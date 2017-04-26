@@ -1,0 +1,24 @@
+[
+  {
+    "question": "Saturn is the____planet from the sun.",
+    "answers": [
+      {
+        "id": 0,
+        "text": "fourth",
+        "correct": false
+      },
+      {
+        "id": 1,
+        "text": "second"
+      },
+      {
+        "id": 2,
+        "text": "third"
+      },
+      {
+        "id": 3,
+        "text": "fifth"
+      }
+    ]
+  }
+]
