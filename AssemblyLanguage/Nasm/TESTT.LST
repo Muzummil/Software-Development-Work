@@ -1,0 +1,15 @@
+     1                                  [org 0x0100]
+     2 00000000 BB[1D00]                		mov bx, num1 	; point bx to first number
+     3 00000003 B90A00                  		mov cx, 10 		; load count of numbers in cx
+     4 00000006 B80000                  		mov ax, 0 		; initialize sum to zero
+     5 00000009 0307                    l1: 	add ax, [bx] 	; add number to ax
+     6 0000000B 81C30200                		add bx, 2 		; advance bx to next number
+     7 0000000F 81E90100                		sub cx, 1 		; numbers to be added reduced
+     8 00000013 75F4                    		jnz l1 		; if numbers remain add next
+     9 00000015 A3[3100]                		mov [total], ax 	; write back sum in memory
+    10 00000018 B8004C                  		mov ax, 0x4c00 	; terminate program
+    11 0000001B CD21                    		int 0x21
+    12 0000001D 0A0014001E00280032-     num1: dw 10, 20, 30, 40, 50, 10, 20, 30, 40, 50
+    13 00000026 000A0014001E002800-
+    14 0000002F 3200               
+    15 00000031 0000                    total: dw 0

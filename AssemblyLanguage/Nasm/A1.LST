@@ -1,0 +1,12 @@
+     1                                  [org 0x0100]
+     2                                  
+     3 00000000 B80500                  	mov ax, 5 		
+     4 00000003 BB0A00                  	mov bx, 10 		
+     5 00000006 01D8                    	add ax, bx 		; accumulate sum in ax
+     6 00000008 BB0F00                  	mov bx, 15 		; load third number in bx
+     7 0000000B 01D8                    	add ax, bx 		; accumulate sum in ax
+     8                                  	
+     9                                  
+    10                                  
+    11 0000000D B8004C                  mov ax, 0x4c00 	; terminate program
+    12 00000010 CD21                    	int 0x21
