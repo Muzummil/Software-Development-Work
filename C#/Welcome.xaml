@@ -1,0 +1,11 @@
+﻿<Window x:Class="DatabaseLoginWpf.Welcome"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Welcome" Height="177.014" Width="215.224">
+    
+    <Grid>
+        <Label Content="Login Succesful" HorizontalAlignment="Left" Margin="28,47,0,0" VerticalAlignment="Top" Width="138"/>
+        <Button x:Name="Logout" Content="Logout" HorizontalAlignment="Left" Margin="28,92,0,0" VerticalAlignment="Top" Width="138" Click="Logout_Click"/>
+
+    </Grid>
+</Window>
