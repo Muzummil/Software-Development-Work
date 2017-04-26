@@ -1,0 +1,62 @@
+<html>
+<head>
+<style>
+* a{
+text-decoration:none;
+color:black;
+display:block;
+}
+#menu{
+
+}
+#menu ul{
+position:relative;
+padding:0px;
+margin:0px;
+}
+#menu ul li{
+text-align:center;
+line-height:40px;
+float:left;
+padding-left:0px;
+margin:0px;
+list-style:none;
+text-decoration:none;
+width:125px;
+height:40px;
+position:relative;
+padding:3px;background-color:red;
+font-size:20px;
+border-right:2px solid white;
+}
+#menu ul li a:hover{
+background-color:green;
+}
+#menu ul ul{
+position:absolute;
+display:none;
+}
+#menu ul li:hover > ul{
+display:block;
+}
+</style>
+</head>
+<body>
+<div id="menu">
+<ul>
+<li><a href="#">Home</a></li>
+<li><a href="#">About</a></li>
+<li><a href="#">News</a>
+
+<ul>
+<li><a href="a">Pakistan</a></li>
+<li><a href="a">China</a></li>
+<li><a href="a">India</a></li>
+</ul>
+
+</li>
+<li><a href="#">Contact Us</a></li>
+</div>
+
+</body>
+</html>
