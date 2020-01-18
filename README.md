@@ -1,2 +1,2 @@
 # testOutMyWork
-Check out my work and test it out for you experience and practice.....
+Check out my work where qaulity of code is the benchmark.
