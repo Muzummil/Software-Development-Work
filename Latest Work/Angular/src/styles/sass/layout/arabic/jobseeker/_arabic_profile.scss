@@ -1,0 +1,320 @@
+.arabic{
+  .third-box{
+    margin-left: 1%;
+    margin-right: inherit;
+  }
+    .display .dp-txt .rounded i{
+        float: right;
+    }
+    .rounded span{
+        float: right;
+        padding-right: 15px;
+    }
+    .display .social-section .social-media .fb ul li{
+        float: right;
+    }
+    .half-box{
+        margin-left: 1%;
+        margin-right: inherit;
+    }
+    #my-profile .txt i{
+        padding-left: 10px;
+        padding-right: inherit;
+    }
+
+
+    .intl-tel-input.allow-dropdown.separate-dial-code.iti-sdc-4 input{
+        text-align: left;
+    }
+    .intl-tel-input.allow-dropdown.separate-dial-code.iti-sdc-4 .selected-flag{
+        text-align: left;
+    }
+    .intl-tel-input.allow-dropdown.separate-dial-code .selected-dial-code{
+        text-align: left;
+    }
+    .intl-tel-input .selected-flag .iti-flag{
+        left: 10px;
+    }
+ 
+    .resume .cv-file .cv-lft .cv-co-name2 i{
+        text-align: right;
+        float: right;
+    }
+    .resume .cv-file .cv-lft a{
+        float: right;
+    }
+    #my-profile .left1{
+        float: right;
+    }
+    .work-experience .work-logo{
+        float: right;
+    }
+    .icon-bx{
+        float: right;
+    }
+    .full-xp-left{
+        padding-right: 10px!important;
+        padding-left: inherit;
+    }
+    .skill .beginner{
+        float: right!important;
+    }
+    .skill .intermediate{
+        float: right!important;
+    }
+    #my-profile .absulute-btn{
+        left: 0px;
+        right: inherit;
+    }
+    .skill .skill-category-radio span{
+        margin-right: 5px;
+        margin-left: 0px;
+    }
+    .skill .sk-radio{
+        float: right;
+    }
+    .addskill .skill-80{
+        float: right;
+    }
+    .addskill .skill-20{
+        margin-right: 3%;
+        margin-left: inherit;
+    }
+    .tag-secton .tagss .tag-main{
+        padding: 8px 0px;
+    }
+    .tag-new{
+        float: right!important;
+    }
+    .new-tag-jobseeker{
+        float: right;
+        margin-right: 5px;
+    }
+    .social-media{
+        float: left;
+    }
+    #my-profile .dark{
+        display: inline-block;
+    }
+    #labels-credits{
+        .blink-image{
+            float: right;
+        }
+        .content-broadcast{
+            .text-area-new-user{
+                float: right;
+            }
+        }
+    }
+    .display .dp-lft{
+        margin-left: 10px;
+        margin-right: 0px;
+    }
+    .vedio-head{
+        
+        .zmdi-videocam{
+            margin-left: 5px;
+        }
+    }
+
+
+    // content-broadcast
+    // =================================================
+    #labels-credits{
+        .blink-image{
+            float: right;
+        }
+    }
+    #info-credits{
+        .credit-info-box{
+            float: right;
+        }
+        .arabic-no-arow{
+            &:after{
+                content: none!important;
+            }
+        }
+    }
+    .credit-info-box:after{
+        content: url('../../assets/images/credits/arabic-arrow.png');
+    }
+    .small-cards{
+        button{
+            float: left;
+        }
+    }
+    #broadcast .header-broadcast h2{
+        float: right;
+    }
+    .visa-type{
+        float: left;
+    }
+    .recipt-credits{
+        border-right: none;
+        padding-right: 0px;
+        border-left: 1px solid #f1f1f1;
+        padding-left: 20px;
+    }
+    .recipt-credits .bill-credit ul li span{
+        float: right;
+    }
+    .recipt-credits .bill-credit ul li strong{
+        text-align: left;
+    }
+    #broadcast p{
+        text-align: right!important;
+    }
+    .account-status-credits li{
+        float: right;
+    }
+
+    .language-tag{
+        .pull-left{
+            float: right!important;
+        }
+    }
+    
+    .work-experience .work-light a{
+        float: right!important;
+    }
+    .inner-box-right-xp{
+        .text-eclips{
+            width: 100%!important;
+        }
+    }
+    #my-profile .block .block-title-2 .cancel{
+        float: left;
+    }
+    .edit .inner-box-right-xp .text-eclips{
+     width: 60%!important;
+    }
+
+
+
+}
+
+
+
+
+
+
+// responsive
+
+/*---------------------------------------------------1-------------------------------------------------------*/
+@media (max-width: 1200px){
+
+}
+
+/*---------------------------------------------------2-------------------------------------------------------*/
+@media (min-width: 768px) and (max-width: 1024px){
+    .arabic .edit .inner-box-right-xp .text-eclips{
+         width: 40%!important;
+    }
+     .arabic .hlaf-width-exp-left, .hlaf-width-exp-right{
+        width: 100%!important;
+    }
+    .arabic .inner-box-left-xp{
+        width: 100%!important;
+    }
+    .arabic .inner-box-right-xp{
+        width: 100%!important;
+        float: right;
+        border: 1px solid #f1f1f1;
+        border-radius: 4px;
+        padding: 5px 10px;
+        margin-top: 10px;
+        border-radius: 4px;
+    }
+    .arabic .hlaf-width-exp-left{
+        width: 100%!important;
+        border-bottom:1px solid #f1f1f1;
+        padding-bottom:20px;
+        margin-bottom: 10px;
+    }
+    .arabic .hlaf-width-exp-right{
+        padding-bottom:10px;
+        border-bottom:1px solid #f1f1f1;
+    }
+
+}
+
+/*---------------------------------------------------2-------------------------------------------------------*/
+@media (min-width: 768px) and (max-width: 990px){
+  
+    .arabic .broadcast-bt-blink .blink_me{
+        right:inherit;
+        left: 11px;
+    }
+    .arabic .edit .inner-box-right-xp .text-eclips{
+         width: 30%!important;
+    }
+    .profile-contact .col-sm-12{
+        width: 100%!important;
+    }
+    .arabic .display .edit button{
+        float: right;
+    }
+    .arabic .hlaf-width-exp-lef, .hlaf-width-exp-right{
+        width: 100%!important;
+    }
+    .arabic .inner-box-left-xp{
+        width: 100%!important;
+    }
+    .arabic .inner-box-right-xp{
+        width: 100%!important;
+        float: right;
+    }
+
+}
+
+/*---------------------------------------------------3-------------------------------------------------------*/
+@media (max-width: 767px) {
+  .arabic-mob-left-right{
+        float: none!important;
+        width: 100%;
+   }
+   .arabic{
+        .display .dp-txt .rounded span{
+            float: right;
+        }
+         #my-profile .block-title .right{
+            float: left !important;
+            padding-top: 0px;
+        }
+        #my-profile .block-title .left{
+            float: right !important;
+            padding-top: 0px;
+        }
+        .display .dp-rgt .left-dp{
+            float: none!important;
+        }
+        .dp-rgt{
+            .mobile-edit{
+                float: none!important;
+            }
+        }
+        
+   }
+}
+/*---------------------------------------------------4-------------------------------------------------------*/
+
+@media (max-width: 480px) {
+   .arabic-mob-left-right{
+        float: none!important;
+        width: 100%;
+   }
+   .arabic{
+        .display .dp-txt .rounded span{
+            float: right;
+        }
+        #my-profile .block-title .right{
+            float: left !important;
+            padding-top: 0px;
+        }
+        #my-profile .block-title .left{
+            float: right !important;
+            padding-top: 0px;
+        }
+   }
+
+}

@@ -1,0 +1,42 @@
+<div class="main-tab mobile-tab-top load-data-js" *ngIf="!(isPublic$ | async)" [class.arabic] = "accountService.isArabic()">
+    <div class="container">
+    <!-- Desktop -->
+    <ul class="nav nav-tabs hidden-xs" role="tablist">
+        <li role="presentation" [class.active]="activeFlag == 'all'">
+            <a class="cursor_pointer1"  [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/jobs']" routerLinkActive="active" >
+                {{fixedTextHash['all_jobs'][currLan]}}
+            </a>
+        </li>
+        <li role="presentation" [class.active]="activeFlag == 'myjobs'" >
+            <a class="cursor_pointer1"  [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/jobs/my-jobs']" routerLinkActive="active" >
+                {{fixedTextHash['my_jobs'][currLan]}}
+            </a>
+        </li>
+        <li role="presentation" [class.active]="activeFlag == 'interviews'" >
+            <a class="cursor_pointer1"  [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/jobs/interviews']" routerLinkActive="active" >
+                {{fixedTextHash['interviews'][currLan]}}
+            </a>
+        </li>
+    </ul>
+
+
+    <!-- mobile -->
+    <ul class="mobile-scroll-tab hidden-lg hidden-md hidden-sm" role="tablist">
+        <li role="presentation" [class.active]="allJobsFlag">
+            <a class="cursor_pointer1"  [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/jobs']" routerLinkActive="active" >
+                {{fixedTextHash['all_jobs'][currLan]}}
+            </a>
+        </li>
+        <li role="presentation" [class.active]="myJobsFlag" >
+            <a class="cursor_pointer1"  [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/jobs/my-jobs']" routerLinkActive="active" >
+                {{fixedTextHash['my_jobs'][currLan]}}
+            </a>
+        </li>
+        <li role="presentation" [class.active]="interviewsFlag" >
+            <a class="cursor_pointer1"  [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/jobs/interviews']" routerLinkActive="active" >
+                {{fixedTextHash['interviews'][currLan]}}
+            </a>
+        </li>
+    </ul>
+    </div>
+</div>

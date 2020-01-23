@@ -1,0 +1,108 @@
+@import '../../../../styles/sass/base/_variables.scss';
+
+
+input:-webkit-autofill {
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
+}
+
+h1, h2, h3, h4, h5, span, label, a, button, p{
+    font-family: $primary-Fonts;
+}
+
+.arabic{
+    h1, h2, h3, h4, h5, span, label, a, button, p, input, .cmpny-txt{
+       font-family: $arabic-primary-Fonts!important;
+    }
+}
+
+.company-cover{
+    border-radius: $border-radius;                                             
+}
+.block .cancel button{
+    height:$button-height;
+    border-radius: $border-radius;   
+}
+
+.block{
+    border:1px solid $light-border;
+    border-radius: $border-radius;
+    float: left;
+    width: 100%;
+}
+
+.block-contant{
+    padding: 10px;
+}
+.block-title-2,  .block-title{
+    padding: 10px;
+}
+.display .soc{
+    float: left;
+}
+
+
+.our-team{
+    .social-media{
+        margin-top:6px;
+    }
+    .display .social-section .social-media .s-media{
+        width:35px;
+        height:35px;
+        line-height:35px;
+    }
+    .col-lg-6{
+        border-right: solid 1px #f1f1f1;
+        padding: 15px 10px !important;
+        border-bottom:1px solid $light-border;
+
+    }
+    .team-details{
+        float: left;
+        margin-left:10px;
+    }
+    .team-defult{
+        width: 90px;
+        height:90px;
+        float: left;
+        line-height:90px;
+        background:$bg-default;
+        color:$primarycolor;
+        text-align: center;
+        font-size:$font-30;
+    }
+    .team-photo-rel{
+        position: relative
+    }
+    .team-photo{
+        float: left;
+        width:60px;
+        height:35px;
+        overflow: hidden;
+        img{ width:100%;
+            height: auto;
+        }
+    }
+    .team-photo-editer{
+        float: left;
+        width:90px;
+        height:90px;
+        text-align: center;
+        color:$white;
+        position: absolute;
+        top:0px;
+        left:0px;
+        background: url("../../../../assets/images/opacity.png" ) repeat;
+            i{ font-size:$font-20; padding-top:25px;}
+    }
+    .block-title-2 button{
+        margin-bottom:0px;
+    }
+    .col-lg-5{
+        text-align: right;
+    }
+}
+
+.common-block{
+    padding: 10px;
+}

@@ -1,0 +1,31 @@
+<ion-header class="animated fadeIn no-shadow">
+    <ion-navbar class="no-border" color="primary">
+      <ion-title>Request Detils</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+
+<ion-content padding>
+  <ion-item *ngIf="data">
+    <ion-row>
+      <ion-col col-6>Title</ion-col>
+      <ion-col col-6>{{data.title}}</ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-6>Description</ion-col>
+        <ion-col col-6>{{data.description}}</ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-6>Sent By</ion-col>
+        <ion-col col-6>{{data.sender}}</ion-col>
+    </ion-row>
+    <ion-row>
+          <ion-col col-6>Sender Contact</ion-col>
+          <ion-col col-6>{{data.sender_phone}}</ion-col>
+    </ion-row>
+    <ion-row>
+          <ion-col col-6>Request Status</ion-col>
+          <ion-col col-6>{{data.status}}</ion-col>
+    </ion-row>
+    </ion-item>
+</ion-content>

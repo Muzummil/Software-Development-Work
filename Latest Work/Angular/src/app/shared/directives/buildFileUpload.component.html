@@ -1,0 +1,55 @@
+<div class="popup">
+    <div class="custom-upload-pop">
+        <div class="file_upload_popup_close modal {{popupClass}}"   tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <div class="modal-body upload-dp">
+                        <h2>{{fixedTextHash[fileInfo?.title][currLan]}}</h2>
+                        <button class="close" aria-hidden="true" data-dismiss="modal" type="button">×</button>
+
+                        <div>
+                            <h4 [innerHtml]="fixedTextHash['accepted_files'][currLan].replace('FORMATS',fileInfo.fileExtentions).replace('FSIZE',fileInfo.size).replace('FUNIT',fileInfo.sizeUnit)"></h4>
+
+                            <div *ngIf=" (fileInfo.size * 1048576)  < tagetFile?.size"  class="alert alert-danger alert-dismissible" role="alert">
+                               {{fixedTextHash['file_size_large'][currLan]}}
+                            </div>
+
+                            <div *ngIf="tagetFile?.type && fileInfo.format_list.indexOf(tagetFile?.type) == -1" class="alert alert-danger alert-dismissible" role="alert">
+                                {{fixedTextHash['invalid_file_format'][currLan]}}
+                            </div>
+
+                            <div  *ngIf="(errorFile$| async) == true"  class="alert alert-danger alert-dismissible" role="alert">
+                                {{errorFileString$ | async }}
+                            </div>
+
+                            <div *ngIf="(selectImageDone$ | async)">
+                                <img-cropper  #cropperAvatar [image]="dataCropAvatar" [settings]="cropperSettings"></img-cropper>
+                            </div>
+
+                            <div class="fancy-file">
+                                <div class="fancy-file-name">
+                                    {{(tagetFile?.name)?tagetFile?.name: fixedTextHash['select_file'][currLan]}}
+                                </div>
+                                <button class="fancy-file-button cursor_pointer1">{{fixedTextHash['browse'][currLan]}}</button>
+                                <div class='input-container'>
+                                    <input  *ngIf="fileInfo.mode == 'cropper'" type="file" (change)="fileChange($event)"   placeholder="{{fixedTextHash['upload_file'][currLan]}}" class="browser" accept="{{fileInfo.format_list}}">
+                                    <input  *ngIf="fileInfo.mode == 'normal'" type="file" (change)="createImage($event)"  placeholder="{{fixedTextHash['upload_file'][currLan]}}" class="browser" accept="{{fileInfo.format_list}}">
+                                </div>
+                            </div>
+
+                            <div   class="pop-button">
+
+                                <button *ngIf="(errorFile$| async) == false && (fileInfo.size * 1048576)  >= tagetFile?.size &&  (tagetFile?.type && fileInfo.format_list.indexOf(tagetFile?.type) != -1)" (click)="selectImage()" data-dismiss="modal"
+                                        type="button" class="btn postive"> {{fixedTextHash['save'][currLan]}} </button>
+                                <button *ngIf="(errorFile$| async) == true || (errorFile$| async) == null || (fileInfo.size * 1048576)  < tagetFile?.size || (tagetFile?.type && fileInfo.format_list.indexOf(tagetFile?.type) == -1)" disabled data-dismiss="modal" type="button"
+                                        class="btn postive"> {{fixedTextHash['save'][currLan]}} </button>
+                                <button type="button" class="btn negative" data-dismiss="modal" aria-hidden="true" >{{fixedTextHash['cancel'][currLan]}}</button>
+                                <div class="clr"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

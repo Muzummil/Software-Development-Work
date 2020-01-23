@@ -1,0 +1,37 @@
+.mainmenu__name {
+    position: absolute;
+    top: 25px;
+    left: 90px;
+    //background-color: blue;
+}
+    
+.mainmenu__email {
+    position: absolute;
+    top: 50px;
+    left: 90px;
+    //background-color: green;
+}
+    
+.mainmenu__avatar {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    //background-color: red;
+    height: 70px;
+    max-height: 70px;
+    width: 70px;
+    max-width: 70px;
+    border-radius: 35px !important;
+}
+
+.mainmenu__toolbar {
+    height:90px;
+    background-color: purple;
+}
+
+.mainmenu__time {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: yellow;
+}

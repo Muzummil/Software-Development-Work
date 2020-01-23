@@ -1,0 +1,237 @@
+<div class="main-tab load-data-js mobile-tab-top"></div>
+<!--<emp-profile-topmenu [activeFlag]="'users'"></emp-profile-topmenu>-->
+
+<div class="tab-content job-bloovo margin-top-space" [class.arabic] = "accountService.isArabic()">
+    <!---------------------------  Companies edit details ---------------------------------->
+    <div role="tabpanel" class="tab-pane active" id="followers">
+
+        <div class="container" >
+            <div role="tabpanel" class="tab-pane" id="new_user">
+                <div class="margin-btm-0">
+                    <div class="add-new-user">
+                        <div class="col-lg-12">
+                            <div class="block-title-2">
+                                <div class="pull-left left-bx arabic-right-left"><h2 class="padding-top-10 tex-left">{{textPrint}}</h2></div>
+                                <div class="pull-right right-bx arabic-right-left">
+                                    <a href="#users" aria-controls="users" role="tab" data-toggle="tab">
+                                        <button (click)="onBack()"  >
+                                            <span>{{fixedTextHash['back'][currLan]}}</span>
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="common-block empty-min2 white" *ngIf="!loadDataFlag">
+                                <div class="empty-prf" *ngIf="!loadDataFlag">
+                                    <spinner [visible]="true"></spinner>
+                                </div>
+                            </div>
+
+                            <div class="add-new-user-forms" *ngIf="loadDataFlag">
+
+                                <!-- New add User alert success-->
+                                <div class="alert comen-alert margin-top-5" *ngIf="(successFlag | async)">
+                                    <i class="zmdi zmdi-check-circle"></i>
+                                    {{fixedTextHash['invitation_sent'][currLan]}}
+                                </div>
+
+
+
+                                <!-- alert worng-->
+                                <div class="alert alert-danger" *ngIf="(errorFlag | async)">
+                                    <i class="zmdi zmdi-close-circle"></i>
+                                    {{errorMessage}}
+                                </div>
+
+                                <!-- personal information -->
+                                <div class="common-block section-end">
+                                    <h3>{{fixedTextHash['personal_info'][currLan]}}</h3>
+                                    <form [formGroup]="userForm">
+                                        <div class="common-block">
+                                            <div class="col-lg-4 col-md 4 col-sm-12 col-xs-12 arabic-right-left">
+                                                <input type="text" name="" placeholder="{{fixedTextHash['first_name'][currLan]}}" formControlName="first_name">
+
+                                                <div  *ngIf="( postFlag || userForm.controls['first_name'].touched )&& !userForm.controls['first_name'].valid" class="alert alert-danger alert-dismissible margin-bootom-5" role="alert">
+
+                                                    {{fixedTextHash['please_enter_first_name'][currLan]}}
+                                                </div>
+
+                                            </div>
+                                            <div class="col-lg-4 col-md 4 col-sm-12 col-xs-12 arabic-right-left">
+                                                <input type="text" name="" placeholder="{{fixedTextHash['last_name'][currLan]}}" formControlName="last_name">
+
+                                                <div  *ngIf="( postFlag || userForm.controls['last_name'].touched ) && !userForm.controls['last_name'].valid" class="alert alert-danger alert-dismissible margin-bootom-5" role="alert">
+
+                                                    {{fixedTextHash['please_enter_last_name'][currLan]}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="common-block">
+                                            <div class="col-lg-4 col-md 4 col-sm-12 col-xs-12 arabic-right-left">
+                                                <input [readonly]="(readmodeEmail)? true: null"  type="text" name="" placeholder="{{fixedTextHash['email'][currLan]}}" formControlName="email">
+
+                                                <div  *ngIf="( postFlag || userForm.controls['email'].touched ) && !userForm.controls['email'].valid" class="alert alert-danger alert-dismissible margin-bootom-5" role="alert">
+                                                    {{fixedTextHash['please_enter_email_id'][currLan]}}
+                                                </div>
+
+                                            </div>
+                                            <div class="col-lg-4 col-md 4 col-sm-12 col-xs-12 arabic-right-left" *ngIf="accountService.getUserId() != selId">
+                                                <span class="Rol-text arabic-right-left">{{fixedTextHash['role_of_user'][currLan]}}</span>
+                                                <div class="skill-radio clicks arabic-right-left">
+                                                    <div class="sk-radio user-rol">
+                                                        <div class="radio radio-primary">
+                                                            <input id="radio222"    type="radio" formControlName="role" value="false">
+                                                            <label for="radio222">{{fixedTextHash['user'][currLan]}}</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="sk-radio user-rol">
+                                                        <div class="radio radio-primary">
+                                                            <input id="radio233"   type="radio" formControlName="role" value="true">
+                                                            <label for="radio233">{{fixedTextHash['admin'][currLan]}}</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md 4 col-sm-12 col-xs-12 arabic-right-left" *ngIf="accountService.getUserId() == selId">
+                                                <span class="Rol-text">{{fixedTextHash['role_of_user'][currLan]}}</span>
+                                                <div class="skill-radio clicks">
+                                                    <div class="sk-radio user-rol">
+                                                        <div class="radio radio-primary">
+                                                            <input id="radio2223"    type="radio" formControlName="role"  value="false">
+                                                            <label for="radio2223">{{fixedTextHash['user'][currLan]}}</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="sk-radio user-rol">
+                                                        <div class="radio radio-primary">
+                                                            <input id="radio2333"   type="radio"  formControlName="role" value="true">
+                                                            <label for="radio2333">{{fixedTextHash['admin'][currLan]}}</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="common-block">
+                                            <div class="col-lg-4 col-md 4 col-sm-12 col-xs-12 arabic-right-left">
+                                                <input  [readonly]="(readmodeFields)? true: null"  type="password" name="" placeholder="{{fixedTextHash['password'][currLan]}}" formControlName="password">
+                                                <div  *ngIf="( postFlag || userForm.controls['password'].touched ) && !userForm.controls['password'].valid" class="alert alert-danger alert-dismissible" role="alert">
+                                                    {{fixedTextHash['enter_valid_password'][currLan]}}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md 4 col-sm-12 col-xs-12 arabic-right-left">
+                                                <input  [readonly]="(readmodeFields)? true: null"  type="password" name="" placeholder="{{fixedTextHash['confirm_password'][currLan]}}" formControlName="confirm_password">
+                                                <div  *ngIf="( postFlag || userForm.controls['confirm_password'].touched ) && !userForm.controls['confirm_password'].valid" class="alert alert-danger alert-dismissible" role="alert">
+                                                    {{fixedTextHash['confirm_password'][currLan]}}
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </form>
+                                </div>
+
+                                <!-- box -->
+                                <div class="common-block section-end" *ngIf="userForm.controls['role'].value == 'false' && accountService.getUserId() != selId ">
+
+                                    <h3>{{fixedTextHash['access_privileges'][currLan]}}</h3>
+
+                                    <div class="common-block">
+                                        <!-- Action box1 -->
+                                        <div class="box-action arabic-right-left">
+                                            <div class="common-block box-action-heading">
+                                                <h2>{{fixedTextHash['candidate_search_access'][currLan]}}</h2>
+                                                <div class="clicks">
+                                                    <input id="checkboxG4" class="css-checkbox" type="checkbox"  #search_jobseekers (click)="onSetPermission('search_jobseekers',search_jobseekers.checked)"   [ngModel]="permissionParams['search_jobseekers']" name="checkboxG4">
+                                                    <label class="css-label" for="checkboxG4"></label>
+                                                </div>
+                                            </div>
+                                            <div class="common-block box-action-body">
+                                                <div class="common-block">
+                                                    <h4>{{fixedTextHash['can_post_job'][currLan]}}</h4>
+                                                    <div class="clicks">
+                                                        <input id="checkboxG5" class="css-checkbox"  #create_job (click)="onSetPermission('create_job',create_job.checked)" [ngModel]="permissionParams['create_job']" type="checkbox" name="checkboxG5">
+                                                        <label class="css-label" for="checkboxG5"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="common-block">
+                                                    <h4>{{fixedTextHash['can_change_applicant_status'][currLan]}}</h4>
+                                                    <div class="clicks">
+                                                        <input id="checkboxG6" class="css-checkbox" #edit_job_application_status (click)="onSetPermission('edit_job_application_status',edit_job_application_status.checked)"  [ngModel]="permissionParams['edit_job_application_status']"  type="checkbox" name="checkboxG6">
+                                                        <label class="css-label" for="checkboxG6"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="common-block">
+                                                    <h4>{{fixedTextHash['can_delete_activate_job'][currLan]}}</h4>
+                                                    <div class="clicks">
+                                                        <input id="checkboxG7" class="css-checkbox" #destroy_job (click)="onSetPermission('destroy_job',destroy_job.checked)"   [ngModel]="permissionParams['destroy_job']" type="checkbox" name="checkboxG7">
+                                                        <label class="css-label" for="checkboxG7"></label>
+                                                    </div>
+                                                </div>
+<!--                                                <div class="common-block">-->
+<!--                                                    <h4>{{fixedTextHash['database_search'][currLan]}}</h4>-->
+<!--                                                    <div class="clicks">-->
+<!--                                                        <input id="checkboxG8" class="css-checkbox" #search_jobseekers (click)="onSetPermission('search_jobseekers',search_jobseekers.checked)"   [ngModel]="permissionParams['search_jobseekers']" type="checkbox" name="checkboxG8">-->
+<!--                                                        <label class="css-label" for="checkboxG8"></label>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+                                <!-- status information -->
+                                <div class="common-block section-end status-user">
+                                    <h3 class="padd-only-user">{{fixedTextHash['user_status'][currLan]}}</h3>
+                                    <div class="common-block">
+                                        <div class="skill-radio clicks arabic-right-left">
+                                            <div class="sk-radio">
+                                                <div class="radio radio-primary online">
+                                                    <input id="radio225" name="isActive" type="radio" value="true"
+                                                           [checked]="(isActive$ | async)" (click)="isActive$.next(true)">
+                                                    <label for="radio225">&nbsp;{{fixedTextHash['active'][currLan]}}</label>
+                                                </div>
+                                            </div>
+                                            <div class="sk-radio ">
+                                                <div class="radio radio-primary offline">
+                                                    <input id="radio234" name="isActive" type="radio" value="false"
+                                                           [checked]="!(isActive$ | async)" (click)="isActive$.next(false)">
+                                                    <label for="radio234">&nbsp;{{fixedTextHash['inactive'][currLan]}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <!-- Footer-button -->
+                                <div class="common-block user-footer">
+                                    <div class="block-footer">
+
+                                            <button (click)="onSaveAccount()" class="arabic-right-left">{{fixedTextHash['save'][currLan]}}</button>
+
+                                            <button class="cancel arabic-right-left" (click)="onBack()" >{{fixedTextHash['cancel'][currLan]}}</button>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

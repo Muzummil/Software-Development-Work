@@ -1,0 +1,21 @@
+<div [class.arabic] = "accountService.isArabic()">
+<ng-container *ngIf="showTranslation">
+    <span *ngIf="!accountService.isArabic()" (click)="accountService.getSwitchLanguage('arabic')"
+          [class.english-text-v5]="customClass"
+          [class.only-mob-arabic-top]="customClass2"
+          [class.only-employer-mobile-arabic-text]="accountService.getAuth() && accountService.getCheckEmployer()
+      && customClass2"
+          [class.arabic-text]="showWhiteGlobe || customClass || customClass2" class="cursor_pointer1">العربية&nbsp;
+    <i *ngIf="showWhiteGlobe" class="zmdi zmdi-globe-alt"></i>
+</span>
+    <span *ngIf="accountService.isArabic()" (click)="accountService.getSwitchLanguage('english')"
+          [class.english-text-v5]="customClass"
+          [class.only-mob-arabic-top.left]="customClass2"
+          [class.only-employer-mobile-arabic-text]="accountService.getAuth() && accountService.getCheckEmployer()
+      && customClass2"
+          [class.arabic-text]="showWhiteGlobe || customClass  || customClass2" class="cursor_pointer1">English&nbsp;
+    <i *ngIf="showWhiteGlobe" class="zmdi zmdi-globe-alt"></i>
+</span>
+</ng-container>
+</div>
+

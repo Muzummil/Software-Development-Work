@@ -1,0 +1,206 @@
+<div [class.arabic]="accountService.isArabic()">
+    <div class="fal-shadow-container">
+        <form [formGroup]="eduForm">
+            <!-- spinner -->
+            <!-- ================================= -->
+            <i class="spinner-prf" *ngIf="(spinnerLoader$ | async)">
+                <spinner></spinner>
+            </i>
+            <div *ngIf="!(spinnerLoader$ | async)">
+
+                <!-- start Work Experience delete button -->
+                <button class="btn-delete-work-experience" [class.disabled_button]="!allowDelete"
+                    (click)="getRemoveMe()"><i class="zmdi zmdi-delete"></i></button>
+                <!-- end Work Experience delete button -->
+
+                <!-- start country -->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 arabic-right-left margin-btm-5">
+                    <label class="light-label">{{fixedTextHash['country'][currLan]}}</label>
+                    <input type="hidden" #eduCountryInpt name="edu_country_id" formControlName="edu_country_id">
+                    <bootstrap-selectbox *ngIf="countryList" (selectedId)="setCountry($event)"
+                        (onEmptyText)="eduCountryInpt.value = null;makeControlInvalid(eduForm.controls['edu_country_id'])"
+                        [selectedValue]="eduCountryInpt.value" [placeholder]="fixedTextHash['country'][currLan]"
+                        [selectList]="countryList"
+                        [error]="(eduForm.controls['edu_country_id'].touched || !(prestineForm$ | async)) && !eduForm.controls['edu_country_id'].valid">
+                    </bootstrap-selectbox>
+                </div>
+                <!-- end country -->
+
+                <!-- start university or school -->
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 arabic-right-left margin-btm-5 input-university"
+                    [class.disabledDiv]="!eduForm.controls['edu_country_id'].value > 0">
+                    <label class="light-label">{{fixedTextHash['school'][currLan]}}</label>
+                    <input type="text" name="edu_name" formControlName="edu_name"
+                        placeholder="{{fixedTextHash['school'][currLan]}}" minlength="1" maxlength="50" class="hide">
+
+                    <auto-complete [placeholder]="fixedTextHash['school'][currLan]"
+                        [initData]="[{text: eduForm.controls['edu_name'].value}]" [selectOneEnter]="true"
+                        [selectOnType]="true" [returnEmpty]="true" [resetOnSelect]="false" [showCaret]="false"
+                        (changeRecords)="eduForm.controls['edu_name'].setValue($event.name)"
+                        (clearRecords)="eduForm.controls['edu_name'].setValue($event.name)" [recordType]="'University'"
+                        [id]="eduForm.controls['edu_country_id'].value">
+
+                    </auto-complete>
+                    <div *ngIf="(eduForm.controls['edu_name'].touched || !(prestineForm$ | async)) && !eduForm.controls['edu_name'].valid"
+                        class="alert alert-danger alert-dismissible martop5" role="alert">
+                        {{fixedTextHash['empty_school'][currLan]}}
+                    </div>
+                </div>
+                <!-- end university or school -->
+
+                <!-- start university or school -->
+                <!-- <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 arabic-right-left margin-btm-15">
+                    <label class="light-label">{{fixedTextHash['school'][currLan]}}</label>
+                    <input type="text" name="edu_name" formControlName="edu_name"
+                        placeholder="{{fixedTextHash['school'][currLan]}}" minlength="1" maxlength="50"
+                        [class.error-feild]="(eduForm.controls['edu_name'].touched || !(prestineForm$ | async)) && !eduForm.controls['edu_name'].valid">
+                </div> -->
+                <!-- end university or school -->
+
+                <!-- start city -->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 arabic-right-left margin-btm-5 text-align-left">
+                    <label class="light-label">{{fixedTextHash['city'][currLan]}}</label>
+                    <span *ngFor="let sel_country of countryList">
+                        <auto-comp1 *ngIf="sel_country.id == eduForm.controls['edu_country_id'].value"
+                            [resetOnEmpty]="true" (onEmptyText)="makeControlInvalid(eduForm.controls['edu_city_id'])"
+                            [countryId]="sel_country.id"
+                            [initData]="(sel_country.id == eduForm.controls['edu_country_id'].value) ? [currentCityObj]:[]"
+                            (changeCityId)=" onSelectCity($event)"
+                            [error]="(eduForm.controls['edu_city_id'].touched  || !(prestineForm$ | async)) && !eduForm.controls['edu_city_id'].valid">
+                        </auto-comp1>
+                    </span>
+                    <input *ngIf="!eduForm.controls['edu_country_id'].value" type="text"
+                        placeholder="{{fixedTextHash['city'][currLan]}}"
+                        class="btn btn-default dropdown-toggle minimal">
+                    <input type="hidden" name="edu_city_id" formControlName="edu_city_id" [ngModel]="currentCityObj.id"
+                        placeholder="{{fixedTextHash['city'][currLan]}}"
+                        class="btn btn-default dropdown-toggle minimal">
+                </div>
+                <!-- end city -->
+
+                <div class="clearfix"></div>
+                <!-- start feild of studies -->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 arabic-right-left">
+                    <label class="light-label">{{fixedTextHash['study'][currLan]}}</label>
+                    <input type="text" name="edu_field_study" formControlName="edu_field_study"
+                        placeholder="{{fixedTextHash['study'][currLan]}}" minlength="1" maxlength="50"
+                        [class.error-feild]="(eduForm.controls['edu_field_study'].touched  || !(prestineForm$ | async)) && !eduForm.controls['edu_field_study'].valid">
+                </div>
+                <!-- end feild of studies -->
+
+                <!-- start Educational Qualification -->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 arabic-right-left margin-btm-5">
+                    <label class="light-label">{{fixedTextHash['edu_qualification'][currLan]}}</label>
+                    <input type="hidden" #eduQualificationInpt name="edu_q_id" formControlName="edu_q_id">
+                    <bootstrap-selectbox *ngIf="educationList"
+                        (selectedId)="eduForm.controls['edu_q_id'].setValue($event.id)"
+                        (onEmptyText)="makeControlInvalid(eduForm.controls['edu_q_id'])"
+                        [selectedValue]="eduQualificationInpt.value"
+                        [placeholder]="fixedTextHash['edu_qualification'][currLan]" [selectList]="educationList"
+                        [error]="(eduForm.controls['edu_q_id'].touched || !(prestineForm$ | async)) && !eduForm.controls['edu_q_id'].valid">
+                    </bootstrap-selectbox>
+                </div>
+                <!-- end Educational Qualification -->
+
+                <div class="clearfix"></div>
+
+
+                <!-- start grade -->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 arabic-right-left">
+                    <label class="light-label">{{fixedTextHash['grade'][currLan]}}</label>
+                    <input type="text" name="edu_grade" formControlName="edu_grade"
+                        placeholder="{{fixedTextHash['grade'][currLan]}}" minlength="1" maxlength="50"
+                        [class.error-feild]="(eduForm.controls['edu_grade'].touched  || !(prestineForm$ | async)) && !eduForm.controls['edu_grade'].valid">
+                </div>
+                <!-- end grade -->
+
+                <!-- start Start date -->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 arabic-right-left">
+                    <label class="light-label">{{fixedTextHash['start_date'][currLan]}}</label>
+                    <input type="hidden" placeholder="{{fixedTextHash['start_date'][currLan]}}" #eduStartDate
+                        name="edu_start_date" formControlName="edu_start_date">
+
+                    <datePicker-block (emitSelDate)="setStartDate($event);setEndDate($event);"
+                        [dp_placeholder]="fixedTextHash['start_date'][currLan]" [sel_id]="'24'" [maxDate]="maxDate"
+                        [toYear]="toYear" (onEmptyText)="makeControlInvalid(eduForm.controls['edu_start_date'])"
+                        [dp_value]="eduForm.controls['edu_start_date'].value | date: 'MMM yyyy dd'"
+                        [error]="(eduForm.controls['edu_start_date'].touched  || !(prestineForm$ | async)) && !eduForm.controls['edu_start_date'].valid">
+                    </datePicker-block>
+                </div>
+                <!-- end Start date -->
+                <!-- start End date -->
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 arabic-right-left" *ngIf="ShowEndDate"
+                    [style.display]="stillStuding?'none':'block'">
+                    <label class="light-label">{{fixedTextHash['end_date'][currLan]}}</label>
+                    <input type="hidden" name="edu_end_date" formControlName="edu_end_date"
+                        placeholder="{{fixedTextHash['end_date'][currLan]}}">
+
+                    <datePicker-block (emitSelDate)="getSelectEndDate($event)"
+                        [dp_placeholder]="fixedTextHash['end_date'][currLan]" [sel_id]="'25'" [toYear]="toYear"
+                        [maxDate]="maxDate" [minDate]="minEndDate" [dp_startDate]="minEndDate"
+                        (onEmptyText)="makeControlInvalid(eduForm.controls['edu_end_date']);eduEndDateError=true"
+                        [dp_value]="eduForm.controls['edu_end_date'].value | date: 'MMM yyyy dd'"
+                        [error]="(eduForm.controls['edu_end_date'].touched  || !(prestineForm$ | async)) && eduEndDateError">
+                    </datePicker-block>
+                </div>
+
+                <!-- end End date -->
+
+                <!-- start I Currently Work Here checkbox -->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 arabic-right-left">
+                    <div class="checkbox fal-currently-work-here custom-sp-check-fix" [class.margin-top-24]="stillStuding">
+                        <div>
+                        <input type="checkbox" [name]="'checkboxG7'+eduForm.controls['edu_id'].value"
+                            [id]="'checkboxG7'+eduForm.controls['edu_id'].value" (click)="onToggleCurrentlyStuding()"
+                            formControlName="edu_still_studing" />
+
+                        <label [attr.for]="'checkboxG7'+eduForm.controls['edu_id'].value">
+                            {{fixedTextHash['curr_edu'][currLan]}} </label>
+                        </div>
+                    </div>
+                </div>
+                <!-- end I Currently Work Here checkbox -->
+
+                <!-- start upload document -->
+                <div *ngIf="this.jobseekerType=='coops' || this.jobseekerType=='summer_training'" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 arabic-right-left margin-btm-15">
+                    <label class="light-label">{{fixedTextHash['upload'][currLan]}} {{fixedTextHash['document'][currLan]}}</label>
+                    <div class="new-upload">
+
+                        <div class="input-group">
+                            <div *ngIf="gotDoc && !notShowAttachment">
+                                <a  href="{{eduDocList[0]['document']}}" target="_blank">{{fixedTextHash['attach_document'][currLan]}}</a>
+                                <i class="zmdi zmdi-delete cv_delete cursor_pointer1" (click)="removeResume()"></i>
+                            </div>
+                            <input type="hidden" formControlName="document">
+                            <ng-container *ngIf="!gotDoc || notShowAttachment">
+                                <label id="browsebutton1" class="btn btn-default input-group-addon bt-up-ats" for="edu-doc-upload">
+                                    <input id="edu-doc-upload" type="file" (change)="selectFile2($event,'document')" style="display:none;" >
+                                    {{fixedTextHash['browse'][currLan]}}...
+                                </label>
+                                <input type="text" placeholder="{{fixedTextHash['education_document'][currLan]}}" class="form-control js_document" readonly=""  >
+                            </ng-container>
+                        </div>
+                        <span class="help-block"></span>
+                    </div>
+                    <!--info message-->
+                    <ng-container *ngIf="!gotDoc || notShowAttachment">
+                        <div class="font-12" [innerHTML]="fixedTextHash['upload_message'][currLan]
+                        .replace('{file_types}','PDF, DOC').replace('{file_types}','PDF, DOC')
+                        .replace('{file_types}','PDF, DOC').replace('{file_size_with_units}', this.documentFileSizeInMB + ' MB')"></div>
+                        <!--CV error message-->
+                        <div *ngIf="(invalidEduDoc$ | async)" class="alert alert-danger alert-dismissible martop5" role="alert">{{fixedTextHash['invalid_file_format'][currLan]}}</div>
+                        <div *ngIf="(tooLargeEduDoc$ | async)" class="alert alert-danger alert-dismissible martop5" role="alert">{{fixedTextHash['file_size_large'][currLan]}}</div>
+                        <div *ngIf="(eduForm.controls['document'].touched || !(pristineFlag$ | async)) && !eduForm.controls['document'].valid"
+                             class="alert alert-danger alert-dismissible martop5" role="alert">
+                            {{fixedTextHash['upload'][currLan]}} {{fixedTextHash['education_document'][currLan]}}
+                        </div>
+                    </ng-container>
+                </div>
+                <!-- end upload document -->
+            </div>
+            <div class="clearfix"></div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<ion-header class="animated fadeIn no-shadow">
+    <ion-navbar class="no-border" color="primary">
+      <ion-title>Handyman details</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+
+<ion-content padding>
+  <ion-item *ngIf="data!=null">
+    <ion-row>
+      <ion-col col-6>Name</ion-col>
+      <ion-col col-6>{{data.name}}</ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-6>Location</ion-col>
+        <ion-col col-6>{{data.location}}</ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-6>Skills</ion-col>
+        <ion-col col-1 *ngFor="let item of data.skills">{{item}},</ion-col>
+    </ion-row>
+    <ion-row>
+          <ion-col col-6>Handyman Contact</ion-col>
+          <ion-col col-6>{{data.contact}}</ion-col>
+    </ion-row>
+    <!-- <ion-row>
+          <ion-col col-6>Request Status</ion-col>
+          <ion-col col-6>{{data.status}}</ion-col>
+    </ion-row> -->
+    </ion-item>
+</ion-content>

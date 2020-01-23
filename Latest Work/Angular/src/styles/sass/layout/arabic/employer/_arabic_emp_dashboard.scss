@@ -1,0 +1,153 @@
+.arabic{
+	.icon-stats{
+		float: right;
+		padding-left: 15px;
+		padding-right: inherit;
+	}
+	.count-stats{
+		padding-right:15px;
+		padding-left:0px;
+	}
+	.tex-left{
+		text-align: right!important;
+	}
+	.left-bx{
+		text-align: right!important;
+	}
+	#my-profile .left{
+		float: right;
+		
+	}
+	#my-profile .right{
+		float: left;
+	}
+
+	#my-profile .edit .left{
+		width: calc(100% - 159px);
+	}
+
+	#my-profile .edit .right{
+		width: 159px;
+	}
+	#my-profile .edit .vedio-head .right{
+		width: 50px;
+		text-align: left;
+	}
+	#my-profile .edit .vedio-head .left{
+		width: calc(100% - 50px);
+	}
+
+	.rabic_flot_none{
+		float: none!important;
+	}
+	.hlaf-width-exp-left{
+		float: right!important;
+	}
+	.inner-box-left-xp{
+		float: right!important;
+	}
+	.block .block-title-2 .cancel button{
+		float: left;
+	}
+}
+
+
+// landingpage
+.arabic{
+	.employer_landing_page .banner_landing header .menu-landing-page button{
+		float: left;
+	}
+	.employer_landing_page .arabic-text{
+		left: 126px;
+	    top: 5px;
+	    right: inherit;
+	}
+	.employer_landing_page .banner_landing header .menu-landing-page ul{
+		float: left;
+	}
+	.employer_landing_page .process-timeline .time-pr{
+		float: right;
+	}
+	.employer_landing_page .process-timeline .content-pr ul li i{
+		padding-left:20px;
+		padding-right:0px;
+	}
+
+}
+
+
+
+
+// responsive
+
+/*---------------------------------------------------1-------------------------------------------------------*/
+@media (max-width: 1200px){
+         
+}
+
+/*---------------------------------------------------2-------------------------------------------------------*/
+@media (min-width: 768px) and (max-width: 1024px){
+    .arabic .side-menu .brand-name-wrapper a{
+    	float: right!important;
+    }
+    .arabic .only-mob-arabic-top{
+    	  left: 120px !important;
+    }
+}
+
+/*---------------------------------------------------3-------------------------------------------------------*/
+@media (max-width: 767px) {
+	.arabic{
+		#viewed-Profile .filter-jobs .featured-box .feturd-compny{
+			float: right!important;
+		}
+		#viewed-Profile .mob-most-view .feturd-compny-dtls{
+			float: right!important;
+		}
+		#viewed-Profile .mob-most-view .light .text-left{
+			float: right!important;
+			text-align: right!important;
+		}
+		#viewed-Profile .mob-most-view .light .text-right{
+			float: right!important;
+			text-align: right;
+			padding-right: 10px;
+			padding-left: inherit;
+		}
+		.arabic-mob-float-none{
+			float: none!important;
+		}
+		.mobile-job-application .nav-tabs > li{
+			border-top: solid 1px #f1f1f1;
+		}
+	}
+
+}
+/*---------------------------------------------------4-------------------------------------------------------*/
+
+@media (max-width: 480px) {
+	.arabic{
+		#viewed-Profile .filter-jobs .featured-box .feturd-compny{
+			float: right!important;
+		}
+		#viewed-Profile .mob-most-view .feturd-compny-dtls{
+			float: right!important;
+		}
+		#viewed-Profile .mob-most-view .light .text-left{
+			float: right!important;
+			text-align: right!important;
+		}
+		#viewed-Profile .mob-most-view .light .text-right{
+			float: right!important;
+			text-align: right;
+			padding-right: 10px;
+			padding-left: inherit;
+		}
+		.arabic-mob-float-none{
+			float: none!important;
+		}
+		.mobile-job-application .nav-tabs > li{
+			border-top: solid 1px #f1f1f1;
+		}
+	}
+}

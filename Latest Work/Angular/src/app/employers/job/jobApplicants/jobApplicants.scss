@@ -1,0 +1,789 @@
+@import '../../../../styles/sass/base/_variables.scss';
+input:-webkit-autofill {
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
+}
+
+@font-face {
+    font-family: 'icomoon';
+    src:  url('../../../../assets/fonts/ats/icomoon.eot?4nrirk');
+    src:  url('../../../../assets/fonts/ats/icomoon.eot?4nrirk#iefix') format('embedded-opentype'),
+      url('../../../../assets/fonts/ats/icomoon.ttf?4nrirk') format('truetype'),
+      url('../../../../assets/fonts/ats/icomoon.woff?4nrirk') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  [class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+  
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .icon-email-action:before {
+    content: "\111";
+  }
+  .icon-tag-action:before {
+    content: "\112";
+  }
+  .icon-history:before {
+    content: "\113";
+  }
+  .icon-move:before {
+    content: "\114";
+  }
+  .icon-rating:before {
+    content: "\115";
+  }
+  
+  
+
+
+
+h1, h2, h3, h4, h5, span, label, a, button, p{
+    font-family: $primary-Fonts;
+}
+
+.arabic{
+    h1, h2, h3, h4, h5, span, label, a, button, p, input, .cmpny-txt{
+       font-family: $arabic-primary-Fonts!important;
+    }
+}
+
+.smalltxt{
+    font-size: $big-font!important;
+    line-height: 30px;
+    color: $secondarycolor!important;
+    span{
+        color: $primarycolor!important;
+        display: block;
+        font-size: $normal-font!important;
+    }
+}
+
+
+.drop-jobs{
+    .click-dropdown-sort .btn-input .btn.form-control .caret{
+        right: 0px!important;
+    }
+    .btn.form-control{
+        width: 165px!important;
+    }
+}
+
+.block .block-title-2{
+    padding: 10px 0px!important;
+    border-bottom:none!important;
+    border-radius: $border-radius;
+}
+
+.jobapplicant{
+    .jobapp-btm-10{ margin-bottom:10px;}
+    .jobapp-top-10{ margin-top:10px; }
+    .light{ font-size:$x-small-font}
+    .right-bx{ width:289px;}
+    .left-bx{ width: calc(100% - 336px)!important;}
+    .block{
+        .block-title-2{
+            h2{font-size:$normal-font}
+            .btn-jobapplicant{ 
+                background:$secondarycolor;
+                i{
+                    margin-left: 5px;
+                    margin-right: 5px;
+                }
+            }
+        }
+    }
+    .jobanalytics{ 
+        float: left; width: 100%; border: 1px solid $light-border;
+        padding:10px;
+        box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.05);
+        h4{ 
+            color:$primarycolor; font-size:$small-font; font-weight: bold;
+            padding-bottom: 10px;
+            border-bottom:1px solid #f1f1f1; 
+        }
+        .prograss-txt{ color:$secondarycolor; font-size:$x-small-font}
+        .progress{ height:10px!important;box-shadow:none; border-radius: $border-radius;}
+        .progress-bar-success{box-shadow:none;}
+        .prograss-txt-per{font-size:$font-10;  position: absolute; right: 10px; margin-top: 14px;}
+        .job-analytics-cntry{
+            .progress{ background-color:#E8F7FF;}
+            .progress-bar-success{background-color:#8DD8FF}
+            .prograss-txt-per{ color:#3388B4}
+        }
+        .job-analytics-sector{
+            .progress{ background-color:#F8FCFE;}
+            .progress-bar-success{background-color:#D9EDFA}
+            .prograss-txt-per{ color:#599BC6}
+        }
+        .job-analytics-education{
+            .progress{ background-color:#FEF8ED;}
+            .progress-bar-success{background-color:#FADCA7}
+            .prograss-txt-per{ color:#A5792E}
+        }
+        .job-analytics-age{
+            .progress{ background-color:#DBDFE3;}
+            .progress-bar-success{background-color:#91A0AE}
+            .prograss-txt-per{ color:#475A6E}
+        }
+        .job-analytics-nationality{
+            .progress{ background-color:#DBF5F0;}
+            .progress-bar-success{background-color:#84D9CC}
+            .prograss-txt-per{ color:#2B8976}
+        }
+        .job-analytics-gender{
+            .job-male{ margin-top:15px;
+                .job-male-left{ float:left; width:32px;}
+                .job-male-right{ 
+                    float:right; width: calc(100% - 38px);
+                    .progress{ background-color:#D1F6FE;}
+                    .progress-bar-success{background-color:#1ACFF8}
+                    .prograss-txt-per{ color:#008BAA}
+                }
+            }
+            .job-female{ 
+                margin-top:15px;
+                .job-male-left{ float:left; width:25px;}
+                .job-male-right{ 
+                    float:right; width: calc(100% - 38px;);
+                    .progress{ background-color:#FEE2E9;}
+                    .progress-bar-success{background-color:#F97092}
+                    .prograss-txt-per{ color:#A52242}
+                }
+            }
+
+        }
+    }
+
+    .job-anlytics-info{
+        .row-anly{
+            padding: 10px;
+            border:1px solid $light-border;
+            float: left;
+            width: 100%;
+        }
+        .col-lg-2{
+            width: 14.285%;
+                .anly-blue{background:$more-light-bg!important;}
+                .info{
+                    background:$white; text-align: center;
+                    // border: 1px solid $light-border;
+                    h3{ font-size:14px; padding-top:20px; color:$secondarycolor; margin-top:0px; margin-bottom:2px;}
+                    h2{font-size:$font-22; font-weight:bold; padding-top:0px; padding-bottom:20px; color:$primarycolor;}
+                }
+                .info:hover{ background:$more-light-bg }
+        }
+    }
+
+    .bulk-fdb1{ margin-right:0px;}
+    .bulk-fdb1:hover{ background-color:$primarycolor!important; color: $white;}
+    .bulk-btn:hover{ background-color:$primarycolor!important; color: $white;}
+    .bulk-btn{background:$white!important; overflow: hidden; color: $primarycolor; border:1px solid $light-border!important; min-height: 40px!important; padding-top:5px; border-radius: $border-radius; padding: 3px 12px;}
+    .sugested-btn{background:$white!important; overflow: hidden; color: $primarycolor; border:1px solid $light-border!important; min-height: 40px;padding-top:5px;border-radius: $border-radius; padding: 3px 12px;}
+    .bulk-fdb-sort{ background:$white;min-height: 40px!important;padding-top:3px;margin-left:5px;width: calc(100% - 480px);
+        .btn{ border:none!important}
+    }
+    .click-dropdown-sort{
+        span{ padding-top:2px;}
+        .dropdown-toggle{
+            width: 165px!important;
+        }
+    }
+    .click-dropdown-sort .btn-input .btn.form-control .caret{ margin-top:0px!important; right: 0px!important; }
+   
+
+    .feed-back-mg{ margin-bottom:10px; }
+
+    .new-list{
+        background-color:$white; border-radius:$border-radius; border: 1px solid $light-border;
+        .newlistleft{
+            width: calc(100% - 170px); float:left;
+            overflow: hidden;
+            .newlistdp-left{ width:145px; height:170px; background:$bg-default; float:left; position:relative;
+                img{
+                width: 145px;
+                height: 170px;
+                object-fit: cover;
+                }
+                i{
+                text-align: center;
+                line-height: 170px;
+                font-size: 40px;
+                display: block;
+                color: $empty-icon-color;
+                }
+            }
+            .newlistdp-right{ 
+                width: calc(100% - 395px); float:left; padding:10px; padding-left:15px;
+                .applicant-name-dt{
+                    width: 100%;
+                    float: left;
+                    h2{
+                        font-size:$font-20; color:$primarycolor; font-weight:normal; padding-bottom:8px;
+                        display: block;
+                        width: auto;
+                        float: left;
+                        strong{
+                            font-weight: 600;
+                        }
+                    }
+                    ul{
+                        margin:0px;
+                        li{
+                            display: inline-block;
+                            width: 20px;
+                            height: 20px;
+                            background: $bg-default;
+                            border: solid 1px $light-border;
+                            text-align: center;
+                            border-radius:3px;
+                            border-radius:3px;
+                            border-radius:3px;
+                            float: left;
+                            margin-left: 5px;
+                            i{
+                            color: $primarycolor;
+                            }
+                        }
+                    }
+                }
+
+                h4{ 
+                    font-size:$small-font; color:$secondarycolor; margin:5px 0px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    max-width: 80%;
+                    font-weight: 400;
+                    // display: inline-block;
+                }
+                .com-pos{
+                    width: 100%;
+                    padding:0px 5px;
+                    float: left;
+                    h4{
+                        i{
+                        display: inline-block;
+                        width: 20px;
+                        }
+                    }
+                }
+
+                .oth-sec{
+                    width: 100%;
+                    padding:0px;
+                    float: left;
+                    margin-left: 5px;
+                    h4{
+                        display: block;
+                        width: 100%;
+                        margin-right: 10px;
+                        padding:5px 0px;
+                        margin:0px;
+                        span{
+                            font-weight: normal;
+                            display: inline-block;
+                            width: 115px;
+                        }
+                        i{
+                            display: inline-block;
+                            width: 20px;
+                        }
+                    }
+                }
+            }
+
+        }
+        .newlistright{ 
+            width:160px; height:170px; float:right; padding:20px;border-left: 1px solid $light-border;border-radius:$border-radius; -webkit-border-radius:$border-radius; -moz-border-radius:$border-radius;
+            .newlist-percentage{
+                .matching-new-application{ margin-top:0px;width: 120px; height:auto!important; text-align:center;margin:0px auto; float:none!important;
+                canvas{ width:100px!important; height:100px!important; }
+                }
+                .circle{
+                    span{ font-size:$x-small-font}
+                    strong{ 
+                        height: 100px;width: 100px; 
+                        border-radius:50%; left:28px; color:$primarycolor; padding-top:25px; font-size:$normal-font;
+                        position: absolute;
+                        top:0px;
+                        text-align: center;
+                        display: block;
+                    }
+                }
+            }
+        }
+
+        .newlist-experience{ 
+            width:250px; float:right; padding:10px;
+            .exp-box{ background:$more-light-bg; border:solid 1px $light-border; border-radius:$border-radius; text-align:center; padding:14px 0px;
+                h5{ color:$secondarycolor;font-size: $x-small-font; margin:3px 0px;}
+                h4{ color:$primarycolor; font-size: $small-font; font-weight:bold;margin:3px 0px;}
+            }
+        }
+        // New style of the all listing page lable
+        .new-succes{
+            button{ background:#1ABC9C; color:$white; font-size: $x-small-font; border-radius:3px; border:none; padding:0 5px;}
+        }
+        .new-unsucces{
+            button{ background:#E74C3C; color:$white; font-size: $x-small-font; border-radius:3px; border:none; padding:0 5px;}
+        }
+        .new-reviewed{
+            button{ background:#3379bd!important; color:$white; font-size: $x-small-font; border-radius:3px; border:none; padding:0 5px;}
+        }
+        .new-shortlisted{
+            button{ background:#354A61; color:$white; font-size: $x-small-font; border-radius:3px; border:none; padding:0 5px;}
+        }
+        .new-applied{
+            button{ background:#ffdd91; color:$white; font-size: $x-small-font; border-radius:3px; border:none; padding:0 5px;}
+        }
+        .new-interview{
+            button{ background:#97aec6; color:$white; font-size: $x-small-font; border-radius:3px; border:none; padding:0 5px;}
+        }
+        .hide-bigscreens{ display:none }
+    }
+
+    .click-dropdown-sort{
+        .dropdown-menu{ margin-top:2px;}
+    }
+    .newlist{
+        .newlistright{ width:200px;}
+        .newlistleft{ width: calc(100% - 200px);}
+    }
+    .greenlist{ color:#1ABC9C }
+}
+
+
+.block .block-title-2{
+    padding: 10px 0px!important;
+}
+.block .block-footer{
+    float: left;
+    width: 100%;
+    border-top: 1px solid $light-border;
+}
+.block-title{
+    span{
+        float: right;
+        display: block;
+        color: $secondarycolor;
+        text-decoration: underline;
+        font-size: $normal-font;
+        &:hover{
+            cursor: pointer;
+        }
+    }
+}
+.srt-feture{
+    font-weight: 600;
+}
+.application-brder-v4{
+    border-bottom: solid 5px #badcfd;
+    background-color:rgba(186, 220, 253, 0.3) !important;
+    cursor: pointer;
+    border-radius: $border-radius;
+}
+.advance-filter{
+    background: none!important;
+    float: right;
+    color: $primarycolor!important;
+    padding: 0px!important;
+    font-size: 14px;
+    width: 100%;
+    text-align: right;
+}
+.btn-jobapplicant-back{
+    float: right;
+}
+
+.arabic{
+    .app-datail .sugested-btn i{
+        padding-right: 0px;
+        padding-left: 5px;
+    }
+    .applicant-name-dt{
+        h2{
+            float: right!important;
+        }
+    }
+    .btn-jobapplicant-back{
+        float: left;
+    }
+    .advance-filter{
+        float: left!important;
+        text-align: left;
+    }
+    .block-title span{
+        float: left;
+    }
+    .job-male-left{
+        float: right!important;
+    }
+    .jobapplicant .bulk-btn{
+        i{
+            padding-left: 5px;
+        }
+    }
+    .jobapplicant  .new-list .newlistright{
+        // margin-right: 10px;
+        border-left: none;
+        border-right: solid 1px $light-border;
+    }
+    .jobapplicant .new-list .newlistleft .newlistdp-right h4{
+        span{
+            float: right;
+            padding-left: 5px;
+        }
+    }
+    .click-dropdown-sort .btn-input .btn.form-control .caret{right:inherit!important; left: 0px!important;}
+    .right-bx{
+        width: 288px !important;
+    }
+}
+
+.matching-new-application{
+    position:relative;
+    margin-top: 15px;
+    width: 160px;
+    float: left;
+    height: 80px;
+    canvas{
+        width: 100px!important;
+        height: 100px!important;
+        margin: 0px auto;
+        display: block;
+    }
+
+}
+
+// action list
+// ===================================================
+.action-list-candi{
+    border: 1px solid $light-border;
+    height: 40px;
+    width: 100%;
+    border-radius: $border-radius;
+    border-bottom: none;
+    .form-group{
+        margin-bottom: 0px;
+        float: left;
+        padding-left: 10px;
+        color: $primarycolor;
+    }
+    .form-check-input{
+        float: left;
+        width: 20px;
+        margin: 0px;
+    }
+    .form-check-label{
+        line-height: 40px;
+        margin-bottom: 0px;
+    }
+    .action-button-candi{
+        display: block;
+        margin-bottom: 0px;
+        float: right;
+        li{
+            border-left: 1px solid $light-border;
+            display: block;
+            width: 40px;
+            height: 40px;
+            float: left;
+            text-align: center;
+            line-height: 40px;
+            color: $primarycolor;
+            &:hover{
+                cursor: pointer;
+            }
+        }
+    }
+}
+.arabic{
+    .action-list-candi .action-button-candi{
+        float: left;
+    }
+    .action-list-candi .form-group{
+        float: right;
+        padding-left:0px;
+        padding-right:10px;
+    }
+}
+
+
+// cvtag
+// ================
+.cvtag{
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    float: left;
+    border-top: none;
+    ul{
+        margin-bottom: 0px;
+        li{
+            display: inline-block;
+            padding: 0px 10px;
+            height: $button-height;
+            line-height: $button-height;
+            border: 1px solid $light-border;
+            border-radius: $border-radius;
+            overflow: hidden;
+            margin-right: 5px;
+            box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.05);
+        }
+    }
+}
+
+// statsnew
+// ================
+.statsnew{
+    border: 1px solid $light-border;
+    border-top: none;
+    width: 100%;
+    height: auto;
+    float: left;
+    .col-lg-3{
+        text-align: center;
+        min-height: 80px;
+        border-right: 1px solid $light-border;
+        span{
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: $normal-font;
+            color: $secondarycolor;
+        }
+        b{
+            display: block;
+            text-align: center;
+            font-size: 18px;
+            color: $primarycolor;
+        }
+    }
+    .col-lg-6{
+        text-align: center;
+        min-height: 80px;
+        border-right: 1px solid $light-border;
+        span{
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: $normal-font;
+            color: $secondarycolor;
+        }
+        b{
+            display: block;
+            text-align: center;
+            font-size: 18px;
+            color: $primarycolor;
+        }
+    }
+}
+
+// skills
+// ===================
+.newlist-experience{
+    b{
+        text-align: right;
+        display: block;
+    }
+    ul{
+        li{
+            display: block;
+            width: 100%;
+            .textskilAts{
+                color: $secondarycolor;
+                display: block;
+                text-align: right;
+            }
+            .frameSkills{
+                display: block;
+                width: 100%;
+                height: 5px;
+                background: #f1f1f1;
+                margin-top: 5px;
+            }
+            b{
+                display: block;
+                float: right;
+                width: 33.33%;
+                height: 5px;
+            }
+            .bignnerAts{
+                background: $shade12;
+            }
+            .intermediateAts{
+                background: $shade6;
+            }
+            .expertAts{
+                background: $shade1;
+            }
+        }
+    }
+}
+
+.listingFrame{
+    width: 100%;
+    float: left;
+    margin-bottom: 10px;
+    box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.05);
+}
+
+.kesh-no-pointer-event{
+    pointer-events: none;
+}
+
+// Responsive
+// =======================================================
+@media all and (max-width: 1200px) {
+    .jobapplicant .bulk-fdb1{
+        margin-right: 0px!important;
+    }
+    .jobapplicant{
+        .bulk-fdb1{ margin-right:0px; }
+        .new-list{
+            padding:10px;
+            .newlistright{ width:170px;
+            .newlist-percentage{ width:130px;
+            .newlist-experience{ width:180px;}
+            }
+            }
+        }
+    }
+    .jobapplicant .new-list .newlistleft .newlistdp-right .applicant-name-dt h2{
+        text-align: left!important;
+    }
+    .mobile_full{
+        width: 100%!important;
+    }
+    .half-fix-v4{
+        width: 100%;
+    }
+    .left-bx{
+        width: 100%!important;
+    }
+    
+}
+
+// =======================================================
+@media all and (max-width: 991px) {
+    .half-fix-v4{
+        width: 100%;
+    }
+    .jobapplicant .new-list .newlist-experience{
+        width: 100%;
+    }
+    .newlist-experience{
+        border-top: 1px solid $light-border;
+    }
+    // new stats
+    // =========================
+    .statsnew{
+        border: none;
+        .col-lg-3{
+            border:1px solid $light-border!important;
+            border-right: none;
+            width: 50%;
+        }
+    }
+    .cvtag{
+        border:1px solid $light-border;
+        li{
+            width: auto!important;
+            float: left;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+    }
+    
+}
+
+
+// =======================================================
+@media (max-width: 768px) {
+    .jobapplicant .bulk-fdb1{
+        margin-right: 0px!important;
+    }
+    .newlistleft{
+        width: 100%!important;
+    }
+    .jobapplicant .new-list .newlistleft .newlistdp-right .applicant-name-dt h2 strong{
+        text-align: left!important;
+    }
+    .jobapplicant .new-list .newlistleft .newlistdp-right{
+        padding-left: 0px!important;
+        padding: 10px!important;
+    }
+    .jobapplicant .new-list .newlist-experience{
+        width: 100%;
+    }
+    .jobapplicant .new-list .newlistleft{
+        width: 100%;
+    }
+    .half-fix-v4{
+        width: 100%;
+    }
+    .arabic{
+        .jobapplicant .new-list .newlistleft .newlistdp-right .applicant-name-dt ul{
+            left: 0px!important;
+            right: inherit;
+        }
+        .right-bx{
+            width: 100% !important;
+        }
+    }
+    .jobapplicant .new-list .newlistright{
+        border:none!important;
+    }
+    .jobapplicant .new-list .newlistleft .newlistdp-right{
+        border-top: 1px solid $light-border;
+    }
+
+    // new stats
+    // =========================
+    .statsnew{
+        border: none;
+        .col-lg-3{
+            border:1px solid $light-border!important;
+            border-right: none;
+            width: 50%;
+        }
+    }
+    .cvtag{
+        border:1px solid $light-border;
+    }
+
+    .jobapplicant{
+        .left-bx{
+            width: 100% !important;
+        }
+    }
+
+}
+// =======================================================
+@media (max-width: 480px) {
+    .newlistright{
+        border:none!important;
+    }
+      // new stats
+    // =========================
+    .statsnew{
+        border: none;
+        .col-lg-3{
+            border-bottom:1px solid $light-border;
+            border-right: none;
+            width: 100%;
+        }
+    }
+}

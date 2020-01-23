@@ -1,0 +1,114 @@
+<ion-header>
+  <ion-toolbar>    
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Tilføj begivenhed</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding >
+  <ion-item lines="none">
+      <ion-label position="stacked">Titel</ion-label>
+    <ion-input required type="text" [(ngModel)]="begivenhed.titel" placeholder="Titel på begivenhed"></ion-input><br>
+  </ion-item>
+  <ion-item lines="none">
+    <ion-label position="stacked">Kontakt Person</ion-label>
+    <ion-input required type="text" [(ngModel)]="begivenhed.kontaktPerson"placeholder="Navn"></ion-input><br>
+  </ion-item>
+  <ion-item lines="none">
+    <ion-label position="stacked">Telefon</ion-label>
+    <ion-input required type="text" [(ngModel)]="begivenhed.kontaktTelefon" placeholder="Telefon"></ion-input><br>
+  </ion-item>
+ 
+
+    <ion-grid nopadding>
+        <ion-row nopadding>
+            <ion-col size="12" >
+              <div class="field_fix">
+                  <ion-item lines="none">
+                      <ion-label position="stacked">Adresse</ion-label>
+                      <ion-input required type="text"  [(ngModel)]="begivenhed.adresse" placeholder="Adresse"></ion-input><br>
+                    </ion-item>
+       
+              </div>
+            </ion-col>
+    
+          </ion-row>
+        <ion-row nopadding>
+          <ion-col size="5" >
+            <div class="field_fix">
+                <ion-item lines="none" nopadding>
+                    <ion-label position="stacked">Postnummer</ion-label>
+                    <ion-input required type="text" [(ngModel)]="begivenhed.postnummer" placeholder="Postnummer"></ion-input><br>
+                  </ion-item>
+     
+            </div>
+          </ion-col>
+          <ion-col size="7" >
+            <div>
+                <ion-item lines="none" nopadding>
+                    <ion-label position="stacked">By</ion-label>
+                    <ion-input required type="text" [(ngModel)]="begivenhed.by" placeholder="By"></ion-input><br>
+                  </ion-item>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  
+  <ion-item lines="none">
+    <ion-label>Vælg en kategori:</ion-label>
+    <ion-select value="sport" okText="Ok" cancelText="Afbryd" [(ngModel)]="begivenhed.kategori" > 
+        <ion-select-option value="sport">Sport</ion-select-option>
+        <ion-select-option value="natur">Natur</ion-select-option>
+        <ion-select-option value="hygge">Hygge</ion-select-option>
+        <ion-select-option value="videnskab">Videnskab</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+  <ion-grid>
+    <ion-row >
+      <ion-col size="7" >
+        <div class="field_fix">
+          <ion-item lines="none">
+            <ion-label position="stacked">Start dato</ion-label>
+            <ion-datetime display-format="DD MMMM YYYY" min="2018" cancel-text ="Afbryd" done-text="Færdig" [(ngModel)]="begivenhed.startDato" ></ion-datetime>
+          </ion-item>
+ 
+        </div>
+      </ion-col>
+      <ion-col size="5" >
+        <div>
+          <ion-item lines="none">
+            <ion-label position="stacked">Start tid</ion-label>
+            <ion-datetime displayFormat="HH:mm" cancel-text ="Afbryd" done-text="Færdig" [(ngModel)]="begivenhed.startTid"></ion-datetime>
+          </ion-item>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row > 
+      <ion-col size="7" >
+        <div class="field_fix">
+          <ion-item lines="none">
+            <ion-label position="stacked">Slut dato</ion-label>
+            <ion-datetime display-format="DDD MMMM YYYY" min="2018" cancel-text ="Afbryd" done-text="Færdig" [(ngModel)]="begivenhed.slutDato"></ion-datetime>
+          </ion-item>
+ 
+        </div>
+      </ion-col>
+      <ion-col size="5" >
+        <div>
+          <ion-item lines="none">
+            <ion-label position="stacked">Slut tid</ion-label>
+            <ion-datetime displayFormat="HH:mm" cancel-text ="Afbryd" done-text="Færdig" [(ngModel)]="begivenhed.slutTid"></ion-datetime>
+          </ion-item>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-button color="success" expand="full" (click)="addEvent()">Tilføj Begivenhed</ion-button>
+</ion-content>

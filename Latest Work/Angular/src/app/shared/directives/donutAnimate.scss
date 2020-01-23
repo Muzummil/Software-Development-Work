@@ -1,0 +1,43 @@
+@import '../../../styles/sass/base/_variables.scss';
+input:-webkit-autofill {
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
+}
+
+h1, h2, h3, h4, h5, span, label, a, button, p{
+    font-family: $primary-Fonts;
+}
+
+.arabic{
+    h1, h2, h3, h4, h5, span, label, a, button, p, input, .cmpny-txt{
+       font-family: $arabic-primary-Fonts!important;
+    }
+}
+
+
+.circle{
+    width: 100%!important;
+    span{ font-size:$x-small-font}
+    strong{ 
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        color:$primarycolor;
+        /* padding-top: 25px; */
+        font-size: 14px;
+        position: absolute;
+        top: -103px;
+        /* line-height: 100px; */
+        display: block;
+        text-align: center;
+        margin: 0px auto;
+        line-height: 100px;
+        left: 10px;
+    }
+    canvas{
+        width: 100px;
+    }
+}
+.circle span{
+    color: $primarycolor;
+}

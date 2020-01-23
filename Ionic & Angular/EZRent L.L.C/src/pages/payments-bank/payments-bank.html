@@ -1,0 +1,39 @@
+<ion-header class="animated fadeIn no-shadow">
+
+  <ion-navbar class="no-border" color="primary">
+    <ion-title>
+      Create Bank Account
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="common-bg payments-account">
+  <h5>Add Bank Account</h5>
+  <form #myForm="ngForm" [formGroup]="onPropertySetupForm" (ngSubmit)="PropertyInfo()" class="list-form" margin-top>
+    <ion-item>
+      <ion-label fixed>
+        <img src="../assets/icon/signup_1.png" width="30">
+      </ion-label>
+      <ion-input type="text" formControlName="Name" placeholder="Name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>
+        <img src="../assets/icon/pass1.png" width="30">
+      </ion-label>
+      <ion-input type="text" formControlName="AccountNumber" placeholder="Account Number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>
+        <img src="../assets/icon/income_icon.png" width="30">
+      </ion-label>
+      <ion-input type="text" formControlName="AccountType" placeholder="Bank Account Type"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>
+        <img src="../assets/icon/signup_4.png" width="30">
+      </ion-label>
+      <ion-input type="text" formControlName="RoutingNumber" placeholder="Routing Number"></ion-input>
+    </ion-item>
+  </form>
+
+</ion-content>

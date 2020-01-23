@@ -1,0 +1,406 @@
+<!--FILTER-->
+<div class="filter clicks" [class.arabic] = "accountService.isArabic()">
+    <div id="main">
+        <div class="panel-group border-bottom" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="advance-filter-container">
+                <!-- country -->
+                <!-- ========================================================================== -->
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 arabic-right-left">
+                        <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingTwo">
+                                    <h3 class="panel-title">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                                            href="#" aria-expanded="false" aria-controls="collapsethree">
+                                            {{fixedTextHash['country'][currLan]}}
+                                        </a>
+                                    </h3>
+                                </div>
+                                <div id="collapsethree" role="tabpanel" aria-labelledby="headingTwo">
+                                    <div class="panel-body">
+                                        <div *ngIf="(locations$ | async)?.showAddmoreFlag" class="edit">
+                                            <div [class.filter-add]="(locations$ | async)?.expendAddmoreFlag"
+                                                [class.filter-open]="!(locations$ | async)?.expendAddmoreFlag">
+                                                <auto-complete [fullWidth]="true" [resetOnSelect]="true" [recordType]="'Country'"
+                                                                [placeholder]="fixedTextHash['add_more'][currLan]"
+                                                                (changeRecords)="onAddElement($event,'locations')"
+                                                                [excludeItems]="(locations$ | async)?.elements"></auto-complete>
+                            
+                                            </div>
+                                        </div>
+                                        <!-- Empty -->
+                                        <div class="empty-min4 " *ngIf="((locations$ | async)?.elements?.length >0)? false:true">
+                                                <div class="empty-prf">
+                                                    <spinner [visible]="true"></spinner>
+                                                </div>
+                                            </div>
+                                            <div class="fltr-check-box scrollbar" id="style-4">
+                                            <div class="fltr-check"
+                                            *ngFor="let country of (locations$ | async)?.elements,let country_index =index">
+                                            <input [id]="'checkboxCountry'+country_index"
+                                                    value="{{country.id}}"
+                                                    (click)="onSelectElement(country.id,'locations')"
+                                                    class="css-checkbox" type="checkbox"
+                                                    [attr.name]="'checkboxCountry'+country_index"
+                                                    [checked]="country.selectedFlag"
+                                            >
+                                            <label class="css-label" [attr.for]="'checkboxCountry'+country_index">
+                                                {{country.name}}&nbsp;(<strong *ngIf="country.jobs_count == 1">{{country.jobs_count}}&nbsp;{{fixedTextHash['job'][currLan]}}</strong><strong
+                                                    *ngIf="country.jobs_count != 1">{{country.jobs_count}}&nbsp;{{fixedTextHash['jobs'][currLan]}}</strong>)
+                                                <span class="job-count"></span>
+                                            </label>
+                                            </div>
+                                            </div>
+                                    </div>
+                                </div>
+                                </div>
+                </div>
+
+                <!-- City -->
+                 <!-- ========================================================================== -->
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 arabic-right-left">
+                        <div class="panel panel-default">
+                                <div class="panel-heading" role="tab">
+                                    <h3 class="panel-title">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                                           href="#" aria-expanded="false" aria-controls="collapseTwo">
+                                            {{fixedTextHash['city'][currLan]}}
+                                        </a>
+                                    </h3>
+                                </div>
+                                <div *ngIf="(locations$ | async)?.elementsChecked.length == 0">
+                                    <div class="panel-body">
+                                        <div class="alert alert-warning page-alert" id="alert-3">
+                                            Select Country First
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="(locations$ | async)?.elementsChecked.length >0" id="collapseTwo" role="tabpanel" aria-labelledby="headingTwo">
+                                    <div class="panel-body">
+                                        <!-- Add More -->
+                                        <div *ngIf="(cities$ | async)?.showAddmoreFlag" class="edit">
+                                            <div [class.filter-add]="(cities$ | async)?.expendAddmoreFlag"
+                                                    [class.filter-open]="!(cities$ | async)?.expendAddmoreFlag">
+                                                <auto-comp-city [fullWidth]="true" [resetOnSelect]="true" [recordType]="'City'"
+                                                                [showJobsCount]="true" (changeRecords)="onAddElement($event,'cities')"
+                                                                [placeholder]="fixedTextHash['add_more'][currLan]"
+                                                                [countryList]="(locations$ | async)?.elementsChecked"
+                                                                [excludeItems]="(cities$ | async)?.elements"
+                                                                [excludeItems]="(cities$ | async)?.elements">
+                
+                                                </auto-comp-city>
+                                            </div>
+                                        </div>
+                                            
+                                        <div class="empty-min4 " *ngIf="((cities$ | async)?.elements?.length >0)? false:true">
+                                            <div class="empty-prf">
+                                                <spinner [visible]="true"></spinner>
+                                            </div>
+                                        </div>
+                                        <div class="fltr-check-box scrollbar" id="style-4">
+                                        <div class="fltr-check" *ngFor="let city of (cities$ | async)?.elements,let city_index =index">
+                                            <input [id]="'checkboxCity'+city_index"
+                                                   value="{{city.id}}"
+                                                   (click)="onSelectElement(city.id,'cities')"
+                                                   class="css-checkbox"
+                                                   type="checkbox" [attr.name]="'checkboxCity'+city_index"
+                                                   [checked]="city.selectedFlag"
+                                            >
+                                            <label class="css-label" [attr.for]="'checkboxCity'+city_index">{{city.name}}&nbsp;
+                                                (<strong>{{city.jobs_count}}</strong>)
+                                            </label>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                </div>
+
+                <!-- Sector -->
+                <!-- ========================================================================== -->
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 arabic-right-left">
+                        <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingTwo">
+                                    <h3 class="panel-title">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                                           href="#" aria-expanded="false" aria-controls="collapsethree">
+                                            {{fixedTextHash['sector'][currLan]}}
+                                        </a>
+                                    </h3>
+                                </div>
+                                <div id="collapsethree" role="tabpanel" aria-labelledby="headingTwo">
+                
+                                    <div class="panel-body">
+                                        
+                                        <div *ngIf="(sectors$ | async)?.showAddmoreFlag" class="edit">
+                                            <div [class.filter-add]="(sectors$ | async)?.expendAddmoreFlag"
+                                                    [class.filter-open]="!(sectors$ | async)?.expendAddmoreFlag">
+                
+                                                <auto-complete [fullWidth]="true"
+                                                                [resetOnSelect]="true"
+                                                                [placeholder]="fixedTextHash['add_more'][currLan]"
+                                                                [recordType]="'Sector'"
+                                                                (changeRecords)="onAddElement($event,'sectors')"
+                                                                [excludeItems]="(sectors$ | async)?.elements">
+                
+                                                </auto-complete>
+                                            </div>
+                                        </div>
+                                        <div class="fltr-check-box scrollbar" id="style-4">   
+                                        <div class="fltr-check"
+                                             *ngFor="let sector of (sectors$ | async)?.elements,let sector_index =index;trackBy:sector?.id">
+                                            <input [id]="'checkboxSector'+sector_index" value="{{sector.id}}" class="css-checkbox"
+                                                   type="checkbox" [attr.name]="'checkboxSector'+sector_index"
+                                                   [checked]="sector.selectedFlag"
+                                                   (click)="onSelectElement(sector.id,'sectors')">
+                                            <label class="css-label" [attr.for]="'checkboxSector'+sector_index">{{sector.name}}</label>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                </div>
+
+                <!-- functional Area -->
+                <!-- ========================================================================== -->
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 arabic-right-left">
+                        <div class="panel panel-default">
+                                <div class="panel-heading" role="tab">
+                                    <h3 class="panel-title">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                                           href="#" aria-expanded="false" aria-controls="collapsefour">
+                                            {{fixedTextHash['functional_area'][currLan]}}
+                                        </a>
+                                    </h3>
+                                </div>
+                                <div id="collapsefour"  role="tabpanel" aria-labelledby="headingTwo">
+                                    <div class="panel-body">
+                                        <div *ngIf="(fareas$ | async)?.showAddmoreFlag" class="edit">
+                                            <div [class.filter-add]="!(fareas$ | async)?.expendAddmoreFlag"
+                                                 [class.filter-open]="(fareas$ | async)?.expendAddmoreFlag"
+                                                 (click)="customAdd('fareas')">
+                                                <div class="pull-left  arabic-right-left"><i class="icon-add"></i></div>
+                                                <div class="pull-left  arabic-right-left">
+                                                    <span>{{fixedTextHash['more'][currLan]}}</span></div>
+                                                <div class=" clearfix"></div>
+                                            </div>
+                                            <div [class.filter-add]="(fareas$ | async)?.expendAddmoreFlag"
+                                                 [class.filter-open]="!(fareas$ | async)?.expendAddmoreFlag">
+                
+                                                <auto-complete [placeholder]="'Add Functional Area'" [fullWidth]="true"
+                                                               [resetOnSelect]="true" [recordType]="'FunctionalArea'"
+                                                               (changeRecords)="onAddElement($event,'fareas')"
+                                                               [excludeItems]="(fareas$ | async)?.elements">
+                                                </auto-complete>
+                
+                                            </div>
+                                        </div>
+                                        <div class="fltr-check-box scrollbar" id="style-4">
+                                        <div class="fltr-check"
+                                             *ngFor="let funArea of (fareas$ | async)?.elements,let funArea_index =index">
+                                            <input [id]="'checkboxFuncA'+funArea_index" value="{{funArea.id}}"
+                                                   class="css-checkbox" type="checkbox" [attr.name]="'checkboxFuncA'+funArea_index"
+                                                   [checked]="funArea.selectedFlag"
+                                                   (click)="onSelectElement(funArea.id,'fareas')">
+                                            <label class="css-label" [attr.for]="'checkboxFuncA'+funArea_index">{{funArea.name}}</label>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                </div>
+
+                <!-- Job Type -->
+                <!-- ========================================================================== -->
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 arabic-right-left">
+                        <div class="panel panel-default">
+                                <div class="panel-heading" role="tab">
+                                    <h3 class="panel-title">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                                           href="#" aria-expanded="false" aria-controls="collapsefive">
+                                            {{fixedTextHash['job_type'][currLan]}}
+                                        </a>
+                                    </h3>
+                                </div>
+                                <div id="collapsefive"  role="tabpanel" aria-labelledby="headingTwo">
+                                    <div class="panel-body">
+                                        <div *ngIf="(jobTypes$ | async)?.showAddmoreFlag" class="edit">
+                                            <div [class.filter-add]="!(jobTypes$ | async)?.expendAddmoreFlag"
+                                                    [class.filter-open]="(jobTypes$ | async)?.expendAddmoreFlag"
+                                                    (click)="customAdd('jobtypes')">
+                                                <div class="pull-left  arabic-right-left"><i class="icon-add"></i></div>
+                                                <div class="pull-left  arabic-right-left">
+                                                    <span>{{fixedTextHash['more'][currLan]}}</span></div>
+                                                <div class=" clearfix"></div>
+                                            </div>
+                                            <div [class.filter-add]="(jobTypes$ | async)?.expendAddmoreFlag"
+                                                    [class.filter-open]="!(jobTypes$ | async)?.expendAddmoreFlag">
+                
+                                                <auto-complete [placeholder]="'Add Job Type'" [fullWidth]="true" [resetOnSelect]="true"
+                                                                [recordType]="'JobType'" [excludeItems]="(jobTypes$ | async)?.elements"
+                                                                (changeRecords)="onAddElement($event,'jobtypes')"></auto-complete>
+                                            </div>
+                                        </div>
+                                        <div class="fltr-check-box scrollbar" id="style-4">
+                                        <div class="fltr-check"
+                                             *ngFor="let jobType of (jobTypes$ | async)?.elements,let jobType_index =index">
+                                            <input [id]="'checkboxJobType'+jobType_index" value="{{jobType.id}}"
+                                                   class="css-checkbox" type="checkbox"
+                                                   [attr.name]="'checkboxJobType'+jobType_index"
+                                                   [checked]="jobType.selectedFlag"
+                                                   (click)="onSelectElement(jobType.id,'jobtypes')">
+                                            <label class="css-label"
+                                                   [attr.for]="'checkboxJobType'+jobType_index">{{jobType.name}}</label>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                </div>
+
+                <!-- sakary -->
+                <!-- ========================================================================== -->
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 arabic-right-left">
+                    <div class="panel panel-default">
+                            <div class="panel-heading" role="tab">
+                                <h3 class="panel-title">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                                        href="#" aria-expanded="false" aria-controls="collapsesix">
+                                        {{fixedTextHash['salary_level'][currLan]}}
+                                    </a>
+                                </h3>
+                            </div>
+                            <div id="collapsesix"  role="tabpanel" aria-labelledby="headingTwo">
+                                <div class="panel-body">
+                                    <div class="fltr-check-box scrollbar" id="style-4">
+                                    <div class="fltr-check"
+                                            *ngFor="let selRange of (salarylevels$ | async)?.elements,let selRange_index =index">
+                                        <input [id]="'checkboxSalRangeType'+selRange_index" value="{{selRange.id}}"
+                                                class="css-checkbox" type="checkbox"
+                                                [attr.name]="'checkboxSalRangeType'+selRange_index" [checked]="selRange.selectedFlag"
+                                                (click)="onSelectElement(selRange.id,'salarylevels')">
+                                        <label class="css-label" [attr.for]="'checkboxSalRangeType'+selRange_index">{{selRange.name}}</label>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+
+                <!-- Education Level -->
+                <!-- ========================================================================== -->
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 arabic-right-left">
+                        <div class="panel panel-default">
+                                <div class="panel-heading" role="tab">
+                                    <h3 class="panel-title">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                                           href="#" aria-expanded="false" aria-controls="collapseseven">
+                                            {{fixedTextHash['edu_level'][currLan]}}
+                                        </a>
+                                    </h3>
+                                </div>
+                                <div id="collapseseven"  role="tabpanel" aria-labelledby="headingTwo">
+                                    <div class="panel-body">
+                                            <div *ngIf="(edulevels$ | async)?.showAddmoreFlag" class="edit">
+                                                <div [class.filter-add]="!(edulevels$ | async)?.expendAddmoreFlag"
+                                                        [class.filter-open]="(edulevels$ | async)?.expendAddmoreFlag"
+                                                        (click)="customAdd('edulevels')">
+                                                    <div class="pull-left  arabic-right-left"><i class="icon-add"></i></div>
+                                                    <div class="pull-left  arabic-right-left">
+                                                        <span>{{fixedTextHash['more'][currLan]}}</span></div>
+                                                    <div class=" clearfix"></div>
+                                                </div>
+                                                <div [class.filter-add]="(edulevels$ | async)?.expendAddmoreFlag"
+                                                        [class.filter-open]="!(edulevels$ | async)?.expendAddmoreFlag">
+                    
+                                                    <auto-complete [placeholder]="'Add Education Level'" [fullWidth]="true"
+                                                                    [resetOnSelect]="true" [recordType]="'JobEducation'"
+                                                                    (changeRecords)="onAddElement($event,'edulevels')"
+                                                                    [excludeItems]="(edulevels$ | async)?.elements"></auto-complete>
+                                                </div>
+                                            </div>
+                                        <div class="fltr-check-box scrollbar" id="style-4">
+                                        <div class="fltr-check"
+                                             *ngFor="let eduType of (edulevels$ | async)?.elements,let eduType_index =index">
+                                            <input [id]="'checkboxEduType'+eduType_index" value="{{eduType.id}}"
+                                                   class="css-checkbox" type="checkbox"
+                                                   [checked]="eduType.selectedFlag"
+                                                   [attr.name]="'checkboxEduType'+eduType_index"
+                                                   (click)="onSelectElement(eduType.id,'edulevels')">
+                                            <label class="css-label"
+                                                   [attr.for]="'checkboxEduType'+eduType_index">{{eduType.name}}</label>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                </div>
+
+                <!-- Exp Level -->
+                <!-- ========================================================================== -->
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 arabic-right-left">
+                        <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="">
+                                    <h3 class="panel-title">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                                           href="#" aria-expanded="false" aria-controls="collapseeight">
+                                            {{fixedTextHash['exp_level'][currLan]}}
+                                        </a>
+                                    </h3>
+                                </div>
+                                <div id="collapseeight"  role="tabpanel" aria-labelledby="headingTwo">
+                                    <div class="panel-body">
+
+                                            <div *ngIf="(explevels$ | async)?.showAddmoreFlag" class="edit">
+                                                    <div [class.filter-add]="!(explevels$ | async)?.expendAddmoreFlag"
+                                                         [class.filter-open]="(explevels$ | async)?.expendAddmoreFlag"
+                                                         (click)="customAdd('explevels')">
+                                                        <div class="pull-left  arabic-right-left"><i class="icon-add"></i></div>
+                                                        <div class="pull-left  arabic-right-left">
+                                                            <span>{{fixedTextHash['more'][currLan]}}</span></div>
+                                                        <div class=" clearfix"></div>
+                                                    </div>
+                                                    <div [class.filter-add]="(explevels$ | async)?.expendAddmoreFlag"
+                                                         [class.filter-open]="!(explevels$ | async)?.expendAddmoreFlag">
+                        
+                                                        <auto-complete [placeholder]="'Add Experience Level'" [fullWidth]="true"
+                                                                       [resetOnSelect]="true" [recordType]="'JobExperience'"
+                                                                       [excludeItems]="(explevels$ | async)?.elements"
+                                                                       (changeRecords)="onAddElement($event,'explevels')"></auto-complete>
+                                                    </div>
+                        
+                                                </div>
+                                        <div class="fltr-check-box scrollbar" id="style-4">
+                                            <div class="fltr-check"
+                                                *ngFor="let exType of (explevels$ | async)?.elements,let exType_index =index">
+                                                <input [id]="'checkboxExType'+exType_index" value="{{exType.id}}"
+                                                    class="css-checkbox" type="checkbox"
+                                                    [attr.name]="'checkboxExType'+exType_index"
+                                                    [checked]="exType.selectedFlag"
+                                                    (click)="onSelectElement(exType.id,'explevels')">
+                                                <label class="css-label" [attr.for]="'checkboxExType'+exType_index">{{exType.name}}</label>
+                                            </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                </div>
+
+                <!-- Rest Button -->
+                <!-- ========================================================================== -->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 border-top arabic-right-left">
+                    <!--BUTTONS SUBMIT REFERESH-->
+                    <div class="bt-group-ats">
+                            <button class="bt-reset-filter" data-toggle="collapse" data-target="#demo">{{fixedTextHash['apply'][currLan]}}</button>
+                            <button class="bt-reset-filter bt-cancel-ats arabic-right-left" (click)="onReset()">{{fixedTextHash['reset'][currLan]}}</button>
+                            <div class="clearfix"></div>
+                    </div>
+                </div>
+
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+

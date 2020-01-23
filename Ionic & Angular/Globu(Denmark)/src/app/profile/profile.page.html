@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Min Profil
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-grid>
+  <ion-row>
+      <ion-col size="9">
+          <div>
+          
+                  <ion-label position="stacked">Navn:</ion-label>
+                  <ion-input placeholder="{{ userProfile?.forname }} {{ userProfile?.lastname }}"></ion-input>
+          
+                  <ion-label position="stacked">Email:</ion-label>
+                  <ion-input placeholder="{{ userProfile?.email }}"></ion-input>
+
+                  <ion-label position="stacked">Brugernavn:</ion-label>
+                  <ion-input placeholder="{{ userProfile?.username }}"></ion-input>
+          </div>
+      </ion-col>
+      <ion-col size="3">
+          <div class="profile__avatar"><img src="{{ userProfile?.photoURL }}">
+          <div class="profile__text">SKIFT PROFILBILLEDE</div>
+          </div>
+      </ion-col>
+  </ion-row>
+</ion-grid>
+
+<ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <div>
+            <ion-label position="stacked">Fødselsdato:</ion-label>
+            <ion-input placeholder="{{ userProfile?.birthday }}"></ion-input>
+        </div>
+      </ion-col>
+      <ion-col size="6">
+        <div>
+            <ion-label position="stacked">Telefon:</ion-label>
+            <ion-input placeholder="{{ userProfile?.contactPhone }}"></ion-input>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

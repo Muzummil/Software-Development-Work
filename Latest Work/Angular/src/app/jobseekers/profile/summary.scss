@@ -1,0 +1,28 @@
+@import '../../../styles/sass/base/_variables.scss';
+
+h1, h2, h3, h4, h5, span, label, a, button, p{
+  font-family: $primary-Fonts;
+}
+
+.arabic{
+    h1, h2, h3, h4, h5, span, label, a, button, p, input{
+    font-family: $arabic-primary-Fonts!important;
+    .block-title{
+      h4{
+        font-family: $arabic-primary-Fonts!important;
+      }
+    }
+  }
+}
+
+.block{
+  border:1px solid $light-border;
+}
+
+.block-contant{
+  padding: 10px;
+}
+.block-title-2,  .block-title{
+  padding: 10px;
+}
+

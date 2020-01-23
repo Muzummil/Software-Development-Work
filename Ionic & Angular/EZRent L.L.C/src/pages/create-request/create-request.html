@@ -1,0 +1,58 @@
+<ion-header class="animated fadeIn no-shadow inner-tab">
+
+    <ion-navbar class="no-border" color="primary" hideBackButton="true">
+      <!-- <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button> -->
+      <ion-title>
+        Create Request
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+
+
+<ion-content padding>
+  <div class="no-data" *ngIf="!data && data==null">
+      <img src="../../assets/icon/no-data.png" alt="image">
+      <h4>No tennat/landlord found</h4>
+    </div>
+    <div *ngIf="data && data!=null" >
+    <form #myForm="ngForm" [formGroup]="onRequestSetupForm" (ngSubmit)="addRequest()" class="list-form" margin-top>
+      <!-- <ion-item *ngIf="tenants==null">
+        <ion-label fixed>
+          Select User
+        </ion-label>
+        <ion-select  formControlName="User" placeholder="users" col-5 multiple="false" cancelText="Cancel" okText="OK">
+          <ion-option value={{userId}}>Self</ion-option>
+        </ion-select>
+      </ion-item> -->
+      <ion-item>
+        <ion-label fixed>
+          Select User
+        </ion-label>
+          <ion-select *ngFor="let item of data"  formControlName="User" placeholder="users" col-5 multiple="false" cancelText="Cancel" okText="OK">
+            <!-- <ion-option value={{userId}}>Self</ion-option> -->
+            <ion-option value={{item.id}}>{{item.name}}</ion-option>
+          </ion-select>
+      </ion-item>
+      <p ion-text color="danger" class="has-error" *ngIf="onRequestSetupForm.get('User').hasError('required') && myForm.submitted">please select user</p>
+      <ion-item>
+        <ion-label fixed>
+          <img src="../assets/icon/signup_1.png" width="30">
+        </ion-label>
+        <ion-input type="text" formControlName="Title" placeholder="Request title"></ion-input>
+      </ion-item>
+      <p ion-text color="danger" class="has-error" *ngIf="onRequestSetupForm.get('Title').hasError('required') && myForm.submitted">title is required</p>
+      <ion-item>
+        <ion-label fixed>
+          <img src="../assets/icon/signup_1.png" width="30">
+        </ion-label>
+        <ion-textarea class="textarea" formControlName="Description" placeholder="Request description"></ion-textarea>
+      </ion-item>
+      <p ion-text color="danger" class="has-error" *ngIf="onRequestSetupForm.get('Description').hasError('required') && myForm.submitted">description is required</p>
+      <button ion-button full type="submit" color="primary" >Create Request</button>
+    </form>
+  </div>
+    <!-- <button ion-button full type="button" color="primary"  (click)="backToRequest()">Back to request page</button> -->
+
+</ion-content>

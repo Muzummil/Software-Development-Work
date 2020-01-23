@@ -1,0 +1,84 @@
+@import '../../../../styles/sass/base/_variables.scss';
+h1, h2, h3, h4, h5, h6, span, p, a{
+	margin:0px;
+	font-family: $primary-Fonts;
+}
+
+.arabic{
+	h1, h2, h3, h4, h5, h6, span, p, a, button, .req-dark, .applicants-txt {
+		margin:0px;
+		font-family: $arabic-primary-Fonts!important;
+	}
+}
+
+h2{
+    font-weight: 500;
+    font-size: $medium-size;
+    text-align: left;
+    color: $tertiarycolor;
+    display: block;
+    width: calc(100% - 430px);
+    float: left;
+    margin-bottom: 20px!important;
+    a{
+        color: $tertiarycolor;
+    }
+    i{
+        display: inline;
+        padding: 0px 5px;
+    }
+    span{
+        color: $primarycolor;
+
+    }
+}
+
+.subCandiSwitch{
+    float: right;
+    width: 100%;
+    margin-bottom: 15px;
+    height: auto;
+    button{
+        width: 50%;
+        height: $button-height;
+        border:1px solid $light-border;
+        border-radius: $border-radius;
+        float: left;
+        color: $primarycolor;
+        background: $white;
+        &:hover{
+            background: $primarycolor;
+            color: $white;
+            cursor: pointer;
+        }
+    }
+    .active{
+        background: $primarycolor;
+        color: $white;
+        cursor: pointer;
+    }
+}
+
+.arabic{
+    button{
+        float: right!important;
+    }
+    text-align: right;
+    i{
+        -moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH";
+        display: inline-block!important;
+    }
+}
+
+// ============MediumScreen========
+
+@media all and (max-width: 768px) {
+    h2{
+        width: 100%;
+    }
+}

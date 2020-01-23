@@ -1,0 +1,21 @@
+page-reminders {
+.fab-btn .fab-close-icon {
+    line-height: 40px;
+    font-size: 14px;
+    }
+    .fab-btn {
+        width: 40px;
+        height: 40px;
+        line-height: 15px;
+        font-size: 13px;
+        margin-top: 8px;
+    }
+    .fab-btn ion-fab-list{min-height: 40px;}
+    ion-fab-list[side="left"] {margin: 0 45px;}
+    .fab-btn ion-icon {
+        font-size: 1.8rem;
+    }
+    .row ion-col.col{
+        white-space: normal;
+    }
+}

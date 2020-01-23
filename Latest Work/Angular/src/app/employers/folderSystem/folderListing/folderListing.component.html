@@ -1,0 +1,53 @@
+<section class="cvFolderSystem container" [class.arabic] = "accountService.isArabic()">
+    <!-- header part -->
+    <!-- ================================================= -->
+    <div class="headerFolder">
+        <!-- header & search -->
+        <div class="searchName">
+            <h2 class="arabic-right-left">{{fixedTextHash['home'][currLan]}}</h2>
+            <div class="searchFolder arabic-right-left">
+                <search-tag-folder [url]="getUrl()"></search-tag-folder>
+            </div>
+        </div>
+        <!-- add new folder -->
+        <div class="addNewFolderSelect">
+            <a class="addnew arabic-right-left" data-toggle="modal" data-target="#addNewFolder">{{fixedTextHash['add_new_folder'][currLan]}}</a>
+            <div class="actionSelect arabic-right-left">
+                
+<!--                &lt;!&ndash; action &ndash;&gt;-->
+<!--                <div _ngcontent-c9="" class="click-dropdown-sort">-->
+<!--                    <div _ngcontent-c9="" class="panel panel-default">-->
+<!--                        <div _ngcontent-c9="" class="panel-body">-->
+<!--                            <div _ngcontent-c9="" class="btn-group btn-input clearfix">-->
+<!--                                <button _ngcontent-c9="" class="btn btn-default dropdown-toggle form-control" data-toggle="dropdown" type="button" aria-expanded="false">-->
+<!--                                    <span _ngcontent-c9="" data-bind="label">Action</span>&nbsp;<span _ngcontent-c9="" class="caret"></span>-->
+<!--                                </button>-->
+<!--                                <ul _ngcontent-c9="" class="dropdown-menu" role="menu">-->
+<!--                                    <div _ngcontent-c9="" class="arow-dropdown zmdi zmdi-caret-up"></div>-->
+<!--                                    <li _ngcontent-c9="">-->
+<!--                                        <a _ngcontent-c9="">Bulk Feedback</a>-->
+<!--                                    </li>-->
+<!--                                    <li _ngcontent-c9="">-->
+<!--                                        <a _ngcontent-c9="">Copy to</a>-->
+<!--                                    </li>-->
+<!--                                    <li _ngcontent-c9="">-->
+<!--                                        <a _ngcontent-c9="">Delete</a>-->
+<!--                                    </li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+                <!-- Select all -->
+<!--                <div class="form-group form-check">-->
+<!--                    <input type="checkbox" class="form-check-input" id="exampleCheck1">-->
+<!--                    <label class="form-check-label" for="exampleCheck1">Select All</label>-->
+<!--                </div>-->
+            </div>
+        </div>
+    </div>
+    <spinner [visible]="showSpinner"></spinner>
+    <folder-chart [folderList$]="folderList$"></folder-chart>
+    <pagination-new  [url]="urlPath" [totalRecords]="totalRecords$"></pagination-new>
+</section>

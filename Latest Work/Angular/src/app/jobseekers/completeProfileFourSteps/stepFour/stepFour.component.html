@@ -1,0 +1,204 @@
+<div class="container basic-height" [class.arabic] = "accountService.isArabic()">
+
+    <!-- Step indication header -->
+    <!--========================================================================-->
+    <complete-profile-progress-bar [step]="4"></complete-profile-progress-bar>
+    <!-- Step indication header -->
+    <!--========================================================================-->
+
+<div class="clearfix"></div>
+
+    <!--========================================================================-->
+    <!-- Start Step Four -->
+    <div class="fal-register-form-container">
+
+        <!--    Image and Video Popup Desktop only-->
+        <!-- =============================================-->
+        <ng-container *ngIf="screenwidth > windowSizeDivider">
+
+            <!-- start upload image -->
+            <div class="fal-upload">
+                <div class="col-left arabic-right-left">
+                    <i *ngIf="(avatarImage$ | async) == null" class="icon-profile"></i>
+                    <img *ngIf="(avatarImage$ | async)  != null" [src]="(avatarImage$ | async)">
+                </div>
+                <div class="col-right arabic-right-left">
+                    <h5>{{fixedTextHash['profile_pic'][currLan]}}</h5>
+                    <a data-toggle="modal" data-target=".your-profile-img" href="#">
+                        <button class="upld-btn" type="button"> {{fixedTextHash['upload'][currLan]}}</button>
+                    </a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <!-- end upload image -->
+
+            <!-- start upload video -->
+            <div class="fal-upload no-border margin-top-0">
+                <div class="col-left arabic-right-left">
+                    <i *ngIf="(video$ | async) == null" class="icon-Elevator-Video"></i>
+                    <i *ngIf="(video$ | async) != null" class="success-video"><img src="/assets/images/Elevator-Video-success.svg"></i>
+                </div>
+                <div class="col-right arabic-right-left">
+                    <h5>{{fixedTextHash['upload_30_video'][currLan]}}</h5>
+                    <a data-toggle="modal" data-target=".your-profile-video" href="#">
+                        <button class="upld-btn" type="button"> {{fixedTextHash['upload'][currLan]}} </button>
+                    </a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <!-- end upload video -->
+
+            <!-- start error messages -->
+            <div>
+                <div  *ngIf="uploadError"  class="alert alert-danger alert-dismissible martop5" role="alert">
+                    {{fixedTextHash['click_upload_later'][currLan]}}
+                </div>
+                <div *ngIf="uploadError2" class="alert alert-danger alert-dismissible martop5" role="alert">
+                    {{fixedTextHash['error_upload'][currLan]}}
+                </div>
+            </div>
+            <!-- end error messages -->
+
+            <!-- start button group -->
+            <div class="fal-register-btn-group">
+                <button *ngIf="!postInProcess" class="fal-btn-primary" type="button" (click)="getSubmit()">{{fixedTextHash['done'][currLan]}}</button>
+                <button type="button" *ngIf="postInProcess" class="disabled_button fal-btn-primary">{{fixedTextHash['done'][currLan]}}</button>
+                <!-- <button class="fal-btn-secondary" type="button" (click)="onSkip()">{{fixedTextHash['upload_later'][currLan]}} </button> -->
+                <button class="fal-btn-secondary" type="button" (click)="onBack()">{{fixedTextHash['back'][currLan]}}</button>
+            </div>
+            <!-- end button group -->
+
+            <!-- Pop ups-->
+            <build-file [popupClass]="'your-profile-img'"  (selectedFile)="loadFiles($event,'image')"></build-file>
+            <build-file [popupClass]="'your-profile-video'"  (selectedFile)="loadFiles($event,'video')"
+                        [custromfileInfo]="{title:'video_profile',format_list:videoFormatList,size:5,fileExtentions:videoFileExtentions,mode:'normal'}">
+
+            </build-file>
+        </ng-container>
+        <!-- =============================================-->
+
+   <!-- Mobile =========================================================================-->
+        <ng-container *ngIf="screenwidth <= windowSizeDivider">
+            <div *ngIf="!(selectImageDone$ | async)">
+
+                <!-- Profile Picture -->
+                <!-- =============================================-->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 arabic-right-left">
+                    <h4>{{fixedTextHash['profile_pic'][currLan]}}</h4>
+                    <div class="fal-upload-mobile-reg">
+                        <div class="icon-img">
+                            <div class="preview-icon" *ngIf="(avatarImage$ | async) == null">
+                                <i class="zmdi zmdi-plus"></i>
+                            </div>
+                            <div class="preview-img" *ngIf="(avatarImage$ | async)  != null">
+                                <img [src]="(avatarImage$ | async)">
+                            </div>
+                        </div>
+                        <div class="upload-detail-mob">
+                            <span>{{fixedTextHash['upload_image'][currLan]}}</span>
+                            <p>{{fixedTextHash['we_accept'][currLan]}} {{fileInfo.fileExtentions}} {{fixedTextHash['max_upload_size'][currLan]}} {{fileInfo.size}} {{fileInfo.sizeUnit}}.</p>
+                        </div>
+
+                        <div class="upload-btn-group">
+                            <button class="fal-btn-upload">{{fixedTextHash['upload'][currLan]}}</button>
+                            <input  type="file" (change)="fileChange($event)" placeholder="Upload file" class="custom-file-input" accept="{{fileInfo.format_list}}">
+                        </div>
+                    </div>
+
+                    <!-- Error picture -->
+                    <div *ngIf=" (fileInfo.size * 1048576)  < tagetFile?.size"  class="error-text-mob">
+                        <p>{{fixedTextHash['file_large'][currLan]}}</p>
+                    </div>
+
+                    <div *ngIf="tagetFile?.type && fileInfo.format_list.indexOf(tagetFile?.type) == -1" class="error-text-mob">
+                        <p> {{fixedTextHash['invalid_file'][currLan]}}</p>
+                    </div>
+                    <!-- Error picture -->
+
+                </div>
+
+                <!-- Video Profile -->
+                <!-- =============================================-->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 arabic-right-left">
+                    <h4>{{fixedTextHash['profile_video'][currLan]}}</h4>
+                    <div class="fal-upload-mobile-reg">
+                        <div class="box-upload-monile-reg">
+                            <div class="icon-img">
+                                <div class="preview-icon" *ngIf="(video$ | async) == null">
+                                    <i class="icon-Elevator-Video"></i>
+                                </div>
+                                <div class="preview-img" *ngIf="(video$ | async) != null">
+                                    <i class="successful-up"><img src="/assets/images/Elevator-Video-success.svg"></i>
+                                </div>
+                            </div>
+                            <div class="upload-detail-mob">
+                                <span>{{fixedTextHash['upload_30_video'][currLan]}}</span>
+                                <p>{{fixedTextHash['we_accept'][currLan]}} {{fileInfoVideo.fileExtentions}} {{fixedTextHash['max_upload_size'][currLan]}} {{fileInfoVideo.size}} {{fileInfoVideo.sizeUnit}}.</p>
+                            </div>
+                            <div class="upload-btn-group">
+                                <button class="fal-btn-upload">{{fixedTextHash['upload'][currLan]}}</button>
+                                <input  type="file" (change)="createVideo($event)" placeholder="Upload file"  accept="{{fileInfoVideo.format_list}}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Error message video -->
+                    <!-- =============================================-->
+                    <div *ngIf=" (fileInfoVideo.size * 1048576)  < tagetFileVideo?.size"  class="error-text-mob">
+                        <p>{{fixedTextHash['file_large'][currLan]}}</p>
+                    </div>
+                    
+                    <div  *ngIf="(errorFileString$| async) != null"  class="blank-error-text">
+                        <p>{{errorFileString$ | async }}</p>
+                    </div>
+                    <div *ngIf="tagetFileVideo?.type && fileInfoVideo.format_list.indexOf(tagetFileVideo?.type) == -1" class="error-text-mob">
+                        <p>{{fixedTextHash['invalid_file'][currLan]}}</p>
+                    </div>
+                    <!-- Error message video -->
+
+                    <!-- no profile picture error -->
+                    <div  *ngIf="uploadError"  class="error-text-mob">
+                        <p>{{fixedTextHash['click_upload_later'][currLan]}}</p>
+                    </div>
+                    <!-- no profile picture error -->
+
+                    <!-- server error -->
+                    <div *ngIf="uploadError2"  class="error-text-mob">
+                        <p>{{fixedTextHash['error_upload'][currLan]}}</p>
+                    </div>
+                    <!-- server error -->
+                </div>
+
+                <!-- start button group done, back, upload later -->
+                <div class="fal-register-btn-group">
+                    <button class="fal-btn-secondary" (click)="onBack()"><a>{{fixedTextHash['back'][currLan]}}</a></button>
+                    <button type="button" class="fal-btn-secondary" (click)="onSkip()"><a>{{fixedTextHash['upload_later'][currLan]}}</a></button>
+                    <button type="button"  class="fal-btn-primary" *ngIf="!postInProcess" (click)=" getSubmit()"><a>{{fixedTextHash['done'][currLan]}}</a></button>
+                    <button  type="button" *ngIf="postInProcess" class="fal-btn-primary disabled_button">{{fixedTextHash['done'][currLan]}}</button>
+                </div>
+                <!-- end button group done, back, upload later -->
+
+            </div>
+            <div class="form-sp" *ngIf="(selectImageDone$ | async)">
+                <!-- Crop -->
+                <!-- =============================================-->
+                <div class="each-area-input">
+                    <div class="crop-mob">
+                        <img-cropper  #cropperAvatar [image]="dataCropAvatar" [settings]="cropperSettings"></img-cropper>
+                    </div>
+                </div>
+                <!-- start button group crop -->
+                <div class="fal-register-btn-group">
+                    <button type="button" (click)="selectImage('image')" class="fal-btn-primary">{{fixedTextHash['crop'][currLan]}}</button>
+                </div>
+                <!-- end button group crop -->
+            </div>
+        </ng-container>
+   <!--=========================================================================-->
+
+    </div>
+    <!-- end Step Four -->
+    <!--========================================================================-->
+
+</div>
+

@@ -1,0 +1,97 @@
+<!-- -->
+<ion-content padding class="animated fadeIn login auth-page">
+  <div class="login-content">
+
+    <!-- Logo -->
+    <div padding-horizontal text-center class="animated fadeInDown">
+      <div class="logo"><img src="assets/imgs/logo.png"></div>
+      <h2 ion-text class="text-primary">
+        <strong></strong>Brainery
+      </h2>
+    </div>
+
+    <!-- Login form -->
+    <form class="list-form">
+      <ion-item>
+        <ion-label floating>
+          <ion-icon name="mail" item-start class="text-primary"></ion-icon>
+          Email
+        </ion-label>
+        <ion-input type="email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>
+          <ion-icon name="lock" item-start class="text-primary"></ion-icon>
+          Password
+        </ion-label>
+        <ion-input type="password"></ion-input>
+      </ion-item>
+    </form>
+
+    <div>
+      <button ion-button icon-start block color="dark" tappable (click)="login()">
+        <ion-icon name="log-in"></ion-icon>
+        SIGN IN
+      </button>
+
+      <!-- <p text-center ion-text color="secondary">Or Sign in with:</p>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col col-4>
+            <button ion-button icon-only block class="btn-facebook">
+              <ion-icon name="logo-facebook"></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col col-4>
+            <button ion-button icon-only block class="btn-twitter">
+              <ion-icon name="logo-twitter"></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col col-4>
+            <button ion-button icon-only block class="btn-gplus">
+              <ion-icon name="logo-googleplus"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid> -->
+
+    </div>
+  </div>
+</ion-content>
+
+
+
+
+ <!-- <ion-list>
+  <ion-item>
+    <ion-label floating>Username</ion-label>
+    <ion-input type="text" [(ngModel)]="userName" name="username" requiered></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>Password</ion-label>
+    <ion-input type="password" [(ngModel)]="password" (keyup.enter)="login()" name="password" requiered></ion-input>
+  </ion-item>
+ </ion-list>
+ <button ion-button (click)="login()">Login</button> -->
+
+
+<!-- <ion-content padding id="loginMainTag">
+<div>
+ <div id="main" ng-controller="mainCtrl">
+        <div id="logo"><img src="assets/imgs/logo.png"> </div>
+        <div *ngIf="showLoginEmptyErr" class="error">* All fields are required.</div>
+        <div *ngIf="showLoginErr" class="error">Invalid username or password.</div>
+        <div id="login_box">
+            <div class="form-field"><input type="text" name="username" placeholder="Username" class="form-text" [(ngModel)]="userName"> </div>
+            <div class="form-field"><input type="password" name="login_password" placeholder="Password" class="form-text" [(ngModel)]="password" (keyup.enter)="login()"> </div>
+            <input type="button" value="Login" class="form-btn" (click)="login()">
+            <div class="cb"></div>
+        </div>
+    </div>
+</div>
+
+</ion-content>
+
+ -->

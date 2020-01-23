@@ -1,0 +1,35 @@
+<ion-header class="animated fadeIn no-shadow">
+
+  <ion-navbar class="no-border" color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Handyman
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+<div class="no-data" *ngIf="!data">
+  <img src="../../assets/icon/no-data.png" alt="image">
+  <h4>No handyman found</h4>
+</div>
+<ion-list *ngIf="data">
+<ion-item *ngFor="let item of handyman">
+<div (click)="viewDetails(item.id)">
+<h3>{{item.name}}</h3>
+<p>{{item.location}}</p>
+</div>
+<ion-fab mini right bottom>
+<button class="fab-btn" ion-fab color="primary"><ion-icon name="arrow-dropleft"></ion-icon></button>
+<ion-fab-list side="left">
+  <h3 *ngIf="item.user_id!=userId">View only</h3>
+  <button class="fab-btn" color="primary" *ngIf="item.user_id==userId"  (click)="editRequest(item)" ion-fab><ion-icon name="ios-create"></ion-icon></button>
+  <button class="fab-btn" color="primary" *ngIf="item.user_id==userId" (click)="deleteRequest(item.id)" ion-fab><ion-icon name="ios-trash"></ion-icon></button>
+</ion-fab-list>
+</ion-fab>
+</ion-item>
+</ion-list>
+<button ion-button full (click)="addHandyman()">Add Handyman</button>
+</ion-content>

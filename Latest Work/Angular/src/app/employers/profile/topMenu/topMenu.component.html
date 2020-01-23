@@ -1,0 +1,32 @@
+<div class=" main-tab hidden-xs">
+    <div class="container">
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" [class.active]="activeFlag == 'profile'?true:false">
+            <a [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/profile']" routerLinkActive="active" class="cursor_pointer1">
+            {{fixedTextHash['profile'][currLan]}}
+        </a>
+        </li>
+        <li role="presentation" [class.active]="activeFlag == 'users'?true:false">
+            <a [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/profile/users']" routerLinkActive="active" class="cursor_pointer1" >
+                {{fixedTextHash['users'][currLan]}}
+            </a>
+        </li>
+    </ul>
+    </div>
+</div>
+
+
+<!-- mobile -->
+    <ul class="mobile-scroll-tab hidden-lg hidden-md hidden-sm" role="tablist">
+        <li role="presentation" [class.active]="activeFlag == 'profile'?true:false">
+                <a class="cursor_pointer1"  [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/profile']"  routerLinkActive="active" >
+                  {{fixedTextHash['profile'][currLan]}}
+                </a>
+        </li>
+        <li role="presentation" [class.active]="activeFlag == 'users'?true:false" >
+            <a class="cursor_pointer1"  [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/profile/users']" routerLinkActive="active" >
+                {{fixedTextHash['users'][currLan]}}
+            </a>
+        </li>
+    </ul>
+<!-- ***** -->

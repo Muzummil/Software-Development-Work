@@ -1,0 +1,84 @@
+<div class="container basic-height" [class.arabic] = "accountService.isArabic()">
+
+    <!-- Step indication header -->
+    <!--========================================================================-->
+    <complete-profile-progress-bar [step]="3"></complete-profile-progress-bar>
+    <!--  Step indication header -->
+    <!--========================================================================-->
+
+
+    <!--========================================================================-->
+    <!-- Start Step Three -->
+    <div class="fal-register-form-container">
+        <spinner *ngIf="!loadedFlag" [visible]="true"></spinner>
+        <ng-container *ngIf="loadedFlag">
+            <form [formGroup]="completeThirdForm">
+
+            <!-- start Highest Education -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 arabic-right-left margin-btm-5">
+                <h4>{{fixedTextHash['high_edu'][currLan]}}</h4>
+                <input type="hidden" #heduInpt name="generalInfo_form_highest_edu_name"
+                        formControlName="highest_edu_name_id">
+                <bootstrap-selectbox *ngIf="educationList" (selectedId)="completeThirdForm.controls['highest_edu_name_id'].setValue($event.id)"
+                                        [selectedValue]="heduInpt.value"  [placeholder]="fixedTextHash['add_high_edu'][currLan]"
+                                        [error]="(!(pristineFlag$ | async) || completeThirdForm.controls['highest_edu_name_id'].touched) && !completeThirdForm.controls['highest_edu_name_id'].valid"
+                                        (onEmptyText)="heduInpt.value=null;makeControlInvalid(completeThirdForm.controls['highest_edu_name_id'])"                                        
+                                        [selectList]="educationList">
+                </bootstrap-selectbox>
+            </div>
+            <!-- end Highest Education -->
+
+            <!-- start divider -->
+            <div class="clearfix"></div>
+            <div class="fal-divider"></div>
+            <!-- end divider -->
+
+            <!--========================================================================-->
+            <!-- start Add education information -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 arabic-right-left">
+                <h4>{{fixedTextHash['new_school'][currLan]}}</h4>
+
+           
+                    <!-- start University or School component -->
+                    <ng-container *ngFor="let selEdu of eduDetailsList, let i =index">
+                        <add-education  *ngIf="selEdu && !selEdu['_destroy'] || selEdu['_destroy'] == 0"
+                                        [prestineForm$]="eduDetailsPrestine" [eduDetails]="selEdu"
+                                        [allowDelete]="getValidateDelete(eduDetailsList)"
+                                        (removeMe)="removeEdu(i)" (changeEduDetails)="changeEdu($event, i, selEdu)">
+
+                        </add-education>
+                    </ng-container>
+                    <!-- end University or School component -->
+
+                    <div class="clearfix"></div>
+                
+                <!-- end shadow container -->
+
+                <!-- start add more button -->
+                <div class="fal-addmore">
+                    <div class="help-txt">{{fixedTextHash['fill_previous_and_add_more'][currLan]}}</div>
+                    <button *ngIf="getValidateEdu()" (click)="addEdu()" class="btn-addmore">{{fixedTextHash['add_more'][currLan]}}</button>
+                    <button *ngIf="!getValidateEdu()" class="btn-addmore disabled_button">{{fixedTextHash['add_more'][currLan]}}</button>
+                </div>
+                <!-- end add more button -->
+
+            </div>
+            <!-- end Add education information -->
+            <!--========================================================================-->
+
+            <!-- start button group -->
+            <div class="fal-register-btn-group">
+                <button *ngIf="!postInProcess" class="fal-btn-primary" type="button" (click)="getSubmit()">{{fixedTextHash['next'][currLan]}}</button>
+                <button *ngIf="postInProcess" class="fal-btn-primary disabled_button" type="button">{{fixedTextHash['next'][currLan]}}</button>
+                <button class="fal-btn-secondary" type="button" (click)="onBack()">{{fixedTextHash['back'][currLan]}}</button>
+            </div>
+            <!-- end button group -->
+
+        </form>
+        </ng-container>
+    </div>
+    <!-- end Step Three -->
+    <!--========================================================================-->
+
+</div>
+

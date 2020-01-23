@@ -1,0 +1,124 @@
+/*---------------------------------------------------1-------------------------------------------------------*/
+
+@media (max-width: 1200px){
+
+
+}
+
+@media (max-width: 990px) and (min-width: 1024px){
+   
+}
+/*---------------------------------------------------2-------------------------------------------------------*/
+
+@media (min-width: 768px) and (max-width: 990px){
+
+    .navbar-nav{
+        margin:0px!important;
+    }
+    .side-menu .navbar-default .navbar-nav > li > a{
+        text-align: center;
+    }
+    .navbar-default .navbar-nav > li > a{
+        padding:0px!important;
+        height: 50px;
+        line-height: 50px;
+    }
+ 
+
+    .brst-mob-olny-v{
+        display: block!important;
+    }
+    .mobile-broadcast{
+        display: block!important;
+    }
+
+
+    .mobile-broadcast{
+        top: -41px!important;
+        left: 60px;
+    }
+   
+
+
+}
+
+
+/*---------------------------------------------------3-------------------------------------------------------*/
+
+@media (max-width: 767px) {
+
+.side-menu-container{
+    .container{
+        padding-left:0px;
+        padding-right:0px;
+    }
+}
+.side-menu .navbar-nav li{
+    float: left;
+}
+  .int-top-menu .navbar-nav li{
+    width: 12.39% !important;
+    float: left;
+  }
+.navbar-nav{
+    margin:0px!important;
+}
+
+.main-tab{
+    .container{
+        padding-left:0px;
+        padding-right:0px;
+    }
+}
+.side-body{
+    padding-left:0px!important;
+    padding-right:0px!important;
+}
+.profile-picture{
+    width: 42px;
+    height: $button-height;
+    background: #fff;
+    margin: 8px;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    img{
+        width: 100%;
+        height: 35px!important;
+        object-fit: cover;
+
+    }
+}
+.mobile-tab-top{
+    position: static!important;
+}
+
+ .side-menu .navbar-default .navbar-nav > li > a{
+        text-align: center;
+    }
+
+    .navbar-default .navbar-nav > li > a{
+        padding:0px!important;
+        height: 50px;
+        line-height: 50px;
+    }
+
+  .side-menu-container i{
+    margin-right: 0px;
+  }
+  .mobile-scroll-tab{
+    margin-bottom: 0px!important;
+  }
+  .only-employer-mobile-arabic-text{
+        right: 60px!important;
+    }
+
+
+
+}
+
+/*---------------------------------------------------4-------------------------------------------------------*/
+
+@media (max-width: 480px) {
+
+}

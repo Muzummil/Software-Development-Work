@@ -1,0 +1,42 @@
+@import '../../../styles/sass/base/_variables.scss';
+
+
+input:-webkit-autofill {
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
+}
+
+h1, h2, h3, h4, h5, span, label, a, button, p{
+    font-family: $primary-Fonts;
+}
+
+.arabic{
+    h1, h2, h3, h4, h5, span, label, a, button, p, input, .cmpny-txt{
+       font-family: $arabic-primary-Fonts!important;
+    }
+}
+
+.block-title-2{
+    margin-bottom: 20px;
+    border-bottom:1px solid $light-border;
+}
+
+.company{
+    border:1px solid $light-border;
+    margin: 5px 0px;
+}
+.jobapplicant .new-list .newlistleft{
+    border:none;
+}
+.jobapplicant .new-list .newlistleft .newlistdp-left{
+    height: 145px;
+    overflow: hidden;
+    border-radius: $border-radius;
+    img{
+        height: 145px;
+    }
+    i{
+        line-height: 145px;
+        color:$empty-icon-color;
+    }
+}

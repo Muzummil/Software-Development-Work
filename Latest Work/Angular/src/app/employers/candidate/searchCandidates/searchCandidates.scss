@@ -1,0 +1,89 @@
+@import '../../../../styles/sass/base/_variables.scss';
+input:-webkit-autofill {
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
+}
+
+h1, h2, h3, h4, h5, span, label, a, button, p{
+    font-family: $primary-Fonts;
+}
+
+.arabic{
+    h1, h2, h3, h4, h5, span, label, a, button, p, input, .cmpny-txt{
+       font-family: $arabic-primary-Fonts!important;
+    }
+    .padding-left{
+        padding-left: 10px!important;
+    }
+    .candidates .col-lg-3{
+        border-right: none;
+        border-left: 1px solid $light-border;
+    }
+}
+
+.block .block-title h1{
+    font-size: $big-font
+}
+
+
+
+.candidates .search-candidates .full-box{
+    margin-top: 0px;
+}
+.candiSearchCompo{
+    padding: 10px;
+    border: 1px solid $border-brand;
+    background: $bg-default;
+    margin-bottom: 20px;
+    input{
+        border: 1px solid $border-brand;
+    }
+}
+
+.candidate-txt{
+    color: $primarycolor; 
+    border-bottom: solid 1px $form-border; 
+    padding-bottom:8px; 
+    margin-bottom:20px; 
+    font-weight: 700;
+    font-size: $medium-size;
+ }
+button{
+    height: $button-height!important;
+    border-radius: $border-radius;
+}
+
+.edit input, .edit select{
+    height: $button-height!important;
+    margin-bottom: 10px!important;
+}
+
+input , select{
+    margin-bottom: 0px!important;
+}
+
+/*---------------------------------------------------i-------------------------------------------------------*/
+// Smartphone
+@media (max-width: 767px) {
+    .candidates{
+        .search-candidates{
+            .candidate-txt{
+                margin-bottom: 0px;
+                margin-top: 15px;
+            }
+        }
+    }
+}
+
+/*---------------------------------------------------i-------------------------------------------------------*/
+// Mobile
+@media (max-width: 480px) {
+.candidates{
+    .search-candidates{
+        .candidate-txt{
+            margin-bottom: 10px;
+            margin-top: 15px;
+        }
+    }
+}
+}

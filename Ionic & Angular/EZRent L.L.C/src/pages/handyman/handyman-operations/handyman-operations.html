@@ -1,0 +1,122 @@
+<ion-header class="animated fadeIn no-shadow">
+
+  <ion-navbar class="no-border" color="primary">
+    <!-- <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button> -->
+    <ion-title *ngIf="!update && updateData==null">
+      Create Handyman 
+    </ion-title>
+    <ion-title *ngIf="update && updateData!=null">
+      Update Handyman 
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div *ngIf="!update && updateData==null">
+    <form #myForm="ngForm" [formGroup]="onRequestSetupForm" (ngSubmit)="handymanAction('add')" class="list-form" margin-top>
+      <ion-item>
+        <ion-label fixed>
+          <img src="../assets/icon/signup_1.png" width="30">
+        </ion-label>
+        <ion-input type="text" formControlName="name" placeholder="Handyman name"></ion-input>
+      </ion-item>
+      <p ion-text color="danger" class="has-error" *ngIf="onRequestSetupForm.get('name').hasError('required') && myForm.submitted">name is required</p>
+  
+      <ion-item>
+        <ion-label fixed>
+          <img src="../assets/icon/signup_1.png" width="30">
+        </ion-label>
+        <ion-input type="text" formControlName="contact" placeholder="+923098998990"></ion-input>
+      </ion-item>
+      <p ion-text color="danger" class="has-error" *ngIf="onRequestSetupForm.get('contact').hasError('required') && myForm.submitted">contact is required</p>
+
+      <ion-item>
+        <ion-label fixed>
+          <img src="../assets/icon/signup_1.png" width="30">
+        </ion-label>
+        <ion-input type="text" formControlName="location" placeholder="Handyman location"></ion-input>
+      </ion-item>
+      <p ion-text color="danger" class="has-error" *ngIf="onRequestSetupForm.get('location').hasError('required') && myForm.submitted">location is required</p>
+
+      <ion-item>
+        <ion-label fixed>
+          Handyman against apartment
+        </ion-label>
+          <ion-select  *ngFor="let item of apartments" formControlName="apartment" placeholder="apartment" col-5 multiple="false" cancelText="Cancel" okText="OK">
+            <!-- <ion-option value={{userId}}>Self</ion-option> -->
+            <ion-option  value={{item.id}}>Apartment {{item.apart_no}}</ion-option>
+          </ion-select>
+      </ion-item>
+      <p ion-text color="danger" class="has-error" *ngIf="onRequestSetupForm.get('apartment').hasError('required') && myForm.submitted">please select apartment</p>
+
+      <ion-item>
+          <ion-label fixed>
+            Select skills of handyman
+          </ion-label>
+            <ion-select  formControlName="skills" placeholder="skills" col-5 multiple="true" cancelText="Cancel" okText="OK">
+              <!-- <ion-option value={{userId}}>Self</ion-option> -->
+              <ion-option *ngFor="let item of skills" value={{item.name}}>{{item.name}}</ion-option>
+            </ion-select>
+        </ion-item>
+      <p ion-text color="danger" class="has-error" *ngIf="onRequestSetupForm.get('skills').hasError('required') && myForm.submitted">please select skills</p>
+
+      <button *ngIf="!update && updateData==null" ion-button full type="submit" color="primary" >Create Handyman</button>
+    </form>
+  </div>
+  
+  <div *ngIf="update && updateData!=null">
+    <form #myForm="ngForm" [formGroup]="onRequestSetupForm" (ngSubmit)="handymanAction('update')" class="list-form" margin-top>
+      <ion-item>
+        <ion-label fixed>
+          <img src="../assets/icon/signup_1.png" width="30">
+        </ion-label>
+        <ion-input type="text" formControlName="name" value="{{updateData.name}}"></ion-input>
+      </ion-item>
+      <p ion-text color="danger" class="has-error" *ngIf="onRequestSetupForm.get('name').hasError('required') && myForm.submitted">name is required</p>
+  
+      <ion-item>
+        <ion-label fixed>
+          <img src="../assets/icon/signup_1.png" width="30">
+        </ion-label>
+        <ion-input type="text" formControlName="contact" value="{{updateData.contact}}"></ion-input>
+      </ion-item>
+      <p ion-text color="danger" class="has-error" *ngIf="onRequestSetupForm.get('contact').hasError('required') && myForm.submitted">contact is required</p>
+
+      <ion-item>
+        <ion-label fixed>
+          <img src="../assets/icon/signup_1.png" width="30">
+        </ion-label>
+        <ion-input type="text" formControlName="location" value="{{updateData.location}}"></ion-input>
+      </ion-item>
+      <p ion-text color="danger" class="has-error" *ngIf="onRequestSetupForm.get('location').hasError('required') && myForm.submitted">location is required</p>
+
+      <ion-item>
+        <ion-label fixed>
+          Handyman against apartment
+        </ion-label>
+          <ion-select  *ngFor="let item of apartments" formControlName="apartment" value="apartment" col-5 multiple="false" cancelText="Cancel" okText="OK">
+            <!-- <ion-option value={{userId}}>Self</ion-option> -->
+            <ion-option  value={{item.id}}>Apartment {{item.apart_no}}</ion-option>
+          </ion-select>
+      </ion-item>
+      <p ion-text color="danger" class="has-error" *ngIf="onRequestSetupForm.get('apartment').hasError('required') && myForm.submitted">please select apartment</p>
+
+      <ion-item>
+          <ion-label fixed>
+            Select skills of handyman
+          </ion-label>
+            <ion-select  formControlName="skills" placeholder="skills" col-5 multiple="true" cancelText="Cancel" okText="OK">
+              <!-- <ion-option value={{userId}}>Self</ion-option> -->
+              <ion-option *ngFor="let item of skills" value={{item.name}}>{{item.name}}</ion-option>
+            </ion-select>
+        </ion-item>
+      <p ion-text color="danger" class="has-error" *ngIf="onRequestSetupForm.get('skills').hasError('required') && myForm.submitted">please select skills</p>
+      <button ion-button full type="submit" color="primary">Update Handyman</button>
+    </form>
+  </div>
+    <!-- <button ion-button full type="button" color="primary"  (click)="backToRequest()">Back to request page</button> -->
+  
+  </ion-content>
+  

@@ -1,0 +1,112 @@
+.bloovo-header{ 
+    background:$white; 
+    height:50px; 
+    position: fixed; 
+    padding-right:60px;  
+    width: 100%; 
+    top: 0px; 
+    z-index: 777;
+    margin-left: 8px;
+    .col-lg-5{ 
+        padding-left: 0px!important;
+    }
+    .search{ 
+        position: relative;
+        input{ 
+            border: solid 1px $light-border;
+            margin-top:7px;
+            color:$secondarycolor;
+            width: 100%; 
+            padding:0px 20px 0px 30px;
+            height: $button-height;
+        }
+        i{
+            position: absolute; 
+            left: 15px;
+            color:$secondarycolor;
+            top:18px;
+        }
+    }
+    
+    .profile-picture{ 
+        width: 28px; 
+        transition: all 0.5s ease;
+        height: 35px; 
+        margin: 0 auto; 
+        background: $bg-default;
+        margin-top:0px;
+        
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px; 
+        i{  
+            line-height:35px; 
+            color: $primarycolor 
+        }
+
+        img{     
+            width: 28px;   
+            height: 35px;    
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px; 
+        }
+    }
+
+    .log-out{ 
+        padding:0px 20px;
+        line-height: 60px;
+        a{
+            color:$secondarycolor;
+        }
+        a:hover{ 
+            color:$primarycolor
+        }
+        i{ 
+            color:$primarycolor
+        }
+    }
+    .profile-name{ 
+        color:$primarycolor;
+        padding:0px 15px; 
+        line-height: 50px;
+        font-family: $primary-Fonts;
+    }
+} 
+
+.arabic{
+    .bloovo-header{
+        .arabic-text{
+            top: 10px;
+            color: $primarycolor;
+            left: 79px;
+            right: inherit;
+            z-index: 1;
+            &:hover{
+                cursor: pointer;
+            }
+        }
+        .profile-picture {
+            float: left;
+            margin-left: 80px;
+        }
+    } 
+}
+
+ .bloovo-header{
+    .arabic-text{
+        top: 57px;
+        font-family: $arabic-primary-Fonts;
+        color: #fff;
+        right: 10px;
+        z-index: 1;
+        font-size: 16px;
+    }
+    
+    // .profile-picture {
+    //     margin-right: 45px;
+    // }
+    
+}  
+
+

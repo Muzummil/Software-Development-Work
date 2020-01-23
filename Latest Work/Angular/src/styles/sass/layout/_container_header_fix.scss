@@ -1,0 +1,145 @@
+@media (min-width: 1200px){
+   .container {
+        width: 1200px!important;
+    } 
+}
+
+
+
+// Header
+.bloovo-header{
+    left:0px;
+    margin-left: 0px;
+    padding-right:0px;
+    .click-dropdown .dropbtn{
+        padding-right:0px;
+    }   
+}
+
+.bloovo-header .profile-picture{
+    width: 35px!important;
+}
+
+.side-menu-container{
+    background: $primarycolor;
+}
+.navbar-nav{
+    width: 100%;
+    background: $primarycolor;
+}
+.side-menu{
+    width: 100%;
+    height: 49px;
+}
+.side-menu .navbar-nav li{
+    display: inline-block;
+    width: 60px;
+    border-left: 1px solid $border-menu;
+}
+.main-tab{
+    background:#fff;
+    -webkit-box-shadow: 0 2px 14px 0 rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 14px 0 rgba(0, 0, 0, 0.05);
+}
+.main-tab .nav-tabs{
+    background:#fff;
+}
+
+.main-tab .nav-tabs li.active > a, .main-tab .nav-tabs li.active > a:hover, .main-tab .nav-tabs li.active > a:focus{
+    background-color: #fff!important;
+    color:$primarycolor!important;
+    border: none;
+    border-right: solid 1px $light-color;
+}
+.main-tab .nav-tabs>li a:hover{
+    background-color: #fff!important;
+    color: #374a61!important;
+}
+
+.main-tab .nav-tabs li > a{
+     border-right: solid 1px $light-color!important;
+}
+.main-tab .nav-tabs>li{
+    padding:15px 0px;
+    padding-right:15px;
+}
+.main-tab .nav-tabs li.active > a, .main-tab .nav-tabs li.active > a:hover, .main-tab .nav-tabs li.active > a:focus{
+    border-right: solid 1px $light-color!important;
+    color: $primarycolor!important;
+}
+
+// containers
+// ==========================================
+
+.commen-container-v5{
+    float: left;
+    width: 100%;
+}
+
+
+
+.logo-b{
+    display: inline-block;
+    margin-top: -6px;
+    float: left;
+}
+.bloovo-header .profile-name{
+ display:block;
+ height:auto;
+ background-color:#222f40;
+ color:#fff!important;
+ font-weight:bold!important;
+ line-height:24px;
+ padding:15px 10px;
+ width:100%;
+}
+.bloovo-right{
+    span{
+        line-height: 40px;
+        padding-right:10px;
+    }
+}
+.hint--right:before, .hint--right:after{
+    left: -15px!important;
+}
+.hint--right:after{
+    margin-bottom: -61px!important;
+}
+.hint--right:before{
+    display: none!important;
+}
+.side-menu .navbar-default .navbar-nav > li > a{
+    padding:10px 0px;
+}
+#my-job{
+    margin-top: 60px;
+}
+.bloovo-header .profile-picture img{
+    width: 100%;
+    height: 35px;
+    object-fit: cover;
+}
+
+.padding-left-none{
+    padding-left:0px!important;
+}
+.padding-right-none{
+    padding-right:0px!important;
+}
+
+.employers-details .employers-logo{
+    box-shadow: 0 2px 14px 0 rgba(0, 0, 0, 0.03);
+}
+
+.only-mob-arabic-top{
+    right: 130px!important;
+    top: 11px!important;
+    z-index: 999!important;
+    position:fixed;
+}
+
+.main-tab .nav-tabs > li{
+    padding-right:10px!important;
+}
+
+

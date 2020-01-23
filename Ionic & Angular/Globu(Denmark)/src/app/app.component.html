@@ -1,0 +1,23 @@
+<ion-app color="primary">
+    <ion-split-pane>
+      <ion-menu>
+        <ion-header>
+      <app-sidemenu> </app-sidemenu>
+        </ion-header>
+        <ion-content>
+          <ion-list>
+            <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+              <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
+                <ion-icon slot="start" [name]="p.icon"></ion-icon>
+                <ion-label>
+                  {{p.title}}
+                </ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+          </ion-list>
+        </ion-content>
+        <div class="mainmenu__logout"><ion-button color="danger" expand="block" (click)="logout()">LOG OUT</ion-button></div>
+      </ion-menu>
+      <ion-router-outlet main></ion-router-outlet>
+    </ion-split-pane>
+  </ion-app>

@@ -1,0 +1,15 @@
+ .arabic{
+    #viewed-Profile .left, #poll .left, #saved-jobs .left{
+      float: right!important;
+    }
+    #viewed-Profile .right, #poll .right, #saved-jobs .right{
+      float: left!important;
+    }
+    .progress-bar{
+      float: right;
+    }
+    .percentage-color{
+      text-align: left;
+    }
+ }
+

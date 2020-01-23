@@ -1,0 +1,392 @@
+<ng-container *ngIf="candidateObj">
+    <div [class.arabic]="accountService.isArabic()">
+        <div class="action-list-candi">
+            <!-- Select all -->
+            <!--    <div class="form-group form-check">-->
+            <!--        <input type="checkbox" class="form-check-input" id="exampleCheck3">-->
+            <!--        <label class="form-check-label" for="exampleCheck3">Select</label>-->
+            <!--    </div>-->
+
+            <ul class="action-button-candi">
+
+                <li *ngIf="averageRating" class="ratingResultBar right">
+                    <strong>
+                        {{fixedTextHash['average_rating'][currLan]}}
+                    </strong>
+                    <div>
+                        <b class="avrate">{{averageRating | number:'1.1-1'}}</b>
+                        <span class="resultRate">
+                            <i [style.width.%]="averageRating * 100 / highestRating"></i>
+                        </span>
+                    </div>
+                </li>
+
+
+                <!-- Shortlist Candidate -->
+                <li *ngIf="isShortnRejectList && isShortListedCandidate()" class="dummy_tab hint--right"
+                    [attr.aria-label]="fixedTextHash['shortList_candidate'][currLan]">
+                    <a>
+                        <i class="icon-short"></i>
+                    </a>
+                </li>
+                <li *ngIf="isShortnRejectList && !isShortListedCandidate()"
+                    class="hint&#45;&#45;right" data-toggle="modal"
+                    [attr.aria-label]="fixedTextHash['shortList_candidate'][currLan]"
+                    [attr.data-target]="'#shortList-candidate-modal-' + getJobseekerId()">
+                    <i class="icon-short"></i>
+                </li>
+
+                <!-- Reject Candidate -->
+                <li *ngIf="isShortnRejectList && isRejectedCandidate()" class="dummy_tab hint--right"
+                    [attr.aria-label]="fixedTextHash['reject_candidate'][currLan]">
+                    <a>
+                        <i class="zmdi zmdi-close"></i>
+                    </a>
+                </li>
+                <li *ngIf="isShortnRejectList && !isRejectedCandidate()" class="hint&#45;&#45;right" data-toggle="modal"
+                    [attr.aria-label]="fixedTextHash['reject_candidate'][currLan]"
+                    [attr.data-target]="'#reject-candidate-modal-' + getJobseekerId()">
+                    <i class="zmdi zmdi-close"></i>
+                </li>
+
+                <!-- cv Attachement -->
+                <li *ngIf="(defaultResume$ | async)" class="hint&#45;&#45;right"
+                    [attr.aria-label]="fixedTextHash['cv'][currLan]">
+                    <a href="{{(defaultResume$ | async)}}" target="_blank"><i class="zmdi zmdi-attachment-alt"></i></a>
+                </li>
+
+                <!--  invite to apply -->
+                <li *ngIf="showInviteToApply && isInviteToApplyActive" class="hint&#45;&#45;right"
+                    (click)="showJobSearchBox = true" [attr.aria-label]="fixedTextHash['inivite_to_apply'][currLan]"
+                    data-toggle="modal" [attr.data-target]="'#invite-to-apply-' + getJobseekerId()">
+                    <i class="zmdi zmdi-account-add"></i>
+                </li>
+                <!-- Video -->
+                <li class="hint&#45;&#45;right" *ngIf="candidateObj?.video"
+                    [attr.aria-label]="fixedTextHash['video_profile'][currLan]" data-toggle="modal"
+                    [attr.data-target]="'#video-action-' + getJobseekerId()"><i class="zmdi zmdi-videocam"></i></li>
+
+                <!-- Tag -->
+                <li class="hint&#45;&#45;right" [attr.aria-label]="fixedTextHash['create_tag'][currLan]"
+                    data-toggle="modal" [attr.data-target]="'#tagsaction-modal-' + getJobseekerId()"><i
+                        class="icon-tag-action"></i></li>
+
+                <!-- feedback -->
+                <!-- @todo: Remove Feedback from now -->
+                <!-- <li  class="hint&#45;&#45;right" [attr.aria-label]="fixedTextHash['feedback'][currLan]"><i class="icon-email-action"></i></li>-->
+
+                <!-- rating action -->
+                <li *ngIf="!starRatingDone" class="hint&#45;&#45;right"
+                    [attr.aria-label]="fixedTextHash['rate_profile'][currLan]" data-toggle="modal"
+                    [attr.data-target]="'#rating-modal-' + getJobseekerId()"><i class="icon-rating"></i></li>
+
+                <!-- history -->
+                <li [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/candidate/'+getUserId()+'/'+this.accountService.getSpaceToDash(candidateObj?.first_name+' '+candidateObj?.last_name)+'/history']"
+                    class="hint&#45;&#45;right" [attr.aria-label]="fixedTextHash['history'][currLan]"><i
+                        class="icon-history"></i></li>
+
+                <!-- move -->
+                <li *ngIf="showFoldering" data-toggle="modal" [attr.data-target]="'#moveto-' + getJobseekerId()"
+                    class="hint--right"
+                    [attr.aria-label]="(operation == 'add')? fixedTextHash['add_to_folder'][currLan]: fixedTextHash['move_to_folder'][currLan]">
+                    <i class="icon-move"></i></li>
+                <!-- download -->
+                <li class="hint--right" [attr.aria-label]="fixedTextHash['download_profile'][currLan]"
+                    (click)="onSavePDF()">
+                    <spinner [visible]="showSpinner"></spinner>
+                    <i *ngIf="!downloadInProcess" class="zmdi zmdi-download"></i>
+                </li>
+                <!-- delete -->
+                <li data-toggle="modal" *ngIf="currentFolderId" class="hint--right"
+                    [attr.data-target]="'#delete-candidate-' + getJobseekerId()"><i class="zmdi zmdi-delete"></i></li>
+            </ul>
+
+        </div>
+
+        <!-- Add/Move To Folder -->
+        <div *ngIf="showFoldering" class="modal fade js-move-to-folder" id="moveto-{{getJobseekerId()}}" tabindex="-1"
+            role="dialog" aria-labelledby="moveto" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="moveto">
+                            <!-- folder-icon -->
+                            {{(operation == 'add')? fixedTextHash['add_to_folder'][currLan] : fixedTextHash['move_to_folder'][currLan]}}
+                        </h5>
+                    </div>
+                    <!-- modal body -->
+                    <div class="modal-body">
+                        <div *ngIf="errorflag" class="alert alert-danger alert-dismissible" role="alert">
+                            {{(customErrorMessage)? customErrorMessage :fixedTextHash['cannot_move_to_folder'][currLan]}}
+                        </div>
+                        <div class="scrollbar" id="style-4">
+                            <folder-chart *ngIf="folderList$.value" [folderList$]="folderList$"
+                                [specialOperation]="operation" [candidateObj]="candidateObj"
+                                [currentFolderId]="currentFolderId" [jobseekerFolderId]="jobseekerFolderId"
+                                (updateDone)="getUpdateDone($event)" (seeMore)="getSeeMore($event?.folderId)">
+
+                            </folder-chart>
+                            <span class="see-more-folder" *ngIf="parentFolderId" class="see-more-folder"
+                                (click)="getSeeMore(parentFolderId)">
+                                <i class="zmdi zmdi-minus"></i>&nbsp;{{fixedTextHash['back'][currLan]}}&nbsp;
+                            </span>
+                            <span class="see-more-folder" *ngIf="totalPages > currentPage" class="see-more-folder"
+                                (click)="getNextPage()">
+                                <i class="zmdi zmdi-plus"></i>&nbsp;{{fixedTextHash['load_more'][currLan]}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal">{{fixedTextHash['close'][currLan]}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Delete from Folder-->
+        <div *ngIf="showFoldering" class="modal fade js-delete-folder" id="delete-candidate-{{getJobseekerId()}}"
+            tabindex="-1" role="dialog" aria-labelledby="deleteFolder" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+
+                    <!-- modal body -->
+                    <div class="modal-body deleteFolderModel">
+                        <spinner [visible]="showSpinner"></spinner>
+                        <div *ngIf="errorflag" class="alert alert-danger alert-dismissible" role="alert">
+                            {{fixedTextHash['delete_folder_error'][currLan]}}
+                        </div>
+                        <h2>{{fixedTextHash['sure_delete'][currLan]}}</h2>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="btGroup">
+                            <button type="button" class="btn btn-primary"
+                                (click)="getDelete()">{{fixedTextHash['yes'][currLan]}}</button>
+                            <button type="button" class="btn btn-secondary"
+                                data-dismiss="modal">{{fixedTextHash['no'][currLan]}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- add tags  Modal -->
+    <!-- ========================================== -->
+    <!-- Modal -->
+    <div class="modal fade js_close_tags" id="{{'tagsaction-modal-' + getJobseekerId()}}" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true" [class.arabic]="accountService.isArabic()">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title centerAts" id="exampleModalLabel">{{fixedTextHash['create_tag'][currLan]}}
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    <ng2-select [items]="searchableTags" [showJobsCount]="false" [resetOnSelect]="true"
+                        [selectOneEnter]="true" [resetOnEmpty]="true" [selectOnType]="true" [selectOnEnter]="true"
+                        [showCaret]="false" (selected)="selectedTag($event)"
+                        placeholder="{{fixedTextHash['create_tag_placeholder'][currLan]}}">
+                    </ng2-select>
+                    <div class="txt font-12">{{fixedTextHash['press_enter_to_add'][currLan]}}</div>
+                    <ul class="hasTagsats">
+                        <ng-container *ngFor="let selTag of jobseekerTags">
+                            <li class="cursor_pointer1" *ngIf="!selTag?._destroy">{{selTag?.name}}<span
+                                    (click)="removeTag(selTag)" class="zmdi zmdi-delete"></span></li>
+                        </ng-container>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="restTags()"
+                        data-dismiss="modal">{{fixedTextHash['cancel'][currLan]}}</button>
+                    <button type="button" class="btn btn-primary"
+                        (click)="getCreateTag()">{{fixedTextHash['add'][currLan]}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- add Feedback  Modal -->
+    <!-- ========================================== -->
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3"
+        aria-hidden="true" [class.arabic]="accountService.isArabic()">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title centerAts" id="exampleModalLabel3">Send Feedback</h5>
+                </div>
+                <div class="modal-body feedbackAts">
+                    <span>Status</span>
+                    <select>
+                        <option>Shortlisted</option>
+                        <option>Successful</option>
+                        <option>Unsuccessful</option>
+                    </select>
+                    <textarea placeholder="Write feedback"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                        data-dismiss="modal">{{fixedTextHash['cancel'][currLan]}}</button>
+                    <button type="button" class="btn btn-primary">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- add Rating  Modal -->
+    <!-- ========================================== -->
+    <!-- Modal -->
+    <div *ngIf="!starRatingDone" class="modal fade js_close_star_rating" id="{{'rating-modal-' + getJobseekerId()}}"
+        tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        [class.arabic]="accountService.isArabic()">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title centerAts">{{fixedTextHash['rate_candidate'][currLan]}}</h5>
+                </div>
+                <div>
+                    <ul class="rating">
+                        <li (click)="setStarRating(1)"><i [class.zmdi-star]="starRating >=1"
+                                [class.zmdi-star-outline]="starRating < 1" class="zmdi"></i></li>
+                        <li (click)="setStarRating(2)"><i [class.zmdi-star]="starRating >=2"
+                                [class.zmdi-star-outline]="starRating < 2" class="zmdi"></i></li>
+                        <li (click)="setStarRating(3)"><i [class.zmdi-star]="starRating >=3"
+                                [class.zmdi-star-outline]="starRating < 3" class="zmdi"></i></li>
+                        <li (click)="setStarRating(4)"><i [class.zmdi-star]="starRating >=4"
+                                [class.zmdi-star-outline]="starRating < 4" class="zmdi"></i></li>
+                        <li (click)="setStarRating(5)"><i [class.zmdi-star]="starRating >=5"
+                                [class.zmdi-star-outline]="starRating < 5" class="zmdi"></i></li>
+                    </ul>
+                    <div class=" clearfix"></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- add Video Modal -->
+    <!-- ========================================== -->
+    <!-- Modal -->
+    <div *ngIf="candidateObj?.video" class="video-force-close modal fade" id="{{'video-action-' + getJobseekerId()}}" tabindex="-1"
+        role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true"
+        data-backdrop="static" data-keyboard="false"
+        [class.arabic]="accountService.isArabic()">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title centerAts" id="exampleModalLabel1">
+                        {{fixedTextHash['video_profile'][currLan]}}</h5>
+                </div>
+                <div class="modal-body video-pop">
+                    <!-- Video add here -->
+                    <video-style *ngIf="candidateObj?.video" [social_media_video]="videoSrc$"
+                        [video_screenshot]="videoScreenShot$">
+                    </video-style>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                    (click)="stopVideo()">{{fixedTextHash['cancel'][currLan]}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- invite to apply Modal -->
+    <!-- ========================================== -->
+    <!-- Modal -->
+    <div *ngIf="showInviteToApply && isInviteToApplyActive" class="modal fade"
+        id="{{'invite-to-apply-' + getJobseekerId()}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+        aria-hidden="true" [class.arabic]="accountService.isArabic()">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title centerAts" id="exampleModalLabel2">{{fixedTextHash["invite"][currLan]}}
+                        {{(targetApplicant$ | async)?.first_name}} {{(targetApplicant$ | async)?.last_name}}
+                        {{fixedTextHash['to_apply'][currLan]}}</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="pop-txtarea invite-suggsted-candi">
+
+                        <div class="common-block" *ngIf="(failAlert$ | async)">
+                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                {{fixedTextHash['invitation_error_message'][currLan]}}
+                            </div>
+                        </div>
+
+                        <div class="common-block" *ngIf="(successAlert$ | async)">
+                            <div class="alert comen-alert alert-dismissible" role="alert">
+                                {{fixedTextHash['invitation_success_message'][currLan]}}
+                            </div>
+                        </div>
+                        <form [formGroup]="inviteToApplyForm">
+                            <input type="hidden" formControlName="job_id">
+                            <ng2-select *ngIf="showJobSearchBox" [items]="searchableJobs" [showJobsCount]="false"
+                                [resetOnSelect]="false" [selectOneEnter]="true" [resetOnEmpty]="true"
+                                [selectOnType]="false" [showCaret]="true"
+                                [error]="(inviteToApplyForm.controls['job_id'].touched || !inviteToApplyPristine) && !inviteToApplyForm.controls['job_id'].valid"
+                                (selected)="selectedJob($event)"
+                                placeholder="{{fixedTextHash['select_job_title'][currLan]}}">
+                            </ng2-select>
+                            <textarea rows="10" cols="50" name="#" wrap="hard"
+                                placeholder="{{fixedTextHash['invite_to_apply_message'][currLan]}}"
+                                formControlName="invite_message"
+                                [class.error-feild]="(!inviteToApplyPristine || inviteToApplyForm.controls['invite_message'].touched) && !inviteToApplyForm.controls['invite_message'].valid"></textarea>
+                        </form>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button *ngIf="!inviteToApplyPostInProgress" type="button" class="btn postive"
+                        (click)="sendApplyInvitation()"> {{fixedTextHash['invite'][currLan]}}</button>
+                    <button *ngIf="inviteToApplyPostInProgress" type="button" class="btn postive disabled_button">
+                        {{fixedTextHash['invite'][currLan]}}</button>
+                    <button type="button" class="btn negative" data-dismiss="modal" (click)="resetApplyInvitation()">
+                        {{fixedTextHash['cancel'][currLan]}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for ShortList Candidate -->
+    <div class="modal fade js_close_tags" id="{{'shortList-candidate-modal-' + getJobseekerId()}}" tabindex="-1"
+        role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" [class.arabic]="accountService.isArabic()">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content simple_modal_face2">
+                <div class="modal-header">
+                    <h2 class="modal-title centerAts" id="exampleModalLabel">
+                        {{fixedTextHash['shortlist_candidate_msg'][currLan]}}
+                    </h2>
+                </div>
+                <div class="modal-footer bt_group_center">
+                    <button type="button" class="btn btn-secondary" (click)="restTags()"
+                        data-dismiss="modal">{{fixedTextHash['cancel'][currLan]}}</button>
+                    <button type="button" class="btn btn-primary"
+                        (click)="shortListCandidate(getApllicationId())">{{fixedTextHash['confirm'][currLan]}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Reject Candidate -->
+    <div class="modal fade js_close_tags" id="{{'reject-candidate-modal-' + getJobseekerId()}}" tabindex="-1"
+        role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" [class.arabic]="accountService.isArabic()">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content simple_modal_face2">
+                <div class="modal-header">
+                    <h2 class="modal-title centerAts" id="exampleModalLabel">
+                        {{fixedTextHash['reject_candidate_msg'][currLan]}}
+                    </h2>
+                </div>
+                <div class="modal-footer bt_group_center">
+                    <button type="button" class="btn btn-secondary" (click)="restTags()"
+                        data-dismiss="modal">{{fixedTextHash['cancel'][currLan]}}</button>
+                    <button type="button" class="btn btn-primary"
+                        (click)="rejectCandidate(getApllicationId())">{{fixedTextHash['confirm'][currLan]}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</ng-container>

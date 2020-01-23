@@ -1,0 +1,645 @@
+@import '../../../../styles/sass/base/_variables.scss';
+
+h1, h2, h3, h4, h5, h6, span, p, a{
+	margin:0px;
+	font-family: $primary-Fonts;
+}
+
+.arabic{
+	h1, h2, h3, h4, h5, h6, span, p, a, button, .req-dark, .applicants-txt {
+		margin:0px;
+		font-family: $arabic-primary-Fonts!important;
+	}
+}
+
+select {
+    width: 100%;
+    border: solid 1px $boredr-color;
+    color: $text-normal-color !important;
+    height: $form-height!important;
+    padding: 0px 10px;
+    margin-bottom: 10px;
+    font-size: 14px !important;
+    line-height: $button-height!important;
+    border-radius: $border-radius!important;
+    background-color:$form-bg!important; 
+}
+
+.cvFolderSystem{ 
+    padding: 30px 10px;
+    min-height: 700px;
+    .headerFolder{
+        h2{
+            font-weight: 500;
+            font-size: $medium-size;
+            text-align: left;
+            color: $primarycolor;
+            display: block;
+            width: calc(100% - 430px);
+            float: left;
+            margin-bottom: 20px!important;
+        }
+        .searchFolder{
+            float: left;
+            position: relative;
+            width: 430px;
+            input, select {
+                width: 100%;
+                border: solid 1px $boredr-color;
+                color: $text-normal-color !important;
+                height: $form-height!important;
+                padding: 0px 10px;
+                margin-bottom: 10px;
+                font-size: 14px !important;
+                line-height: $button-height!important;
+                border-radius: $border-radius!important;
+                background-color:$form-bg!important; 
+            }
+            @-webkit-keyframes autofill {
+                to {
+                    color: $primary-font;
+                    background: transparent;
+                }
+            }
+            
+            input:-webkit-autofill {
+                -webkit-animation-name: autofill;
+                -webkit-animation-fill-mode: both;
+            }
+            button{
+                height: $button-height;
+                line-height: $button-height;
+                text-align: center;
+                color: $white;
+                background-color: $primarycolor;
+                border-radius: $border-radius;
+                width: $button-height;
+                position: absolute;
+                right: 0px;
+                top: 0px;
+                border:none;
+                &:hover{
+                    background-color: $secondarycolor;
+                    cursor: pointer;
+                }
+            }
+        }
+        
+    }
+    // addNewFolderSelect
+    .addNewFolderSelect{
+        width: 100%;
+        float: left;
+        border-bottom: 1px solid $tertiarycolor;
+        padding-bottom: 20px;
+        margin-bottom: 30px;
+        // addnew utton
+        .addnew{
+            width: 180px;
+            border:1px solid $light-border;
+            color: $primarycolor;
+            font-size: $normal-font;
+            font-weight: 600;
+            height: $button-height;
+            line-height: $button-height;
+            display: block;
+            text-align: center;
+            float: left;
+            border-radius: $border-radius;
+            &:hover{
+                background-color: $primarycolor;
+                color: $white;
+            }
+        }
+        // action araea
+        .actionSelect{
+            width: calc(100% - 180px);
+            float: left;
+            // dropdown actions
+            .dropdown-toggle{
+                border:1px solid $light-border!important;
+                border-radius: $border-radius!important;
+                text-align: left;
+            }
+            .form-check{
+                width: 130px;
+                float: right;
+                padding-left: 10px;
+                .form-check-input{
+                    float: left;
+                    width: 15px;
+                    margin: 0px;
+                }
+                .form-check-label{
+                    line-height: $button-height;
+                    padding-left: 10px;
+                    font-weight: 500;
+                    color: $primarycolor;
+                }
+            }
+        }
+        
+    }
+}
+
+// Checkbox
+.radio {
+   display: block;
+   position: relative;
+   padding-left: 30px;
+   cursor: pointer;
+   font-size: $small-font;
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+   font-weight: 500;
+   margin-bottom:0px; 
+}
+
+/* Hide the browser's default radio button */
+.radio input {
+   position: absolute;
+   opacity: 0;
+   cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkround {
+   position: absolute;
+   top: 0px;
+   left: 0;
+   height: 20px;
+   width: 20px;
+   background-color: #fff ;
+   border-color:$primarycolor;
+   border-style:solid;
+   border-width:2px;
+   border-radius: 50%;
+}
+
+
+/* When the radio button is checked, add a blue background */
+.radio input:checked ~ .checkround {
+   background-color: #fff;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkround:after {
+   content: "";
+   position: absolute;
+   display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.radio input:checked ~ .checkround:after {
+   display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.radio .checkround:after {
+   left: 2px;
+   top: 2px;
+   width: 12px;
+   height: 12px;
+   border-radius: 50%;
+   background:$primarycolor;
+}
+
+.noSubfolder2{
+    button{
+        display: none;
+    }
+    padding-left: 0px !important;
+    width: 95.5%!important;
+}
+.noSubfolder1{
+    button{
+        display: none;
+    }
+    padding-left: 0px !important;
+    width: 100%!important;
+}
+.noSubfolder3{
+    button{
+        display: none;
+    }
+    padding-left: 0px !important;
+    width: 100%!important;
+}
+
+
+.listFoldereach{
+    width: 100%;
+    float: left;
+    padding: 20px 0px;
+    
+
+    // step2
+    // ===========================/
+    .folderStep2{
+        margin-left: 20px;
+        width: calc(100% - 20px)!important;
+        border-top: 1px solid $light-border;
+        padding: 20px 0px;
+        display: block;
+        float: left;
+        .nameLabelFolder{
+            width: calc(100% - 340px);
+            padding-left:45px;
+            float: left;
+            position: relative;
+            button{
+                width: 33px;
+                height: 33px;
+                border-radius: 160px;
+                text-align: center;
+                border:1px solid $light-border;
+                position: absolute;
+                color: $secondarycolor;
+                left: 0px;
+                font-size: 20px;
+            }
+            span{
+                font-size: $normal-font;
+                font-weight: 400;
+                color: $primarycolor;
+                text-align: left;
+                padding-top: 10px;
+                float: left;
+                display: inline-block;
+                max-width: 80%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap; 
+            }
+            // icon
+            .iconlistfolder{
+                display: inline-block;
+                width: 50px;
+                height: 40px;
+                border-radius: 3px;
+                background-color: $tertiarycolor;
+                position: relative;
+                margin-right: 15px;
+                float: left;
+                .tip-top{
+                    display: block;
+                    position: absolute;
+                    width: 20px;
+                    height: 10px;
+                    background: $secondarycolor;
+                    top: -4px;
+                    left: 0px;
+                    border-radius: 3px;
+                }
+                .baseline{
+                    display: block;
+                    position: absolute;
+                    width: 100%;
+                    height: 9px;
+                    background: $secondarycolor;
+                    top: 0px;
+                    left: 0px;
+                }
+            }
+        }
+        .actionlist{
+                width: 340px;
+                float: left;
+                .action-buttons{
+                    float: right;
+                    li{
+                        display: inline-block;
+                        text-align: center;
+                        width: $button-height;
+                        height: $button-height;
+                        line-height: $button-height;
+                        color: $primarycolor;
+                        border: 1px solid $light-border;
+                        border-radius: $border-radius;
+                        i{
+                            font-size: 16px;
+                            color: $primarycolor;
+                        }
+                    }
+                }
+        }
+    }
+
+      // step3
+    // ===========================/
+    .folderStep3{
+        margin-left: 30px;
+        width: calc(100% - 30px);
+        border-top: 1px solid $light-border;
+        padding: 20px 0px;
+        display: block;
+        float: left;
+        .nameLabelFolder{
+            width: calc(100% - 340px);
+            padding-left:45px;
+            float: left;
+            position: relative;
+            button{
+                width: 33px;
+                height: 33px;
+                border-radius: 160px;
+                text-align: center;
+                border:1px solid $light-border;
+                position: absolute;
+                color: $secondarycolor;
+                left: 0px;
+                font-size: 20px;
+            }
+            span{
+                font-size: $normal-font;
+                font-weight: 400;
+                color: $primarycolor;
+                text-align: left;
+                padding-top: 10px;
+                float: left;
+                display: inline-block;
+                max-width: 80%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap; 
+            }
+            // icon
+            .iconlistfolder{
+                display: inline-block;
+                width: 50px;
+                height: 40px;
+                border-radius: 3px;
+                background-color: $tertiarycolor;
+                position: relative;
+                margin-right: 15px;
+                float: left;
+                .tip-top{
+                    display: block;
+                    position: absolute;
+                    width: 20px;
+                    height: 10px;
+                    background: $secondarycolor;
+                    top: -4px;
+                    left: 0px;
+                    border-radius: 3px;
+                }
+                .baseline{
+                    display: block;
+                    position: absolute;
+                    width: 100%;
+                    height: 9px;
+                    background: $secondarycolor;
+                    top: 0px;
+                    left: 0px;
+                }
+            }
+        }
+        .actionlist{
+                width: 340px;
+                float: left;
+                .action-buttons{
+                    float: right;
+                    li{
+                        display: inline-block;
+                        text-align: center;
+                        width: $button-height;
+                        height: $button-height;
+                        line-height: $button-height;
+                        color: $primarycolor;
+                        border: 1px solid $light-border;
+                        border-radius: $border-radius;
+                        i{
+                            font-size: 16px;
+                            color: $primarycolor;
+                        }
+                    }
+                }
+        }
+    }
+
+      // step1
+    // ===========================/
+    .folderStep1{
+        display: block;
+        width: 100%;
+        float: left;
+        border-top: 1px solid $light-border;
+        padding: 20px 0px;
+        .nameLabelFolder{
+            width: calc(100% - 340px);
+            padding-left:45px;
+            float: left;
+            position: relative;
+            button{
+                width: 33px;
+                height: 33px;
+                border-radius: 160px;
+                text-align: center;
+                border:1px solid $light-border;
+                position: absolute;
+                color: $secondarycolor;
+                left: 0px;
+                font-size: 20px;
+            }
+            span{
+                font-size: $normal-font;
+                font-weight: 400;
+                color: $primarycolor;
+                text-align: left;
+                padding-top: 10px;
+                float: left;
+                display: inline-block;
+                max-width: 80%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap; 
+            }
+            // icon
+            .iconlistfolder{
+                display: inline-block;
+                width: 50px;
+                height: 40px;
+                border-radius: 3px;
+                background-color: $tertiarycolor;
+                position: relative;
+                margin-right: 15px;
+                float: left;
+                .tip-top{
+                    display: block;
+                    position: absolute;
+                    width: 20px;
+                    height: 10px;
+                    background: $secondarycolor;
+                    top: -4px;
+                    left: 0px;
+                    border-radius: 3px;
+                }
+                .baseline{
+                    display: block;
+                    position: absolute;
+                    width: 100%;
+                    height: 9px;
+                    background: $secondarycolor;
+                    top: 0px;
+                    left: 0px;
+                }
+            }
+        }
+        .actionlist{
+                width: 340px;
+                float: left;
+                .action-buttons{
+                    float: right;
+                    li{
+                        display: inline-block;
+                        text-align: center;
+                        width: $button-height;
+                        height: $button-height;
+                        line-height: $button-height;
+                        color: $primarycolor;
+                        border: 1px solid $light-border;
+                        border-radius: $border-radius;
+                        i{
+                            font-size: 16px;
+                            color: $primarycolor;
+                        }
+                    }
+                }
+        }
+    }
+   
+}
+
+
+
+
+
+
+
+
+
+
+// arabic
+// ==================================================
+.arabic{
+    .headerFolder{
+        .searchFolder{
+            button{
+                left: 0px;
+                right: inherit;
+            }
+        }
+    }
+    h2{
+        text-align: right!important;
+    }
+    .dropdown-toggle{
+        text-align: right!important;
+    }
+    .form-check-label{
+        float: left;
+    }
+    .click-dropdown-sort{
+        float: left;
+    }
+    .form-check{
+        float: left!important;
+    }
+    .to{
+        float: left;
+    }
+    .listFoldereach .actionlist ul{
+        float: left;
+    }
+    .listFoldereach .nameLabelFolder button{
+        right: 0px;
+        left: inherit;
+    }
+    .listFoldereach .nameLabelFolder .iconlistfolder{
+        float: right;
+    }
+    .listFoldereach .nameLabelFolder{
+        padding-right: 45px;
+        padding-left: inherit;
+    }
+    .listFoldereach .nameLabelFolder span{
+        text-align: right;
+        float: right;
+    }
+    .listFoldereach .nameLabelFolder .iconlistfolder{
+        margin-left: 15px;
+        margin-right: 0px;
+    }
+}
+
+
+
+
+/* Respopnsive breakpoint */
+// ============bigScreen===========
+@media all and (max-width: 991px) {
+    .folderStep2{
+        margin-left: 30px!important;
+        width: 96%!important;
+    }
+    .folderStep3{
+        margin-left: 60px!important;
+        width: 91.5%!important;
+    }
+}
+
+// ============MediumScreen========
+@media all and (max-width: 768px) {
+    .cvFolderSystem{ 
+        .headerFolder{
+            h2{
+                width: 100%;
+                text-align: center;
+                padding-bottom:10px;
+            }
+            .searchFolder{
+                width: 100%;
+            }
+            .addNewFolderSelect{
+                .addnew{
+                    width: 100%;
+                    margin-bottom: 10px;
+                }
+                .actionSelect{
+                    width: 100%;
+                    .form-check{
+                        float: left;
+                    }
+                }
+            }
+        }
+    }
+
+    .nameLabelFolder{
+        width: 100%!important;
+    }
+    .action-buttons{
+        float: left!important;
+        margin-top: 10px;
+        margin-left: 44px;
+    }
+  
+
+
+    // arabic
+    // ===============
+    .arabic{
+        h2{
+            text-align: center!important;
+        }
+    }
+
+    
+}
+
+// ============SmallScreen=========
+@media all and (max-width: 480px) {
+
+}

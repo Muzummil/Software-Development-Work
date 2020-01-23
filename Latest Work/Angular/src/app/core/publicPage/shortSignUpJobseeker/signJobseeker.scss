@@ -1,0 +1,70 @@
+
+@import '../../../../styles/sass/base/_variables.scss';
+
+
+button:focus {
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+li:focus {
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.choose-registration{
+    height: 650px;
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center; /* align vertical */
+    width: 100%;
+    .grid-container{
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+    .out-line{
+        border: solid 1px $boredr-color;
+        height: 270px;
+        border-radius: 10px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        padding: 15px;
+        img{
+            height: 55px;
+        }
+        h2{
+            font-size: 20px;
+            font-weight: 600;
+            color: $primarycolor;
+            margin-top: 24px !important;
+        }
+    }
+}
+
+
+
+
+
+@media all and (max-width: 991px) {
+    .choose-registration{
+        height: auto;
+        padding-top: 60px;
+        padding-bottom: 40px;
+        .out-line{
+            margin-bottom: 30px;
+        }
+        .mb-0{
+            margin-bottom: 0px!important;
+        }
+    }
+    
+    .arabic.choose-registration{
+        .grid-container{
+            float: none !important;
+        }
+    }
+}

@@ -1,0 +1,193 @@
+<div *ngIf="!showfilter && (screenwidth > windowSizeDivider)"  class="col-lg-3 refine-serch filter-hide arabic-right-left">
+    <div class="block bottom-gap empty-min14">
+        <div class="row block-title">
+            <h2>{{fixedTextHash['refine_search'][currLan]}}</h2>
+        </div>
+
+        <filter-area-company  *ngIf="order == null"  [page]="accountService.getCurrLangUrl()+this.accountService.getPath() + '/companies'"></filter-area-company>
+        <filter-area-company  *ngIf="order != null"  [page]="accountService.getCurrLangUrl()+this.accountService.getPath() + '/companies/top-followed-companies'"></filter-area-company>
+    </div>
+</div>
+
+<div *ngIf="!showfilter" class="col-lg-9 col-md-12 col-sm-12 col-xs-12 compny-percentage">
+
+    <div class="row block filter-jobs bottom-gap">
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" *ngIf="!(allCompanies$ | async)?.length">
+            <div class="row">
+                <div class="row empty-min8">
+                    <spinner *ngIf="!(allCompanies$ | async)?.length && (allCompanies$ | async)?.length != 0" [visible]="true"></spinner>
+                    <div *ngIf="(allCompanies$ | async)?.length == 0"  class="empty-prf">
+                        <i class="icon-empty-company"></i>
+                        <h5>{{fixedTextHash['no_match_search_companies'][currLan]}}</h5>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--Current page : {{(currentPage$ | async) }}-->
+        <div class="row" *ngIf="(allCompanies$ | async)?.length">
+
+            <div class="row block-title-2 padding-5-10 border-none hidden-xs">
+
+                <div class="col-lg-12 col-sm-12 col-xs-12">
+                    <h1 class="h1-mainList">
+                   <span class="light">{{fixedTextHash['all_companies'][currLan]}}</span>
+                    </h1>
+                </div>
+
+            </div>
+
+
+        <div class="loading-spinner-space" *ngIf="(loadingFlagsArray$ | async)"><spinner [visible]="(loadingFlagsArray$ | async)"></spinner></div>
+
+
+            <div class="row" *ngFor="let selCom of (allCompanies$ | async),let comcount =index">
+
+
+                <!-- Desktop-company_listing -->
+                <div class="featured-box">
+
+                    <!-- Desktop-company_listing -->
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padding-10 hidden-xs arabic-right-left">
+
+                        <a class="cursor_pointer1"   [routerLink]="[this.accountService.getCurrLangUrl()+this.accountService.getPath()+'/companies/'+ this.accountService.getSpaceToDashLowerCase(selCom.name) + '-'+selCom.id]"   >
+
+                            <div class="feturd-compny mobile-without-matching" *ngIf="!selCom.profileImage">
+                                <i class="zmdi zmdi-city-alt empty-blank"></i>
+                            </div>
+                            <div class="feturd-compny mobile-without-matching" *ngIf="selCom.profileImage">
+                                <span>
+                                    <img src="{{selCom.profileImage}}">
+                                </span>
+                            </div>
+
+                            <div class="feturd-compny-dtls">
+                                <div class="txt-white"><h3>{{selCom?.name}}</h3></div>
+                                <div class="cmpny-txt"><i class="zmdi zmdi-pin"></i>{{selCom?.city?.name}}, {{selCom?.country?.name}}</div>
+                                <div class="cmpny-txt"><i class="zmdi zmdi-chart-donut"></i>{{selCom?.sector?.name}}</div>
+                            </div>
+                            <div class=" clearfix"></div>
+                        </a>
+                    </div>
+
+                    <!-- Mobile-listing -->
+                    <div class="job_mobile hidden-lg hidden-md hidden-sm">
+                        <!-- company logo -->
+                        <a class="cursor_pointer1"  [routerLink]="[this.accountService.getCurrLangUrl()+this.accountService.getPath()+'/companies/'+this.accountService.getSpaceToDashLowerCase(selCom.name) + '-'+selCom.id]"  >
+                            <div class="company_logo">
+                                <a class="cursor_pointer1"   [routerLink]="[this.accountService.getCurrLangUrl()+this.accountService.getPath()+'/companies/'+this.accountService.getSpaceToDashLowerCase(selCom.name) + '-'+selCom.id]"   >
+                                    <div class="feturd-compny mobile-without-matching" *ngIf="!selCom.profileImage">
+                                        <i class="zmdi zmdi-city-alt empty-blank"></i>
+                                    </div>
+                                    <div class="feturd-compny" *ngIf="selCom.profileImage">
+                                        <span>
+                                            <img src="{{selCom.profileImage}}">
+                                        </span>
+                                    </div>
+                                </a>
+                            </div>
+                        </a>
+
+                        <!-- Job title and company name -->
+                        <div class="job_details">
+                            <a class="cursor_pointer1"   [routerLink]="[this.accountService.getCurrLangUrl()+this.accountService.getPath()+'/companies/'+this.accountService.getSpaceToDashLowerCase(selCom.name)+ '-'+selCom.id]" >
+                            <div class="txt-white">{{selCom?.name}}</div>
+                            <div class="cmpny-txt"><i class="zmdi zmdi-pin"></i>&nbsp;{{selCom?.city?.name}}, {{selCom?.country?.name}}</div>
+                            <div class="cmpny-txt"><i class="zmdi zmdi-chart-donut"></i>{{selCom?.sector?.name}}</div>
+                            </a>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padding-10">
+                        <div class="align">
+                            <div class=" company-following">
+                                <i class="zmdi zmdi-case" ></i>&nbsp;{{selCom?.jobsOpen | number}}
+                                <span class="follow-change hide-feedback">
+                                    {{selCom?.jobsOpen > 1 ? fixedTextHash['jobs_open'][currLan] : fixedTextHash['job_open'][currLan]}}
+                                </span>
+                            </div>
+                            <div class="company-following">
+                                <i class="zmdi zmdi-accounts"></i>&nbsp;{{selCom?.follower | number}}
+                                <span class="follow-change hide-feedback">&nbsp;
+                                    {{selCom?.follower > 1 ? fixedTextHash['followers'][currLan] : fixedTextHash['follower'][currLan]}}
+                                </span>
+                            </div>
+
+
+
+
+                          <div class="follow-following bt-company-align " *ngIf="isPublic == false">
+                            <button class="follow hidden-xs" (click)="onFollowCompany(comcount)" *ngIf="selCom?.followingFlag ==false">
+                              <a  class="msg-follow"><i class="zmdi zmdi-plus-square"></i> {{fixedTextHash['follow'][currLan]}}</a>
+                              <a class="msg-following"><i class="zmdi zmdi-check-square"></i> {{fixedTextHash['following'][currLan]}}</a>
+                              <a class="msg-unfollow"><i class="zmdi zmdi-minus-square"></i> {{fixedTextHash['unfollow'][currLan]}} </a>
+                            </button>
+
+                            <button class="follow following hidden-xs"  (click)="onUnFollowCompany(comcount)" *ngIf="selCom?.followingFlag ==true">
+                              <a  class="msg-follow"><i class="zmdi zmdi-plus-square"></i> {{fixedTextHash['follow'][currLan]}}</a>
+                              <a  class="msg-following"><i class="zmdi zmdi-check-square"></i>  {{fixedTextHash['following'][currLan]}}</a>
+                              <a  class="msg-unfollow"><i class="zmdi zmdi-minus-square"></i> {{fixedTextHash['unfollow'][currLan]}} </a>
+                            </button>
+
+
+                            <button class="follow  visible-xs" *ngIf="selCom?.followingFlag ==false" (click)="onFollowCompany(comcount)" > <a  class="msg-follow"><i class="zmdi zmdi-plus-square"></i> {{fixedTextHash['follow'][currLan]}}</a></button>
+                            <button class="follow  visible-xs" *ngIf="selCom?.followingFlag ==true" (click)="onUnFollowCompany(comcount)"> <a class="msg-follow"><i class="zmdi zmdi-check-square"></i> {{fixedTextHash['following'][currLan]}}</a></button>
+                          </div>
+
+
+
+                            <div class=" clearfix"></div>
+                        </div>
+                    </div>
+                    <div class=" clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <pagination-new *ngIf="isPublic" [url]="urlPath"   [totalRecords]="totalRecords$">
+    </pagination-new>
+
+    <pagination-new  *ngIf="!isPublic && order == null" [url]="accountService.getCurrLangUrl()+this.accountService.getPath()+'/companies'" [totalRecords]="totalRecords$">
+    </pagination-new>
+
+    <pagination-new  *ngIf="!isPublic && order != null"
+                     [url]="accountService.getCurrLangUrl()+this.accountService.getPath()+'/companies/top-followed-companies'"
+                     [totalRecords]="totalRecords$">
+    </pagination-new>
+
+</div>
+
+
+<div *ngIf="showfilter" class="col-lg-12 refine-serch">
+    <div class="block bottom-gap">
+        <div class="row block-title-2">
+            <h2 class="padding-top-10">{{fixedTextHash['refine_search'][currLan]}}</h2>
+            <a (click)="getToggleFilter()">
+                <button>
+                    <span><i class="zmdi zmdi-arrow-left"></i></span>
+                    <span class="hide">{{fixedTextHash['back'][currLan]}}</span>
+                </button>
+            </a>
+        </div>
+        <filter-area-company  *ngIf="order == null"
+                              [page]="accountService.getCurrLangUrl()+this.accountService.getPath()+'/companies'">
+
+        </filter-area-company>
+        <filter-area-company  *ngIf="order != null"
+                              [page]="accountService.getCurrLangUrl()+this.accountService.getPath()+'/companies/top-followed-companies'">
+
+        </filter-area-company>
+    </div>
+</div>
+<!-- Filter -->
+<div class="row" id="filter">
+    <div class="filter-mobile">
+        <a (click)="getToggleFilter()">
+            <button *ngIf="!showfilter">{{fixedTextHash['filter'][currLan]}}</button>
+            <button *ngIf="showfilter">{{fixedTextHash['apply'][currLan]}}</button>
+        </a>
+    </div>
+</div>

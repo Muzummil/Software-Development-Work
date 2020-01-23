@@ -1,0 +1,225 @@
+<div class="main-tab load-data-js mobile-tab-top"></div>
+<div class="tab-content" [class.arabic] = "accountService.isArabic()">
+    <!--------------------------- My Profile ---------------------------------->
+    <div role="tabpanel" class="tab-pane active" id="emp-jobs">
+        <div class="container margin-top-space">
+
+            <div class="col-md-12 post_job_title_face2">
+                <div class="col_left_post_job_title_face2 arabic-right-left">
+                    <h2>{{fixedTextHash['post_new_job_desc'][currLan]}}</h2>
+                </div>
+                <div class="col_right_post_job_title_face2 arabic-right-left">
+                    <button [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/jobs/add']"><i class="icon-post-job"></i> {{fixedTextHash['post_new_job'][currLan]}}</button>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class=" col-lg-12">
+                <div class=" block bottom-gap">
+                    <div class="job-serch edit">
+                        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 padding-left arabic-right-left mg-bt-arabic">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 arabic-right-left">
+                                <div class="full-box">
+                                    <bootstrap-selectbox *ngIf="(sectorListObs | async)"
+                                                            (selectedId)="sectorId =$event.id"
+                                                            [selectedValue]="sectorId"
+                                                            [placeholder]="fixedTextHash['sector'][currLan]"
+                                                            [selectList]="(sectorListObs | async)">
+                                    </bootstrap-selectbox>
+
+                                </div>
+
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 arabic-right-left">
+                                <div class="full-box">
+
+                                    <bootstrap-selectbox *ngIf="(fareaListObs | async)"
+                                                            (selectedId)="fareaId =$event.id"
+                                                            [selectedValue]="fareaId"
+                                                            [placeholder]="fixedTextHash['functional_area'][currLan]"
+                                                            [selectList]="(fareaListObs | async)">
+                                    </bootstrap-selectbox>
+
+                                </div>
+
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 arabic-right-left">
+                                <div class="full-box">
+                                    <bootstrap-selectbox *ngIf="(jobTypeListObs | async)"
+                                                            (selectedId)="jobTypeId =$event.id"
+                                                            [selectedValue]="jobTypeId"
+                                                            [placeholder]="fixedTextHash['job_type'][currLan]"
+                                                            [selectList]="(jobTypeListObs | async)">
+                                    </bootstrap-selectbox>
+
+
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="full-box">
+                                    <bootstrap-selectbox *ngIf="(jobStatusListObs | async)"
+                                                            (selectedId)="jobsStausId =$event.id"
+                                                            [selectedValue]="jobsStausId"
+                                                            [placeholder]="fixedTextHash['select_status'][this.currLan]"
+                                                            [selectList]="(jobStatusListObs | async)">
+                                    </bootstrap-selectbox>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                            <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 arabic-right-left">
+                                <input type="text" (keyup)="setSearchString(titleSearch.value)" #titleSearch name="phn"
+                                        [placeholder]="fixedTextHash['search_jobs'][currLan]" class="mob-sp-s">
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 block-title-2 border-none padding-0 arabic-right-left">
+                                <button (click)="searchFilter()">
+                                    {{fixedTextHash['search'][currLan]}}
+                                </button>
+                            </div>
+                        </div>
+                        <div class=" clearfix"></div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <!-- new design -->
+                    <div class="clearfix"></div>
+                    <ng-container *ngFor="let selJob of (jobListObs | async),let jobIndex = index ">
+                        <div class="emp_joblist_face2">
+                            <div class="jobs_face2 arabic-right-left">
+                                <a *ngIf="selJob.jobStatus != 'Draft'"
+                                   [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/jobs/'+accountService.getSpaceToDashLowerCase(selJob.title)+'-'+selJob.id]"
+                                   class="cursor_pointer1" class="jobs_link_face2">
+                                    <div class="col_img_face2 arabic-right-left">
+                                        <img *ngIf="!selJob?.branch?.avatar"  src="/assets/images/custom-images/logo2.svg">
+                                        <img *ngIf="selJob?.branch?.avatar"  [src]="selJob?.branch?.avatar">
+                                    </div>
+                                    <div class="col_txt_face2 arabic-right-left">
+                                        <h4 class="job_title_face2">{{(selJob.title) ? selJob.title : fixedTextHash['no_title'][currLan]}}<span class="fal-heading-int-hiring" *ngIf="hasInternalHiring && selJob?.is_internal_hiring">({{fixedTextHash['internal_hiring'][currLan ]}})</span></h4>
+                                        <p *ngIf="selJob?.branch?.name" class="job_desc_face2">{{selJob?.branch?.name}}</p>
+                                        <p  *ngIf="!selJob.sector" class="job_desc_face2"> {{fixedTextHash['no_sector'][currLan]}}</p>
+                                        <p  *ngIf="selJob.sector" class="job_desc_face2"><span>{{selJob.sector}}</span>&nbsp;<span class="arabic-right-left sp-arabic-sm">{{fixedTextHash['sector_word_in_job_list'][currLan]}}&nbsp;</span></p>
+                                        <p class="job_desc_face2">{{(selJob.city) ? selJob.city : fixedTextHash['no_city'][currLan]}}{{fixedTextHash['comma'][currLan]}}
+                                            {{(selJob.countryCountry) ? selJob.countryCountry :
+                                                fixedTextHash['no_country'][currLan]}}</p>
+                                        <p class="job_desc_face2" [innerHTML]="fixedTextHash['job_posted_by'][currLan].replace('{USERNAME}',selJob?.user?.first_name).replace('{DATE}', accountService.getFormattedDate(selJob?.postDate, 'D MMM, YYYY'))"></p>
+                                    </div>
+                                </a>
+                                <a *ngIf="selJob.jobStatus == 'Draft'"
+                                   class="cursor_pointer1" class="jobs_link_face2">
+                                    <div class="col_img_face2 arabic-right-left">
+                                        <img *ngIf="!selJob?.branch?.avatar"  src="/assets/images/custom-images/logo2.svg">
+                                        <img *ngIf="selJob?.branch?.avatar"  [src]="selJob?.branch?.avatar">
+                                    </div>
+                                    <div class="col_txt_face2 arabic-right-left">
+                                        <h4 class="job_title_face2">{{(selJob.title) ? selJob.title : fixedTextHash['no_title'][currLan]}}<span class="fal-heading-int-hiring" *ngIf="hasInternalHiring && selJob?.is_internal_hiring">({{fixedTextHash['internal_hiring'][currLan ]}})</span></h4>
+                                        <p *ngIf="selJob?.branch?.name" class="job_desc_face2">{{selJob?.branch?.name}}</p>
+                                        <p  *ngIf="!selJob.sector" class="job_desc_face2"> {{fixedTextHash['no_sector'][currLan]}}</p>
+                                        <p  *ngIf="selJob.sector" class="job_desc_face2"><span>{{selJob.sector}}</span>&nbsp;<span class="arabic-right-left sp-arabic-sm">{{fixedTextHash['sector_word_in_job_list'][currLan]}}&nbsp;</span></p>
+                                        <p class="job_desc_face2">{{(selJob.city) ? selJob.city : fixedTextHash['no_city'][currLan]}}{{fixedTextHash['comma'][currLan]}}
+                                            {{(selJob.countryCountry) ? selJob.countryCountry :
+                                                fixedTextHash['no_country'][currLan]}}</p>
+                                        <p class="job_desc_face2" [innerHTML]="fixedTextHash['job_posted_by'][currLan].replace('{USERNAME}',selJob?.user?.first_name).replace('{DATE}', accountService.getFormattedDate(selJob?.postDate, 'D MMM, YYYY'))"></p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="action_face2 arabic-right-left">
+                                <h5 class="status_face2 active_face2" *ngIf="!selJob.deleted  && !getIfExpired(selJob.endDate)  && selJob.jobStatus == 'Open'">{{fixedTextHash['active'][currLan]}}</h5>
+                                <h5 class="status_face2 delete_face2" *ngIf="selJob.deleted">{{fixedTextHash['deleted'][currLan]}}</h5>
+                                <h5 class="status_face2 expired_face2" *ngIf="!selJob.deleted  && getIfExpired(selJob.endDate) && selJob.jobStatus != 'Draft'">{{fixedTextHash['expired'][currLan]}}</h5>
+                                <h5 class="status_face2 draft_face2" *ngIf="!selJob.deleted  && selJob.jobStatus == 'Draft'">{{fixedTextHash['draft'][currLan]}}</h5>
+                                <ul class="action_btn_group_face2">
+                                    <li *ngIf="!selJob.deleted"><a [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/jobs/'+selJob.id+'/edit']"><i class="zmdi zmdi-edit"></i></a></li>
+                                    <li *ngIf="selJob.deleted"><a class="disabled_button"><i class="zmdi zmdi-edit"></i></a></li>
+                                    <li *ngIf="!selJob.deleted &&  accountService.getDestroyJob() "><a data-toggle="modal" [attr.data-target]="'.delete-user'+selJob.id"><i class="zmdi zmdi-delete"></i></a></li>
+                                    <li *ngIf="!selJob.deleted &&  !accountService.getDestroyJob()"><a><i class="zmdi zmdi-delete"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="row_face2">
+                                <div class="col-md-4 column_face2 no_application_face2 arabic-right-left">
+                                    <h4 class="column_face2_title">{{selJob.viewCount | number}}</h4>
+                                    <p class="column_face2_desc">{{fixedTextHash['count_views'][currLan]}}</p>
+                                </div>
+                                <div class="col-md-4 column_face2 no_views_face2 arabic-right-left">
+                                    <a *ngIf="selJob?.numberApplicants > 0"
+                                       [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/jobs/'+selJob.id+'/'+accountService.getSpaceToDash(selJob.title)+'/applicants']">
+                                        <h4 class="column_face2_title">{{selJob.numberApplicants | number}}</h4>
+                                        <p class="column_face2_desc">{{fixedTextHash['count_applications'][currLan]}}</p>
+                                    </a>
+                                    <a *ngIf="selJob?.numberApplicants == 0">
+                                        <h4 class="column_face2_title">{{selJob.numberApplicants | number}}</h4>
+                                        <p class="column_face2_desc">{{fixedTextHash['count_applications'][currLan]}}</p>
+                                    </a>
+                                </div>
+                                <div class="col-md-4 column_face2 no_appratio_face2 arabic-right-left">
+                                    <h4 class="column_face2_title" *ngIf=" selJob.numberApplicants == 0">0%</h4>
+                                    <h4 class="column_face2_title" *ngIf=" selJob.numberApplicants > 0">{{selJob.numberApplicants * 100 / selJob.viewCount | number:'1.0-1'}}%</h4>
+                                    <p class="column_face2_desc">{{fixedTextHash['application_ratio'][currLan]}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Delete Pop up-->
+                        <div class="popup" *ngIf="accountService.getDestroyJob()">
+                            <div class="logout-pop">
+                                <div class="modal close_delete delete-user{{selJob?.id}}" tabindex="-1"
+                                     role="dialog" aria-labelledby="myLargeModalLabel">
+                                    <div class="modal-dialog modal-md">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <button class="close following" aria-hidden="true"
+                                                        data-dismiss="modal" type="button">×
+                                                </button>
+                                                <h2>{{fixedTextHash['delete_job'][currLan]}}</h2>
+
+                                                <h4><span
+                                                        class="navy"> {{fixedTextHash['sure_delete_job'][currLan]}}
+                                                    <b>{{selJob?.title}}</b></span>
+                                                </h4>
+                                                <div class="pop-button">
+                                                    <button (click)="deleteJob(selJob.id,jobIndex)" type="button"
+                                                            class="btn postive">
+                                                        {{fixedTextHash['delete'][currLan]}}
+                                                    </button>
+                                                    <button type="button" class="btn negative" data-dismiss="modal">
+                                                        {{fixedTextHash['cancel'][currLan]}}
+                                                    </button>
+                                                    <div class="clr"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <div class="clearfix"></div>
+                    <!-- new design -->
+
+                    <div class="spinner-blank-job" *ngIf="!(jobListObs | async) || (jobListObs | async)?.length == 0">
+                        <div class="empty-prf" *ngIf="!(jobListObs | async)">
+                            <spinner [visible]="true"></spinner>
+                        </div>
+                        <div *ngIf="(jobListObs | async) && (jobListObs | async)?.length == 0">
+                            <div class="empty-prf">
+                                <i class="icon-empty-job"></i>
+                                <h5>{{fixedTextHash['no_results'][currLan]}}.&nbsp;{{fixedTextHash['post_new_job'][currLan]}}</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="margin-top-10">
+                        <pagination-new [url]="accountService.getCurrLangUrl()+accountService.getPath()+'/jobs'"
+                            [totalRecords]="totalJobsObs">
+                        </pagination-new>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

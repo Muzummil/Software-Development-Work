@@ -1,0 +1,97 @@
+ .arabic{
+    .settings span{
+      float: right;
+    }
+    .settings .align-left{
+      text-align: right;
+    }
+    .clicks .radio{
+      padding-left: 0px;
+      padding-right: 5px;
+    }
+ }
+
+
+
+// responsive
+
+/*---------------------------------------------------1-------------------------------------------------------*/
+@media (max-width: 1200px){
+   .arabic{
+        .mob-arabic-flot-none{
+          float: none!important;
+        }
+        .settings .skill-radio .sk-radio{
+          text-align: right;
+          width: 48%;
+        }
+        .mob-arabic-flot-right{
+          float: right!important;
+        }
+    }    
+}
+
+/*---------------------------------------------------2-------------------------------------------------------*/
+@media (min-width: 768px) and (max-width: 1024px){
+  .arabic{
+        .mob-arabic-flot-none{
+          float: none!important;
+        }
+        .mob-arabic-flot-right{
+          float: right!important;
+        }
+
+        .settings .skill-radio .sk-radio{
+          text-align: right;
+          width: 48%;
+        } 
+    }
+}
+
+/*---------------------------------------------------3-------------------------------------------------------*/
+
+@media (max-width: 767px) {
+   .arabic{
+        .mob-arabic-flot-none{
+          float: none!important;
+        }
+        .mob-arabic-flot-right{
+          float: right!important;
+        }
+
+        .settings .skill-radio .sk-radio{
+          text-align: right;
+          width: 48%;
+        }
+        .side-menu .navbar-default .navbar-nav > li > a{
+          text-align: right;
+        }
+         .side-menu-container i{
+              margin-left: 10px;
+              margin-right:inherit;
+        } 
+    }
+}
+/*---------------------------------------------------4-------------------------------------------------------*/
+
+@media (max-width: 480px) {
+    .arabic{
+        .mob-arabic-flot-none{
+          float: none!important;
+        }
+        .mob-arabic-flot-right{
+          float: right!important;
+        }
+
+        .settings .skill-radio .sk-radio{
+          text-align: right;
+        }
+        .side-menu-container i{
+              margin-left: 10px;
+              margin-right:inherit;
+        }
+        .side-menu .navbar-default .navbar-nav > li > a{
+          text-align: right;
+        }
+    }
+}

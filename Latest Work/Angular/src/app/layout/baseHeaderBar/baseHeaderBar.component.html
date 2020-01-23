@@ -1,0 +1,66 @@
+<div   *ngIf="!isInterviewPage">
+    <!-- Mobile Language Change -->
+    <div class="mobile-language-ats" *ngIf="showTranslation">
+        <switch-language [customClass]="true"></switch-language>
+    </div>
+    <!-- header Authorized-->
+    <div *ngIf="(isAuthorized$ | async)"  class="relative" [class.arabic] = "accountService.isArabic()">
+        <header  class="ats-header">
+            <div class="container">
+                <div class="col-lg-6 col-sm-4 col-xs-12 arabic-right-left">
+                    <i>
+                        <a [routerLink]="accountService.getCurrLangUrl()" class="logo-home-inner">
+                            <img src="/assets/images/custom-images/logo2.svg"  class="img-responsive english-logo-inner">
+                            <img src="/assets/images/custom-images/logo2-ar.svg"  class="img-responsive arabic-logo-inner">
+                        </a>
+                    </i>
+                </div>
+                <div   class="menu col-lg-6 col-sm-8 col-xs-12 mobile-top-menu-fit arabic-right-left sign-in-public">
+                    <!-- arabic english text -->
+                    <div class="inner-laguage-ats">
+                        <switch-language [customClass]="true"></switch-language>
+                    </div>
+                    <!-- Authorized Header -->
+                    <ng-container *ngIf="(isAuthorized$ | async)">
+
+                        <div class="profile-picture bloovo-right">
+                            <img  *ngIf="(profileHeader$ | async)?.avatar" [src]="(profileHeader$ | async)?.avatar">
+                            <i *ngIf="!(profileHeader$ | async)?.avatar" class="icon-profile" ></i>
+                        </div>
+                        <!-- Jobseeker Login details -->
+                        <div *ngIf="!accountService.getCheckEmployer()" class="profile-name bloovo-right">
+                            {{(profileHeader$ | async)?.full_name}}
+                        </div>
+
+
+
+                        <!-- Employer login details -->
+                        <div *ngIf="accountService.getCheckEmployer() && !accountService.getCompanyOwner()"
+                             class="profile-name bloovo-right light bold-none">
+                            {{(profileHeader$ | async)?.full_name}}
+                            <strong class="dark padding-left">&nbsp;&nbsp;({{(profileHeader$ | async)?.company_name}})</strong>
+                        </div>
+                        <div *ngIf="accountService.getCheckEmployer() && accountService.getCompanyOwner()"
+                             class="profile-name bloovo-right light bold-none">
+                            {{(profileHeader$ | async)?.company_name}}
+                        </div>
+
+
+                        <a  class="cursor_pointer1 logout" (click)="logout()">
+                            {{fixedTextHash['logout'][currLan]}}
+                        </a>
+
+
+                        <div class=" clr"></div>
+                    </ng-container>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <!-- Header Public-->
+    <div *ngIf="!(isAuthorized$ | async)" [class.arabic] = "accountService.isArabic()">
+        <public-top-menu></public-top-menu>
+    </div>
+
+</div>

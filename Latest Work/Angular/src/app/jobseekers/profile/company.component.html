@@ -1,0 +1,256 @@
+<form [formGroup]="work_experience.company_form">
+    <div class="work-exp-details">
+        <i class="spinner-prf" *ngIf="(spinnerLoader$ | async)">
+            <spinner></spinner>
+        </i>
+        <div *ngIf="!(spinnerLoader$ | async)">
+            <div class="col-lg-6 arabic-right-left">
+                <div class="work-exp-form">
+                    <div class="full-box">
+                        <div class="dark">{{fixedTextHash['company'][currLan]}}</div>
+                        <input type="text" name="formCompany_company_name"
+                            placeholder="{{fixedTextHash['add_company'][currLan]}}" [ngModel]="company_Obj.name"
+                            formControlName="company_name" minlength="1" maxlength="50">
+                        <div class="full-box">
+                            <input type="hidden" name="formCompany_company_id" [ngModel]="company_Obj.id"
+                                formControlName="company_id">
+
+                            <!--formControlName="company_name"-->
+                            <div *ngIf="((formPostObj$ | async) && !work_experience.company_form.controls['company_name'].valid ) || (work_experience.company_form.controls['company_name'].touched && !work_experience.company_form.controls['company_name'].valid)"
+                                class="alert alert-danger alert-dismissible martop5" role="alert">
+                                {{fixedTextHash['empty_company'][currLan]}}
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="full-box">
+                        <div class="dark">{{fixedTextHash['title'][currLan]}}</div>
+                        <div class="full-box">
+                            <input type="text" name="company_title" name="formCompany_company_title"
+                                formControlName="company_title" placeholder="{{fixedTextHash['job_type'][currLan]}}"
+                                minlength="1" maxlength="50">
+                            <!--formControlName="company_title"-->
+                            <div *ngIf="((formPostObj$ | async) && ! work_experience.company_form.controls['company_title'].valid )||( work_experience.company_form.controls['company_title'].touched && ! work_experience.company_form.controls['company_title'].valid)"
+                                class="alert alert-danger alert-dismissible martop5" role="alert">
+                                {{fixedTextHash['empty_job_type'][currLan]}}
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="full-box">
+
+                        <div class="dark">{{fixedTextHash['sector'][currLan]}}</div>
+                        <div class="full-box">
+                            <div class="btn-group">
+
+                                <input type="hidden" #workSectorInpt name="formCompany_company_sector_id"
+                                    formControlName="company_sector_id">
+                                <bootstrap-selectbox *ngIf="sectorList"
+                                    (selectedId)="work_experience.company_form.controls['company_sector_id'].setValue($event.id)"
+                                    [selectedValue]="workSectorInpt.value"
+                                    [placeholder]="fixedTextHash['sector'][currLan]" [selectList]="sectorList">
+                                </bootstrap-selectbox>
+
+
+                                <div *ngIf="((formPostObj$ | async) && !work_experience.company_form.controls['company_sector_id'].valid )||(work_experience.company_form.controls['company_sector_id'].touched && !work_experience.company_form.controls['company_sector_id'].valid)"
+                                    class="alert alert-danger alert-dismissible martop5" role="alert">
+                                    {{fixedTextHash['empty_sector'][currLan]}}
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" clearfix"></div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="full-box">
+                    <div class="half-box-lft arabic-right-left">
+                        <div class="full-box">
+                            <div class="dark">{{fixedTextHash['country'][currLan]}}</div>
+                            <div class="full-box">
+                                <div class="btn-group">
+
+                                    <input type="hidden" #workCountryInpt name="formCompany_company_country"
+                                        formControlName="company_country">
+                                    <bootstrap-selectbox *ngIf="countryList"
+                                        (selectedId)="work_experience.company_form.controls['company_country'].setValue($event.id)"
+                                        [selectedValue]="workCountryInpt.value"
+                                        [placeholder]="fixedTextHash['add_country'][currLan]"
+                                        [selectList]="countryList">
+                                    </bootstrap-selectbox>
+
+                                    <div *ngIf=" ((formPostObj$ | async) && !work_experience.company_form.controls['company_country'].valid )|| (work_experience.company_form.controls['company_country'].touched && !work_experience.company_form.controls['company_country'].valid)"
+                                        class="alert alert-danger alert-dismissible martop5" role="alert">
+                                        {{fixedTextHash['empty_country'][currLan]}}
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="half-box-rgt" *ngIf="(country_Obj$ | async)?.id">
+                        <div class="full-box">
+                            <div class="dark">{{fixedTextHash['city'][currLan]}}</div>
+                            <div class="full-box">
+                                <div class="btn-group">
+                                    <span *ngFor="let sel_country of countryList">
+                                        <auto-comp1 *ngIf="sel_country.id == (country_Obj$ | async)?.id"
+                                            [resetOnEmpty]="true" [countryId]="sel_country.id" [current_city]="cityObj"
+                                            [initData]="(sel_country.id == firstCountryId) ? [city_Obj]:[]"
+                                            (changeCityId)=" onSelectCity($event)">
+                                        </auto-comp1>
+                                    </span>
+
+
+                                    <input type="hidden" formControlName="company_city_id" [ngModel]="city_Obj.id"
+                                        name="formCompany_company_city_id">
+
+                                    <div *ngIf="  ((formPostObj$ | async) && !work_experience.company_form.controls['company_city_id'].valid )|| (work_experience.company_form.controls['company_city_id'].touched && !work_experience.company_form.controls['company_city_id'].valid)"
+                                        class="alert alert-danger alert-dismissible martop5" role="alert">
+                                        {{fixedTextHash['empty_city'][currLan]}}
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="half-box-rgt" *ngIf="!(country_Obj$ | async)?.id">
+                        <div class="full-box">
+                            <div class="dark">{{fixedTextHash['city'][currLan]}}</div>
+                            <div class="full-box">
+                                <div class="btn-group">
+                                    <input placeholder="{{fixedTextHash['add_city'][currLan]}}" type="text"
+                                        name="formCompany_company_city_id">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div>
+
+                    <div class="full-box">
+                        <div class="third-box arabic-right-left">
+                            <div class="full-box">
+                                <div class="dark">{{fixedTextHash['start_date'][currLan]}}</div>
+                                <div class="full-box relative">
+                                    <input type="hidden" placeholder="{{fixedTextHash['from'][currLan]}}"
+                                        name="formCompany_company_start_date" formControlName="company_start_date"
+                                        [ngModel]="startDate" #workStartDate (change)="selectStartDate(workStartDate)">
+
+                                    <datePicker-block
+                                        (emitSelDate)="work_experience.company_form.controls['company_start_date'].setValue($event['selDate']);setEndDate($event)"
+                                        [dp_placeholder]="fixedTextHash['from'][currLan]"
+                                        [sel_id]="wrk_exp_index+'_'+display_mode+'34'" [toYear]="toYear"
+                                        [maxDate]="maxDate"
+                                        [dp_value]="work_experience.company_form.controls['company_start_date'].value | date: 'MMM yyyy dd'">
+                                    </datePicker-block>
+
+                                    <div *ngIf="((formPostObj$ | async) && !work_experience.company_form.controls['company_start_date'].valid )||(work_experience.company_form.controls['company_start_date'].valid.touched && !work_experience.company_form.controls['company_start_date'].valid)"
+                                        class="alert alert-danger alert-dismissible martop5" role="alert">
+                                        {{fixedTextHash['empty_start_date'][currLan]}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="third-box arabic-right-left" *ngIf="ShowEndDate" [style.display]="work_experience.company_still_working?'none':'block'">
+                            <div class="full-box"
+                                >
+                                <div class="dark">{{fixedTextHash['end_date'][currLan]}}</div>
+                                <div class="full-box relative">
+                                    <input type="hidden" placeholder="{{fixedTextHash['to'][currLan]}}"
+                                        name="formCompany_company_end_date" formControlName="company_end_date"
+                                        [ngModel]="endDate" #workEndDate (change)="selectEndDate(workEndDate)">
+
+                                    <datePicker-block (emitSelDate)="work_experience.company_form.controls['company_end_date'].setValue($event['selDate']);
+                                     company_end_date_req = false;
+                                     work_experience.company_form.controls['company_still_working'].setValue(false);
+                                     work_experience.company_still_working =false"
+                                        [dp_placeholder]="fixedTextHash['to'][currLan]"
+                                        [sel_id]="wrk_exp_index+'_'+display_mode+'35'" [toYear]="toYear"
+                                        [maxDate]="maxDate" [minDate]="minEndDate" [dp_startDate]="minEndDate"
+                                        [dp_value]="work_experience.company_form.controls['company_end_date'].value | date: 'MMM yyyy dd'">
+                                    </datePicker-block>
+
+                                    <div *ngIf="company_end_date_req"
+                                        class="alert alert-danger alert-dismissible martop5" role="alert">
+                                        {{fixedTextHash['empty_end_date'][currLan]}}
+                                    </div>
+                                    
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="third-box margin-top-30">
+
+                            <input type="checkbox" [name]="'checkboxG11'+wrk_exp_index"
+                                [id]="'checkboxG11'+wrk_exp_index" class="css-checkbox"
+                                formControlName="company_still_working" (click)="onToggleCurrentlyWorking()">
+
+                            <label [attr.for]="'checkboxG11'+wrk_exp_index" class="css-label">
+                                {{fixedTextHash['curr_work'][currLan]}}
+                            </label>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+            <div class="bullet col-lg-12">
+                <div class="dark bold"> {{fixedTextHash['roles_resp'][currLan]}}</div>
+
+
+                <div class=" margin-bottom-10">
+                    <div class="full-box relative"
+                        *ngFor="let sel_rr of work_experience.company_roles_and_resp; let i= index">
+                        <input type="text" [name]="'formCompany_rr_name'+i" [value]="sel_rr.name" disabled="disabled"
+                            class="margin-bootom-5">
+
+                        <div class="absulute-btn block-title-2 padding-0 border-none">
+                            <button type="button" (click)="onRemoveRR(i)"><i class="zmdi zmdi-delete"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="full-box relative" *ngIf="work_experience.company_roles_and_resp?.length < 10">
+                        <input type="text" name="formCompany_new_rr" [(ngModel)]="work_experience.temp_roles_resp"
+                            [ngModelOptions]="{standalone: true}" placeholder="{{fixedTextHash['roles_resp'][currLan]}}"
+                            minlength="5" maxlength="300">
+                        <div class="absulute-btn block-title-2 padding-0 border-none">
+                            <button type="button" (click)="onAddRR()"><i class="zmdi zmdi-plus"></i>
+                                {{fixedTextHash['add'][currLan]}}
+
+                            </button>
+                        </div>
+                    </div>
+
+                    <div *ngIf="!work_experience.temp_roles_resp_valid"
+                        class="alert alert-danger alert-dismissible martop5" role="alert">
+                        {{fixedTextHash['limit_role_char'][currLan]}}
+                    </div>
+                    <span class="txt font-12"> {{fixedTextHash['limit_work_points'][currLan]}}</span>
+                    <div class="block-title-2 padding-0 border-none margin-top-10">
+                        <button type="button" class="arabic-right-left" (click)="onSaveWE(wrk_exp_index)">
+                            <i class="zmdi zmdi-floppy"></i> {{fixedTextHash['save'][currLan]}}
+                        </button>
+                        <button class="hidden"></button>
+                        <span class="span-button" (click)="onCancelWE(wrk_exp_index)">
+                            <i class="zmdi zmdi-close"></i>
+                            {{fixedTextHash['cancel'][currLan]}}
+                        </span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class=" clearfix"></div>
+</form>

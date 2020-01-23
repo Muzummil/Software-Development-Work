@@ -1,0 +1,44 @@
+<ion-header class="animated fadeIn no-shadow inner-tab">
+    <ion-navbar class="no-border" color="primary">
+      <ion-title>Edit Maintenance Request</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding>
+    <form #myForm="ngForm" [formGroup]="onRequest" (ngSubmit)="updateRequest()" class="list-form" margin-top>
+    <!-- <ion-item *ngIf="tenants==null">
+        <ion-label fixed>
+          Select User
+        </ion-label>
+        <ion-select  formControlName="User" placeholder="users" col-5 multiple="false" cancelText="Cancel" okText="OK">
+          <ion-option value={{userId}}>Self</ion-option>
+        </ion-select>
+      </ion-item> -->
+      <ion-item *ngIf="data!=null">
+        <ion-label fixed>
+          Select User
+        </ion-label>
+        <ion-select *ngFor="let item of data"  formControlName="User" placeholder="users" col-5 multiple="false" cancelText="Cancel" okText="OK">
+          <!-- <ion-option value={{userId}}>Self</ion-option> -->
+          <ion-option value={{item.id}}>{{item.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <p ion-text color="danger" class="has-error" *ngIf="onRequest.get('User').hasError('required') && myForm.submitted">please select user</p>
+      <ion-item>
+        <ion-label fixed>
+          <img src="../assets/icon/signup_1.png" width="30">
+        </ion-label>
+        <ion-input type="text" formControlName="Title" value={{requestData.title}}></ion-input>
+      </ion-item>
+      <p ion-text color="danger" class="has-error" *ngIf="onRequest.get('Title').hasError('required') && myForm.submitted">title required</p>
+      <ion-item>
+        <ion-label fixed>
+          <img src="../assets/icon/signup_1.png" width="30">
+        </ion-label>
+        <ion-textarea class="textarea" formControlName="Description" value={{requestData.description}}></ion-textarea>
+      </ion-item>
+      <p ion-text color="danger" class="has-error" *ngIf="onRequest.get('Description').hasError('required') && myForm.submitted">description required</p>
+      <button ion-button full type="submit" color="primary">Update Maintenance Request</button>
+    </form>
+  </ion-content>
+  

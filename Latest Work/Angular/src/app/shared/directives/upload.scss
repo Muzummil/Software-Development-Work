@@ -1,0 +1,15 @@
+@import '../../../styles/sass/base/_variables.scss';
+
+h1, h2, h3, h4, h5, span, label, a, button, p{
+  font-family: $primary-Fonts;
+}
+
+.arabic{
+    h1, h2, h3, h4, h5, span, label, a, button, p, input, .dark{
+    font-family: $arabic-primary-Fonts!important;
+  }
+}
+
+input{
+    height: $button-height!important;
+}

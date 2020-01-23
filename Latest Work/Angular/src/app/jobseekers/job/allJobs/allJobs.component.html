@@ -1,0 +1,304 @@
+<job-menu [activeFlag]="'all'"></job-menu>
+<!-- Banner -->
+<!-- ======================================================= -->
+
+<div class="sub-banner-ats">
+    <h1>{{fixedTextHash['build_a_career_of_your_choice'][currLan]}}</h1>
+</div>
+<!-- ======================================================= -->
+<section class="banner-atas" [class.arabic] = "accountService.isArabic()">
+    <div class="container search-ats">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 arabic-right-left">
+            <h2>{{fixedTextHash['search_jobs'][currLan]}}</h2>
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 arabic-right-left">
+            <form [formGroup]="form1">
+            <input type="text" placeholder="{{fixedTextHash['search_jobs_title'][currLan]}}"  [ngModel]="searchString"
+            name="search_string" formControlName="search_string" (keyup.enter)="onSearch()">
+            </form>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 arabic-right-left">
+            <button (click)="onSearch()" class="arabic-right-left">{{fixedTextHash['search'][currLan]}}</button>
+            <button class="advance-filter arabic-right-left" data-toggle="collapse" data-target="#demo">{{fixedTextHash['refine_search'][currLan]}}</button>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- ======================================================= -->
+<div class="container" [class.arabic] = "accountService.isArabic()">
+<div class="tab-content job-bloovo">
+<div role="tabpanel" class="tab-pane active load-data-js" id="all-jobs">
+
+
+   
+
+    <!--BODY-AREA-->
+    <div *ngIf="!showfilter" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+        <div class="col-lg-12 col-sm-12 col-xs-12 hidden-lg hidden-md hidden-sm border-5">
+            <div class="btn-group btn-input clearfix filter-drop-mobile-only">
+                <button type="button" class="btn btn-default dropdown-toggle form-control"
+                        data-toggle="dropdown">
+                    <span data-bind="label">{{(orderName$ | async)}}</span>&nbsp;
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <div class="arow-dropdown zmdi zmdi-caret-up"></div>
+                    <li><a class="cursor_pointer1" (click)="onSelectOrder('created_at',fixedTextHash['date_posted'][currLan])">{{fixedTextHash['date_posted'][currLan]}}</a></li>
+                    <li *ngIf="!(isPublic$ | async)">
+                        <a class="cursor_pointer1" (click)="onSelectOrder('matching_percentage',fixedTextHash['matching_percentage'][currLan])">{{fixedTextHash['matching_percentage'][currLan]}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class=" row main-alert" id="alert-open" *ngIf="showHelpFlag">
+            <div class="row">
+                <div class="pull-left  arabic-right-left"><h4>{{fixedTextHash['help_job_title'][currLan]}}</h4></div>
+                <div (click)="getToggleHelp()" class="pull-right  arabic-left-right" id="alert-close"><i
+                        class="zmdi zmdi-close-circle navy"></i></div>
+                <div class=" clearfix"></div>
+            </div>
+            <p>{{fixedTextHash['help_job_desc'][currLan]}}</p>
+        </div>
+
+ 
+
+
+
+        
+        <div class="row block filter-jobs bottom-gap box-shadow-none border-top ">
+
+        <!--Sortby-->
+        <!-- ======================================================================================================================= -->
+            <div class="row sortby-jobs hidden-xs">
+
+                <div class="col-lg-6 col-sm-6 col-xs-12  arabic-right-left">
+                <h1 class="padding-top-10"> {{(matchingJobs$ | async) | number}}
+                    <span class="light">
+                        {{(isPublic$ | async) ? fixedTextHash['all_jobs'][currLan] : fixedTextHash['matched_jobs'][currLan]}}
+                    </span>
+                </h1>
+                </div>
+
+                <div class="col-lg-6 col-sm-6  col-xs-12 drop-jobs arabic-left-right">
+                    <div class="sort-drop">
+                        <div class="click-dropdown-sort">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="btn-group btn-input clearfix">
+                                        <button type="button" class="btn btn-default dropdown-toggle form-control"
+                                                data-toggle="dropdown">
+                                            <span data-bind="label">{{(orderName$ | async)}}</span>&nbsp;<span
+                                                class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <div class="arow-dropdown zmdi zmdi-caret-up"></div>
+                                            <li><a class="cursor_pointer1" (click)="onSelectOrder('created_at',fixedTextHash['date_posted'][currLan])">{{fixedTextHash['date_posted'][currLan]}}</a></li>
+                                            <li *ngIf="!(isPublic$ | async)">
+                                                <a class="cursor_pointer1"
+                                                   (click)="onSelectOrder('matching_percentage',fixedTextHash['matching_percentage'][currLan])">
+                                                    {{fixedTextHash['matching_percentage'][currLan]}}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="srt-feture">{{fixedTextHash['sort'][currLan]}}:</span>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        <!-- ======================================================================================================================= -->
+
+       
+
+        <!--SEARCH TAGS-->
+        <search-tag-module *ngIf="(searchTags$ |async )!= null"
+                            [search_tagsObs]="searchTags$"
+                            [url]="accountService.getCurrLangUrl()+accountService.getPath()+'/jobs'"
+                            [titleObs]="title$"
+                            [loctitleObs]="loctitle$">
+        </search-tag-module>
+        <!-- ======================================================================================================================= -->
+
+         <!-- Advance Filter  -->
+        <!-- ======================================================================================================================= -->
+        <div id="demo" class="collapse advancefilter">
+                <!--Filter-->
+                <div *ngIf="!showfilter" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 refine-serch arabic-right-left ">
+                    <div class="block bottom-gap">
+                        <div class="row">
+                            <h2>{{fixedTextHash['refine_search'][currLan]}}</h2>
+                        </div>
+                        <filter1-area-job [page]="accountService.getCurrLangUrl()+accountService.getPath()+'/jobs'"> </filter1-area-job>
+                    </div>
+                </div>
+            </div>
+        <!-- ======================================================================================================================= -->
+
+        
+        
+            <!--ALL LISTING-->
+
+            <div class="row empty-min2">
+
+                <div class="empty-prf border-5-top" *ngIf="(showSpinner$ | async)">
+                    <spinner [visible]="(showSpinner$ | async)"></spinner>
+                </div>
+                <div *ngIf="!(showSpinner$ | async) && (jobList$ | async)?.length ==0"  class="row empty-min2">
+
+                    <div class="empty-prf ">
+                        <i class="icon-empty-nojobs"></i>
+                        <h5>{{fixedTextHash['no_jobs'][currLan]}}</h5>
+                    </div>
+                </div>
+
+                <span  *ngIf="!(showSpinner$ | async)">
+                    <div class="row"  *ngFor="let selJob of (jobList$ | async),let jobcount =index;">
+                        <!-- desktop -->
+                        <div class="featured-box joblisting list-height">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                                <!-- picture -->
+                                <div *ngIf="!selJob?.branch?.avatar"  class="atsCompany">
+                                      <img  src="/assets/images/custom-images/logo2.svg" alt="avatar">
+                                </div>
+                                <span *ngIf="selJob?.branch?.avatar"  class="atsCompany">
+                                    <img [src]="selJob?.branch?.avatar">
+                                </span>
+
+                                <div [class.feturd-compny-dtls]="!(isPublic$ | async)" [class.feturd-compny-dtls2]="(isPublic$ | async)" class="arabic-right-left">
+                                    <div class="txt-white"><a class="cursor_pointer1" [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/'+accountService.getSpaceToDashLowerCase(selJob.countryCountry)+'/jobs/'
+                                    +accountService.getSpaceToDashLowerCase(selJob.city)+'/'+accountService.getSpaceToDashLowerCase(selJob.sector)+'/'+accountService.getSpaceToDashLowerCase(selJob.title)+'-'+selJob.id]">{{selJob.title}}</a></div>
+                                    <div *ngIf="selJob?.branch?.name" class="cmpny-txt"><strong>{{selJob?.branch?.name}}</strong></div>
+                                    <div *ngIf="!selJob?.branch?.name" class="cmpny-txt"><strong>{{selJob?.companyObj?.name}}</strong></div>
+                                    <div class="cmpny-txt">{{selJob.city}}{{fixedTextHash['comma'][currLan]}} {{selJob.countryCountry}}</div>
+                                    <div class="cmpny-txt"> <span>{{selJob.sector}}</span>&nbsp;<span class="arabic-right-left sp-arabic-sm">{{fixedTextHash['sector_word_in_job_list'][currLan]}}&nbsp;</span></div>
+                                    <div class="cmpny-txt">{{fixedTextHash['job_posted_on'][currLan]}} {{ accountService.getFormattedDate(selJob.createdDate, 'MMM DD, YYYY')}}</div>
+                                    <button class="btViewApply" *ngIf="!(isPublic$ | async)" [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/'+accountService.getSpaceToDashLowerCase(selJob.countryCountry)+'/jobs/'
+                                    +accountService.getSpaceToDashLowerCase(selJob.city)+'/'+accountService.getSpaceToDashLowerCase(selJob.sector)+'/'+accountService.getSpaceToDashLowerCase(selJob.title)+'-'+selJob.id]">{{fixedTextHash['view_and_apply'][currLan]}}</button>
+                                </div>
+
+                                <!-- Sallary Range -->
+                                <div class="new-salary-range hidden-sm hide">
+                                    <div class="salary-range-box" *ngIf="selJob.salaryTo != 0">
+                                        <strong>{{selJob.salaryFrom | number}} - {{selJob.salaryTo | number}}</strong>
+                                        <span>{{fixedTextHash['salary_level'][currLan]}} ({{fixedTextHash[accountService.getCurrency()][currLan]}})</span>
+                                    </div>
+                                    <div class="salary-range-box" *ngIf="selJob.salaryTo == 0">
+                                        <span class="salary-not-av">{{fixedTextHash['no_salary'][currLan]}}</span>
+                                    </div>
+                                </div>
+
+                                <!-- Probability -->
+                                <div class="new-probability hidden-sm arabic-right-left" *ngIf="!(isPublic$ | async)">
+                                    <!-- circle -->
+                                    <div class="prop-spin" *ngIf="showAnimate[jobcount] && showAnimate[jobcount]['spinner'] == true">
+                                        <img src="/assets/images/balls.svg">
+                                    </div>
+                                    <div class="{{'circle'+jobcount}} circle" [class.hide]="(!showAnimate[jobcount] || !showAnimate[jobcount]['show'])">
+                                        <strong></strong>
+                                        <span>{{fixedTextHash['probability_success'][currLan]}}</span>
+                                    </div>
+                                    <!-- calculate -->
+                                    <div class="calculate-propability"  *ngIf="!showAnimate[jobcount]">
+                                        <span>{{fixedTextHash['check_success'][currLan]}} </span>
+                                        <button class="calculate-bt" (click)="showAnimation('.circle'+jobcount,selJob.id,jobcount);showAnimate[jobcount]={show:true,spinner:true}">
+                                            {{fixedTextHash['calculate'][currLan]}}
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="feturd-matching-percentage">
+                                    <div  *ngIf="(isPublic$ | async)" class="tooltip-x">
+                                        <!--Tool Tip-->
+                                        <button class="apply-bt" [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/'+accountService.getSpaceToDashLowerCase(selJob.countryCountry)+'/jobs/'
+                                        +accountService.getSpaceToDashLowerCase(selJob.city)+'/'+accountService.getSpaceToDashLowerCase(selJob.sector)+'/'+accountService.getSpaceToDashLowerCase(selJob.title)+'-'+selJob.id]">
+                                            {{fixedTextHash['view_and_apply'][currLan]}}
+                                        </button>
+                                    </div>
+                                    <div *ngIf="!(isPublic$ | async)" >
+                                        <!--Tool Tip-->
+                                        <animate-cicle *ngIf="selJob.matchingPercent"
+                                                    [textVal]="fixedTextHash['matching_percentage'][currLan]"
+                                                    [val]="selJob.matchingPercent">
+                                        </animate-cicle>
+                                    </div>
+                                </div>
+
+
+                                <!-- Probability smart screen -->
+                                <div class="col-xs-12 col-sm-6 border-top hidden-md hidden-lg hidden-xs" >
+                                    <div class="col-xs-6 col-sm-6 hide">
+                                        <div class="salary-range-box-moboile" *ngIf="selJob.salaryTo != 0">
+                                            <strong>{{selJob.salaryFrom | number}} - {{selJob.salaryTo | number}}</strong>
+                                            <span>{{fixedTextHash['salary_level'][currLan]}} ({{fixedTextHash[accountService.getCurrency()][currLan]}})</span>
+                                        </div>
+                                        <div class="salary-range-box" *ngIf="selJob.salaryTo == 0">
+                                        <span class="salary-not-av">{{fixedTextHash['no_salary'][currLan]}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 border-left probability-mob" *ngIf="!(isPublic$ | async)">
+
+                                        <!-- circle -->
+                                        <div class="prop-spin" *ngIf="showAnimate[jobcount] && showAnimate[jobcount]['spinner'] == true">
+                                        <img src="/assets/images/balls.svg">
+                                        </div>
+
+                                        <div class="{{'circle'+jobcount}} circle" [class.hide]="(!showAnimate[jobcount] || !showAnimate[jobcount]['show'])">
+                                            <strong></strong>
+                                            <span>{{fixedTextHash['probability_success'][currLan]}}</span>
+                                        </div>
+                                        <!-- calculate -->
+                                        <div class="calculate-propability-mobile"  *ngIf="!showAnimate[jobcount]">
+                                            <span>{{fixedTextHash['check_success'][currLan]}} </span>
+                                            <button class="calculate-bt"
+                                                    (click)="showAnimation('.circle'+jobcount,selJob.id,jobcount);showAnimate[jobcount]={show:true,spinner:true}">
+                                                {{fixedTextHash['calculate'][currLan]}}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class=" clearfix"></div>
+                            </div>
+
+                            <div class=" clearfix"></div>
+                        </div>
+                    </div>
+                </span>
+
+            </div>
+        </div>
+
+        <pagination-new  [url]="urlPath" [totalRecords]="totalRecords$"></pagination-new>
+    </div>
+
+    <div *ngIf="showfilter" class="col-lg-12 refine-serch">
+        <div class="block bottom-gap">
+            <div class="row block-title-2">
+                <h2 class="padding-top-10">{{fixedTextHash['refine_search'][currLan]}}</h2>
+                <a (click)="getToggleFilter()">
+                    <button>
+                        <span>
+                            <i class="zmdi zmdi-arrow-left"></i>
+                        </span>
+                        <span class="hide">{{fixedTextHash['back'][currLan]}}</span>
+                    </button>
+                </a>
+            </div>
+            <filter1-area-job [page]="accountService.getCurrLangUrl()+accountService.getPath()+'/jobs'"></filter1-area-job>
+        </div>
+    </div>
+    
+
+</div>
+</div>
+
+</div>

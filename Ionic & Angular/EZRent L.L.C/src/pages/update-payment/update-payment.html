@@ -1,0 +1,53 @@
+
+<ion-header class="animated fadeIn no-shadow">
+
+  <ion-navbar class="no-border" color="primary">
+    <ion-title>
+      Update Payment Account Info
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="common-bg payments-account">
+  <h5>Update Account</h5>
+  <form #myForm="ngForm" [formGroup]="onPropertySetupForm" (ngSubmit)="PropertyInfo()" class="list-form" margin-top>
+    <ion-item>
+      <ion-label fixed>
+        <img src="../assets/icon/signup_1.png" width="30">
+      </ion-label>
+      <ion-input type="text" formControlName="FirstName" placeholder="{{data[0]['first_name']}}"></ion-input>
+    </ion-item>
+    <p ion-text color="danger" class="has-error" *ngIf="onPropertySetupForm.get('FirstName').hasError('required') && myForm.submitted">firstname required</p>
+    <ion-item>
+      <ion-label fixed>
+        <img src="../assets/icon/signup_1.png" width="30">
+      </ion-label>
+      <ion-input type="text" formControlName="LastName" placeholder="{{data[0]['last_name']}}"></ion-input>
+    </ion-item>
+    <p ion-text color="danger" class="has-error" *ngIf="onPropertySetupForm.get('LastName').hasError('required') && myForm.submitted">lastname required</p>
+    <ion-item>
+      <ion-label fixed>
+        <img src="../assets/icon/signup_3.png" width="30">
+      </ion-label>
+      <ion-input type="text" formControlName="Email" placeholder="{{data[0]['email']}}"></ion-input>
+    </ion-item>
+    <p ion-text color="danger" class="has-error" *ngIf="onPropertySetupForm.get('Email').hasError('required') && myForm.submitted">email required</p>
+    <!-- <ion-item>
+      <ion-label fixed>
+        <img src="../assets/icon/pass1.png" width="30">
+      </ion-label>
+      <ion-input type="text" formControlName="Type" placeholder="Type"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>
+        <img src="../assets/icon/building_icon.png" width="30">
+      </ion-label>
+      <ion-input type="text" formControlName="Address" placeholder="Address"></ion-input>
+    </ion-item> -->
+    <button ion-button full type="submit" class="btn-fb signfb">Update Account</button>
+  </form>
+  <!-- <div class="btn-margin"> -->
+    <button ion-button full class="btn-fb signfb" (click)="skip()">Back To Payment</button>
+  <!-- </div> -->
+
+</ion-content>

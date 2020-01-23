@@ -1,0 +1,22 @@
+<div class=" main-tab">
+    <div class="container hidden-xs">
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" [class.active]="activeFlag == 'stats'?true:false">
+            <a [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/dashboard']">
+                {{fixedTextHash['my_statistics'][currLan]}}
+            </a>
+        </li>
+    </ul>
+</div>
+
+<!-- mobile -->
+<ul class="mobile-scroll-tab hidden-lg hidden-md hidden-sm" role="tablist">
+    <li role="presentation" [class.active]="activeFlag == 'stats'?true:false">
+            <a class="cursor_pointer1"
+               [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/dashboard']"
+               routerLinkActive="active" >
+            {{fixedTextHash['my_statistics'][currLan]}}
+        </a>
+    </li>
+</ul>
+</div>

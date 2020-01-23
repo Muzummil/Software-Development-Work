@@ -1,0 +1,84 @@
+
+<div [class.arabic] = "accountService.isArabic()">
+<!-- start add your skills -->
+<div class="col-lg-12 col-md-12 fal-add-skill-container">
+    <h4 [class.red-error]="error">{{fixedTextHash['add_top_five_skills'][currLan]}}</h4>
+    <div  class="fal-enter-skill arabic-right-left margin-btm-15" [class.border-none-skill-container]="skillList.length >= maxCount">
+        <input *ngIf="skillList.length >= maxCount" type="text" readonly placeholder="{{placeholder}}">
+        <auto-complete  *ngIf="skillList.length < maxCount" [selectOnType]="true"
+                        [returnEmpty]="true"
+                        [selectOneEnter]="true"
+                        [error]="getValidateUniqueSkill()"
+                        [clearFlag]="clearFlag"
+                        [recordType]="'Skill'"
+                        [initData]="[{text:  newSkill.name, id: ''}]"
+                        [showCaret]="false"
+                        (click)="getResetClearFlag()"
+                        (clearRecords)="setSkillName($event)"
+                        (changeRecords)="setSkillName($event)"
+                        [placeholder]="placeholder">
+        </auto-complete>
+    </div>
+    <div class="fal-select-skill-level arabic-right-left margin-btm-15">
+        <div class="bar-strip"></div>
+        <ul class="clicks">
+                <li>
+                    <span class="txt-beginner">{{fixedTextHash['beginner'][currLan]}}</span>
+                    <div class="radio radio-primary">
+                        <input id="fal-select-beginner-skill" type="radio" name="optradio" [checked]="newSkill?.level == 1" (click)="setSkillLevel(1)">
+                        <label for="fal-select-beginner-skill"></label>
+                    </div>
+                </li>
+                <li>
+                    <span class="txt-intermediate">{{fixedTextHash['intermediate'][currLan]}}</span>
+                    <div class="radio radio-primary">
+                        <input type="radio" id="fal-select-intermediate-skill" name="optradio" [checked]="newSkill?.level == '2'" (click)="setSkillLevel(2)">
+                        <label for="fal-select-intermediate-skill"></label>
+                    </div>
+                </li>
+                <li>
+                    <span class="txt-expert">{{fixedTextHash['expert'][currLan]}}</span>
+                    <div class="radio radio-primary">
+                        <input type="radio" id="fal-select-expert-skill" name="optradio" [checked]="newSkill?.level == 3" (click)="setSkillLevel(3)">
+                        <label for="fal-select-expert-skill"></label>
+                    </div>
+                </li>
+        </ul>
+    </div>
+    <div class="fal-btn-add-skill arabic-right-left margin-btm-15">
+        <a  (click)="addNewSkillName()" [class.disabled_button]="!newSkill.name || newSkill.name.length > validMaxSkillLength || skillList.length >= maxCount" class="fal-btn-primary cursor_pointer1">{{fixedTextHash['add_new_skill'][currLan]}}</a>
+    </div>
+</div>
+<!-- end add your skills -->
+
+<!-- start skill progress -->
+<div *ngFor="let selskill of (skillListObs | async),let sIndex = index" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left form-group">
+    <div class="fal-progress-col-left arabic-right-left">
+        <div class="skill-txt">
+            <div class="pull-left arabic-right-left">
+                <div class="light">{{selskill?.name}}</div>
+            </div>
+            <div class="pull-right arabic-left-right">
+                <div class="light navy" *ngIf="selskill?.level == 1">{{fixedTextHash['beginner'][currLan]}}</div>
+                <div class="light navy" *ngIf="selskill?.level == 2">{{fixedTextHash['intermediate'][currLan]}}</div>
+                <div class="light navy" *ngIf="selskill?.level == 3">{{fixedTextHash['expert'][currLan]}}</div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="skill-category">
+            <div class="skill-box">
+                <div class="beginner"></div>
+                <div class="intermediate"*ngIf="selskill?.level >= 2"></div>
+                <div class="expert"*ngIf="selskill?.level >= 3"></div>
+            </div>
+        </div>
+    </div>
+    <div class="fal-progress-col-right">
+        <a (click)="getRemoveSkill(sIndex)"><i class="zmdi zmdi-delete"></i></a>
+    </div>
+</div>
+<!-- end skill progress -->
+</div>
+
+
+

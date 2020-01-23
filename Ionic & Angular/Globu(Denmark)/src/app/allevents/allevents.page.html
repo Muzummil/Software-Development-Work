@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Alle begivenheder
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-searchbar showCancelButton cancelButtonText="Afbryd" mode="ios" placeholder="Søg efter en begivenhed"></ion-searchbar>
+
+    <ion-slides *ngIf="begivenheder" #mySlider (ionSlidesDidLoad)="slidesDidLoad()"  [options]="slideOpts" >      
+      <ion-slide  *ngFor="let item of begivenheder | async">
+
+        <ion-card routerLink="/detail/{{item?.id}}">
+          <div>
+            <div class="begivenhed__picture_overlay">
+            <img src="../../assets/img/queen-live.png" style="Height:340 px;  width:226 px;"/>
+            
+            </div>
+            <div class="begivenhed__titel"> {{ item?.titel }} </div>
+            <div class="begivenhed__subtitel"> {{ item?.subtitel }} </div>
+        
+          <ion-card-content text-wrap>
+            {{item?.Beskrivelse}}
+            <br>
+            <br><ion-icon name="ios-pin"></ion-icon>{{ item?.By}}
+          </ion-card-content>
+        </div>
+        </ion-card>
+        </ion-slide>
+    </ion-slides>
+
+</ion-content>

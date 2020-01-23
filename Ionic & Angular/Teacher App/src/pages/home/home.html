@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <!-- <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button> -->
+    <ion-title>
+      Welcome <strong>{{name}}</strong>
+    </ion-title>
+    <ion-buttons end>
+      <!-- <button ion-button tappable (click)="presentNotifications($event)">
+        <ion-icon name="notifications"></ion-icon>
+      </button> -->
+      <button ion-button tappable (click)="settingPage()">
+        <ion-icon name="cog"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <!-- <ion-fab right bottom>
+    <button ion-fab color="light"><ion-icon name="arrow-dropleft"></ion-icon></button>
+    <ion-fab-list side="left">
+      <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
+      <button ion-fab><ion-icon name="logo-twitter"></ion-icon></button>
+      <button ion-fab><ion-icon name="logo-vimeo"></ion-icon></button>
+      <button ion-fab><ion-icon name="logo-googleplus"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab> -->
+  <!-- <ion-spinner name="bubbles"></ion-spinner> -->
+  <ion-item padding>
+    <!-- <ion-select  (change)="onClassChange($event)" >
+      <ion-option value="1">emp</ion-option>
+      <ion-option *ngFor="let cd of classesData;" value={{cd.course_id}}>{{cd.course_name}}</ion-option> -->
+<!--       <ion-label>Class</ion-label> -->
+      <h2 >No Class Found For You</h2>
+      <ion-select [(ngModel)]="selectedClass" style="width:100%;max-width:100%;" (ionChange)="onClassChange();" placeholder="Select Class">
+        <ion-option value="{{item.course_id}},{{item.session_id}},{{item.batch_id}}" *ngFor="let item of classesData">
+          {{item.course_name}}
+        </ion-option>
+        <ion-option *ngIf="noClass" disabled>No Class Found For You</ion-option>
+      </ion-select>
+
+   
+  </ion-item>
+  <!-- <ion-item>
+    <ion-label>Subjects</ion-label>
+    <ion-select multiple="false" okText="Okay!">
+      <ion-option value="1">Test 01</ion-option>
+      <ion-option value="2">Test 02</ion-option>
+      <ion-option value="3">Test 03</ion-option>
+      </ion-select>
+  </ion-item> -->
+  <!-- <ion-item>
+    <ion-label>Subjects</ion-label>
+    <ion-select (change)="onSubjectChange($event)" multiple="true" cancelText="Nah" okText="Okay!">
+      <ion-option *ngFor="let cd of subjectsData;" value={{cd.subject_id}}>{{cd.subject_name}}</ion-option>
+      </ion-select>
+  </ion-item> -->
+
+<!--   <ion-item padding *ngIf="subjectPart">
+      <ion-label>Subject</ion-label>
+      
+      <ion-select [(ngModel)]="selectedSubject" (ionChange)="onSubjectChange();">
+        <ion-option value="{{item.subject_id}},{{item.batch_id}}" *ngFor="let item of subjectsData">{{item.subject_name}}</ion-option>
+      </ion-select>
+  </ion-item>
+ -->      
+
+<!--       <ion-select (change)="onSubjectChange($event)">
+        <ion-option></ion-option>
+        <ion-option *ngFor="let cd of subjectsData;" value={{cd.subject_id}},{{cd.batch_id}}>{{cd.subject_name}}</ion-option>
+      </ion-select> -->
+  <div text-center>
+   <button  ion-button (click)="goToAttendance()">Attendence</button>
+  </div>
+<!--   <button ion-button (click)="goToLogin()">Login</button>
+  <button ion-button (click)="logout()">Logout</button> -->
+</ion-content>

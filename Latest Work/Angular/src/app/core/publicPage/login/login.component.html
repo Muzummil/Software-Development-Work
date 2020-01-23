@@ -1,0 +1,126 @@
+<div class="bg-login" [class.arabic] = "accountService.isArabic()">
+    <div class="sign-page back-bg">
+            <div>
+
+                <div class="public-sign-in-both sign-in">
+                    <div class="sign new-user-sign-form">
+                        <h2 class="text-center">{{fixedTextHash['signin'][currLan]}}</h2>
+                        <form [formGroup]="form1">
+                        <div *ngIf="errorFlag && errorMode == 1" class="alert alert-danger alert-dismissible error-signin-e2e" role="alert">
+                            {{fixedTextHash['wrong_auth'][currLan]}}
+                        </div>
+                        <div *ngIf="errorFlag && errorMode == 2" class="alert alert-danger alert-dismissible error-signin-e2e" role="alert">
+                            {{fixedTextHash['inactive_account'][currLan]}}
+                        </div>
+                        <div *ngIf="errorFlag && errorMode == 3" class="alert alert-danger alert-dismissible error-signin-e2e" role="alert">
+                            {{fixedTextHash['invalid_email'][currLan]}}
+                        </div>
+                        <div *ngIf="errorFlag && errorMode == 4" class="alert alert-danger alert-dismissible error-signin-e2e" role="alert">
+                            {{fixedTextHash['wrong_password'][currLan]}}
+                        </div>
+                        <div *ngIf="errorFlag && errorMode == 5" class="alert alert-danger alert-dismissible error-signin-e2e" role="alert">
+                            {{fixedTextHash['non_confirm'][currLan]}}
+                            <a [routerLink]="'/resend-confirmation'">{{fixedTextHash['click_here'][currLan]}}</a> {{fixedTextHash['resend_confirm'][currLan]}}
+                        </div>
+
+                        <div *ngIf="showErrorActivated" class="alert alert-danger alert-dismissible error-signin-e2e" role="alert">
+                            {{fixedTextHash['before_confirm'][currLan]}}
+                        </div>
+                        <div *ngIf="showSuccessActivated" class="comen-alert" role="alert">
+                            {{fixedTextHash['confirm_success'][currLan]}}
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="home-full">
+
+
+                                    <input type="text" formControlName="username" placeholder="{{fixedTextHash['email'][currLan]}}"
+                                           [class.error-feild]="(form1.controls['username'].touched || !(pristineFlag$ | async)) && form1.controls['username'].errors"
+                                           (keydown.enter)="loginUser()">
+
+                                    <div  *ngIf="(form1.controls['username'].touched || !(pristineFlag$ | async)) && form1.controls['username'].errors"
+                                          class="alert alert-danger margin-top-5 alert-dismissible" role="alert">
+                                        {{fixedTextHash['empty_email'][currLan]}}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="home-full">
+
+                                    <input  type="password" name="user_password" formControlName="user_password"
+                                            [class.error-feild]="(form1.controls['user_password'].touched || !(pristineFlag$ | async)) && form1.controls['user_password'].errors"
+                                            placeholder="{{fixedTextHash['password'][currLan]}}"
+                                            (keydown.enter)="loginUser()">
+                                    <div  *ngIf="(form1.controls['user_password'].touched || !(pristineFlag$ | async)) && form1.controls['user_password'].errors"  class="alert
+                                     alert-danger margin-top-5 alert-dismissible " role="alert">
+                                        {{fixedTextHash['empty_password'][currLan]}}
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="home-full2">
+                            <div class="requr clicks pull-left arabic-right-left">
+                                <input id="rememberme" class="css-checkbox" type="checkbox" name="rememberme"  formControlName="rememberme">
+                                <label class="css-label" for="rememberme">
+                                    <span>{{fixedTextHash['remember_me'][currLan]}}</span>
+                                </label>
+                            </div>
+                            <div class="pull-right arabic-left-right">
+                                <a [routerLink]="accountService.getCurrLangUrl()+'forgot-password'"> {{fixedTextHash['forget_password'][currLan]}}</a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="pop-button login-bt-margin">
+                            <button type="button" class="btn postive login-user-button-e2e" (click)="loginUser()">
+                                <i class="bt-spinner2 spinner-home-v3" *ngIf="postinProgress">
+                                    <img src="assets/images/balls.svg">
+                                </i>{{fixedTextHash['signin'][currLan]}}</button>
+                            <div class="clr"></div>
+                        </div>
+
+                        <span class="cancel-signin cursor_pointer1" [routerLink]="accountService.getCurrLangUrl()">{{fixedTextHash['cancel'][currLan]}}</span>
+
+                         </form>
+
+                         <div class="row">
+                            <div class="col-lg-12">
+                                <img src="/assets/images/divider-sign.svg" class="pull-left devider-login">
+                            </div>
+                        </div>
+                        <div class="signin-box">
+                            <div class="signp">
+                                <p>{{fixedTextHash['social_signin'][currLan]}}</p>
+                            </div>
+                            <div class="sign-v3 ats-bt-group">
+                                <button  type="button" class="link-v3" (click)="loginLinkedIn()">
+                                    <i class="zmdi zmdi-linkedin" *ngIf="!linkedinSpinner"></i>
+                                    <i class="bt-spinner2 spinner-home-v3" *ngIf="linkedinSpinner"><img src="assets/images/balls.svg"></i>
+                                    <span class="hide-sml-screen"> Linkedin</span>
+                                </button>
+                                <button  type="button" class="face-v3 " (click)="loginFacebook()">
+                                    <i class="zmdi zmdi-facebook-box" *ngIf="!facebookSpinner"></i>
+                                    <i class="bt-spinner2 spinner-home-v3" *ngIf="facebookSpinner"><img src="assets/images/balls.svg"></i>
+                                    <span class="hide-sml-screen"> Facebook</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-center">{{fixedTextHash['no_account'][currLan]}}
+                                <a class="cursor_pointer1" [routerLink]="accountService.getCurrLangUrl()+'signup-jobseeker'">{{fixedTextHash['signup'][currLan]}}</a>
+                            </h3>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+    </div>
+
+
+    
+</div>

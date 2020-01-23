@@ -1,0 +1,97 @@
+.arabic{
+  #most-profile .invt{
+    float: right;
+  }
+  .filter-jobs .featured-box .feturd-compny-dtls{
+    margin-left: inherit;
+  }
+  .emplyer-edit .employers-detail{
+  	float: right!important;
+  }
+  .half-box{
+  	margin-right: 1px!important;
+  	margin-left: inherit;
+  	float: right!important;
+  }
+  .emplyer-edit .employers-information .ab-box b{
+  	right:-23px;
+  	left: inherit;
+  }
+  .emplyer-edit .employers-information .ab-box{
+  	float: left!important;
+  }
+  .emplyer-edit .our-team .team-photo{
+  	float: right!important;
+  }
+  .emplyer-edit .our-team .team-details{
+  	float: right!important;
+  	margin-right: 10px;
+  	margin-left: inherit;
+  }
+  .emplyer-edit .our-team .col-lg-5{
+  	text-align: left;
+  }
+  .mobile_profile_strip h2{
+  	float: right;
+  }
+  .mobile_profile_strip button{
+  	float: left;
+  }
+  .mobile_profile_container .plus h4 span{
+  	float: right;
+  }
+  .mobile_profile_container .company_network_input{
+  	padding-right: 50px!important;
+  	padding-left: 0px!important;
+  }
+  .mobile_profile_container .date-ico{
+  	left: 15px;
+  	right: inherit;
+  	margin-top: -30px;
+  }
+  .mobile_profile_container .plus i{
+  	padding-left: 10px;
+  	padding-right: inherit;
+  }
+  .mobile_profile_container .plus h4 span{
+  	padding-right: 10px;
+  	padding-left: inherit;
+  }
+  .mobile_profile_container .each-team-mob button{
+  	float: left!important;
+  }
+  .employers-details .cover-back-change{
+  	right: 20px;
+  	left: inherit;
+  }
+  .dashboard-employer .total-applications .dash-navy{
+  	margin-right: 10px;
+  	margin-left: 0px;
+  }
+  .newlistpad{
+    width: 100%;
+  }
+}
+
+
+/*---------------------------------------------------2-------------------------------------------------------*/
+@media (min-width: 768px) and (max-width: 1024px){
+  .arabic .employers-details .display .social-media{
+      text-align:right!important;
+    }
+    .arabic .mobile-broadcast{
+      text-align: right;
+    }
+}
+
+/*---------------------------------------------------2-------------------------------------------------------*/
+@media (min-width: 768px) and (max-width: 990px){
+    .arabic .employers-details .display .social-media{
+      text-align:right!important;
+    }
+    .arabic .broadcast-bt-blink{
+      left: inherit!important;
+      top: -41px;
+    }
+}
+

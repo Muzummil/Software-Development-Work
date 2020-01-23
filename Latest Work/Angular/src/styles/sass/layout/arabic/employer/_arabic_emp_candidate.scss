@@ -1,0 +1,70 @@
+.arabic{
+
+	.matching-candidates{
+		.block .block-title-2 span{
+			display: inline-block;
+			float: none!important;
+		}
+    .block .block-title-2 .srt-feture {
+      float: left!important;
+    }
+
+	}
+
+	.Profile-tag{
+		float: right!important;
+	}
+	.last-seen-v5{
+		left: 20px;
+		right: inherit;
+	}
+	#followers{
+		.dp-rgt{
+			.social-media{
+				margin-left: 5px;
+			}
+		}
+	}
+	
+}
+
+
+
+
+// responsive
+
+/*---------------------------------------------------1-------------------------------------------------------*/
+@media (max-width: 1200px){
+	.arabic{
+
+	}
+}
+
+/*---------------------------------------------------2-------------------------------------------------------*/
+@media (min-width: 768px) and (max-width: 1024px){
+
+}
+
+/*---------------------------------------------------3-------------------------------------------------------*/
+@media (max-width: 767px) {
+	.arabic{
+		.jobapplicant .new-list .newlistleft .newlistdp-right .applicant-name-dt h2{
+			text-align: center;
+			width: 100%;
+		}
+		.jobapplicant .new-list .newlist-experience .exp-box{
+			height: 90px!important;
+		}
+		.bt-arabic-pdf{
+			width: 100%;
+		}
+	}
+}
+/*---------------------------------------------------4-------------------------------------------------------*/
+
+@media (max-width: 480px) {
+	.bt-arabic-pdf{
+		float: right;
+		width: 100%!important;
+	}
+}

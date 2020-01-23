@@ -1,0 +1,108 @@
+.arabic{
+  .blog .header-text h3 span{
+    float: right;
+  }
+  .blog .header-text h3 span i{
+    padding-left: 8px;
+    padding-right: inherit;
+  }
+  .blog_post_thumbnail{
+    float: right;
+  }
+  .blog_post_detail{
+    .social-media{
+      float: right;
+    }
+  }
+  .blog .like-comment span i{
+    padding-left:5px;
+    padding-right:inherit;
+  }
+  .blog .like-comment span{
+    padding-right: 0px;
+  }
+  .blog_post_thambnail_small{
+    float: right;
+  }
+  .blog_post_detail{
+    padding-right:10px;
+    padding-left:inherit;
+  }
+  .blog_sidebar .top_viewed span i{
+    padding-left:5px;
+    padding-right:inherit;
+  }
+  .blog_sidebar .tag-section ul li{
+    margin-left: 5px;
+    margin-right: inherit;
+  }
+  .left-blog-text{
+    float: right;
+    text-align: right;
+  }
+  .blog_detail h1{
+    float: none;
+  }
+  .blog_detail button{
+    margin: 10px 0px;
+  }
+  .blog-post-from{
+    float: right;
+  }
+  .blog_detail .blog_post_by{
+    float: right;
+    margin-right: 10px;
+    margin-left: inherit;
+  }
+  .blog_detail .blog_post_by span i{
+    margin-left: 5px;
+    margin-right: inherit;
+  }
+  .blog_detail .area .social-section{
+    float: left!important;
+  }
+  .blog_detail .download-coment-like .download i{
+        padding-left: 8px;
+        padding-right: inherit;
+  }
+  .blog_detail .download-coment-like .like-comment span i{
+        padding-left: 5px;
+        padding-right: inherit;
+  }
+  .blog_detail .area .user-coment{
+    float: right;
+  }
+  .commnet-feild{
+    margin-right: 10px;
+    margin-left: inherit;
+  }
+  .blog_detail .download-coment-like .like-comment span{
+        border-left: 1px solid #f1f1f1;
+        border-right:none;
+  }
+  .arabic .blog_detail .download-coment-like .download i{
+    padding-left:0px;
+  }
+  .blog_detail .area ul li .commnet-content span i{
+    padding-right: inherit;
+    padding-left: 5px;
+  }
+
+}
+
+
+
+
+
+
+/*---------------------------------------------------3-------------------------------------------------------*/
+@media (max-width: 767px) {
+  .arabic{
+    .right-blog-text{
+      a{
+        float: left;
+        margin-left: 10px;
+      }
+    }
+  }
+}

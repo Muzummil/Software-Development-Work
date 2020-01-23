@@ -1,0 +1,1056 @@
+@import '../../../../styles/sass/base/_variables.scss';
+
+h1, h2, h3, h4, h5, h6, span, p, a{
+	margin:0px;
+	font-family: $primary-Fonts;
+}
+
+.arabic{
+	h1, h2, h3, h4, h5, h6, span, p, a, button, .req-dark, .applicants-txt {
+		margin:0px;
+		font-family: $arabic-primary-Fonts!important;
+	}
+}
+
+
+
+
+select {
+    width: 100%;
+    border: solid 1px $boredr-color;
+    color: $text-normal-color !important;
+    height: $form-height!important;
+    padding: 0px 10px;
+    margin-bottom: 10px;
+    font-size: 14px !important;
+    line-height: $button-height!important;
+    border-radius: $border-radius!important;
+    background-color:$form-bg!important;
+}
+
+.cvFolderSystem{
+    padding: 30px 10px;
+    min-height: 700px;
+    .headerFolder{
+        h2{
+            font-weight: 500;
+            font-size: $medium-size;
+            text-align: left;
+            color: $tertiarycolor;
+            display: block;
+            width: calc(100% - 430px);
+            float: left;
+            i{
+                display: inline;
+                padding: 0px 5px;
+            }
+            span{
+                color: $primarycolor;
+
+            }
+        }
+        .searchFolder{
+            float: left;
+            position: relative;
+            width: 430px;
+            input, select {
+                width: 100%;
+                border: solid 1px $boredr-color;
+                color: $text-normal-color !important;
+                height: $form-height!important;
+                padding: 0px 10px;
+                margin-bottom: 10px;
+                font-size: 14px !important;
+                line-height: $button-height!important;
+                border-radius: $border-radius!important;
+                background-color:$form-bg!important;
+            }
+            @-webkit-keyframes autofill {
+                to {
+                    color: $primary-font;
+                    background: transparent;
+                }
+            }
+
+            input:-webkit-autofill {
+                -webkit-animation-name: autofill;
+                -webkit-animation-fill-mode: both;
+            }
+            button{
+                height: $button-height;
+                line-height: $button-height;
+                text-align: center;
+                color: $white;
+                background-color: $primarycolor;
+                border-radius: $border-radius;
+                width: $button-height;
+                position: absolute;
+                right: 0px;
+                top: 0px;
+                border:none;
+                &:hover{
+                    background-color: $secondarycolor;
+                    cursor: pointer;
+                }
+            }
+        }
+
+    }
+    // addNewFolderSelect
+    .addNewFolderSelect{
+        width: 100%;
+        float: left;
+        border-bottom: 1px solid $tertiarycolor;
+        padding-bottom: 20px;
+        margin-bottom: 30px;
+        // addnew utton
+        .addnew{
+            width: 180px;
+            border:1px solid $light-border;
+            color: $primarycolor;
+            font-size: $normal-font;
+            font-weight: 600;
+            height: $button-height;
+            line-height: $button-height;
+            display: block;
+            text-align: center;
+            float: right;
+            border-radius: $border-radius;
+            &:hover{
+                background-color: $primarycolor;
+                color: $white;
+            }
+        }
+        // action araea
+        .actionSelect{
+            width: calc(100% - 180px);
+            float: left;
+            // dropdown actions
+            .dropdown-toggle{
+                border:1px solid $light-border!important;
+                border-radius: $border-radius!important;
+                text-align: left;
+            }
+            .form-check{
+                width: 130px;
+                float: right;
+                padding-left: 10px;
+                .form-check-input{
+                    float: left;
+                    width: 15px;
+                    margin: 0px;
+                }
+                .form-check-label{
+                    line-height: $button-height;
+                    padding-left: 10px;
+                    font-weight: 500;
+                    color: $primarycolor;
+                }
+            }
+        }
+
+    }
+}
+
+// Checkbox
+.radio {
+   display: block;
+   position: relative;
+   padding-left: 30px;
+   cursor: pointer;
+   font-size: $small-font;
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+   font-weight: 500;
+   margin-bottom:0px;
+}
+
+/* Hide the browser's default radio button */
+.radio input {
+   position: absolute;
+   opacity: 0;
+   cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkround {
+   position: absolute;
+   top: 0px;
+   left: 0;
+   height: 20px;
+   width: 20px;
+   background-color: #fff ;
+   border-color:$primarycolor;
+   border-style:solid;
+   border-width:2px;
+   border-radius: 50%;
+}
+
+.searchFolder{
+    width: 100%;
+}
+/* When the radio button is checked, add a blue background */
+.radio input:checked ~ .checkround {
+   background-color: #fff;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkround:after {
+   content: "";
+   position: absolute;
+   display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.radio input:checked ~ .checkround:after {
+   display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.radio .checkround:after {
+   left: 2px;
+   top: 2px;
+   width: 12px;
+   height: 12px;
+   border-radius: 50%;
+   background:$primarycolor;
+}
+
+
+
+.noSubfolder2{
+    button{
+        display: none;
+    }
+    padding-left: 0px !important;
+    width: 95.5%!important;
+}
+.noSubfolder1{
+    button{
+        display: none;
+    }
+    padding-left: 0px !important;
+    width: 100%!important;
+}
+.noSubfolder3{
+    button{
+        display: none;
+    }
+    padding-left: 0px !important;
+    width: 100%!important;
+}
+
+
+.listFoldereach{
+    width: 100%;
+    float: left;
+    padding: 20px 0px;
+
+
+    // step2
+    // ===========================/
+    .folderStep2{
+        margin-left: 20px;
+        width: calc(100% - 20px)!important;
+        display: block;
+        float: left;
+        .list-one-one{
+            border-top: 1px solid $light-border;
+            padding: 20px 0px;
+            width: 100%;
+            float: left;
+            .nameLabelFolder{
+                width: calc(100% - 340px);
+                padding-left:45px;
+                float: left;
+                position: relative;
+                button{
+                    width: 33px;
+                    height: 33px;
+                    border-radius: 160px;
+                    text-align: center;
+                    border:1px solid $light-border;
+                    position: absolute;
+                    color: $secondarycolor;
+                    left: 0px;
+                    font-size: 20px;
+                }
+                span{
+                    font-size: $normal-font;
+                    font-weight: 400;
+                    color: $primarycolor;
+                    text-align: left;
+                    padding-top: 10px;
+                    float: left;
+                    display: inline-block;
+                    max-width: 80%;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+                // icon
+                .iconlistfolder{
+                    display: inline-block;
+                    width: 50px;
+                    height: 40px;
+                    border-radius: 3px;
+                    background-color: $tertiarycolor;
+                    position: relative;
+                    margin-right: 15px;
+                    float: left;
+                    .tip-top{
+                        display: block;
+                        position: absolute;
+                        width: 20px;
+                        height: 10px;
+                        background: $secondarycolor;
+                        top: -4px;
+                        left: 0px;
+                        border-radius: 3px;
+                    }
+                    .baseline{
+                        display: block;
+                        position: absolute;
+                        width: 100%;
+                        height: 9px;
+                        background: $secondarycolor;
+                        top: 0px;
+                        left: 0px;
+                    }
+                }
+            }
+            .actionlist{
+                    width: 340px;
+                    float: left;
+                    .action-buttons{
+                        float: right;
+                        li{
+                            display: inline-block;
+                            text-align: center;
+                            width: $button-height;
+                            height: $button-height;
+                            line-height: $button-height;
+                            color: $primarycolor;
+                            border: 1px solid $light-border;
+                            border-radius: $border-radius;
+                            i{
+                                font-size: 16px;
+                                color: $primarycolor;
+                            }
+                        }
+                    }
+            }
+
+        }
+
+    }
+
+      // step3
+    // ===========================/
+    .folderStep3{
+        margin-left: 30px;
+        width: calc(100% - 30px)!important;
+        width: 100%;
+        float: left;
+        .list-one-one{
+            border-top: 1px solid $light-border;
+            padding: 20px 0px;
+            width: 100%;
+            float: left;
+            .nameLabelFolder{
+                width: calc(100% - 340px);
+                padding-left:45px;
+                float: left;
+                position: relative;
+                button{
+                    width: 33px;
+                    height: 33px;
+                    border-radius: 160px;
+                    text-align: center;
+                    border:1px solid $light-border;
+                    position: absolute;
+                    color: $secondarycolor;
+                    left: 0px;
+                    font-size: 20px;
+                }
+                span{
+                    font-size: $normal-font;
+                    font-weight: 400;
+                    color: $primarycolor;
+                    text-align: left;
+                    padding-top: 10px;
+                    float: left;
+                    display: inline-block;
+                    max-width: 80%;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+                // icon
+                .iconlistfolder{
+                    display: inline-block;
+                    width: 50px;
+                    height: 40px;
+                    border-radius: 3px;
+                    background-color: $tertiarycolor;
+                    position: relative;
+                    margin-right: 15px;
+                    float: left;
+                    .tip-top{
+                        display: block;
+                        position: absolute;
+                        width: 20px;
+                        height: 10px;
+                        background: $secondarycolor;
+                        top: -4px;
+                        left: 0px;
+                        border-radius: 3px;
+                    }
+                    .baseline{
+                        display: block;
+                        position: absolute;
+                        width: 100%;
+                        height: 9px;
+                        background: $secondarycolor;
+                        top: 0px;
+                        left: 0px;
+                    }
+                }
+            }
+            .actionlist{
+                    width: 340px;
+                    float: left;
+                    .action-buttons{
+                        float: right;
+                        li{
+                            display: inline-block;
+                            text-align: center;
+                            width: $button-height;
+                            height: $button-height;
+                            line-height: $button-height;
+                            color: $primarycolor;
+                            border: 1px solid $light-border;
+                            border-radius: $border-radius;
+                            i{
+                                font-size: 16px;
+                                color: $primarycolor;
+                            }
+                        }
+                    }
+            }
+        }
+    }
+
+      // step1
+    // ===========================/
+    .folderStep1{
+        display: block;
+        width: 100%;
+        float: left;
+
+        .list-one-one{
+            border-top: 1px solid $light-border;
+            padding: 20px 0px;
+            width: 100%;
+            float: left;
+            .nameLabelFolder{
+                width: calc(100% - 340px);
+                padding-left:45px;
+                float: left;
+                position: relative;
+                button{
+                    width: 33px;
+                    height: 33px;
+                    border-radius: 160px;
+                    text-align: center;
+                    border:1px solid $light-border;
+                    position: absolute;
+                    color: $secondarycolor;
+                    left: 0px;
+                    font-size: 20px;
+                }
+                span{
+                    font-size: $normal-font;
+                    font-weight: 400;
+                    color: $primarycolor;
+                    text-align: left;
+                    padding-top: 10px;
+                    float: left;
+                    display: inline-block;
+                    max-width: 80%;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+                // icon
+                .iconlistfolder{
+                    display: inline-block;
+                    width: 50px;
+                    height: 40px;
+                    border-radius: 3px;
+                    background-color: $tertiarycolor;
+                    position: relative;
+                    margin-right: 15px;
+                    float: left;
+                    .tip-top{
+                        display: block;
+                        position: absolute;
+                        width: 20px;
+                        height: 10px;
+                        background: $secondarycolor;
+                        top: -4px;
+                        left: 0px;
+                        border-radius: 3px;
+                    }
+                    .baseline{
+                        display: block;
+                        position: absolute;
+                        width: 100%;
+                        height: 9px;
+                        background: $secondarycolor;
+                        top: 0px;
+                        left: 0px;
+                    }
+                }
+            }
+            .actionlist{
+                    width: 340px;
+                    float: left;
+                    .action-buttons{
+                        float: right;
+                        li{
+                            display: inline-block;
+                            text-align: center;
+                            width: $button-height;
+                            height: $button-height;
+                            line-height: $button-height;
+                            color: $primarycolor;
+                            border: 1px solid $light-border;
+                            border-radius: $border-radius;
+                            i{
+                                font-size: 16px;
+                                color: $primarycolor;
+                            }
+                        }
+                    }
+            }
+        }
+    }
+
+}
+
+
+
+// Candidate listing
+.new-list{
+    background-color:$white; margin-bottom: 5px; border-radius:$border-radius;
+    margin-bottom: 10px;
+    float: left; width: 100%;
+    .newlistleft{
+        width: 100%; float:left; border-radius:4px; -webkit-border-radius:4px; -moz-border-radius:4px;
+        overflow: hidden;  border: 1px solid #e3f1f7;
+        .newlistdp-left{ width:145px; height:170px; background:$bg-default; float:left; position:relative;
+            img{
+            width: 145px;
+            height: 170px;
+            object-fit: cover;
+            }
+            i{
+            text-align: center;
+            line-height: 170px;
+            font-size: 40px;
+            display: block;
+            color: $empty-icon-color;
+            }
+        }
+        .newlistdp-right{
+            width: calc(100% - 315px); float:left; padding:10px; padding-left:15px;
+            .applicant-name-dt{
+                width: 100%;
+                float: left;
+                h2{
+                    font-size:$font-20; color:$primarycolor; font-weight:normal; padding-bottom:8px;
+                    display: block;
+                    width: calc(100% - 50px);
+                    float: left;
+                    strong{
+                        font-weight: 600;
+                    }
+                }
+                ul{
+                    margin:0px;
+                    li{
+                        display: inline-block;
+                        width: 20px;
+                        height: 20px;
+                        background: $bg-default;
+                        border: solid 1px $light-border;
+                        text-align: center;
+                        border-radius:3px;
+                        border-radius:3px;
+                        border-radius:3px;
+                        float: right;
+                        margin-left: 5px;
+                        i{
+                        color: $primarycolor;
+                        }
+                    }
+                }
+            }
+
+            h4{
+                font-size:$small-font; color:$secondarycolor; margin:5px 0px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 80%;
+                font-weight: 400;
+                // display: inline-block;
+            }
+            .com-pos{
+                width: 100%;
+                padding:0px 5px;
+                float: left;
+                h4{
+                    i{
+                    display: inline-block;
+                    width: 20px;
+                    }
+                }
+            }
+
+            .oth-sec{
+                width: 100%;
+                padding:0px;
+                float: left;
+                margin-left: 5px;
+                h4{
+                    display: block;
+                    width: 100%;
+                    margin-right: 10px;
+                    padding:5px 0px;
+                    margin:0px;
+                    span{
+                        font-weight: normal;
+                        display: inline-block;
+                        width: 115px;
+                    }
+                    i{
+                        display: inline-block;
+                        width: 20px;
+                    }
+                }
+            }
+        }
+
+    }
+    .newlistright{
+        width:160px; height:170px; float:right; padding:20px;border: 1px solid #e3f1f7;border-radius:$border-radius; -webkit-border-radius:$border-radius; -moz-border-radius:$border-radius;
+        .newlist-percentage{
+            .matching-new-application{ margin-top:0px;width: 120px; height:auto!important; text-align:center;margin:0px auto; float:none!important;
+            canvas{ width:100px!important; height:100px!important; }
+            }
+            .circle{
+                span{ font-size:$x-small-font}
+                strong{
+                    height: 100px;width: 100px;
+                    border-radius:50%; left:28px; color:$primarycolor; padding-top:25px; font-size:$normal-font;
+                    position: absolute;
+                    top:0px;
+                    text-align: center;
+                    display: block;
+                }
+            }
+        }
+    }
+
+    .newlist-experience{
+        width:170px; float:right; padding:10px;
+        .exp-box{ background:$more-light-bg; border:solid 1px $light-border; margin-bottom: 8px; border-radius:$border-radius; text-align:center; padding:14px 0px;
+            h5{ color:$secondarycolor;font-size: $x-small-font; margin:3px 0px;}
+            h4{ color:$primarycolor; font-size: $small-font; font-weight:bold;margin:3px 0px;}
+        }
+    }
+    .action-list-candi{
+        border: 1px solid $light-border;
+        height: 40px;
+        width: 100%;
+        border-radius: $border-radius;
+        border-bottom: none;
+        .form-group{
+            margin-bottom: 0px;
+            float: left;
+            padding-left: 10px;
+            color: $primarycolor;
+        }
+        .form-check-input{
+            float: left;
+            width: 20px;
+            margin: 0px;
+        }
+        .form-check-label{
+            line-height: 40px;
+            margin-bottom: 0px;
+        }
+        .action-button-candi{
+            display: block;
+            float: right;
+            li{
+                border-left: 1px solid $light-border;
+                display: block;
+                width: 40px;
+                height: 40px;
+                float: left;
+                text-align: center;
+                line-height: 40px;
+                color: $primarycolor;
+                &:hover{
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+    // New style of the all listing page lable
+    .new-succes{
+        button{ background:#1ABC9C; color:$white; font-size: $x-small-font; border-radius:3px; border:none; padding:0 20px;}
+    }
+    .new-unsucces{
+        button{ background:#E74C3C; color:$white; font-size: $x-small-font; border-radius:3px; border:none; padding:0 20px;}
+    }
+    .new-reviewed{
+        button{ background:#3379bd!important; color:$white; font-size: $x-small-font; border-radius:3px; border:none; padding:0 20px;}
+    }
+    .new-shortlisted{
+        button{ background:#354A61; color:$white; font-size: $x-small-font; border-radius:3px; border:none; padding:0 20px;}
+    }
+    .new-applied{
+        button{ background:#ffdd91; color:$white; font-size: $x-small-font; border-radius:3px; border:none; padding:0 20px;}
+    }
+    .new-interview{
+        button{ background:#97aec6; color:$white; font-size: $x-small-font; border-radius:3px; border:none; padding:0 20px;}
+    }
+    .hide-bigscreens{ display:none }
+}
+
+
+
+
+
+
+
+
+
+// Modal
+// ===============================================
+.modal{
+    h5{
+        color: $primarycolor;
+        font-size: $big-font;
+        line-height: 50px;
+        i{
+            display: inline-block;
+            width: 50px;
+            height: 40px;
+            border-radius: 3px;
+            background-color: $tertiarycolor;
+            position: relative;
+            float: left;
+            margin-right: 15px;
+            .tip-top{
+                display: block;
+                position: absolute;
+                width: 20px;
+                height: 10px;
+                background: $secondarycolor;
+                top: -4px;
+                left: 0px;
+                border-radius: 3px;
+            }
+            .baseline{
+                display: block;
+                position: absolute;
+                width: 100%;
+                height: 9px;
+                background: $secondarycolor;
+                top: 0px;
+                left: 0px;
+            }
+        }
+    }
+    .modal-header, .modal-footer{
+        border:none;
+    }
+    .modal-content{
+        padding: 30px;
+    }
+    .modal-footer{
+        button{
+            height: $button-height;
+            color: $white;
+            background-color: $primarycolor;
+            border:none;
+            width: 120px;
+            font-size: $normal-font;
+            &:hover{
+                background-color: $secondarycolor;
+            }
+        }
+        .btn-secondary{
+            background-color: $secondarycolor;
+            &:hover{
+                background-color: $primarycolor;
+            }
+        }
+    }
+    h6{
+        color: $primarycolor;
+        font-size: $normal-font;
+        display: block;
+        padding: 20px 0px;
+    }
+
+
+    // selectUserSection
+    .selectUserSection{
+        padding: 20px 0px;
+        .to{
+            width: 30px;
+            float: left;
+            font-size:$normal-font;
+            color: $primarycolor;
+            line-height: $button-height;
+        }
+        .selectUser{
+            width: calc(100% - 30px);
+            float: left;
+        }
+    }
+
+}
+
+
+
+
+
+
+// arabic
+// ==================================================
+.arabic{
+    .headerFolder{
+        .searchFolder{
+            button{
+                left: 0px;
+                right: inherit;
+            }
+        }
+    }
+    h2{
+        text-align: right!important;
+    }
+    .dropdown-toggle{
+        text-align: right!important;
+    }
+    .form-check-label{
+        float: left;
+    }
+    .click-dropdown-sort{
+        float: left;
+    }
+    .form-check{
+        float: left!important;
+    }
+    .to{
+        float: left;
+    }
+    .listFoldereach .actionlist ul{
+        float: left;
+    }
+    .listFoldereach .nameLabelFolder button{
+        right: 0px;
+        left: inherit;
+    }
+    .listFoldereach .nameLabelFolder .iconlistfolder{
+        float: right;
+    }
+    .listFoldereach .nameLabelFolder{
+        padding-right: 45px;
+        padding-left: inherit;
+    }
+    .listFoldereach .nameLabelFolder span{
+        text-align: right;
+        float: right;
+    }
+    .listFoldereach .nameLabelFolder .iconlistfolder{
+        margin-left: 15px;
+        margin-right: 0px;
+    }
+    .sublist-step-1{
+        margin-left: 0px;
+        margin-right: 60px;
+    }
+    .sublist-step-2{
+        margin-left: 0px;
+        margin-right: 90px;
+    }
+}
+
+.deleteFolderModel{
+    h2{
+        font-size: $big-font;
+        display: block;
+        text-align: center;
+        color: $primarycolor;
+        margin-bottom: 30px!important;
+    }
+    h3{
+        font-size: $normal-font;
+        display: block;
+        text-align: center;
+        color: $secondarycolor;
+    }
+    .iconlistfolder{
+        margin-top: 40px;
+        display: block;
+        width: 50px;
+        height: 40px;
+        border-radius: 3px;
+        background-color: $tertiarycolor;
+        position: relative;
+        margin-right: 15px;
+        margin:10px auto;
+        .tip-top{
+            display: block;
+            position: absolute;
+            width: 20px;
+            height: 10px;
+            background: $secondarycolor;
+            top: -4px;
+            left: 0px;
+            border-radius: 3px;
+        }
+        .baseline{
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 9px;
+            background: $secondarycolor;
+            top: 0px;
+            left: 0px;
+        }
+    }
+}
+.btGroup{
+    width: 250px;
+    margin: 0px auto;
+}
+
+
+
+/* Respopnsive breakpoint */
+// ============bigScreen===========
+@media all and (max-width: 991px) {
+
+}
+
+// ============MediumScreen========
+@media all and (max-width: 768px) {
+    .cvFolderSystem{
+        .headerFolder{
+            h2{
+                width: 100%;
+                text-align: center;
+                padding-bottom:10px;
+            }
+            .searchFolder{
+                width: 100%;
+            }
+            .addNewFolderSelect{
+                .addnew{
+                    width: 100%;
+                    margin-bottom: 10px;
+                }
+                .actionSelect{
+                    width: 100%;
+                    .form-check{
+                        float: left;
+                    }
+                }
+            }
+        }
+    }
+    .listFoldereach .nameLabelFolder{
+        width: 100%;
+    }
+    .listFoldereach .actionlist ul{
+        float: left;
+        margin-top: 10px;
+    }
+    .sublist-step-1{
+        margin-left: 30px;
+        width: 93%;
+    }
+
+    .sublist-step-2{
+        margin-left: 60px;
+        width: 86%;
+    }
+
+    .newlist-experience{
+        width: 100%!important;
+    }
+    .exp-box{
+        width: 50%;
+        float: left;
+    }
+    .newlistdp-right{
+        width: calc(100% - 145px)!important;
+    }
+    .listFoldereach .folderStep1 .nameLabelFolder{
+        width: 100%!important;
+    }
+    .listFoldereach .folderStep1 .actionlist .action-buttons{
+        float: left!important;
+    }
+
+    // arabic
+    // ===============
+    .arabic{
+        h2{
+            text-align: center!important;
+        }
+    }
+    .action-buttons{
+        float: left!important;
+        margin-top: 10px;
+        margin-left: 44px;
+    }
+
+
+}
+
+// ============SmallScreen=========
+@media all and (max-width: 480px) {
+    .newlistdp-right{
+        width: 100%!important;
+    }
+    .newlistdp-left{
+        width: 95px!important;
+        height: 95px!important;
+        margin-top: 15px;
+        margin-left: 15px;
+        img{
+            width: 95px!important;
+            height: 95px!important;
+            object-fit: cover;
+        }
+    }
+    .new-list .action-list-candi .action-button-candi li{
+        border:1px solid $light-border;
+    }
+    .new-list .action-list-candi .form-check-label{
+        display: none;
+    }
+
+}

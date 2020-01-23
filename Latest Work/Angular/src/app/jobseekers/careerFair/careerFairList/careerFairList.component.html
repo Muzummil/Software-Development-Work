@@ -1,0 +1,125 @@
+<div class="container-fluid career-fair" [class.arabic]="accountService.isArabic()">
+    <div class="container">
+        <h2>{{fixedTextHash['career_fairs'][currLan]}}</h2>
+        <div id="careerCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#careerCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#careerCarousel" data-slide-to="1"></li>
+                <li data-target="#careerCarousel" data-slide-to="2"></li>
+                <li data-target="#careerCarousel" data-slide-to="3"></li>
+                <li data-target="#careerCarousel" data-slide-to="4"></li>
+                <li data-target="#careerCarousel" data-slide-to="5"></li>
+                <li data-target="#careerCarousel" data-slide-to="6"></li>
+            </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="../../../../assets/images/custom-images/ATS/career-fair-one.jpg" alt="">
+                </div>
+
+                <div class="item">
+                    <img src="../../../../assets/images/custom-images/ATS/career-fair-two.jpg" alt="">
+                </div>
+
+                <div class="item">
+                    <img src="../../../../assets/images/custom-images/ATS/career-fair-three.jpg" alt="">
+                </div>
+
+                <div class="item">
+                    <img src="../../../../assets/images/custom-images/ATS/career-fair-four.jpg" alt="">
+                </div>
+
+                <div class="item">
+                    <img src="../../../../assets/images/custom-images/ATS/career-fair-five.jpg" alt="">
+                </div>
+
+                <div class="item">
+                    <img src="../../../../assets/images/custom-images/ATS/career-fair-six.jpg" alt="">
+                </div>
+
+                <div class="item">
+                    <img src="../../../../assets/images/custom-images/ATS/career-fair-seven.jpg" alt="">
+                </div>
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#careerCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#careerCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <p>{{fixedTextHash['career_fair_one'][currLan]}}</p>
+        <p>{{fixedTextHash['career_fair_two'][currLan]}}</p>
+        <p>{{fixedTextHash['career_fair_three'][currLan]}}</p>
+        <p>{{fixedTextHash['career_fair_four'][currLan]}}</p>
+    </div>
+
+
+    <div class="container upcoming-event">
+        <h2>{{fixedTextHash['upcoming_events'][currLan]}}</h2>
+        <div>
+            <spinner *ngIf="showSpinner" [visible]="true"></spinner>
+
+            <!-- empty career list -->
+            <div *ngIf="careerFairList.length == 0 && !showSpinner">
+                <div class="empty-prf career-empty">
+                    <div>
+                        <i class="icon-empty-user"></i>
+                        <h5>{{fixedTextHash['no_upcoming_events'][currLan]}}</h5>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAIR lIST -->
+
+            <ng-container *ngIf="careerFairList.length > 0 && !showSpinner">
+                <div *ngFor="let selCareerFair of careerFairList" class="col-md-12">
+                    <div class="career-fair-loop">
+                        <!-- LOGO OF CAREER FARE -->
+                        <div class="box-career-logo arabic-right-left" [routerLink]="accountService.getCurrLangUrl()+accountService.getPath()+'career-fairs/'+ accountService.getSpaceToDashLowerCase(selCareerFair.title)+'-'+selCareerFair.id">
+                            <img *ngIf="selCareerFair?.logo_image" src="{{selCareerFair?.logo_image}}">
+                            <i *ngIf="!selCareerFair?.logo_image" class="zmdi zmdi-image-o"></i>
+                        </div>
+                        <!-- CODE OF CAREER FARE MOBILE ONLY-->
+                        <div class="box-career-code hidden-lg hidden-sm hidden-md arabic-left-right">
+                            <qr-code [url]="accountService.getCurrLangUrl()+'career-fairs/'+ accountService.getSpaceToDashLowerCase(selCareerFair.title)+'-'+selCareerFair.id">
+                            </qr-code>
+                        </div>
+                        <!-- DETAILS OF CAREER FARE -->
+                        <div class="box-career-details arabic-right-left" [routerLink]="accountService.getCurrLangUrl()+accountService.getPath()+'/career-fairs/'+ accountService.getSpaceToDashLowerCase(selCareerFair.title)+'-'+selCareerFair.id">
+                            <ul>
+                                <li><strong>{{selCareerFair?.title}}</strong></li>
+                                <li>{{selCareerFair?.city?.name}}</li>
+                                <li>{{selCareerFair?.country?.name}}</li>
+                                <li>{{selCareerFair?.address}}</li>
+                                <li *ngIf="selCareerFair?.gender == 'any'">{{fixedTextHash['for_both_males_and_females'][currLan]}}</li>
+                                <li *ngIf="selCareerFair?.gender == 'male'">{{fixedTextHash['for_males'][currLan]}}</li>
+                                <li *ngIf="selCareerFair?.gender == 'female'">{{fixedTextHash['for_females'][currLan]}}</li>
+                                <li>{{fixedTextHash['start_date'][currLan]}}: {{accountService.getFormattedDate(selCareerFair?.from, 'MMM DD, YYYY')}} | {{fixedTextHash['end_date'][currLan]}}: {{accountService.getFormattedDate(selCareerFair?.to, 'MMM DD, YYYY')}}</li>
+                                <li>Url: {{ getPageUrl() + accountService.getCurrLangUrl()+accountService.getPath()+'career-fairs/'+ accountService.getSpaceToDashLowerCase(selCareerFair.title)+'-'+selCareerFair.id}}</li>
+                            </ul>
+                        </div>
+                        <!-- CODE OF CAREER FARE DESKTOP ONLY-->
+                        <div class="box-career-code hidden-xs arabic-right-left">
+                            <qr-code [url]="accountService.getCurrLangUrl()+'career-fairs/'+ accountService.getSpaceToDashLowerCase(selCareerFair.title)+'-'+selCareerFair.id">
+                            </qr-code>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </ng-container>
+
+
+            <!-- PAGINATION -->
+            <div class="col-md-12">
+                <pagination-new [url]="accountService.getCurrLangUrl()+accountService.getPath()+'career-fairs'" [totalRecords]="totalRecords$"></pagination-new>
+            </div>
+
+        </div>
+    </div>
+</div>

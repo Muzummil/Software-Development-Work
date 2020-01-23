@@ -1,0 +1,189 @@
+@import '../../../styles/sass/base/_variables.scss';
+
+h1, h2, h3, h4, h5, span, label, a, button, p{
+  font-family: $primary-Fonts;
+}
+
+.arabic{
+    h1, h2, h3, h4, h5, span, label, a, button, p, input{
+    font-family: $arabic-primary-Fonts!important;
+  }
+}
+
+.block{
+  border:1px solid $light-border;
+ 
+}
+
+.nav-tabs > li{
+  width: 100%;
+  color:$dark-color!important;
+  margin-bottom:-3px;
+  border-left:none;
+}
+.nav-tabs > li > a{
+  border: none;
+  color:$primarycolor;
+  margin-right: 0px;
+  padding: 15px 0px;
+  text-align: center
+}
+.nav > li > a:hover,
+.nav > li > a:focus {
+  background-color:$button-primary;
+  color:$bg;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
+  border:none ;
+  background:$button-primary;
+  color:$bg;
+}
+
+.nav-tabs > li > a{
+  border-radius:0px
+}
+
+.big-button-edit{
+  width: 100%;
+  text-align: center;
+  height: $button-height;
+  line-height: $button-height;
+  border: solid 1px $boredr-color;
+  color: $primarycolor;
+  border-radius: $border-radius;
+}
+
+.big-button-edit:hover{
+  background:$primarycolor;
+  color:$white
+}
+
+.cv-rgt{
+  float: right;
+  width:80px;
+  .follow-following{
+      width:100%;
+      float: right;
+  }
+}
+
+.cv-file{
+  .msg-following{
+      height: 25px!important;
+      line-height: 25px!important;
+  }
+  .msg-unfollow{
+      height: 25px!important;
+      line-height: 25px!important;
+  }
+  .msg-follow{
+      height: 25px!important;
+      line-height: 25px!important;
+  }
+}
+
+.follow-following{ 
+  width: 110px; 
+  display: inline-block;
+  float: right;
+  margin-left: 5px;
+
+  i{line-height:normal!important}
+  button{ 
+      border: none; width: 100%; 
+      background: none;
+      padding: 0px;
+  }
+
+  button .msg-follow,
+  button .msg-following,
+  button .msg-unfollow{
+      display: none;
+      font-size:$x-small-font;
+  }
+  button .msg-follow{
+      display: block; 
+      background:$bg; 
+      height: $button-height; line-height: $button-height;
+      border: solid $boredr-color 1px; 
+      color:$primarycolor;
+      font-size: $x-small-font;
+      width:100%;  
+      border-radius: $border-radius;
+  }
+  button.following .msg-follow{
+      display: none; 
+      background:$primarycolor; 
+      height: $button-height; line-height: $button-height;
+      border: solid $primarycolor 1px; 
+      color:$white;
+      width:100%;
+      border-radius: $border-radius;
+  }
+  button.following .msg-following{
+      display: block; 
+      background:$primarycolor; 
+      height: $button-height; line-height: $button-height;
+      border: solid $primarycolor 1px; 
+      color:$bg; width:100%;
+      border-radius: $border-radius;
+  }
+
+  button.following:not(.wait):hover .msg-following{
+      display: none;
+  }
+
+  button.following:not(.wait):hover .msg-unfollow{
+      display: block;
+      background:$bg; 
+      height: $button-height; line-height: $button-height;
+      border: solid  $boredr-color 1px; 
+      color:$primarycolor; 
+      width:100%;
+      border-radius: $border-radius;
+  }
+
+}
+
+.percentage-btn{
+
+  .btn1{
+      width: calc(100% - 170px)!important;
+      float:left;
+      margin-bottom: 5px;
+  }
+  .btn2{
+      width: 80px;
+      background:$primarycolor;
+      color:$bg;
+      border:none;
+      height:  $button-height;
+      margin-left:5px;
+      text-align: center;
+      line-height: $button-height;
+      float:right;
+      border-radius: $border-radius;
+  }
+  .btn2:hover{
+      background:$secondarycolor;
+  }
+  .btn3{
+      width: 80px;
+      background:$bg;
+      color: $primarycolor;
+      border: solid 1px $boredr-color;
+      height: $button-height;
+      margin-left:5px;
+      text-align: center;
+      line-height:$button-height;
+      float:right;
+      border-radius: $border-radius;
+  }
+  .btn3:hover{
+      background:$primarycolor;
+      color:$bg;
+      border: solid 1px $primarycolor;
+
+  }
+
+}

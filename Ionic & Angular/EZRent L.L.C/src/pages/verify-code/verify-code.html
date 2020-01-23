@@ -1,0 +1,36 @@
+<ion-header class="animated fadeIn no-shadow">
+
+  <ion-navbar class="no-border" color="primary" hideBackButton="true">
+    <ion-title>
+      Enter Verification Code
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="common-bg animated verify_code">
+  <div class="login-content fadeIn">
+    <!-- Logo -->
+    <div padding-horizontal text-center class="animated fadeInDown">
+      <div class="logo-for">
+        <img src="../assets/img/logo.png" width="100%" height="auto">
+      </div>
+    </div>
+  </div>
+
+  <h5>Please enter the verification code that was sent to you via text message</h5>
+  <form [formGroup]="onVerifyCode" (ngSubmit)="onVerify()" class="list-form" margin-top>
+    <ion-item>
+      <ion-label fixed>
+        <img src="../assets/icon/signup_4.png" width="30">
+      </ion-label>
+      <ion-input type="number" formControlName="Number" placeholder="Enter Verification Code"></ion-input>
+    </ion-item>
+    <p ion-text color="danger" class="text-1x has-error" *ngIf="message">{{ message }}</p>
+    <p ion-text color="danger" class="has-error" *ngIf="onVerifyCode.get('Number').touched && onVerifyCode.get('Number').hasError('required')">This field is required</p>
+
+    <ion-toolbar position="bottom">
+      <button ion-button full [disabled]="!onVerifyCode.valid">VERIFY</button>
+    </ion-toolbar>
+
+  </form>
+</ion-content>

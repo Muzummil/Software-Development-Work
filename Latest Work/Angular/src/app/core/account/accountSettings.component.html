@@ -1,0 +1,106 @@
+<div class="main-tab load-data-js"></div>
+<div class="container basic-height" [class.arabic] = "accountService.isArabic()">
+<div class="load-data-js">
+    <!-- all broadcast label-->
+    <!-- ========================================================= -->
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+        <div class="block settings ">
+            <div class="col-lg-12 col-md-12 col-sm-12 arabic-right-left">
+
+
+                <h2 class="mobile-padding ">{{fixedTextHash['account_settings'][currLan]}}</h2>
+                <spinner [visible]="loadingFlag1"></spinner>
+                <form  [formGroup]="form1">
+
+                    <div class="row min-height spacing">
+
+
+
+                        <div *ngIf="(postsuccessFlag$ | async) == true"   class="comen-alert">
+                            <i class="zmdi zmdi-check-circle"></i> {{fixedTextHash['password_change_success'][currLan]}}
+                        </div>
+
+
+
+                        <div *ngIf="failedPostFlag" class="alert alert-danger mar15">
+                            <div>{{errorMessage}}</div>
+                        </div>
+
+
+
+                        <div class="set">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 bottom-gap"><span>{{fixedTextHash['password'][currLan]}}</span></div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 arabic-right-left">
+                                <p class="align-left margin-top-5">{{fixedTextHash['curr_password'][currLan]}}</p>
+                                <input type="password"
+                                       name="current_password" placeholder="xxxxxx" formControlName="current_password">
+
+                                <div *ngIf="(form1.controls['current_password'].touched || postFlag == true) && form1.controls['current_password'].errors"  class="alert martop15 alert-danger">
+                                    <div *ngIf="form1.controls['current_password'].errors.required">{{fixedTextHash['empty_curr_password'][currLan]}}</div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-4 col-sm-12 col-xs-12 arabic-right-left">
+                                <p class="align-left margin-top-5">{{fixedTextHash['new_password'][currLan]}}</p>
+                                <input type="password"
+                                       name="new_password"
+                                       placeholder="xxxxxx"
+                                       formControlName="new_password">
+
+
+                                <div *ngIf="(form1.controls['new_password'].touched || postFlag == true) && form1.controls['new_password'].errors">
+                                    <div *ngIf="form1.controls['new_password'].errors.required" class="alert martop15 alert-danger">
+                                        {{fixedTextHash['empty_new_password'][currLan]}}
+                                    </div>
+
+                                    <div *ngIf="!form1.controls['new_password'].errors.required && form1.controls['new_password'].errors.complexPass"
+                                         class="alert alert-danger mar15">
+                                        The new password min length must be {{
+                                        form1.controls['new_password'].errors.complexPass.minlength}}
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="col-md-4 col-sm-12 col-xs-12 arabic-right-left">
+                                   
+                                <div class="row"><p class="align-left margin-top-5">{{fixedTextHash['confirm_new_password'][currLan]}}</p></div>
+                                <input type="password"
+                                name="new_password2"
+                                formControlName="new_password2"
+                                placeholder="xxxxxx">
+
+                                <div *ngIf="(form1.controls['new_password2'].touched || postFlag == true)&& form1.controls['new_password2'].errors">
+                                        <div *ngIf="form1.controls['new_password2'].errors.required" class="alert martop15 alert-danger">
+                                            {{fixedTextHash['empty_confirm_password'][currLan]}}
+                                        </div>
+                                        <div *ngIf="!form1.controls['new_password2'].errors.required  && form1.controls['new_password2'].errors.passwordMissmatch"
+                                             class="alert martop15 alert-danger">{{fixedTextHash['miss_match_password'][currLan]}}
+                                        </div>
+                                    </div>
+    
+                            </div>
+                            
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 block-footer padding-top-0">
+                            <button (click)="onSubmitAccountSettings()" >{{fixedTextHash['save_changes'][currLan]}}</button>
+                        </div>
+
+                    </div>
+                </form>
+
+
+
+            </div>
+
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+</div>

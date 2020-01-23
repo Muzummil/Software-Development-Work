@@ -1,0 +1,73 @@
+page-register,
+.register {
+    .button-md, [ion-button][disabled]{
+        background: #0092d0;
+        opacity: 1 !important;
+        padding: 2.0rem;
+    }
+    .m-l.label-ios{padding: 5px 10px !important;}
+    .align-btm .text-input-md {
+        margin: 12px 8px;
+    }
+    .text-input-ios{margin: 10px 8px;}
+    .text-input-md{margin: 14px 8px;}
+    .align-btm .text-input-ios {
+        margin: 11px 8px;
+    }
+    .align-space .text-input-ios {
+        margin: 9px 8px;
+    }
+    .mobile-input .text-input {
+        padding-left: 5px !important;
+    }
+    .label-md{
+        margin: 6px 0;
+    }
+    .label-ios{
+        margin: 6px 0;
+        padding: 4px 10px !important;
+    }
+    ion-label{
+        text-align: center;
+    }
+    .toolbar-md-primary .toolbar-background-md {
+        background: #00a3e8;
+    }
+    .login-heading{
+        font-size: 40px;
+    }
+    .auth-page .scroll-content .login-content .logo{
+        margin: 70px auto 0;
+    }
+    //version2
+    ion-label[fixed]{
+        //min-width: 115px;
+        color: white !important;
+        min-width: 100px;
+        padding: 0px 10px 6px 10px;
+        border-radius: 5px 0 0 5px;
+        background: #fff;
+        border-bottom: 2px #e3e4e8 solid;
+    }
+    .item-input ion-input, .item-input ion-textarea{
+        border: 0px solid transparent;
+        margin-left: -9px;
+        border-radius: 0 5px 5px 0;
+        background: #fff;
+        border-bottom: 2px #e3e4e8 solid;
+    }
+    .item-ios.item-block .item-inner{
+        border-bottom: 0;
+    }
+    .item-md.item-block .item-inner{
+        border-bottom: 0;
+    }
+    .text-input-md, .text-input-md {
+        margin: 11px 8px;
+    }
+    .label-ios + ion-input .text-input, .label-ios + ion-textarea .text-input, .label-ios + .input + .cloned-input {
+        margin-left: 0px;
+        width: calc(100% - (16px / 2) - 16px);
+    }
+
+}

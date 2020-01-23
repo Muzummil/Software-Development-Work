@@ -1,0 +1,291 @@
+<div class="main-tab load-data-js mobile-tab-top"></div>
+<div class="tab-content job-bloovo">
+    <!--------------------------- All Jobs ---------------------------------->
+    <div *ngIf="!loadedData" class="empty-min2">
+        <i class="small_loading">
+            <spinner></spinner>
+        </i>
+    </div>
+
+    <div *ngIf="loadedData" class="container margin-top-space" [class.arabic]="accountService.isArabic()">
+
+
+        <!--candidates serches-->
+        <div class="common-block" *ngIf="showFilter == false">
+
+            <div class="candidates-search">
+                <div class="common-block clicks bottom-gap">
+                    <form [formGroup]="candidateNameForm">
+                        <div class="common-block candi-new-search">
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 arabic-right-left">
+                                <input type="text" formControlName="search_string"
+                                       (keydown)="searchOnEnter($event)"
+                                       [placeholder]="fixedTextHash['search_keywords'][currLan]"
+                                       name="search_string">
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12  block-footer padding-0 border-none arabic-right-left">
+                                <div class="candidate-button"
+                                     [routerLink]="accountService.getCurrLangUrl()+accountService.getPath()+'/candidate/list'"> {{fixedTextHash['reset'][currLan]}}  </div>
+                                <div class="advance-filter arabic-right-left cursor_pointer1" data-toggle="collapse"
+                                     data-target="#demo">{{fixedTextHash['refine_search'][currLan]}}</div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="common-block matching-candidates new-candidate-list-feature" *ngIf="showFilter == false">
+            <!-- advancefilter -->
+            <!-- ==================================== -->
+            <div id="demo" class="collapse advancefilter">
+                <div class="col-lg-12 col-md-12 col-sm-12 xol-xs-12 refine-serch filter-hide arabic-right-left">
+                    <div class="block bottom-gap">
+                        <div class="common-block block-title">
+                            <h2>{{fixedTextHash['filter'][currLan]}}</h2>
+                            <span data-toggle="collapse" data-target="#demo">{{fixedTextHash['close'][currLan]}}</span>
+                        </div>
+                        <!--FILTER-->
+                        <div class="common-block filter clicks">
+                            <div id="main">
+                                <filter-area-candidate [firstLoad]="firstLoad" [page]="accountService.getCurrLangUrl()+accountService.getPath()+'/candidate/list'">
+                                </filter-area-candidate>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--BODY-AREA-->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" [class.arabic]="accountService.isArabic()">
+                <!--FILTER-->
+                <div class="common-block block filter-jobs bottom-gap">
+                    <div class="common-block block-title-2 border-none">
+                        <div class="col-lg-6 col-sm-6 col-xs-12 arabic-right-left"
+                             *ngIf="(totalRecords$ | async) <= 1000">
+                            <h2 class="big-number"> {{(totalRecords$ | async) | number}}
+                            <span class="light">{{fixedTextHash['match_candidate'][currLan]}}</span></h2>
+                        </div>
+                        <div class="col-lg-6 col-sm-6 col-xs-12 arabic-right-left"
+                             *ngIf="(totalRecords$ | async) > 1000">
+                            <h2 class="big-number">1,000+
+                            <span class="light">{{fixedTextHash['match_candidate'][currLan]}}</span></h2>
+                        </div>
+                    </div>
+
+                    <!--SEARCH TAGS-->
+                    <search-tag-module *ngIf="(search_tags$ |async )!= null" [search_tagsObs]="search_tags$"
+                                       [url]="accountService.getCurrLangUrl()+accountService.getPath()+'/candidate/list'">
+                    </search-tag-module>
+
+                    <!--ALL LISTING-->
+                    <div class="common-block invite margin-top-space">
+                        <div class="common-block empty-min2 ">
+                            <!-- empty screen -->
+                            <div class="empty-prf" *ngIf="(showSpinner$ | async)">
+                                <spinner [visible]="(showSpinner$ | async)"></spinner>
+                            </div>
+
+                            <div *ngIf="!(showSpinner$ | async) && !emptyFilter && results?.hits?.length ==0"
+                                 class="common-block empty-min2">
+                                <div class="empty-prf ">
+                                    <i class="icon-empty-user"></i>
+                                    <h5>{{fixedTextHash['no_candidate'][currLan]}}</h5>
+                                </div>
+                            </div>
+
+                            <div *ngIf="!(showSpinner$ | async) && emptyFilter" class="common-block empty-min2">
+                                <div class="empty-prf ">
+                                    <i class="icon-empty-user"></i>
+                                    <h5>{{fixedTextHash['run_new_search'][currLan]}}</h5>
+                                </div>
+                            </div>
+
+                            <div *ngIf="!(showSpinner$ | async)">
+                                <div class="common-block" *ngFor="let selProfile  of (hits$ | async), let jscount = index">
+                                    <!-- New Design Candidate Search result -->
+                                    <div class="block newlistpad jobapp-btm-10  bg-none jobapplicant candidate-result-new">
+                                       
+
+                                        <!-- desktop-listing new -->
+                                        <!-- ==================================== -->
+                                        <div class=" block newlistpad listingFrame">
+                                        <div class="new-list">
+                                            <folder-tool-bar (updateTags)="getUpdateTags(jscount, $event)"  [candidateObj]="selProfile" [starRatingDone]="(selProfile?.average_rating)" [averageRating]="selProfile?.average_rating"></folder-tool-bar>
+                                            <div class="newlistleft arabic-right-left">
+                                                
+                                                <a target="_blank" [routerLink]="[getCandidateUrl(selProfile)]"
+                                                    [queryParams]="{search:search_string}">
+                                                     <div *ngIf="!selProfile?.avatar"
+                                                          class="newlistdp-left arabic-right-left"><i
+                                                             class="icon-profile"></i></div>
+                                                     <div class="newlistdp-left arabic-right-left"
+                                                          *ngIf="selProfile?.avatar">
+                                                         <img src="{{selProfile?.avatar}}">
+                                                     </div>
+                                                 </a>
+
+                                                 <div class="newlistdp-right arabic-right-left">
+                                                        <div class="applicant-name-dt">
+                                                            <a target="_blank" [routerLink]="[getCandidateUrl(selProfile)]"
+                                                               [queryParams]="{search:search_string}">
+                                                                <strong>
+                                                                    <h2 *ngIf="restricted_names">{{fixedTextHash['name_hidden'][currLan]}}</h2>
+                                                                    <h2 *ngIf="!restricted_names"
+                                                                        [innerHtml]="selProfile?._highlightResult?.first_name?.value+' '+selProfile?._highlightResult?.last_name?.value"></h2>
+                                                                </strong>
+                                                            </a>
+                                                        </div>
+                                                        <a [routerLink]="[getCandidateUrl(selProfile)]" target="_blank">
+                                                            <div class="com-pos">
+                                                                <h4 class="cmpny-txt"
+                                                                    *ngIf="selProfile?.current_experience?.position">
+                                                                    <div class="inline-block"
+                                                                         [innerHtml]="selProfile?._highlightResult?.current_experience?.position?.value"></div>
+                                                                </h4>
+                                                                <h4 class="cmpny-txt"
+                                                                    *ngIf="selProfile?.current_experience?.position">
+                                                                    <div class="inline-block"
+                                                                         [innerHtml]="selProfile?._highlightResult?.current_experience?.position?.value"></div>
+                                                                </h4>
+                                                                <h4 class="cmpny-txt"
+                                                                    *ngIf="!selProfile?.current_experience?.position && selProfile?.preferred_position">
+                                                                    <div class="inline-block"
+                                                                         [innerHtml]="selProfile?.preferred_position"></div>
+                                                                </h4>
+                                                                <h4 class="cmpny-txt"
+                                                                    *ngIf="!selProfile?.current_experience?.position && !selProfile?.preferred_position">
+                                                                    {{fixedTextHash['no_title'][currLan]}}
+                                                                </h4>
+                                                                <h4 *ngIf="selProfile?.current_experience?.company_name">
+                                                                    <b [innerHtml]="selProfile?._highlightResult?.current_experience?.company_name?.value"></b>
+                                                                </h4>
+                                                                <h4 *ngIf="!selProfile?.current_experience?.company_name">
+                                                                    <b>{{fixedTextHash['no_comp'][currLan]}}</b>
+                                                                </h4>
+                                                                <h4 *ngIf="selProfile?.city?.name && selProfile?.country?.name">
+                                                                    <div class="inline-block"
+                                                                         [innerHtml]="algoliaService.getCityName(selProfile?._highlightResult?.city?.name?.value)"></div>{{fixedTextHash['comma'][currLan]}}
+                                                                    <div class="inline-block"
+                                                                         [innerHtml]="algoliaService.getCountryName(selProfile?._highlightResult?.country?.name?.value)"></div>
+                                                                </h4>
+                                                                <h4 *ngIf="selProfile?.city?.name && !selProfile?.country?.name">
+                                                                    <div [innerHtml]="algoliaService.getCityName(selProfile?._highlightResult?.city?.name?.value)"></div>
+                                                                </h4>
+                                                                <h4 *ngIf="selProfile?.general_info?.sector?.name">
+                                                                    <div [innerHtml]="algoliaService.getSectorName(selProfile?.general_info?.sector?.name)"></div>
+                                                                </h4>
+                                                                <h4 *ngIf="selProfile?.last_active">{{fixedTextHash['last_seen'][currLan]}}:&nbsp;{{accountService.getFormattedDate(selProfile?.last_active, 'MMM DD, YYYY')}}</h4>
+                                                            </div>
+                                                        </a>
+                                                </div>
+
+                                        <!-- Skills New Listing -->
+                                        <!-- ======================== -->
+                                        <div *ngIf="selProfile?.skills && selProfile?.skills.length > 0" class="newlist-experience">
+                                            <b>{{fixedTextHash['skills'][currLan]}}</b>
+                                            <ul>
+                                                <li *ngFor="let selSkill of selProfile?.skills.slice(0, 3)">
+                                                    <span class="textskilAts">{{selSkill?.name}}</span>
+                                                    <span class="frameSkills">
+                                                        <b [class.bignnerAts]="selSkill?.level >=1"></b>
+                                                        <b [class.intermediateAts]="selSkill?.level >=2"></b>
+                                                        <b [class.expertAts]="selSkill?.level >=3"></b>
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        </div>
+                                   
+                                        <!-- statsnew -->
+                                        <!-- ==================================== -->
+                                        <div class="statsnew">
+                                            <div class="col-sm-6 col-xs-12" 
+                                            [ngClass]="{'col-lg-3 col-md-3': selProfile?.jobseeker_type!='coops' && selProfile?.jobseeker_type!='summer_training'
+                                            , 'col-lg-6 col-md-6': selProfile?.jobseeker_type=='coops' || selProfile?.jobseeker_type=='summer_training'}" >
+                                                <span>{{fixedTextHash['high_edu'][currLan]}}</span>
+                                                <b>{{selProfile?.job_education?.name}}</b>
+                                            </div>
+                                            <div *ngIf="selProfile?.jobseeker_type!='coops' && selProfile?.jobseeker_type!='summer_training'" class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                                <span>{{fixedTextHash['years_experience'][currLan]}}</span>
+                                                <b *ngIf="selProfile?.general_info?.total_years_experience == 1">{{selProfile?.general_info?.total_years_experience}} {{fixedTextHash['year'][currLan]}}</b>
+                                                <b *ngIf="selProfile?.general_info?.total_years_experience > 1">{{selProfile?.general_info?.total_years_experience}} {{fixedTextHash['years'][currLan]}}</b>
+                                                <b *ngIf="!selProfile?.general_info?.total_years_experience || selProfile?.general_info?.total_years_experience == 0">{{fixedTextHash['no_experience'][currLan]}}</b>
+                                            </div>
+                                            <div *ngIf="selProfile?.jobseeker_type!='coops' && selProfile?.jobseeker_type!='summer_training'" class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                                <span>{{fixedTextHash['salary_expectations'][currLan]}}</span>
+                                                <b *ngIf="selProfile?.general_info?.expected_salary">{{fixedTextHash[accountService.getCurrency()][currLan]}} {{selProfile?.general_info?.expected_salary | number}} / {{fixedTextHash['month'][currLan]}}</b>
+                                                <b *ngIf="!selProfile?.general_info?.expected_salary">{{fixedTextHash['negotiable'][currLan]}}</b>
+                                            </div>
+
+                                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 border-none" 
+                                            [ngClass]="{'col-lg-3 col-md-3': selProfile?.jobseeker_type!='coops' && selProfile?.jobseeker_type!='summer_training'
+                                            , 'col-lg-6 col-md-6': selProfile?.jobseeker_type=='coops' || selProfile?.jobseeker_type=='summer_training'}">
+                                                <span>{{fixedTextHash['nationality'][currLan]}}</span>
+                                                <b>{{selProfile?.nationality?.name}}</b>
+                                            </div>
+                                        </div>
+
+                                        <!-- tags -->
+                                        <!-- ==================================== -->
+                                        <div class="cvtag" *ngIf="selProfile?.hash_tags?.length > 0">
+                                            <ul>
+                                                <li *ngFor="let selTag of selProfile?.hash_tags">
+                                                    #{{selTag?.name}}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        </div>
+                                        </div>
+
+                                       
+                                        </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div *ngIf="(totalRecords$ | async) > 0">
+                    <pagination-new 
+                    [url]="accountService.getCurrLangUrl()+accountService.getPath()+'/candidate/list'"
+                    [totalRecords]="totalRecords$"></pagination-new>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Filter -->
+
+
+        <div *ngIf="showFilter" class="col-lg-12 refine-serch float-fix">
+            <div class="block bottom-gap">
+                <div class="common-block block-title-2">
+                    <h2 class="padding-top-10">{{fixedTextHash['search_by'][currLan]}}</h2>
+                    <a>
+                        <button (click)="showFilter = false"><span><i class="zmdi zmdi-arrow-left"></i></span><span
+                                class="hide">{{fixedTextHash['back'][currLan]}}</span></button>
+                    </a>
+                </div>
+            </div>
+            <!-- Filter -->
+            <div class="common-block" id="filter">
+                <div class="filter-mobile">
+                    <a>
+                        <button *ngIf="!showFilter"
+                                (click)="showFilter = true">{{fixedTextHash['filter'][currLan]}}</button>
+                        <button *ngIf="showFilter"
+                                (click)="showFilter = false">{{fixedTextHash['apply'][currLan]}}</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

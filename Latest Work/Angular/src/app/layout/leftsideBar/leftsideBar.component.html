@@ -1,0 +1,125 @@
+<!--Empty Bar Complete Profile-->
+<div class="main-menu"
+    *ngIf="(isAuthorized$ | async) && !isPublic && !accountService.getCheckEmployer() && !accountService.getProfileComplete() && !isInterviewPage">
+    <div class="side-menu">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="empty-menu-bar"></div>
+        </nav>
+    </div>
+</div>
+
+<div class="main-menu"
+    *ngIf="(isAuthorized$ | async) && !isPublic  && accountService.getProfileComplete() && !isInterviewPage">
+    <div class="side-menu">
+        <nav class="navbar navbar-default" role="navigation">
+
+
+            <!-- Employer -->
+            <div [class.employer-no-broadcast]="(isAuthorized$ | async) && accountService.getCheckEmployer()"
+                class="side-menu-container arabic" *ngIf="accountService.getCheckEmployer()">
+                <div class="container int-top-menu">
+                    <ul class="nav navbar-nav arabic-right-left" [class.slide-in]="navbarToggle">
+                        <li class="hint--right" [attr.aria-label]="fixedTextHash['dashboard'][currLan]">
+                            <a [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/dashboard']"
+                                (click)="getAuth();getLoaderBar('dashboard');toggleNavbar($event,'dashobard')">
+                                <i class="zmdi zmdi-equalizer"></i>
+                            </a>
+                        </li>
+                        <li class="hint--right" [attr.aria-label]="fixedTextHash['users'][currLan]">
+                            <a [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/profile']"
+                                (click)="getAuth();getLoaderBar('profile');toggleNavbar($event)">
+                                <i class="zmdi zmdi-accounts-outline"></i>
+                            </a>
+                        </li>
+                        <li class="hint--right" [attr.aria-label]="fixedTextHash['jobs'][currLan]">
+                            <a [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/jobs']"
+                                (click)="getAuth();getLoaderBar('jobs');toggleNavbar($event,'job')">
+                                <i class="icon-jobs-posted font-23 mob-font-23"></i>
+                            </a>
+                        </li>
+                        <li class="hint--right" [attr.aria-label]="fixedTextHash['candidates'][currLan]"
+                            *ngIf="accountService.getSearchJobSeekers()">
+                            <a [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+getCandidatePath()]"
+                                (click)="getAuth();getLoaderBar('candidate');toggleNavbar($event,'candidate')">
+                                <i class="icon-candidate"></i>
+                            </a>
+                        </li>
+                        <li *ngIf="showFoldering" class="hint--right"
+                            [attr.aria-label]="fixedTextHash['folders'][currLan]">
+                            <a [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/folders']"
+                                (click)="getAuth();getLoaderBar('folders');toggleNavbar($event,'folders')">
+                                <i class="zmdi zmdi-folder"></i>
+                            </a>
+                        </li>
+                        <li class="hint--right" [attr.aria-label]="fixedTextHash['settings'][currLan]">
+                            <a [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/settings']"
+                                (click)="getAuth();getLoaderBar('settings');toggleNavbar($event)">
+                                <i class="zmdi zmdi-settings"></i>
+                            </a>
+                        </li>
+                        <li class="hint--right" [attr.aria-label]="fixedTextHash['interviews'][currLan]">
+                            <a [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/interviews']"
+                                (click)="getAuth();getLoaderBar('interview');toggleNavbar($event)"><i
+                                    class="zmdi zmdi-accounts-alt"></i></a>
+                        </li>
+                        <li *ngIf="hasCareerFair" class="hint--right" [attr.aria-label]="fixedTextHash['career_fair'][currLan]">
+                            <a [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/career-fairs']"
+                                (click)="getAuth();getLoaderBar('career_fair');toggleNavbar($event)"><i
+                                    class="zmdi zmdi-graduation-cap"></i></a>
+                        </li>
+
+                        <li class="hint--right hidden-lg hidden-md hidden-sm logout-side"
+                            [attr.aria-label]="fixedTextHash['logout'][currLan]">
+                            <a class="cursor_pointer1" (click)="logout()"><i class="zmdi zmdi-power"></i></a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+
+
+
+            <!-- Job Seeker -->
+            <div class="side-menu-container arabic" *ngIf="!accountService.getCheckEmployer()">
+                <div class="container">
+                    <ul class="nav navbar-nav arabic-right-left " [class.slide-in]="navbarToggle">
+                        <li class="hint--right" [attr.aria-label]="fixedTextHash['profile_jobseeker'][currLan]"
+                            [class.menu_active]="(activeMenu == 'profile')?true:false">
+                            <a [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/profile']"
+                                (click)="getAuth();getLoaderBar('profile');toggleNavbar($event);">
+                                <i class="icon-profile"></i>
+                            </a>
+                        </li>
+                        <li class="hint--right" [attr.aria-label]="fixedTextHash['jobs'][currLan]"
+                            [class.menu_active]="(activeMenu == 'jobs')?true:false">
+                            <a [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/jobs']"
+                                (click)="getAuth();getLoaderBar('jobs');toggleNavbar($event,'jobs')">
+                                <i class="icon-jobs-posted font-23 mob-font-15"></i>
+                            </a>
+                        </li>
+                        <li class="hint--right" [attr.aria-label]="fixedTextHash['settings'][currLan]"
+                            [class.menu_active]="(activeMenu == 'settings')?true:false">
+                            <a [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/settings']"
+                                (click)="getAuth();getLoaderBar('settings');toggleNavbar($event,'settings')">
+                                <i class="zmdi zmdi-settings"></i>
+                            </a>
+                        </li>
+
+                        <li class="hint--right hidden-lg hidden-md logout-side"
+                            [attr.aria-label]="fixedTextHash['logout'][currLan]">
+                            <a class="cursor_pointer1" (click)="logout()">
+                                <i class="zmdi zmdi-power"></i>
+                            </a>
+                        </li>
+                        <li *ngIf="hasCareerFair" class="hint--right" [attr.aria-label]="fixedTextHash['career_fair'][currLan]">
+                            <a [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/career-fairs']"
+                                (click)="getAuth();getLoaderBar('career_fair');toggleNavbar($event)"><i
+                                    class="zmdi zmdi-graduation-cap"></i></a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+    </div>
+</div>

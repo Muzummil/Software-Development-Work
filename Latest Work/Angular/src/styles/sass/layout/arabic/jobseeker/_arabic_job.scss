@@ -1,0 +1,290 @@
+ .arabic{
+    font-family: $arabic-primary-Fonts!important;
+    .sort-drop{
+      float: left;
+      .click-dropdown-sort{
+        float: left;
+      }
+    }
+    .srt-feture{
+      float: left!important;
+      border-left:1px solid #e1e1e1;
+      border-right:0px!important;
+      padding-left: 10px;
+    }
+    .future-serch .search-box-job-seeker{
+      float: right;
+    }
+    .future-serch .future-serch-icon i{
+      float: right;
+    }
+    .future-serch .future-serch-icon input{
+      margin-left: 5px;
+      margin-right: inherit;
+    }
+    .career .block-title a{
+      float: left;
+    }
+    .icon-featured-serch{
+      //float: right;
+      text-align: right;
+    }
+    .icon-serch-float-right{
+      float: right;
+    }
+    .filter #accordion .panel-title > a.accordion-toggle::before, .filter #accordion a[data-toggle="collapse"]::before{
+      float: left!important;
+    }
+    .refine-serch .clicks input[type=checkbox].css-checkbox + label.css-label{
+      text-align: right;
+      width: 100%
+    }
+    .clicks input[type=checkbox].css-checkbox:checked + label.css-label{
+      background-position: right -15px;
+    }
+    .clicks input[type=checkbox].css-checkbox + label.css-label{
+      background-position: right 0px;
+      padding-right:25px;
+      padding-left:0px;
+      span{
+        margin-left: -15px;
+      }
+    }
+   .filter .filter-add i{
+    padding-left:12px;
+    padding-right:inherit;
+   }
+   .Profile-tag span i{
+    border-right: solid 1px #9ba5b0;
+    border-left: 0px;
+   }
+   .left-text-with-full{
+    float: right;
+    text-align: right!important;
+   }
+   .company-details .compny-logo{
+    float: right;
+   }
+   .maching-jobseeker-job-detail{
+    float: left;
+   }
+   .detail-jobseeker-job{
+    float: right;
+   }
+   .float-left-detail-only{
+    float: right;
+    margin-left: 5px;
+    margin-right: 0px;
+   }
+   .company-details .compny-details{
+    padding-right:10px;
+    padding-left:0px;
+   }
+   .requirement .req-1{
+      float: right;
+      padding-right: 10px;
+      padding-left: 0px;
+   }
+   .box-company{
+    float: right;
+   }
+   .similar-jobs .filter-jobs .featured-box .feturd-compny-dtls{
+      padding-right: 10px;
+      padding-left: 0px;
+      margin:0px;
+   }
+   .similar-jobs .filter-jobs .featured-box .feturd-compny-dtls .cmpny-txt i{
+    float: right;
+   }
+   .saved-searches .select-all{
+    float: left;
+   }
+   .savedjob_title, .savedjob_title_part{
+    text-align: right;
+    padding-right:0px;
+   }
+   .job_mobile .job_details{
+    float: right;
+   }
+   .application-detail-t-myjob{
+      text-align: right;
+   }
+   .application-tracking-t-myjob-icons{
+        border-left: solid 1px #f1f1f1;
+   }
+   .my-job-mobile .cmpny-txt i{
+    float: right;
+   }
+   .my-job-mobile .cmpny-txt span{
+      float: right!important;
+   }
+   .my-job .tracking .track{
+    float: right;
+   }
+   .active-label2{
+    float: right;
+   }
+   .veiw-secton2 .col-lg-3{
+      border-left: solid 1px #badcfd;
+      border-right: 0px;
+   }
+   .benefits .benafit-box{
+    float: right;
+   }
+   .margin-lft-10{
+    margin-right: 10px;
+    margin-left: 0px;
+   }
+   .filter .fltr-check label strong{
+    display: inline-block;
+   }
+   .filter-jobs .featured-box .feturd-compny-dtls{
+     float: right!important;
+     margin-left: 0px!important;
+   }
+   .maching-jobseeker-job-detail .circle{
+    width: 100%;
+   }
+
+   .similar-jobs .scroll{
+      height: 497px;
+   }
+   .similar-jobs .filter-jobs .featured-box .feturd-compny-dtls .cmpny-txt span{
+    margin:0px;
+    line-height: inherit;
+    text-align: right;
+    float: right;
+   }
+   .company-details .compny-details .job-socail{width: 54%; border:none;}
+   #interview-list-all .int-candi-detail ul li strong{
+    //  font-family: $arabic-primary-Fonts!important;
+   }
+   .expired-label2{
+    float: right;
+   }
+   .new-probability .calculate-propability{
+    padding-left: 10px;
+    padding-right: inherit;
+   }
+   .applied{
+    padding-left: 5px;
+    padding-right: 0px;
+   }
+
+   .arabic .saved-searches .select-all{
+     padding-right: 10px;
+   }
+   .footer-bt-group{
+    width: 792px;
+    button{
+      width: 390px;
+    }
+   }
+   .small-cards .card-credit .overlay-s{
+     right:0px;
+   }
+   .recipt-credits .bill-credit .bold{
+    font-family: 'Noto Kufi Arabic'!important;
+   }
+ }
+
+
+
+// responsive
+/*---------------------------------------------------1-------------------------------------------------------*/
+@media (max-width: 1200px){
+
+}
+
+ @media (min-width: 768px) and (max-width: 990px){
+   .arabic .broadcast-bt-blink{
+     width: auto!important;
+     padding-left: 40px!important;
+   }
+   .arabic .saved-jobs .saved-check{
+     right: 9px !important;
+     left:inherit!important;
+   }
+ }
+
+/*---------------------------------------------------2-------------------------------------------------------*/
+@media (min-width: 768px) and (max-width: 1024px){
+  .arbic{
+    .my-job .tracking .track .big-icn{
+      width: 67px!important;
+    }
+     .my-job .tracking{
+      width: 80%!important;
+     }
+    .application-tracking-t-myjob-icons{
+      height: 150px!important;
+    }
+    .application-tracking-t-myjob-icons{
+      padding-bottom:20px;
+      height: 150px;
+    }
+    .broadcast-bt-blink{
+      width: auto!important;
+      padding-left: 40px!important;
+    }
+    .saved-jobs .saved-check{
+      right: 9px !important;
+      left:inherit!important;
+    }
+  }
+
+
+}
+
+/*---------------------------------------------------3-------------------------------------------------------*/
+
+@media (max-width: 767px) {
+  .arabic .saved-jobs .saved-check{
+    right: 9px !important;
+    left:inherit!important;
+  }
+  .arabic .margin-lft-10{
+    margin-right: 0px;
+    margin-left: 0px;
+  }
+  .arabic{
+    .refine-serch{
+      .block .block-title-2 span{
+        float: none!important;
+      }
+    }
+    .application-tracking-t-myjob-icons{
+      padding-bottom:20px;
+      height: auto;
+    }
+  }
+  .arabic-donut-right{
+    .c100.small{
+      float: right;
+    }
+  }
+  .arabic{
+    .detail .mob-match-right{
+      text-align: right;
+      float: right;
+      padding-right: 10px;
+      padding-left: inherit;
+    }
+    
+  }
+  .company-details .compny-details .job-socail{width: 100%; border:none;}
+
+}
+/*---------------------------------------------------4-------------------------------------------------------*/
+
+@media (max-width: 480px) {
+  .arabic{
+    .feturd-compny-dtls .cmpny-txt{
+      text-align: right;
+    }
+  }
+  .arabic .margin-lft-10{
+    margin-right: 0px;
+    margin-left: 0px;
+  }
+}

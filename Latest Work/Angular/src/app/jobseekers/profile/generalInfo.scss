@@ -1,0 +1,60 @@
+@import '../../../styles/sass/base/_variables.scss';
+
+h1, h2, h3, h4, h5, span, label, a, button, p{
+  font-family: $primary-Fonts;
+}
+
+.arabic{
+    h1, h2, h3, h4, h5, span, label, a, button, p, input, .txt{
+    font-family: $arabic-primary-Fonts!important;
+  }
+}
+.left2{
+  .txt{
+    font-family: $arabic-primary-Fonts!important;
+  }
+}
+
+.block{
+  border:1px solid $light-border;
+}
+
+.block-contant{
+  padding: 10px;
+}
+.block-title-2,  .block-title{
+  padding: 10px;
+}
+.preview-signle-grid{
+  .col-lg-6{
+    height: 60px;
+    border-bottom: 1px solid #f1f1f1;
+  }
+}
+.information{
+  .info-min{
+    min-height: auto;
+    float: left;
+    width: 100%;
+  }
+}
+.edit-general-info-v2{
+  float: left;
+  width: 100%;
+  .col-lg-6{
+    min-height: 90px;
+    // border-bottom: 1px solid #f1f1f1;
+  }
+}
+.upload-document{
+  width: 100%;
+  .btn-default{
+    width: 80px !important;
+    background: $button-primary;
+    border: solid 1px $button-primary;
+    color: $white;
+    &:hover{
+      background: $hover-bt-primary;
+    }
+  }
+}

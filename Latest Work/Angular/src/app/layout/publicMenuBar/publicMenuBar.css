@@ -1,0 +1,587 @@
+h1, h2, h3, h4, h5, span, label, a, button, p {
+  font-family: #666;
+}
+
+.arabic h1, .arabic h2, .arabic h3, .arabic h4, .arabic h5, .arabic span, .arabic label, .arabic a, .arabic button, .arabic p, .arabic input {
+  font-family: source-sans-pro, "Simplified Arabic", sans-serif !important;
+}
+
+.arabic .logout {
+  display: block;
+  text-align: left !important;
+}
+
+.fal-neom-header {
+  border-bottom: solid 1px #e1e1e1;
+  padding-top: 13px;
+  padding-bottom: 13px;
+}
+
+.fal-neom-header .neom-logo {
+  float: left;
+}
+
+.fal-neom-header .neom-logo img {
+  width: 215px;
+}
+
+.fal-neom-header .neom-logo .logo-mobile {
+  display: none;
+}
+
+.fal-neom-header .neom-nav-bar {
+  float: right;
+}
+
+.fal-neom-header .neom-nav-bar .menu {
+  margin-top: 13px;
+}
+
+.fal-neom-header .neom-nav-bar .menu li {
+  float: left;
+}
+
+.fal-neom-header .neom-nav-bar .menu li a {
+  font-size: 16px;
+}
+
+.fal-neom-header .neom-nav-bar .menu .login, .fal-neom-header .neom-nav-bar .menu .register {
+  padding: 0px 15px;
+  width: auto;
+  text-align: center;
+}
+
+.fal-neom-header .neom-nav-bar .menu .login {
+  background: #fff;
+}
+
+.fal-neom-header .neom-nav-bar .menu .login a {
+  color: #000 !important;
+}
+
+.fal-neom-header .neom-nav-bar .menu .register {
+  background: #fff;
+  border-left: 1px solid #000;
+}
+
+.fal-neom-header .neom-nav-bar .menu .register a {
+  color: #ebc03f !important;
+}
+
+.logo-desk {
+  width: 57px !important;
+}
+
+/* Respopnsive breakpoint */
+@media all and (max-width: 768px) {
+  .fal-neom-header .neom-logo .logo-desk {
+    display: none;
+  }
+  .fal-neom-header .neom-logo .logo-mobile {
+    display: block;
+    width: 75px;
+  }
+  .fal-neom-header .neom-nav-bar .menu {
+    margin-top: 18px;
+  }
+  .fal-neom-header .neom-nav-bar .menu .login, .fal-neom-header .neom-nav-bar .menu .register {
+    padding: 8px;
+    margin-left: 9px;
+    width: 80px;
+  }
+}
+
+.full-bar {
+  width: 100%;
+  float: left;
+}
+
+.navbar-collapse {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+.mobile-menu-ats {
+  display: none !important;
+}
+
+.desk-menu-ats {
+  display: block !important;
+}
+
+button:focus {
+  outline: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+li:focus {
+  outline: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.ats-alnding-header {
+  width: 100%;
+  height: 63px;
+  background: #fff;
+  position: relative;
+}
+
+.ats-alnding-header .ats-lan-logo {
+  position: absolute;
+  width: 238px;
+  height: 103px;
+  top: -6px;
+  z-index: 999;
+}
+
+.ats-alnding-header .ats-lan-action {
+  float: right;
+  width: calc(100% - 238px);
+  height: 63px;
+}
+
+.ats-alnding-header .ats-lan-action ul {
+  float: right;
+  margin-bottom: 0px;
+}
+
+.ats-alnding-header .ats-lan-action ul li {
+  display: inline-block;
+  font-size: 14px;
+  float: right;
+  border-left: 1px solid #000;
+  padding: 0px 10px;
+  margin-top: 20px;
+}
+
+.ats-alnding-header .ats-lan-action ul li:hover {
+  cursor: pointer;
+}
+
+.ats-alnding-header .ats-lan-action .searchats {
+  width: 390px;
+  float: right;
+  height: 35px;
+  position: relative;
+  margin-top: 10px;
+}
+
+.ats-alnding-header .ats-lan-action .searchats i {
+  display: block;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  line-height: 40px;
+  text-align: center;
+  right: 0px;
+  top: 0px;
+  border: 1px solid #ececec;
+  font-size: 22px;
+}
+
+.sub-hed-ats {
+  background: #ebc03f;
+  height: 40px;
+}
+
+.sub-hed-ats ul {
+  float: right;
+}
+
+.sub-hed-ats ul li {
+  display: inline-block;
+}
+
+.sub-hed-ats ul li a {
+  display: block;
+  width: auto;
+  padding: 0px 15px;
+  line-height: 40px;
+  color: #fff;
+  font-size: 16px;
+}
+
+.sub-hed-ats ul li a:hover {
+  background: #404040;
+  color: #fff;
+}
+
+.ats-header {
+  background: #fff;
+  width: 100%;
+  height: 100px;
+  z-index: 999;
+  padding: 15px 0px;
+  border-bottom: 1px solid #ececec;
+}
+
+.ats-header .sign-in-public a {
+  text-align: right !important;
+  display: inline-block;
+  color: #666;
+  float: right;
+  font-size: 16px;
+  width: 100px;
+  border-radius: 0px;
+  height: 40px;
+  margin-left: 10px;
+  text-align: center;
+  line-height: 58px;
+  margin-top: 30px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.ats-header .sign-in-public .signin {
+  background: #6F6F71;
+  color: #fff;
+  text-align: center !important;
+}
+
+.ats-header .sign-in-public .signup {
+  background: #EBC03F;
+  color: #fff;
+  margin-right: 43px;
+  text-align: center !important;
+}
+
+.logout {
+  position: absolute;
+  bottom: -61px;
+  z-index: 999;
+  color: #fff !important;
+  right: 0px;
+}
+
+.profile-name {
+  padding-top: 10px;
+  color: #ebc03f;
+}
+
+.arab-logo {
+  display: none;
+}
+
+.navbar-brand {
+  float: left;
+  color: #fff;
+  text-align: left;
+}
+
+.navbar {
+  margin-bottom: 0px;
+}
+
+.navbar button {
+  float: right;
+  height: 40px;
+  width: 40px;
+  border: none;
+  background: none;
+  font-size: 30px;
+}
+
+.navbar button i {
+  color: #fff;
+}
+
+.navbar-collapse.in {
+  overflow-y: inherit;
+  padding-bottom: 20px;
+  float: left;
+  width: 100%;
+  border-top: 1px solid #fff;
+}
+
+.arabic-logo-inner {
+  display: none;
+}
+
+.arabic a, .arabic button, .arabic h1, .arabic h2, .arabic h3, .arabic h4, .arabic h5, .arabic span, .arabic p, .arabic a, .arabic button {
+  font-family: source-sans-pro, "Simplified Arabic", sans-serif !important;
+}
+
+.arabic .ats-header .sign-in-public a {
+  float: left;
+  width: auto;
+  padding: 0px 20px;
+  margin-right: 10px;
+  margin-left: 0px;
+  font-family: source-sans-pro, "Simplified Arabic", sans-serif;
+  text-align: left !important;
+}
+
+.arabic .ats-header .sign-in-public .signup {
+  margin-left: 55px !important;
+}
+
+.arabic .logout {
+  position: absolute;
+  bottom: -61px;
+  z-index: 999;
+  color: #fff !important;
+  left: 0px;
+  text-align: left !important;
+}
+
+.arabic .profile-picture {
+  float: left;
+  margin-left: 60px;
+  margin-right: 0px;
+}
+
+.arabic .profile-name {
+  float: left;
+  padding-left: 10px;
+  padding-right: 0px;
+}
+
+.arabic .logout {
+  padding-left: 0px !important;
+}
+
+.arabic .engli-logo {
+  display: none;
+}
+
+.arabic .arab-logo {
+  display: block;
+}
+
+.arabic .ats-alnding-header .ats-lan-action ul {
+  float: left;
+}
+
+.arabic .ats-alnding-header .ats-lan-action li {
+  float: left;
+  border-right: 1px solid #000;
+  border-left: none;
+}
+
+.arabic .searchats {
+  float: left !important;
+}
+
+.arabic .searchats i {
+  left: 0;
+  right: inherit !important;
+}
+
+.arabic .sub-hed-ats ul {
+  float: left;
+}
+
+.arabic .bx-ats-half {
+  border-right: none !important;
+  border-left: 1px solid #ececec;
+}
+
+.arabic .listjobpostats ul li span {
+  text-align: right;
+  float: left;
+  display: inline-block;
+  width: calc(100% - 25%);
+}
+
+.arabic .videobgats .text-video-ats button i {
+  float: right;
+  margin-right: 0px;
+  margin-left: 10px;
+}
+
+.arabic .arabic-logo-inner {
+  display: block;
+}
+
+.arabic .english-logo-inner {
+  display: none;
+}
+
+.profile-picture {
+  width: 40px;
+  height: 40px;
+  margin-right: 40px;
+  margin-top: 20px;
+  background: rgba(233, 219, 166, 0.41);
+  border-radius: 0px;
+  border: 1px solid #ececec;
+  overflow: hidden;
+}
+
+.profile-picture i {
+  text-align: center;
+  display: block;
+  line-height: 40px;
+}
+
+.profile-picture img {
+  width: 100%;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 0px;
+}
+
+.profile-name {
+  padding-right: 10px;
+  margin-top: 20px;
+}
+
+.mobile-tab-top {
+  position: static !important;
+}
+
+/* Respopnsive breakpoint */
+@media all and (max-width: 991px) {
+  .ats-alnding-header {
+    height: 103px;
+  }
+  .sub-hed-ats ul li a {
+    padding: 0px 4px;
+  }
+  .valuats .value {
+    width: 100%;
+  }
+  .valuats .hr {
+    width: 100%;
+  }
+  .alljobsAts .listjobpostats .bx-ats-half {
+    height: auto;
+    margin-top: 15px;
+    border-top: 1px solid #ececec !important;
+  }
+}
+
+@media all and (max-width: 768px) {
+  .logo-home-inner img {
+    margin: 0px auto;
+  }
+  .signup {
+    width: 47.5% !important;
+  }
+  .signin {
+    width: 47.5% !important;
+  }
+  .logout {
+    display: none !important;
+  }
+  .profile-picture {
+    display: none;
+    padding-right: 0px;
+  }
+  .bloovo-right {
+    float: none;
+    text-align: center;
+  }
+  .profile-name {
+    margin-top: 0px;
+    float: none;
+  }
+  .arabic .profile-name {
+    float: none;
+    padding-left: 0px;
+  }
+  .ats-header {
+    height: auto;
+  }
+  .ats-header .sign-in-public .signup {
+    margin-right: 0px;
+  }
+  .arabic .ats-header .sign-in-public .signup {
+    margin-left: 0px !important;
+  }
+  .ats-alnding-header {
+    height: 103px;
+  }
+  .searchats {
+    width: 100% !important;
+  }
+  .sub-hed-ats ul li a {
+    padding: 0px 6px;
+  }
+  .sub-hed-ats {
+    height: auto;
+  }
+  .sub-hed-ats ul {
+    float: left;
+  }
+  .sub-hed-ats ul li {
+    display: block;
+    width: 100%;
+  }
+  .sub-hed-ats ul li a {
+    width: 100%;
+  }
+  .banner-content-ats {
+    height: auto;
+    padding: 60px 0px;
+  }
+  .banner-content-ats h1 {
+    padding-top: 0px;
+  }
+  .banner-content-ats p {
+    width: 90%;
+  }
+  .alljobsAts .listjobpostats .bx-ats-half {
+    height: auto;
+    margin-top: 15px;
+    border-top: 1px solid #ececec !important;
+  }
+  .videobgats .text-video-ats {
+    padding: 30px !important;
+  }
+  .videobgats .image {
+    height: 200px;
+  }
+  .desk-menu-ats {
+    display: none !important;
+  }
+  .mobile-menu-ats {
+    display: block !important;
+  }
+}
+
+@media all and (max-width: 480px) {
+  .logo-home-inner img {
+    width: 180px;
+    margin: 0px auto;
+  }
+  .signup {
+    width: 100% !important;
+    margin-top: 10px !important;
+    margin-right: 0px !important;
+  }
+  .signin {
+    width: 100% !important;
+    margin-top: 10px !important;
+  }
+  .logout {
+    display: none !important;
+  }
+  .ats-header {
+    height: auto;
+  }
+  .arabic .ats-header .sign-in-public .signup {
+    margin-left: 0px !important;
+  }
+  .ats-alnding-header {
+    height: auto;
+  }
+  .ats-lan-logo {
+    width: 100% !important;
+    height: auto !important;
+    position: static !important;
+  }
+  .ats-lan-action {
+    width: 100% !important;
+    height: auto !important;
+    padding-bottom: 10px;
+  }
+  .searchats {
+    width: 100% !important;
+  }
+  .desk-menu-ats {
+    display: none !important;
+  }
+}

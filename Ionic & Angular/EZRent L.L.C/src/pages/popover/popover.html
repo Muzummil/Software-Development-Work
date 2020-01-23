@@ -1,0 +1,17 @@
+
+    <ion-list *ngIf="!previewPage && !tenantPage" >
+        <button ion-item (click)="addProperty()">+Add Property</button>
+        <button ion-item (click)="editProfile()"> Edit Profile</button>
+    </ion-list>
+
+    <ion-list *ngIf="previewPage" >
+        <button ion-item (click)="addAppartment()">+ Add Apartment</button>
+        <button ion-item (click)="editProperty()"> Edit Property</button>
+        <button ion-item (click)="delBuilding()">- Delete Property</button>
+    </ion-list>
+    
+    <ion-list *ngIf="tenantPage && !previewPage" >
+        <button ion-item (click)="addTenant()">+ Add Tenant</button>
+        <button ion-item (click)="editApartment()"> Edit Apartment</button>
+        <button ion-item (click)="delApartment()">- Delete Apartment</button>
+    </ion-list>

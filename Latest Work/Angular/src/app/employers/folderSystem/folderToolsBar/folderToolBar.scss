@@ -1,0 +1,535 @@
+@import '../../../../styles/sass/base/_variables.scss';
+input:-webkit-autofill {
+  -webkit-animation-name: autofill;
+  -webkit-animation-fill-mode: both;
+}
+
+
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../../../../assets/fonts/ats/icomoon.eot?4nrirk');
+  src:  url('../../../../assets/fonts/ats/icomoon.eot?4nrirk#iefix') format('embedded-opentype'),
+    url('../../../../assets/fonts/ats/icomoon.ttf?4nrirk') format('truetype'),
+    url('../../../../assets/fonts/ats/icomoon.woff?4nrirk') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-email-action:before {
+  content: "\111";
+}
+.icon-tag-action:before {
+  content: "\112";
+}
+.icon-history:before {
+  content: "\113";
+}
+.icon-move:before {
+  content: "\114";
+}
+.icon-rating:before {
+  content: "\115";
+}
+
+
+
+// acion list
+
+.action-list-candi{
+  border-bottom: 1px solid $light-border!important;
+  height: 40px;
+  width: 100%;
+  border-radius: $border-radius;
+  border-bottom: none;
+  .form-group{
+    margin-bottom: 0px;
+    float: left;
+    padding-left: 10px;
+    color: $primarycolor;
+  }
+  .form-check-input{
+    float: left;
+    width: 20px;
+    margin: 0px;
+  }
+  .form-check-label{
+    line-height: 40px;
+    margin-bottom: 0px;
+  }
+  .action-button-candi{
+    display: block;
+    margin-bottom: 0px;
+    float: right;
+    li{
+      border-left: 1px solid $light-border;
+      display: block;
+      width: 40px;
+      height: 40px;
+      float: left;
+      text-align: center;
+      line-height: 40px;
+      color: $primarycolor;
+      &:hover{
+        cursor: pointer;
+      }
+      a{
+        display:block;
+       color: $primarycolor;
+      }
+      .loading{
+        width:15px;
+        height: 15px;
+        img{
+          width:15px;
+          height: 15px;
+        }
+      }
+    }
+  }
+}
+
+.arabic{
+  .action-list-candi .action-button-candi{
+    float: left;
+  }
+  .action-list-candi .form-group{
+    float: right;
+    padding-left:0px;
+    padding-right:10px;
+  }
+}
+
+// Modal
+
+.modal{
+  h5{
+      color: $primarycolor;
+      font-size: 20px;
+      line-height: 50px;
+      i{
+          display: inline-block;
+          width: 50px;
+          height: 40px;
+          border-radius: 3px;
+          background-color: $tertiarycolor;
+          position: relative;
+          float: left;
+          margin-right: 15px;
+          .tip-top{
+              display: block;
+              position: absolute;
+              width: 20px;
+              height: 10px;
+              background: $secondarycolor;
+              top: -4px;
+              left: 0px;
+              border-radius: 3px;
+          }
+          .baseline{
+              display: block;
+              position: absolute;
+              width: 100%;
+              height: 9px;
+              background: $secondarycolor;
+              top: 0px;
+              left: 0px;
+          }
+      }
+  }
+  .modal-header, .modal-footer{
+      border:none;
+  }
+  .modal-header{
+    padding:0px;
+  }
+  .modal-title{
+    text-align: center;
+  }
+  .modal-content{
+      padding: 10px;
+  }
+  .modal-footer{
+      button{
+          height: $button-height;
+          color: $white;
+          background-color: $primarycolor;
+          border:none;
+          width: 120px;
+          font-size: $normal-font;
+          &:hover{
+              background-color: $secondarycolor;
+          }
+      }
+      .btn-secondary{
+          background-color: $secondarycolor;
+          &:hover{
+              background-color: $primarycolor;
+          }
+      }
+  }
+  h6{
+      color: $primarycolor;
+      font-size: $normal-font;
+      display: block;
+      padding: 20px 0px;
+  }
+  ul{
+      margin:0px;
+      li{
+          display: block;
+          border-radius: $border-radius;
+          padding: 10px;
+          background-color: $bg-default;
+          border:1px solid $border-brand;
+          margin-bottom: 10px;
+          p{
+              display: block;
+              padding-left: 30px;
+              color: $secondarycolor;
+          }
+      }
+  }
+  // Error
+  .error-feild{
+    border: 1px solid #e74c3c !important;
+  }
+
+
+  // selectUserSection
+  .selectUserSection{
+      padding: 20px 0px;
+      select{
+          height: 180px!important;
+          padding: 8px;
+          option{
+              padding: 10px;
+              color: $primarycolor;
+              border-radius: $border-radius;
+              margin-bottom: 3px;
+          }
+      }
+      span{
+          color:$secondarycolor;
+          font-size: $small-font;
+          display: block;
+          padding-bottom: 5px;
+      }
+      .to{
+          width: 30px;
+          float: left;
+          font-size:$normal-font;
+          color: $primarycolor;
+          line-height: $button-height;
+      }
+      .selectUser{
+          width: calc(100% - 30px);
+          float: left;
+      }
+  }
+ 
+}
+
+.modal-header, .modal-footer{
+  border:none;
+}
+.modal-content{
+  padding: 30px;
+}
+.modal-footer{
+  button{
+      height: $button-height;
+      color: $white;
+      background-color: $primarycolor;
+      border:none;
+      width: 120px;
+      font-size: $normal-font;
+      &:hover{
+          background-color: $secondarycolor;
+      }
+  }
+  .btn-secondary{
+      background-color: $secondarycolor;
+      &:hover{
+          background-color: $primarycolor;
+      }
+  }
+}
+
+.modal-body{
+  .listFoldereach .folderStep1 .actionlist{
+      width: 90px!important;
+  }
+  .nameLabelFolder{
+    span{
+      font-size: 14px;
+    }
+  }
+}
+
+
+.deleteFolderModel{
+  h2{
+      font-size: $big-font;
+      display: block;
+      text-align: center;
+      color: $primarycolor;
+      margin-bottom: 30px!important;
+  }
+  h3{
+      font-size: $normal-font;
+      display: block;
+      text-align: center;
+      color: $secondarycolor;
+  }
+  .iconlistfolder{
+      margin-top: 40px;
+      display: block;
+      width: 50px;
+      height: 40px;
+      border-radius: 3px;
+      background-color: $tertiarycolor;
+      position: relative;
+      margin-right: 15px;
+      margin:10px auto;
+      .tip-top{
+          display: block;
+          position: absolute;
+          width: 20px;
+          height: 10px;
+          background: $secondarycolor;
+          top: -4px;
+          left: 0px;
+          border-radius: 3px;
+      }
+      .baseline{
+          display: block;
+          position: absolute;
+          width: 100%;
+          height: 9px;
+          background: $secondarycolor;
+          top: 0px;
+          left: 0px;
+      }
+  }
+}
+.btGroup{
+  width: 250px;
+  margin: 0px auto;
+}
+
+.see-more-folder{
+  color: $secondarycolor;
+}
+
+.modal-body{
+  height: 300px;
+}
+
+.scrollbar{
+  padding-right: 10px;
+}
+
+// hasTagsats
+.hasTagsats{
+  width: 100%;
+  display: block;
+  li{
+    display: inline-block;
+    width: auto;
+    height: 40px;
+    background-color: $bg-default;
+    float: left;
+    margin-right: 5px;
+    padding: 0px!important;
+    line-height: 40px;
+    padding-left: 10px!important;
+    span{
+      display: block;
+      float: right;
+      display: block;
+      width: 40px;
+      height: 40px;
+      text-align: center;
+      line-height: 40px;
+      background: $primarycolor;
+      color: $white;
+      margin-left: 10px;
+    }
+  }
+}
+
+// feedback
+.feedbackAts{
+  textarea{
+    min-height: 180px!important;
+    width: 100%;
+    margin-top: 10px;
+  }
+  select{
+    line-height: 25px!important;
+  }
+}
+
+// rating{
+  .rating{
+    width: 80%;
+    padding-bottom: 20px;
+    margin: 0px auto!important;
+    li{
+      display: inline-block!important;
+      background: none!important;
+      border:none!important;
+      float: left!important;
+      width: 20%;
+      text-align: center;
+      &:hover{
+        cursor: pointer;
+      }
+      i{
+        font-size: 60px;
+        color: #e1e1e1;
+      }
+      .zmdi-star{
+        color: $green!important;
+      }
+    }
+  }
+  .centerAts{
+    text-align: center;
+  }
+  .gp-btz{
+    width: 280px;
+    margin:0px auto;
+    padding-top: 20px;
+  }
+
+// ARABIC
+// ==============================
+.arabic{
+  .action-button-candi{
+      float: left!important;
+  }
+  .scrollbar{
+    padding-left: 10px;
+    padding-right: 0px;
+  }
+  .hasTagsats{
+    li{
+      float: right;
+      margin-left: 0px!important;
+      padding-right: 10px!important;
+      padding-left: inherit!important;
+      span{
+        margin-right: 10px!important;
+        margin-left: inherit!important;
+        float: left;
+      }
+    }
+  }
+  .action-list-candi .action-button-candi li{
+    float: right;
+  }
+}
+
+.simple_modal_face2{
+  text-align: center;
+  padding: 40px!important;
+  h2{
+    font-size: 24px;
+  }
+  .bt_group_center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+
+.ratingResultBar{
+  width: 130px!important;
+  line-height: 10px!important;
+  padding: 0px 10px;
+  .resultRate{
+    display: block;
+    width: calc(100% - 30px);
+    float: left;
+    position: relative;
+    height: 10px;
+    background-color: #f1f1f1;
+    i{
+      display: block;
+      width: auto;
+      background: $primarycolor;
+      height: 10px;
+      position: absolute;
+      left: 0px;
+    }
+  }
+  strong{
+    display: block;
+    text-align: center;
+    font-size: 11px;
+    margin: 6px 0px;
+    color: $secondarycolor;
+  }
+  .avrate{
+    width: 25px;
+    float: left;
+  }
+
+}
+
+.dummy_tab{
+  background-color: #f9f9f9!important;
+  cursor:not-allowed;
+  a{
+    color: #999;
+    cursor:not-allowed;
+    i{
+      color: #999!important;
+    }
+    &:hover{
+      background: #f9f9f9!important;
+    }
+  }
+  &:hover{
+    background-color: #f9f9f9!important;
+  }
+}
+
+
+/* Respopnsive breakpoint */
+// ============bigScreen===========
+@media all and (max-width: 991px) {
+
+}
+
+// ============MediumScreen========
+@media all and (max-width: 768px) {
+  .gp-btz{
+    width: 100%;
+    button{
+      width: 115px;
+    }
+  }
+}
+
+// ============SmallScreen=========
+@media all and (max-width: 480px) {
+
+}

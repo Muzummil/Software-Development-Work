@@ -1,0 +1,153 @@
+@import '/../../../../styles/sass/base/_variables.scss';
+
+h1, h2, h3, h4, h5, span, label, a, button, p{
+  font-family: $primary-Fonts;
+}
+
+.arabic{
+    h1, h2, h3, h4, h5, span, label, a, button, p, input{
+    font-family: $arabic-primary-Fonts!important;
+  }
+}
+
+select{
+    padding: 0px 12px;
+}
+input[type=checkbox], input[type=radio]{
+    margin: -10px 0 0 -20px;;
+}
+// end reset
+
+
+h1{
+    text-align: center;
+    font-size: 30px;
+    padding-top: 30px;
+    padding-bottom: 10px;
+}
+
+// start step bar
+.fal-steps-container{
+    .step-bar{
+        position: relative;
+        .stats-step{
+            display: block;
+            max-width: 820px;
+            margin:40px auto;
+            li{
+                display: inline-block;
+                width: 25%;
+                float: left;
+                text-align: center;
+                text-align: center;
+                position: relative;
+                height: 5px;
+                // background-color: #f1f1f1;
+                i{
+                    display: block;
+                    width: 60px;
+                    height: 60px;
+                    background-color: #fff;
+                    border: solid 3px #e5e5e5;
+                    border-radius: 160px;
+                    color: rgba(0, 0, 0, 0.25);
+                    line-height: 52px;
+                    font-size: 20px;
+                    font-style: normal;
+                    position: relative;
+                    top: -29px;
+                    text-align: center;
+                    margin: 0px auto;
+                }
+                span{
+                    position: relative;
+                    top: -15px;
+                    color:rgba(0, 0, 0, 0.50);
+                    font-weight: 600
+                }
+                // .leftfix{ float: left;}
+                // .rightfix{ float: right;}
+                // .middfix{ margin:0px auto;}
+            }
+        }
+        .bar-stage{
+            position: relative;
+            height: 3px;
+            width: 580px;
+            margin: 0px auto;
+            top: 42px;
+            div{
+                width: 33.333%;
+                float: left;
+                height: 3px;
+                background-color: $primarycolor;
+                background-color: #f1f1f1;
+            }
+        }
+        .active-step{
+            background-color: $green!important;
+            border: none !important;
+            color: $white !important;
+            line-height: 60px !important;
+        }
+    }
+    .three-step-bar{
+        .stats-step{
+            li{
+                width: 33.33%;
+            }
+        }
+        .bar-stage{
+            div{
+                width: 50%;
+            }
+        }
+    }
+}
+// end step bar
+
+
+
+
+
+// arbic style
+// =====================================
+.arabic{
+    .stats-step{
+        li{
+            float: right!important;
+        }
+    }
+}
+
+
+
+
+/* Respopnsive breakpoint */
+// ============bigScreen===========
+@media all and (max-width: 991px) {
+
+}
+
+// ============MediumScreen========
+@media all and (max-width: 768px) {
+    .fal-steps-container{
+        .step-bar{
+            .bar-stage{
+                width: 67%;
+            }
+            .stats-step{
+                li{
+                    span{
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// ============SmallScreen=========
+@media all and (max-width: 480px) {
+
+}

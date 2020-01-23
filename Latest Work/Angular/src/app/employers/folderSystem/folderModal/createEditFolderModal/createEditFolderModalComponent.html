@@ -1,0 +1,74 @@
+<div class="modal fade add-edit-folder" [attr.id]="(folderObject && folderObject.id)? 'editFolder-' + folderObject.id: 'addNewFolder'"
+     tabindex="-1" role="dialog" aria-labelledby="addNewFolder" aria-hidden="true">
+    <form [formGroup] ="addEditForm">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" [class.arabic] = "accountService.isArabic()">
+            <div class="modal-header">
+                <h5 *ngIf="!folderObject?.id" class="modal-title">
+                    <!-- folder-icon -->
+                    <i><b class="tip-top"></b><b class="baseline"></b></i>{{fixedTextHash['create_new_folder'][currLan]}}
+                </h5>
+                <h5 *ngIf="folderObject?.id" class="modal-title">
+                    <!-- folder-icon -->
+                    <i><b class="tip-top"></b><b class="baseline"></b></i>{{fixedTextHash['edit_folder'][currLan]}}
+                </h5>
+            </div>
+            <!-- modal body -->
+            <div class="modal-body">
+                <spinner [visible]="showSpinner"></spinner>
+                <div *ngIf="errorflag && !customErrorMessage" class="alert alert-danger alert-dismissible" role="alert">
+                    {{(folderObject && folderObject.id)? fixedTextHash['edit_folder_error'][currLan] :
+                    fixedTextHash['create_folder_error'][currLan]}}
+                </div>
+                <div *ngIf="errorflag && customErrorMessage" class="alert alert-danger alert-dismissible" role="alert">
+                    {{customErrorMessage}}
+                </div>
+
+                <input type="text" formControlName="name" placeholder="Folder Name"
+                       [class.error-feild]="(addEditForm.controls['name'].touched || !pristineFlag)
+                       && addEditForm.controls['name'].errors">
+                <h6>{{fixedTextHash['who_can_access'][currLan]}}</h6>
+                <ul>
+                    <li>
+                        <label class="radio">{{fixedTextHash['only_you'][currLan]}}
+                            <input type="radio" name="only_me" value="true" formControlName="only_me" (click)="getResetToMe()">
+                            <span class="checkround"></span>
+                        </label>
+                        <p>{{fixedTextHash['only_you_can_access'][currLan]}}</p>
+                    </li>
+                    <li>
+                        <label class="radio">{{fixedTextHash['specific_users'][currLan]}}
+                            <input type="radio"  value="false" name="only_me" formControlName="only_me">
+                            <span class="checkround"></span>
+                        </label>
+                        <p>{{fixedTextHash['choose_who_share'][currLan]}}</p>
+                    </li>
+                </ul>
+                <ng-container *ngIf="addEditForm.controls['only_me'].value == 'false'">
+                    <div class="common-block selectUserSection">
+                        <div class="to arabic-right-left">To</div>
+                        <div class="selectUser arabic-right-left">
+                            
+                            <select multiple formControlName="assigned_user_ids"
+                                    [class.error-feild]="(addEditForm.controls['assigned_user_ids'].touched || !pristineFlag)
+                       && addEditForm.controls['assigned_user_ids'].errors">
+                                <option *ngFor="let selUser of allUsers?.users" [value]="selUser.id">
+                                    {{selUser?.first_name}}&nbsp;{{selUser?.last_name}}
+                                </option>
+                            </select>
+                            <span>{{fixedTextHash['press_shift_select'][currLan]}}</span>
+                        </div>
+                    </div>
+                </ng-container>
+
+
+            </div>
+            <div class="modal-footer">
+                <button *ngIf="!folderObject" type="button" class="btn btn-primary" (click)="getCreateFolder()">{{fixedTextHash['create'][currLan]}}</button>
+                <button *ngIf="folderObject" type="button" class="btn btn-primary" (click)="getEditFolder()">{{fixedTextHash['edit'][currLan]}}</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{fixedTextHash['close'][currLan]}}</button>
+            </div>
+        </div>
+    </div>
+   </form>
+</div>

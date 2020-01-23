@@ -1,0 +1,139 @@
+
+<!-- Jobseeker Desktop SignUp form -->
+<div class="sign-page back-bg">
+    <div class="bg-sign-up-common">
+        <div class="ats-signup sign-page">
+            <div class="sign sign-up sign-up-jboseeker-container">
+                <!--popupMode == false &&-->
+                <div class="sign-up-confirmation-v2" *ngIf="successFlag == true">
+                    <i class="zmdi zmdi-check-circle"></i>
+                    <p>{{fixedTextHash['signup_success'][currLan]}}</p>
+                </div>
+
+                <div *ngIf="successFlag != true">
+                    <h1 class="text-center">{{fixedTextHash[title][currLan]}}</h1>
+                    <div class="common-block">
+                        <div class="common-block">
+                            <div  *ngIf="errorFlag"  class="alert alert-danger alert-dismissible" role="alert">
+                                {{errorMessage}}
+                            </div>
+
+                            <form  [formGroup]="signupForm">
+                                <div class="home-full">
+                                    <div class="col-lg-6 col-sm-6 col-xs-12 arabic-right-left">
+                                        <div class="home-full">
+                                            <input type="text" name="first_name" placeholder="{{fixedTextHash['first_name'][currLan]}}"
+                                                   formControlName="first_name" minlength="1" maxlength="15"
+                                                   [class.error-feild]="(signupForm.controls['first_name'].touched || !(pristineFlag$ | async)) && signupForm.controls['first_name'].errors">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-sm-6 col-xs-12">
+                                        <div class="home-full">
+                                            <input type="text" name="last_name" placeholder="{{fixedTextHash['last_name'][currLan]}}" formControlName="last_name" minlength="1" maxlength="15"
+                                                   [class.error-feild]="(signupForm.controls['last_name'].touched || !(pristineFlag$ | async)) && signupForm.controls['last_name'].errors">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- email -->
+                                <div class="col-lg-12 col-sm-12 col-xs-12">
+                                    <div class="home-full">
+                                        <input type="text" name="email" placeholder="{{fixedTextHash['email'][currLan]}}"
+                                               formControlName="email"
+                                               [class.error-feild]="(signupForm.controls['email'].touched || !(pristineFlag$ | async)) && signupForm.controls['email'].errors" >
+
+                                    </div>
+                                </div>
+
+                                <!-- Password -->
+                                <div class="col-lg-12 col-sm-12 col-xs-12">
+                                    <div class="home-full">
+                                        <input type="password" name="password"
+                                               placeholder="{{fixedTextHash['password'][currLan]}}"
+                                               formControlName="password"
+                                               [class.error-feild]="(signupForm.controls['password'].touched || !(pristineFlag$ | async)) && signupForm.controls['password'].errors">
+
+                                    </div>
+                                </div>
+
+
+                                <div (click)="check(this.signupForm)" class="common-block" class="col-lg-12 col-sm-12 col-xs-12" *ngIf="!this.signupForm.valid && !(this.pristineFlag$ | async)">
+                                    <div class="home-full">
+                                        <div *ngIf="isFormEmpty" class="alert alert-danger alert-dismissible margin-top-10" role="alert">
+                                            {{fixedTextHash['missed_fields'][currLan]}}
+                                        </div>
+                                        <div *ngIf="!isFormEmpty && this.signupForm.controls['email'].touched && !this.signupForm.controls['email'].valid"  class="alert alert-danger alert-dismissible margin-top-10" role="alert">
+                                            {{fixedTextHash['invalid-email'][currLan]}}
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </form>
+                        </div>
+
+                        <!-- Button -->
+                        <div class="common-block">
+                            <div class="col-lg-12 col-sm-12 col-xs-12">
+                                <div class="pop-full-btn">
+                                    <a (click)="signup_jobseeker()" *ngIf="!postinProgress">
+                                        <button type="button" class="btn postive login-user-button-e2e"> {{fixedTextHash['signup'][currLan]}} </button>
+                                    </a>
+                                    <a  *ngIf="postinProgress">
+                                        <button type="button" class="btn postive  login-user-button-e2e disabled_button"> {{fixedTextHash['signup'][currLan]}} </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <img class="pull-left devider-login" src="/assets/images/divider-sign.svg">
+                            </div>
+                        </div>
+
+                        <div class="common-block" >
+                            <div class="signin-box">
+                                <div class="signp">
+                                    <p>{{fixedTextHash['sign_up_with'][currLan]}}</p>
+                                </div>
+                                <div class="sign-v3">
+                                    <button class="link-v3" (click)="loginLinkedIn()">
+                                        <i class="zmdi zmdi-linkedin" *ngIf="!linkedinSpinner"></i>
+                                        <i class="bt-spinner2 spinner-home-v3" *ngIf="linkedinSpinner"><img src="assets/images/balls.svg"></i>
+                                        <span class="hide-sml-screen"> Linkedin</span>
+                                    </button>
+                                    <button class="face-v3" (click)="loginFacebook()">
+                                        <i class="zmdi zmdi-facebook-box" *ngIf="!facebookSpinner"></i>
+                                        <i class="bt-spinner2 spinner-home-v3" *ngIf="facebookSpinner"><img src="assets/images/balls.svg"></i>
+                                        <span class="hide-sml-screen"> Facebook</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pop-button">
+                            <div class="clr"></div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-center">
+                                {{fixedTextHash['already_signed'][currLan]}}
+                                <a [routerLink]="accountService.getCurrLangUrl()+'login'"> {{fixedTextHash['signin'][currLan]}}</a>
+                            </h3>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+

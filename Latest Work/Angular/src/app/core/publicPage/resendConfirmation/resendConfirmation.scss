@@ -1,0 +1,42 @@
+@import '../../../../styles/sass/base/_variables.scss';
+
+h1, h2, h3, h4, h5, span, label, a, button, p{
+  font-family: $primary-Fonts;
+}
+
+.arabic{
+    h1, h2, h3, h4, h5, span, label, a, button, p, input{
+    font-family: $arabic-primary-Fonts!important;
+  }
+}
+
+
+.confirmemailats{
+    min-height: 768px;
+    padding-top: 60px;
+    h1{
+        display: block;
+        text-align: center;
+        font-size: $big-font;
+    }
+}
+.new-user-sign-form{
+    button{
+        font-weight: 600;
+        height: $button-height!important;
+    }
+    input{
+        height: $button-height;
+    }
+    p{
+        width:95%;
+    }
+}
+
+.cancel-signin{
+    display: block;
+    text-align: center;
+    padding: 20px 0px;
+    text-decoration: underline;
+    font-size: $normal-font;
+  }

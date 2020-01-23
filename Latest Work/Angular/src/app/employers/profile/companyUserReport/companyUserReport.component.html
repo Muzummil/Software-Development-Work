@@ -1,0 +1,168 @@
+<div class="main-tab load-data-js mobile-tab-top"></div>
+<emp-profile-topmenu [activeFlag]="'users'"></emp-profile-topmenu>
+<div class="tab-content job-bloovo">
+
+    <div class="commen-container user-report">
+        <div class="col-lg-3 refine-serch">
+    <div class="block bottom-gap user-report-side-bar">
+        <div class="row block-title-2">
+            <h2>{{fixedTextHash['refine_search'][currLan]}}</h2>
+        </div>
+
+        <div class="row invite">
+
+            <div class="company filter-jobs">
+
+                <div class="row user-detail">
+                    <div class="user_detail_head">
+
+                        <div class="feturd-compny-dtls">
+                            <h2>{{selUser?.first_name}} <ng-container *ngIf="selUser?.last_name">{{selUser?.last_name}}</ng-container></h2>
+
+                            <div *ngIf="selUser?.active" class="online"><i class="icon-round"></i><span class="light"> {{fixedTextHash['active'][currLan]}} </span> </div>
+                            <div *ngIf="!selUser?.active" class="offline"><i class="icon-round"></i><span class="light"> {{fixedTextHash['inactive'][currLan]}} </span></div>
+                            <span><i class="zmdi zmdi-calendar-alt"></i> {{accountService.getFormattedDate(selUser?.join_date, 'MMM DD, YYYY')}}</span>
+
+                        </div>
+
+                        <div class=" clearfix"></div>
+                    </div>
+                    <div class=" clearfix"></div>
+                </div>
+
+
+                <!-- previlages -->
+                <div class="previlages">
+                    <h2>{{fixedTextHash['access'][currLan]}}</h2>
+                    <ul>
+                        <li *ngFor="let selPermission of selUser?.permissions"> {{permissionHash[selPermission]}} </li>
+
+                    </ul>
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+
+
+<!--MAIN BUTTON-->
+        <div class="row block-footer edit ">
+       <div class="full-box margin-btm-10">
+            <bootstrap-selectbox *ngIf="(companyUsersObs | async)" (selectedId)="selUserId =$event.id"  [selectedValue]="selUserId"  [placeholder]="fixedTextHash['select_from_list'][currLan]" [selectList]="(companyUsersObs | async)">
+            </bootstrap-selectbox>
+        </div>
+            <button class="save-serch" class="save-serch" (click)="onChangeUser()"> {{fixedTextHash['generate'][currLan]}}</button>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+        <div class="col-lg-9 refine-serch bottom-gap">
+            <div class="block">
+                <div class="row block-title-2">
+                    <h2 class="padding-top-10">{{fixedTextHash['user_report'][currLan]}}</h2>
+                    <a (click)="onBack()" class="hidden-xs arabic-left-right" > <button> <span><i class="zmdi zmdi-arrow-left"></i></span><span class="hide">{{fixedTextHash['back'][currLan]}}</span>  </button> </a>
+                </div>
+                <div>
+                    <div class="mobile-job-application">
+                        <a href="#jobposted"  class="cursor_pointer1"  aria-controls="jobposted" role="tab" data-toggle="tab">
+                            <div class="big-txt">{{(totalJobs | async) | number}}</div>
+                            <div class="light">{{fixedTextHash['no_jobs_posted'][currLan]}}</div>
+                        </a>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="jobposted">
+
+                                <div class="saved-searches">
+                                    <div class="row tracking-title">
+                                        <div class="col-lg-6 col-md-6 text-left"><span class="navy-dark">{{fixedTextHash['jobs'][currLan]}}</span></div>
+                                        <div class="col-lg-2 col-md-2 text-center"><span class="navy-dark">{{fixedTextHash['no_applications'][currLan]}}</span></div>
+                                        <div class="col-lg-2 col-md-2 text-center"><span class="navy-dark">{{fixedTextHash['no_views'][currLan]}}</span></div>
+                                        <div class="col-lg-2 col-md-2 text-center border-none"><span class="navy-dark">{{fixedTextHash['status'][currLan]}}</span></div>
+                                    </div>
+                                    <div class="row savedserch  filter-jobs" id="our-jobs">
+                                            <div class="report-blank" *ngIf="!(jobsObs | async) || (jobsObs | async)?.jobs?.length == 0">
+                                            <div class="empty-prf" *ngIf="!(jobsObs | async)">
+                                                <spinner [visible]="true"></spinner>
+                                            </div>
+                                            <div *ngIf="(jobsObs | async) && (jobsObs | async)?.jobs?.length == 0"  class="report-blank">
+                                                <div class="empty-prf">
+                                                    <i class="icon-empty-job"></i>
+                                                    <h5>{{fixedTextHash['no_jobs_posted'][currLan]}}</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+                                        <div *ngIf="(jobsObs | async)?.jobs?.length > 0">
+                                        <div class="row" *ngFor="let selJob of (jobsObs | async)?.jobs">
+
+                                            <div  [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/jobs/'+accountService.getSpaceToDashLowerCase(selJob.title)+'-'+selJob.id]"
+                                                  class="cursor_pointer1 featured-box col-lg-6 col-md-6 col-sm-12 col-xs-12 padding-20 report-list">
+                                                <div class="feturd-compny"><img [attr.src]="selJob?.company?.avatar"></div>
+                                                <div class="feturd-compny-dtls d-report">
+                                                    <div class="txt-white">{{selJob.title}}</div>
+                                                    <div class="cmpny-txt bold"><i class="zmdi zmdi-city-alt"></i>{{selJob?.company?.name}}</div>
+                                                    <div class="cmpny-txt"><i class="zmdi zmdi-chart-donut"></i>{{selJob?.sector?.name}}</div>
+                                                    <div class="cmpny-txt"><i class="zmdi zmdi-calendar-alt"></i>{{accountService.getFormattedDate(selJob?.start_date, 'MMM DD, YYYY')}}</div>
+                                                </div>
+                                                <div class=" clearfix"></div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 text-center sd-height">
+                                                <span class="navy"><i class="zmdi zmdi-comment-alt-text"></i>&nbsp;{{selJob.job_applications_count | number}}</span>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 text-center sd-height">
+                                                <span class="navy" *ngIf="selJob.views_count"><i class="zmdi zmdi-eye"></i>&nbsp;{{selJob?.views_count}} </span>
+                                                <span class="navy" *ngIf="!selJob.views_count"><i class="zmdi zmdi-eye"></i>&nbsp;0</span>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 text-center padding-0 sd-height">
+                                                <div class="open-closed">
+
+                                                    <div class="deleted-label" *ngIf="selJob.deleted">{{fixedTextHash['deleted'][currLan]}}</div>
+                                                    <div class="draft-label" *ngIf="!selJob.deleted  && selJob.job_status?.status == 'Draft'" >{{fixedTextHash['draft'][currLan]}}</div>
+                                                    <div class="expired-label" *ngIf="!selJob.deleted  && getIfExpired(selJob.end_date) && selJob.job_status?.status != 'Draft'">{{fixedTextHash['expired'][currLan]}}</div>
+                                                    <div class="active-label" *ngIf="!selJob.deleted  && !getIfExpired(selJob.end_date)  && selJob.job_status?.status == 'Open'">{{fixedTextHash['active'][currLan]}}</div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="rport-pagi" *ngIf="(totalJobs | async) > 10" >
+                                        <pagination-new [url]="accountService.getCurrLangUrl()+accountService.getPath()+'/profile/user_report'" [totalRecords]="totalJobs"></pagination-new>
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+        </div>
+        <a (click)="onBack()" class="hidden-md hidden-lg hidden-sm ">
+        <button class="full-width-button margin-bootom-5">{{fixedTextHash['back'][currLan]}}</button>
+        </a>
+
+
+    </div>
+
+</div>

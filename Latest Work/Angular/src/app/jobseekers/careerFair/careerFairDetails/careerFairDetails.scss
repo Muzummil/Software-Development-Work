@@ -1,0 +1,113 @@
+@import '../../../../styles/sass/base/variables';
+
+label{
+    text-align: left;   
+    margin-top: 10px;
+    display: block;
+    color: $primary-font;
+   }
+    
+   .arabic {
+       label{
+       text-align: right;   
+       display: block;
+      }
+   }
+ 
+   
+.fair-deatils-sec {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 550px;
+    ul {
+        margin-top: 20px;
+        float: left;
+        text-align: left;
+        margin-left: 10px;
+        width: calc(100% - 140px);
+        li {
+            display: block;
+            font-size: 14px;
+            color: $secondarycolor;
+            strong {
+                font-weight: 500;
+                font-size: 16px;
+                font-size: 20px!important;
+                color: $heading-text;
+            }
+        }
+    }
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.detail_career-fair-logo {
+    width: 130px;
+    height: 130px;
+    border: 1px solid #f1f1f1;
+    margin-top: 20px;
+    float: left;
+    img {
+        width: 100%;
+        height: 128px;
+        object-fit: contain;
+    }
+    i {
+        line-height: 130px;
+        font-size: 40px;
+        color: $primarycolor;
+        text-align: center;
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.arabic{
+    .detail_career-fair-logo{
+        float: right;
+    }
+    ul {
+        text-align: right;
+        margin-right: 10px;
+        margin-left: 0px;
+    }
+}
+
+// Error
+.error-feild {
+    border: 1px solid #e74c3c;
+}
+
+button {
+    font-size: 16px;
+    border-radius: 3px;
+    background: $tertiarycolor;
+    padding: 8px 15px;
+    border: none;
+    color: #fff;
+    width: 200px;
+    float: left;
+    margin-top: 15px;
+}
+.arabic {
+    button{
+        float: right;
+    }
+}
+.pointer-none{
+cursor: text;
+}
+
+
+// ============MediumScreen========
+@media all and (max-width: 768px) {
+    .fair-deatils-sec {
+        ul {
+            width: 100%;
+        }
+    }
+}

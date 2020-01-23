@@ -1,0 +1,143 @@
+<div class="col-lg-12 colmd-12 col-sm-12 col-xs-12">
+    <div class="block bottom-gap">
+        <div class="profile-contact">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 min-prf arabic-right-left"> <!---------- Contact Details ------------>
+                <contact-us (onUpdateProfileStatus)="onUpdateProfileStatus.emit($event)" [jobSeekerContact]="jobSeekerContact"></contact-us>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 bdr-all min-prf arabic-right-left"> <!---------- Address ------------>
+                <address-block (onUpdateProfileStatus)="onUpdateProfileStatus.emit($event)"  [jobSeekerAddress]="jobSeekerAddress" [commonData]="commonData"></address-block>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 min-prf"> <!---------- Resume ------------>
+            <div class="resume mobile-job-application">
+
+
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a (click)="showResume()" aria-controls="cv" role="tab" data-toggle="tab">
+                            {{fixedTextHash['my_cv'][currLan]}}
+                        </a>
+                    </li>
+ 
+                </ul>
+
+                <div class="tab-content">
+                    <div role="tabpanel" [class.active]="tab == 'resume'" class="tab-pane" id="cv">
+                        <div [style.display]="(status3$ | async) == 'read' ?'block':'none'"> <!-- Save -->
+                            <div class="resume-contant">
+                                <i class="spinner-prf" *ngIf="(loadSpinner$ | async)"><spinner [visible]="(loadSpinner$| async)"></spinner></i>
+
+                                <div class="resume-cover-empty empty-prf cursor_pointer1" *ngIf="(resumes2$ | async)?.length == 0"
+                                     data-toggle="modal"
+                                     [attr.data-target]="'.'+file.classMap">
+                                    <i class="icon-empty-cover"></i>
+                                    <h5> {{fixedTextHash['add_cv'][currLan]}}</h5>
+                                </div>
+
+                                <div class="cv-file" *ngFor="let selresume of (resumes2$ | async),let i =index">
+
+                                    <!--<span *ngIf="selresume">-->
+                                    <div class="cv-lft cursor_pointer1 arabic-right-left" (click)="onDownloadFile(selresume.url)">
+                                        <span class="dark">
+                                        <div class="cv-co-name2">
+                                            <i class="zmdi zmdi-file-text"></i>&nbsp;{{selresume.name}}
+                                        </div>
+                                        </span>
+                                    </div>
+                                    <div class="cv-rgt">
+                                        <div class="follow-following">
+
+
+
+                                            <button class="follow"  *ngIf ="selresume.default" [class.following]="selresume.default">
+                                                <a class="msg-follow">Default</a>
+                                                <a class="msg-following"><i class="zmdi zmdi-check-circle"></i> {{fixedTextHash['default'][currLan]}}</a>
+                                                <a class="msg-unfollow"><i class="zmdi zmdi-check-circle"></i> {{fixedTextHash['default'][currLan]}}</a>
+                                            </button>
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="clearfix"></div>
+                                    <!--</span>-->
+                                </div>
+
+
+                            </div>
+                            <div class="block-footer">
+                                <a (click)="onEditResume()">
+                                    <div class="big-button-edit">
+                                        <i class="zmdi zmdi-edit"></i> {{fixedTextHash['edit'][currLan]}}
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div [style.display]="(status3$ | async) == 'edit' ?'block':'none'">  <!-- edit -->
+                            <div class="resume-contant">
+
+
+                                <div class="cv-file" *ngFor="let selresume of (resumes2$ | async),let i =index">
+
+                                    <span *ngIf="selresume">
+                                        <div class="cv-lft arabic-right-left">
+                                            <span class="dark">
+                                             <a (click)="onDeleteResume(i,selresume.id)"><i class="zmdi zmdi-delete"></i></a>
+                                             <div class="cv-co-name">
+                                                <i class="zmdi zmdi-file-text"></i>&nbsp;{{selresume.name}}
+                                             </div>
+                                            </span>
+                                        </div>
+                                        <div class="cv-rgt">
+                                            <div class="follow-following">
+                                                <button class="follow" (click)="setResumeDefault(i)"
+                                                        [class.following]="selresume.default">
+                                                    <a class="msg-follow">{{fixedTextHash['default'][currLan]}}</a>
+                                                    <a class="msg-following"><i class="zmdi zmdi-check-circle"></i> {{fixedTextHash['default'][currLan]}}</a>
+                                                    <a class="msg-unfollow"><i class="zmdi zmdi-check-circle"></i> {{fixedTextHash['default'][currLan]}}</a>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </span>
+                                </div>
+
+
+                            </div>
+                            <div class="block-footer">
+                                <div class="percentage-btn">
+
+                                    <a href="#"
+                                       data-toggle="modal"
+                                       [attr.data-target]="'.'+file.classMap">
+                                        <div class="btn1 big-button-edit"><i class="zmdi zmdi-cloud-upload"></i> {{fixedTextHash['upload'][currLan]}}
+                                        </div>
+                                    </a>
+
+
+                                    <a  (click)="onSaveResume()">
+                                        <div class="btn2"><i class="zmdi zmdi-floppy"></i> {{fixedTextHash['save'][currLan]}}</div>
+                                    </a>
+                                    <a (click)="onReadResume()">
+                                        <div class="btn3"><i class="zmdi zmdi-close"></i> {{fixedTextHash['cancel'][currLan]}}</div>
+                                    </a>
+
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+
+                        </div>
+                    </div>
+              
+                    <up-load [file]="file1" (onUpload)="updateCoverLetterList($event)"></up-load>
+                    <up-load [file]="file" (onUpload)="updateResumeList($event)"></up-load>
+
+
+                </div>
+            </div>
+
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

@@ -1,0 +1,84 @@
+<ion-header class="animated fadeIn no-shadow">
+
+  <ion-navbar class="no-border" color="primary">
+    <ion-title>
+      Apartment Set Up
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="common-bg apartment_setup">
+  <!-- <h5>Apartment 1</h5> -->
+  <form #myForm="ngForm" [formGroup]="onAppartmentSetupForm" (ngSubmit)="AppartmentInfo()" class="list-form fields_dark">
+    <ion-item>
+      <ion-label fixed>
+        Apartment Number
+      </ion-label>
+      <ion-input col-12 type="text" formControlName="AppartmentNumber" placeholder="{{appartmentFormat}}"></ion-input>
+    </ion-item>
+    <p ion-text color="danger" class="has-error" *ngIf="onAppartmentSetupForm.get('AppartmentNumber').hasError('required') && myForm.submitted">{{ appartmentMessage }}</p>
+
+    <ion-item>
+      <ion-label fixed>
+        Number of Tenants
+      </ion-label>
+      <ion-input col-12 type="number" formControlName="Tenants" placeholder="No of Tenants"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>
+        Bedroom(s)/Bathroom(s)
+      </ion-label>
+      <ion-input col-5 type="number" formControlName="BedRoom" placeholder="Beds"></ion-input>
+      <ion-input col-5 type="number" formControlName="BathRoom" placeholder="Baths"></ion-input>
+    </ion-item>
+    <p ion-text color="danger" class="has-error" *ngIf="onAppartmentSetupForm.get('BedRoom').hasError('required') && myForm.submitted">{{ bathroomsMessage }}</p>
+    <p ion-text color="danger" class="has-error" *ngIf="onAppartmentSetupForm.get('BathRoom').hasError('required') && myForm.submitted">{{ bedroomsMessage }}</p>
+
+    <ion-item>
+      <ion-label fixed>
+        Rent Price $
+      </ion-label>
+      <ion-input col-12 type="number" formControlName="rentPrice" placeholder="Enter Price"></ion-input>
+    </ion-item>
+    <p ion-text color="danger" class="has-error" *ngIf="onAppartmentSetupForm.get('rentPrice').hasError('required') && myForm.submitted">{{ rent_priceMessage }}</p>
+
+    <ion-item>
+      <ion-label fixed>
+        Due Date
+      </ion-label>
+      <ion-datetime class="p-l-1x" displayFormat="MMM DD YYYY" [(ngModel)]="dueDate" formControlName="firstDueDate" placeholder="MM/DD/YYYY"></ion-datetime>
+    </ion-item>
+    <p ion-text color="danger" class="has-error" *ngIf="onAppartmentSetupForm.get('firstDueDate').hasError('required') && myForm.submitted">{{ dueDateMessage }}</p>
+
+    <ion-item>
+      <ion-label fixed>
+        First Payment Date
+      </ion-label>
+      <ion-datetime class="p-l-1x" displayFormat="MMM DD YYYY" [(ngModel)]="dueDate" formControlName="firstPayment" placeholder="MM/DD/YYYY"></ion-datetime>
+    </ion-item>
+    <p ion-text color="danger" class="has-error" *ngIf="onAppartmentSetupForm.get('firstPayment').hasError('required') && myForm.submitted">{{ firstPaymentMessage }}</p>
+
+    <ion-item>
+      <ion-label fixed>
+        Grace Period
+      </ion-label>
+      <ion-input col-12 type="number" formControlName="GraceDays" placeholder="No of Days"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>
+        Late Fee
+      </ion-label>
+      <ion-input col-4 type="number" formControlName="LateFee" placeholder="$$$"></ion-input>
+      <ion-select placeholder="Flat Fee" col-5 multiple="false" cancelText="Cancel" okText="OK">
+        <ion-option value="FlatFee">Flat Fee($)</ion-option>
+        <ion-option value="Percentage">Percentage(%)</ion-option>
+      </ion-select>
+    </ion-item>
+    <p ion-text color="danger" class="has-error" *ngIf="onAppartmentSetupForm.get('LateFee').hasError('required') && myForm.submitted">{{ late_feeMessage }}</p>
+    <button ion-button full type="submit">Save</button>
+
+
+  </form>
+  <button ion-button full class="btn-fb signfb" (click)="inviteTenant()">Skip</button>
+
+</ion-content>

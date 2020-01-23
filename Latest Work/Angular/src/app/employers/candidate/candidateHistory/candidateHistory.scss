@@ -1,0 +1,296 @@
+@import '../../../../styles/sass/base/_variables.scss';
+
+h1, h2, h3, h4, h5, span, label, a, button, p{
+  font-family: $primary-Fonts;
+}
+
+.arabic{
+    h1, h2, h3, h4, h5, span, label, a, button, p, input{
+    font-family: $arabic-primary-Fonts!important;
+  }
+}
+
+.headHistory{
+    height: auto;
+    padding: 10px;
+    background: $secondarycolor;
+    h2{
+        color: $white;
+        font-size: $medium-size;
+    }
+    span{
+        display: block;
+        color: $white;
+        opacity: 0.8;
+    }
+    button{
+        display: block;
+        height: $button-height;
+        background: $white;
+        color: $secondarycolor!important;
+        width: 100%;
+        border:none;
+    }
+}
+.lineHistory{
+    width: 1px;
+    height: 100vh;
+    background: #f1f1f1;
+    float: left;
+}
+
+.no-hitory{
+    width: 100%;
+    display: block;
+    padding: 10px;
+    border: 1px solid #fcd8d8;
+    background: rgba(255, 0, 0, 0.06);
+}
+
+.listOfHistory{
+    height: auto;
+    border:1px solid #f1f1f1;
+    box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.05);
+    float: left;
+    width: calc(100% - 1px);
+    margin: 3px 0px;
+    padding: 10px;
+    position: relative;
+    .activehistory{
+        background-image: url(../../../../assets/images/custom-images/ATS/activehistory.png);
+        display: block;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-size: contain;
+        left: -12px;
+        top: 45px;
+    }
+    .oldhistory{
+        background-image: url(../../../../assets/images/custom-images/ATS/oldhistory.png);
+        display: block;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-size: contain;
+        left: -12px;
+        top: 45px;
+    }
+    ul{
+        display: block;
+        padding-left: 10px;
+        li{
+            display: block;
+            h3{
+                margin: 0px;
+                font-size: $medium-size;
+                margin-bottom: 10px;
+            }
+            color: $secondarycolor;
+            font-size: 14px;
+            span{
+                color: $primarycolor;
+            }
+        }
+    }
+    button{
+        float:right;
+        border:none;
+        color: $secondarycolor;
+        height: $button-height;
+        box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.05);
+        width: 100px;
+        border:1px solid #f1f1f1;
+        margin-top: 10px;
+    }
+    .statusHistory{
+        text-align: center;
+        width: 100px;
+        display: block;
+        padding: 5px;
+        background: #f1f1f1;
+        float: right;
+    }
+    .communicationLogs{
+        background: #f9f9f9;
+        border:1px solid #f1f1f1;
+        min-height:auto;
+        padding: 20px;
+        h4{
+            margin: 0px;
+            font-size: 16px;
+            padding-bottom: 10px;
+            color: #333;
+            display: block;
+            width: 100%;
+            span{
+                float: right;
+                display: block;
+                padding: 5px;
+                font-size: 14px;
+                background: $white;
+                margin-bottom: 10px;
+                &:hover{
+                    cursor: pointer;
+                }
+            }
+        }
+        // status change History
+        // -----------------------------------
+        .statusCommentsHistory{
+            box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.05);
+            background: $white;
+            padding: 10px;
+            min-height: 300px;
+            margin-bottom: 10px;
+            h2{
+                display: block;
+                width: 100%;
+                height: 30px;
+                background: $primarycolor;
+                color: $white;
+                font-size: 16px;
+                padding: 0px 10px;
+                margin: 0px;
+                line-height: 30px;
+            }
+            ul{
+                li{
+                    display: block;
+                    width: 100%;
+                    height: auto;
+                    padding: 10px;
+                    border: 1px solid #f1f1f1;
+                    margin: 5px 0px;
+                    box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.05);
+                    span{
+                        display: inline-block;
+                        color: #333;
+                        strong{
+                            color: $primarycolor;
+                        }
+                    }
+                    i{
+                        font-style: normal!important;
+                        font-size: 12px;
+                        display: block;
+                    }
+                    p{
+                        display: block;
+                        background-color: $bg-default;
+                        padding: 5px;
+                        margin: 0px;
+                        border-radius: 6px;
+                    }
+                }
+            }
+        }
+
+        // note change History
+        // -----------------------------------
+        .notesHistory{
+            box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.05);
+            background: $white;
+            padding: 10px;
+            min-height: 300px;
+            margin-bottom: 10px;
+            h2{
+                display: block;
+                width: 100%;
+                height: 30px;
+                background: #e1e1e1;
+                color: $secondarycolor;
+                font-size: 16px;
+                padding: 0px 10px;
+                margin: 0px;
+                line-height: 30px;
+            }
+            ul{
+                li{
+                    display: block;
+                    width: 100%;
+                    height: auto;
+                    padding: 10px 0px;
+                    span{
+                        display: inline-block;
+                    }
+                    i{
+                        font-style: normal!important;
+                        font-size: 12px;
+                        display: inline-block;
+                    }
+                    p{
+                        display: block;
+                        background-color: $bg-default;
+                        padding: 5px;
+                        margin: 0px;
+                        border-radius: 6px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.unsuccessfulLabel{
+    color: $successful!important;
+}
+.successfulLabel{
+    color: $unsuccessful!important;
+}
+
+.min-history{
+    min-height: 700px;
+}
+
+// ============================================
+.arabic{
+    .listOfHistory{
+       
+        .activehistory{
+            right: -12px;
+            left: inherit
+        }
+        .oldhistory{
+            right: -12px;
+            left: inherit
+        }
+    }
+    .lineHistory{
+        float: right;
+    }
+}
+
+
+/* Respopnsive breakpoint */
+// ============bigScreen===========
+@media all and (max-width: 991px) {
+
+}
+
+// ============MediumScreen========
+@media all and (max-width: 768px) {
+
+    .headHistory{
+        button{
+            margin-top: 10px;
+        }
+    }
+
+    .listOfHistory{
+        button{
+            width: 100%!important;
+        }
+        .statusHistory{
+            width: 100%!important;
+        }
+    }
+
+}
+
+// ============SmallScreen=========
+@media all and (max-width: 480px) {}

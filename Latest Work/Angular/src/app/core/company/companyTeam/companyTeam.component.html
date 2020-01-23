@@ -1,0 +1,111 @@
+<!-- Our Team -->
+<!-- ========================================== -->
+<section class="team_v2" *ngIf="viewMeetOurTeamFlag">
+    <h2>
+        {{fixedTextHash['meet_our_team'][currLan]}}
+        <a *ngIf="!isPublic  && isEmployer" (click)="viewMeetOurTeamFlag = false"><i class="zmdi zmdi-edit"></i>&nbsp;{{fixedTextHash['edit'][currLan]}}</a>
+    </h2>
+
+    <div *ngFor="let selTeam of (companyTeamObs | async),let teamIndex = index"
+         class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="team-picture-v2">
+            <button *ngIf="selTeam.profileVideo" data-toggle="modal" [attr.data-target]="'.video-team-member-'+teamIndex"
+               class="edit-team-v2">
+                <i class="zmdi zmdi-play"></i>
+            </button>
+            <img [attr.src]="selTeam.profileImage">
+        </div>
+        <h3>{{selTeam.name}}</h3>
+        <span>{{selTeam.designation}}</span>
+    </div>
+</section>
+
+
+<!-- edit -->
+<!-- ================== -->
+<ng-container *ngIf="!isPublic && isEmployer">
+    <section class="team_v2" *ngIf="!viewMeetOurTeamFlag">
+        <h2>
+            {{fixedTextHash['meet_our_team'][currLan]}}
+            <a (click)="viewMeetOurTeamFlag = true" class="add-new-v2 cancel-v2">{{fixedTextHash['cancel'][currLan]}}</a>
+            <a data-toggle="modal" [attr.data-target]="'.'+file_team.classMap" class="add-new-v2">{{fixedTextHash['add_new'][currLan]}}</a>
+        </h2>
+        <div *ngFor="let selTeam of (companyTeamObs | async),let teamIndex = index"
+             class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="team-picture-v2">
+                <button *ngIf="selTeam.profileVideo" data-toggle="modal" [attr.data-target]="'.video-team-member-'+teamIndex"
+                        class="edit-team-v2">
+                    <i class="zmdi zmdi-play"></i>
+                </button>
+                <img [attr.src]="selTeam.profileImage">
+            </div>
+            <h3>{{selTeam.name}}</h3>
+            <span>{{selTeam.designation}}</span>
+            <div class="group-bt-v5">
+                <a data-toggle="modal" [attr.data-target]="'.'+fileTeamList[teamIndex]?.classMap" class="edit-team-v2">
+                    <i class="zmdi zmdi-edit"></i>&nbsp;{{fixedTextHash['edit'][currLan]}}
+                </a>
+                <a data-toggle="modal" [attr.data-target]="'.delete-team-member-'+teamIndex"
+                   class="edit-team-v2 cancel-team-v5">
+                    <i class="zmdi zmdi-delete"></i>&nbsp;{{fixedTextHash['delete'][currLan]}}
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!--Add new Team-->
+    <up-load  [file]="file_team" [mode]="'imageCrop'" (onUpload)="onTeamPicUploaded($event)"></up-load>
+    <ng-container *ngFor="let selTeam of (companyTeamObs | async),let teamIndex = index">
+        <up-load *ngIf="fileTeamList[teamIndex]" [file]="fileTeamList[teamIndex]" [mode]="'imageCrop'"
+                 (onUpload)="onTeamPicUploaded($event)"></up-load>
+        <div class="popup">
+            <div class="logout-pop">
+                <div class="modal close_delete delete-team-member-{{teamIndex}}" tabindex="-1" role="dialog"
+                     aria-labelledby="myLargeModalLabel">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <button class="close following" aria-hidden="true" data-dismiss="modal" type="button">×
+                                </button>
+                                <h2>{{fixedTextHash['delete_team_member'][currLan]}}</h2>
+                                <h4><span class="navy"> {{fixedTextHash['sure_to_delete'][currLan]}}  </span></h4>
+                                <div class="pop-button">
+                                    <button (click)="onDelete(selTeam.id,teamIndex)" type="button" class="btn postive">
+                                        {{fixedTextHash['delete'][currLan]}}
+                                    </button>
+                                    <button type="button" class="btn negative" data-dismiss="modal">{{fixedTextHash['cancel'][currLan]}}</button>
+                                    <div class="clr"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="popup" *ngIf="selTeam.profileVideo">
+            <div class="logout-pop">
+                <div class="modal close_video video-team-member-{{teamIndex}}" tabindex="-1" role="dialog"
+                     aria-labelledby="myLargeModalLabel">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <button class="close following" aria-hidden="true" data-dismiss="modal" type="button">×
+                                </button>
+
+                                <h2>{{selTeam.name}}</h2>
+                                <span>{{selTeam.designation}}</span>
+                                <div class="video-pop-v5">
+                                    <video  controls  loop id="myVideo{{teamIndex}}">
+                                        <source [attr.src]="selTeam?.profileVideo" type="video/mp4">
+                                        {{fixedTextHash['your_browser_does_not_support_html5'][currLan]}}
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</ng-container>
+

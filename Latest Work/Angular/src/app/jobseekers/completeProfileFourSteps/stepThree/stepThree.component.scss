@@ -1,0 +1,185 @@
+@import '/../../../../styles/sass/base/_variables.scss';
+.error-feild{
+    border: 1px solid #e74c3c !important;
+}
+h1, h2, h3, h4, h5, span, label, a, button, p{
+    font-family: $primary-Fonts;
+}
+
+.arabic{
+    h1, h2, h3, h4, h5, span, label, a, button, p, input{
+        font-family: $arabic-primary-Fonts!important;
+    }
+}
+
+select{
+    padding: 0px 12px;
+}
+input[type=checkbox], input[type=radio]{
+    margin: -10px 0 0 -20px;;
+}
+// end reset
+
+
+// start register-form-container
+.fal-register-form-container{
+    min-height: 760px;
+    max-width: 701px;
+    margin: 0px auto;
+    form{
+        display: block;
+        width: 100%;
+        float: left;
+        margin-top: 80px;
+    }
+    h4{
+        text-align: left;
+        display: block;
+        padding-bottom: 10px;
+        text-transform: capitalize;
+        font-size: 14px;
+        color: $secondarycolor;
+        margin:0px;
+        margin-top: 0px;
+        &:after{
+            content: " *";
+            color: red;
+            font-weight: bold;
+        }
+        span{
+            font-size: 12px;
+            font-weight: normal
+        }
+    }
+    .fal-row{
+        margin-right: -5px;
+        margin-left: -5px;
+    }
+    .fal-divider{
+        border-top: 1px solid $light-border;
+        margin-top: 25px;
+        margin-bottom: 30px;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    .fal-shadow-container{
+        padding: 20px 10px 10px 10px;
+        background: $white;
+        margin-top:10px;
+        border:1px solid $light-border;
+        position: relative;
+        box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.05);
+    }
+    .fal-addmore{
+        .help-txt{
+            font-size: 12px !important;
+            padding: 10px 0px;
+            display: block;
+        }
+        .btn-addmore{
+            width: 100%;
+            height: 40px;
+            color: $white;
+            background: $primarycolor;
+            border: none;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+    }
+    .fal-register-btn-group{
+        margin-top: 40px;
+        float: left;
+        width: 100%;
+        border-top: 1px solid $light-border;
+        padding-top: 20px;
+
+        .fal-btn-primary{
+            float: right;
+            background: $primarycolor;
+            border-radius: $border-radius;
+            height: $button-height;
+            text-align: center;
+            color: $white;
+            width: 120px;
+            border:none;
+            margin-left: 5px;
+            a{
+                color: $white;
+            }
+        }
+        .fal-btn-secondary{
+            float: right;
+            background: $secondarycolor;
+            height: $button-height;
+            text-align: center;
+            color: $white;
+            width: 120px;
+            border:none;
+            margin-left: 5px;
+            a{
+                color: $white;
+            }
+        }
+    }
+}
+// end register-form-container
+
+
+
+
+
+
+
+
+
+// arbic style
+// =====================================
+.arabic{
+    .fal-register-form-container{
+        h4{
+            text-align: right;
+        }
+        .fal-register-btn-group{
+            .fal-btn-primary, .fal-btn-secondary{
+                float: left;
+                margin-left: inherit;
+                margin-right: 5px;
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+/* Respopnsive breakpoint */
+// ============bigScreen===========
+@media all and (max-width: 991px) {
+    .fal-register-form-container{
+    }
+}
+
+// ============MediumScreen========
+@media all and (max-width: 768px) {
+    .fal-register-form-container{
+        form{
+            margin-top:20px;
+        }
+        .fal-register-btn-group{
+            .fal-btn-primary, .fal-btn-secondary{
+                width: 50%;
+                margin-left: 0px;
+                margin-right: 0px !important;
+            }
+        }
+    }
+}
+
+// ============SmallScreen=========
+@media all and (max-width: 480px) {
+
+}

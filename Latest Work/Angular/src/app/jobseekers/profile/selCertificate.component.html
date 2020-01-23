@@ -1,0 +1,144 @@
+<spinner [visible]="certSpinnerFlag"></spinner>
+<form [formGroup]="certificate.cert_form">
+
+   
+    <div class="work-exp-details">
+        <div>
+            <div class="col-lg-6 arabic-right-left">
+                <div class="work-exp-form">
+                    <div class="full-box">
+                        <div class="dark">{{fixedTextHash['certificate'][currLan]}}</div>
+                        <div class="full-box">
+                            <input type="text"
+                                   name="cert_name"
+                                   formControlName="cert_name"
+                                   placeholder="{{fixedTextHash['certificate'][currLan]}}"
+                                   minlength="1" maxlength="50">
+                            <div  *ngIf="(certificate.cert_form.controls['cert_name'].touched || !certificate_pristine)&& !certificate.cert_form.controls['cert_name'].valid"
+                                  class="alert alert-danger alert-dismissible martop5" role="alert">
+                                {{fixedTextHash['empty_certificate'][currLan]}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="full-box">
+                        <div class="dark">{{fixedTextHash['institute'][currLan]}}</div>
+                        <div class="full-box">
+                            <input type="text"
+                                   name="cert_university"
+                                   formControlName="cert_university"
+                                   placeholder="{{fixedTextHash['institute'][currLan]}}"
+                                   minlength="1" maxlength="50">
+
+                            <div  *ngIf="(certificate.cert_form.controls['cert_university'].touched || !certificate_pristine) &&
+                                         !certificate.cert_form.controls['cert_university'].valid"
+                                  class="alert alert-danger alert-dismissible martop5" role="alert">
+                                {{fixedTextHash['empty_institute'][currLan]}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class=" clearfix"></div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div>
+                    <div class="full-box">
+                        <div class="half-box-lft arabic-right-left">
+                            <div class="full-box">
+                                <div class="dark">{{fixedTextHash['start_date'][currLan]}}</div>
+                                <div class="full-box relative">
+                                    <input type="hidden"
+                                           formControlName="cert_start_date"
+                                           name="cert_company_start_date"
+                                           #certStartDate
+                                           [ngModel]="startDate"
+                                           (change)="selectStartDate(certStartDate)"
+                                           placeholder="{{fixedTextHash['start_date'][currLan]}}">
+
+                                    <datePicker-block (emitSelDate)="certificate.cert_form.controls['cert_start_date'].setValue($event['selDate']);certificate.cert_form.controls['cert_end_date'].setValue(null)"
+                                                      [dp_placeholder]="fixedTextHash['start_date'][currLan]"
+                                                      [sel_id]="cert_index+'_'+display_mode+'14'"
+                                                      [toYear]="toYear"
+                                                      [maxDate]="maxDate"
+                                                      [dp_value]="certificate.cert_form.controls['cert_start_date'].value | date: 'MMM yyyy dd'" >
+                                    </datePicker-block>
+                                    <div  *ngIf="(certificate.cert_form.controls['cert_start_date'].touched || !certificate_pristine)&&
+                                         !certificate.cert_form.controls['cert_start_date'].valid"
+                                          class="alert alert-danger alert-dismissible martop5" role="alert">
+                                        {{fixedTextHash['empty_start_date'][currLan]}}
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="half-box-rgt">
+                            <div class="full-box">
+                                <div class="dark">{{fixedTextHash['end_date'][currLan]}}</div>
+                                <div class="full-box relative">
+                                    <input type="hidden"
+                                           name="cert_company_end_date"
+                                           formControlName="cert_end_date"
+                                           #certEndDate
+                                           [ngModel]="endDate"
+                                           (change)="selectEndDate(certEndDate)"
+                                           placeholder="{{fixedTextHash['end_date'][currLan]}}">
+                                    <datePicker-block (emitSelDate)="certificate.cert_form.controls['cert_end_date'].setValue($event['selDate'])"
+                                                      [dp_placeholder]="fixedTextHash['end_date'][currLan]"
+                                                      [sel_id]="cert_index+'_'+display_mode+'15'"
+                                                      [toYear]="toYear"
+                                                      [maxDate]="maxDate"
+                                                      [dp_startDate]="certificate.cert_form.controls['cert_start_date'].value | date: 'MMM yyyy dd'"
+                                                      [dp_value]="certificate.cert_form.controls['cert_end_date'].value | date: 'MMM yyyy dd'">
+                                    </datePicker-block>
+
+                                    <div  *ngIf="(certificate.cert_form.controls['cert_end_date'].touched || !certificate_pristine )&&
+                                         !certificate.cert_form.controls['cert_end_date'].valid"
+                                          class="alert alert-danger alert-dismissible martop5" role="alert">
+                                        {{fixedTextHash['empty_end_date'][currLan]}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="full-box">
+                    <div class="half-box-lft arabic-right-left">
+                        <div class="dark">{{fixedTextHash['grade'][currLan]}}</div>
+                        <div class="full-box">
+                            <input type="text"
+                                   formControlName="cert_grade"
+                                   name="cert_grade"
+                                   placeholder="{{fixedTextHash['grade'][currLan]}}"
+                                   minlength="1" maxlength="50">
+
+                            <div  *ngIf="(certificate.cert_form.controls['cert_grade'].touched || !certificate_pristine)&&
+                                         !certificate.cert_form.controls['cert_grade'].valid"
+                                  class="alert alert-danger alert-dismissible martop5" role="alert">
+                                {{fixedTextHash['empty_grade'][currLan]}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="col-lg-12">
+                <div class="block-title-2 padding-0 border-none margin-top-5">
+                    <button class="arabic-right-left"  (click)="onSaveCERT(cert_index)">
+                        <i class="zmdi zmdi-floppy"></i> {{fixedTextHash['save'][currLan]}}
+                    </button>
+                    <span class="span-button" (click)="onCancelCERT(cert_index)">
+                          <i  class="zmdi zmdi-close"></i> {{fixedTextHash['cancel'][currLan]}}
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class=" clearfix"></div>
+</form>
+<!--<up-load [file]="certificate.cert_file_D"></up-load>-->

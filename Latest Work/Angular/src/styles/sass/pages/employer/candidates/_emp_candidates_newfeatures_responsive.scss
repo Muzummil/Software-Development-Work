@@ -1,0 +1,182 @@
+
+/*---------------------------------------------------1-------------------------------------------------------*/
+
+@media (max-width: 1200px){
+}
+
+/*---------------------------------------------------2-------------------------------------------------------*/
+
+@media (min-width: 768px) and (max-width: 1024px){
+
+    .likelyhood_of_changing{
+        width: auto;
+        padding: 0px;
+        height: auto;
+        float: none;
+        border:none;
+    }
+    #followers{
+       .new-list .newlistleft .newlistdp-right{
+            width: calc(100% - 365px)!important;
+            padding-left:10px;
+        } 
+        .new-list .newlist-experience .exp-box{
+            width: 100%;
+        }
+        .jobapplicant .new-list .newlist-experience{
+            width: 220px;
+        }
+        
+    }
+
+    #most-profile{
+       .new-list .newlistleft .newlistdp-right{
+            width: calc(100% - 365px)!important;
+            padding-left:10px;
+        } 
+        .new-list .newlist-experience .exp-box{
+            width: 100%;
+        }
+        .jobapplicant .new-list .newlist-experience{
+            width: 220px;
+        }
+        
+    }
+
+}
+
+
+// ===========================================
+@media all and (max-width: 991px) {
+
+    .likelyhood_of_changing{
+        width: auto;
+        padding: 0px;
+        height: auto;
+        float: none;
+        border:none;
+    }
+
+    
+ 
+}
+
+/*---------------------------------------------------3-------------------------------------------------------*/
+@media (max-width: 767px) {
+
+    .likelyhood_of_changing{
+        width: auto;
+        padding: 0px;
+        height: auto;
+        float: none;
+        border:none;
+    } 
+    .new-candidate-list-feature{
+        .jobapplicant .new-list .newlistleft .newlistdp-left{
+            float: none;
+            margin:0px auto;
+        }
+    }
+
+    #followers{
+       .new-list .newlistleft .newlistdp-right{
+            width: calc(100% - 145px)!important;
+            padding-left:10px;
+            padding-bottom: 5px;
+        } 
+        .new-list .newlist-experience .exp-box{
+            width: 100%;
+            height: auto;
+            h5{
+                padding-top:0px;
+            }
+        }
+        
+    }
+    #most-profile{
+       .new-list .newlistleft .newlistdp-right{
+            width: calc(100% - 145px)!important;
+            padding-left:10px;
+            padding-bottom: 5px;
+        } 
+        .new-list .newlist-experience .exp-box{
+            width: 100%;
+            height: auto;
+            h5{
+                padding-top:0px;
+            }
+        }
+        
+    }
+
+.new-succes, .new-unsucces, .new-reviewed, .new-shortlisted, .new-applied{
+    button{margin-left:5px;}
+}
+
+
+
+
+    
+
+}
+
+/*---------------------------------------------------4-------------------------------------------------------*/
+
+@media (max-width: 480px) {
+
+ #followers{
+       .new-list .newlistleft .newlistdp-right{
+            width: 100%!important;
+            padding-left:10px;
+            padding-bottom: 5px;
+        } 
+        .new-list .newlist-experience .exp-box{
+            width: 100%;
+            height: auto;
+            h5{
+                padding-top:0px;
+            }
+        }
+        .jobapplicant .new-list .newlist-experience{
+            padding-top:0px;
+        }
+        .new-list .newlistleft .newlistdp-right .applicant-name-dt h2{
+            text-align: center;
+            width: 100%;
+        }
+        .new-list .newlistleft .newlistdp-left{
+            float: none;
+            margin:0px auto;
+        }
+    }
+
+     #most-profile{
+       .new-list .newlistleft .newlistdp-right{
+            width: 100%!important;
+            padding-left:10px;
+            padding-bottom: 5px;
+        } 
+        .new-list .newlist-experience .exp-box{
+            width: 100%;
+            height: auto;
+            h5{
+                padding-top:0px;
+            }
+        }
+        .jobapplicant .new-list .newlist-experience{
+            padding-top:0px;
+        }
+        .new-list .newlistleft .newlistdp-right .applicant-name-dt h2{
+            text-align: center;
+            width: 100%;
+        }
+        .new-list .newlistleft .newlistdp-left{
+            float: none;
+            margin:0px auto;
+        }
+    }
+
+    
+
+}
+

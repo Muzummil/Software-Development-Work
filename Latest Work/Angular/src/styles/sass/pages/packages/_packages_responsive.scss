@@ -1,0 +1,160 @@
+/*---------------------------------------------------1-------------------------------------------------------*/
+
+@media (max-width: 1200px){}
+
+/*---------------------------------------------------2-------------------------------------------------------*/
+
+@media (min-width: 768px) and (max-width: 1024px){
+  .package-section{
+    margin-top: 20px;
+  }
+}
+
+/*---------------------------------------------------2-------------------------------------------------------*/
+
+@media (min-width: 768px) and (max-width: 992px){
+  .m-sp-bottom{
+    margin-bottom:5px;
+  }
+  .payment-areav2 .tab-payment .bt-payment-v2{
+    width: 49%!important;
+  }
+  .min-h-768-all-screen{
+    min-height: auto;
+  }
+  .package-section{
+    margin-top: 20px;
+  }
+}
+
+/*---------------------------------------------------3-------------------------------------------------------*/
+
+@media (max-width: 767px) {
+  .payment-areav2{
+    width: 100%;
+  }
+  .total-costv2{
+    width:100%;
+  }
+  .package-info-v2{
+    .pk-v2{
+      button{
+        width: 100%;
+      }
+      p{
+        width: 100%;
+        padding-top: 0px;
+      }
+    }
+    .pk-common{
+      .left-pk{
+        width: 100%;
+        p{
+          width: 100%;
+        }
+        ul{
+          float: left;
+          width: 100%;
+          li{
+            width: 100%;
+            display: block;
+          }
+        }
+      }
+    }
+  }
+  .bt-payment-v2{
+    width: 49%!important;
+  }
+  .package-section{
+     padding:15px;
+
+  }
+  .m-sp-bottom{
+    margin-bottom:5px;
+  }
+  .success-box-v2{
+    min-height: auto;
+    padding:100px 0px;
+  }
+  .payment-areav2 .tab-payment .bt-payment-v2{
+    width: 49%
+  }
+  .min-h-768-all-screen{
+    min-height: auto;
+  }
+  .package-to-sp{
+    margin-top: 10px;
+  }
+  .package-section{
+    margin-top: 20px;
+  }
+}
+
+/*---------------------------------------------------4-------------------------------------------------------*/
+
+@media (max-width: 480px) {
+  .payment-areav2{
+    width: 100%;
+  }
+  .package-info-v2{
+    .pk-v2{
+      button{
+        width: 100%;
+      }
+      p{
+        width: 100%;
+        padding-top: 0px;
+      }
+    }
+    .pk-common{
+      .left-pk{
+        width: 100%;
+        p{
+          width: 100%;
+        }
+        ul{
+          float: left;
+          width: 100%;
+          li{
+            width: 100%;
+            display: block;
+          }
+        }
+      }
+    }
+  }
+  .bt-payment-v2{
+    width: 48%!important;
+  }
+  .bank-transfer-v2 .transfer-details ul li i{
+    width: 100%;
+  }
+  .package-section{
+    padding:15px;
+
+    .package-body{
+      min-height: auto;
+      ul{
+        min-height: auto;
+      }
+    }
+  }
+  .m-sp-bottom{
+    margin-bottom:5px;
+  }
+  .success-box-v2{
+    min-height: auto;
+    padding:100px 0px;
+  }
+
+  .payment-areav2{
+    .nav>li>a{
+      padding:10px 0px!important;
+    }
+  }
+  .min-h-768-all-screen{
+    min-height: auto;
+  }
+  
+}

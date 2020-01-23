@@ -1,0 +1,186 @@
+
+
+@import '../../../styles/sass/base/_variables.scss';
+
+h1, h2, h3, h4, h5, span, label, a, button, p{
+  font-family: $primary-Fonts;
+}
+
+.arabic{
+    h1, h2, h3, h4, h5, span, label, a, button, p, input, .txt{
+    font-family: $arabic-primary-Fonts!important;
+  }
+}
+
+.mobile-tab-top{
+    position: static;
+}
+
+.main-tab .nav-tabs li.active {
+    color: $primarycolor!important;
+}
+
+.main-tab .nav-tabs>li a{
+    padding: 0px!important;
+    padding-right:15px!important;
+    color: $secondarycolor;
+}
+
+.jbProfile{
+  margin-top: 20px;
+}
+
+.block{
+  border:1px solid $light-border;
+}
+
+.prg-cercle{
+  margin: 0px auto;
+}
+
+
+.block-contant{
+  padding: 10px!important;
+}
+
+
+.prf-cncel{
+  background:$bg;
+  text-align: center;
+  line-height: $button-height;
+  border: 1px solid $boredr-color;
+  height: $button-height;
+  color: $primarycolor;
+  margin-top:6px;
+  border-radius: $border-radius;
+}
+
+.dp-edit-right-section{
+  width: calc(100% - 150px);
+  float: left;
+  .bootstrap-select{
+      .btn{
+          height: $button-height;
+          padding: 0px 31px 0px 10px !important;
+          text-align: left!important;
+          font-size:14px;
+          width: 100%!important;
+          border-radius: $border-radius!important;
+      }
+      .button{
+              span{
+                  line-height: $button-height!important;
+              }
+      }
+  }
+
+}
+
+.dp-empty{
+  background:$bg-default;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  position: absolute;
+  top: 0px;
+  height: 150px;
+  width: 135px;
+  text-align: center;
+  line-height: 150px;
+  a{
+      color: $primarycolor;
+      font-size:$font-35
+  }
+}
+
+.display{
+  .dp-edit{
+    background: $bg-default!important;
+    a{
+      color: $primarycolor!important;
+    }
+  }
+}
+.vedio-box{
+  background:$bg-default;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+
+  .vedio-cover{
+      margin: 0 auto;
+      text-align: center;
+      overflow: hidden;
+      img{
+          width:auto; height: 50px;
+      }
+      i{
+          display: block;
+          min-height: 42px;
+          font-size: 40px;
+          color: $secondarycolor;
+          padding-top:10px;
+      }
+      h5{
+          color: $secondarycolor;
+          margin:0px;
+          padding-top:5px;
+      }
+
+  }
+  .btn-clr{
+      background:$secondarycolor;
+  }
+  .btn-clr:hover{
+      background:$primarycolor;
+  }
+  button{
+      width: auto; margin: 0 auto;
+      span{ color:$white}
+  }
+}
+
+
+.vedio-head{
+  background: $primarycolor;
+  padding: 8px 10px;
+  color: $bg;
+  .light{
+      color:$bg;
+  }
+  .light:hover{
+      color: $bg!important
+  }
+}
+
+.social-desable{
+  background-color:$bg-default!important;
+  cursor: not-allowed;
+  i{
+      color: $secondarycolor!important;
+  }
+}
+
+
+.no-border-ats-menu{
+  border:none!important;
+}
+
+/* Respopnsive breakpoint */
+// ============bigScreen===========
+@media all and (max-width: 991px) {
+
+}
+
+// ============MediumScreen========
+@media all and (max-width: 768px) {
+  input{
+    width: 100%!important;
+  }
+  .dp-edit-right-section{
+    width: 100%;
+  }
+}
+
+// ============SmallScreen=========
+@media all and (max-width: 480px) {}

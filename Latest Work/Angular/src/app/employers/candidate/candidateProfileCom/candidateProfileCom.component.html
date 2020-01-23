@@ -1,0 +1,709 @@
+<div class="margin-top-space" [class.arabic] = "accountService.isArabic()">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<div role="tabpanel" class="tab-pane active bg-communication" id="communication-applicant">
+    <div class="col-lg-12 col-md-12 col-m-12 col-xs-12">
+        <div class="block bottom-gap-10">
+            <div class="block-title">
+                <h2>{{fixedTextHash['job_title_emp'][currLan]}}: {{jobDetails?.title}}</h2>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="col-lg-12 col-md-12 col-m-12 col-xs-12">
+            <div class="block bottom-gap">
+                <div class="block-title">
+                    <h2>{{fixedTextHash['comm_with_applicant'][currLan]}}</h2>
+                </div>
+                <div class="communication-new-impliment">
+                    <div class="application">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 arabic-right-left">
+                            <div class="tab-application">
+                                <ul class="nav nav-tabs arabic-right-left" role="tablist">
+
+                                    <li class="dummy_tab hint--right" *ngIf="jobAppStatusId>1" [attr.aria-label]="fixedTextHash['shortlisted'][currLan]">
+                                        <a>
+                                            <i class="icon-short"></i>
+                                        </a>
+                                    </li>
+
+                                    <li role="presentation" *ngIf="jobAppStatusId<=1"
+                                        [class.active]="jobAppStatusId == 1" [attr.aria-label]="fixedTextHash['shortlisted'][currLan]" class="hint--right">
+                                        <a href="#shortlisted" aria-controls="mobile-sector" role="tab"
+                                           data-toggle="tab">
+                                            <i class="icon-short"></i>
+                                        </a>
+                                    </li>
+
+                                    <li class="dummy_tab hint--right" *ngIf="jobAppStatusId>3" [attr.aria-label]="fixedTextHash['interview'][currLan]">
+                                        <a>
+                                            <i class="icon-interview"></i>
+                                        </a>
+                                    </li>
+
+                                    <li class="hint--right" role="presentation" *ngIf="jobAppStatusId<=3" [class.active]="jobAppStatusId == 2" [attr.aria-label]="fixedTextHash['interview'][currLan]" >
+                                        <a href="#interview" aria-controls="interview" role="tab" data-toggle="tab">
+                                        <i class="icon-interview"></i>
+                                        </a>
+                                    </li>
+
+
+                                    <li class="dummy_tab hint--right" *ngIf="jobAppStatusId>3 && jobAppStatusId!=4 && jobAppStatusId==5" [attr.aria-label]="fixedTextHash['successful'][currLan]">
+                                        <a>
+                                            <i class="icon-job-post"></i>
+                                        </a>
+                                    </li>
+
+                                    <li class="hint--right" role="presentation" *ngIf="jobAppStatusId<=3 || jobAppStatusId==4"
+                                        [class.active]="jobAppStatusId == 3 && jobAppStatusId !=5" [attr.aria-label]="fixedTextHash['successful'][currLan]">
+                                        <a href="#successful" aria-controls="successful" role="tab" data-toggle="tab">
+                                            <i class="icon-job-post"></i>
+                                        </a>
+                                    </li>
+
+                                    <li class="dummy_tab hint--right"
+                                        *ngIf="( jobAppStatusId>=4 && jobAppStatusId!=3 && jobAppStatusId !=5 ) ||  jobAppStatusStatus == 'Successful'" [attr.aria-label]="fixedTextHash['unsuccessful'][currLan]">
+                                        <a>
+                                            <i class="icon-job-post-close"></i>
+                                        </a>
+                                    </li>
+                                    <li class="hint--right" role="presentation"
+                                        *ngIf="( jobAppStatusId< 4 || jobAppStatusId==3 || jobAppStatusId==5 ) && jobAppStatusStatus != 'Successful'"
+                                        [class.active]=" jobAppStatusId ==5 " [attr.aria-label]="fixedTextHash['unsuccessful'][currLan]">
+                                        <a href="#unsuccessful" aria-controls="unsuccessful" role="tab"
+                                           data-toggle="tab">
+                                            <i class="icon-job-post-close"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                <div class="tab-content bottom-gap-10">
+
+                                    <div *ngIf="postErrorFlag" class="comen-alert alert-danger" role="alert">
+                                        {{fixedTextHash['feeback_post_fail'][currLan]}}
+                                    </div>
+
+                                    <div *ngIf="postSuccessFlag" class="comen-alert alert-dismissable" role="alert">
+                                        {{fixedTextHash['feeback_post_success'][currLan]}}
+                                    </div>
+
+                                    <!-- Reviewed -->
+                                    <!-- ============================================ -->
+                                    <div role="tabpanel" class="tab-pane" *ngIf="jobAppStatusId == 0"
+                                         [class.active]="jobAppStatusId == 0" id="reviewed">
+                                        <div class="full-box">
+                                            <form [formGroup]="formAppReviewed">
+                                            <textarea wrap="hard" rows="5" formControlName="comment" class="review" placeholder="{{fixedTextHash['enter_feedback'][currLan]}}"></textarea>
+                                                <div *ngIf="(formAppReviewed.controls['comment'].touched || !(pristineReviewFlag$ | async)) && formAppReviewed.controls['comment'].errors"
+                                                     class="alert alert-danger alert-dismissible martop5-nagative"
+                                                     role="alert">
+                                                    {{fixedTextHash['please_enter_feedback'][currLan]}}
+                                                </div>
+                                                <input type="hidden" formControlName="status">
+                                            </form>
+                                        </div>
+                                        <div class="block-footer border-none padding-0 full-bt-inside">
+                                            <button *ngIf="accountService.getJobApplicationStatus()"
+                                                    (click)="shareFeedbackApplied()">
+                                                {{fixedTextHash['move_to_shortlisted'][currLan]}}
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Shortlisted -->
+                                    <!-- ============================================ -->
+                                    <div role="tabpanel" class="tab-pane" *ngIf="jobAppStatusId <= 1"
+                                         [class.active]="jobAppStatusId == 1" id="shortlisted">
+                                        <div class="full-box">
+                                            <form [formGroup]="formAppShortListed">
+<!--                                                @ToDo: May be added back later-->
+<!--                                                <textarea wrap="hard" rows="5" formControlName="comment" placeholder="{{fixedTextHash['enter_comment'][currLan]}}" class="review">-->
+<!--                                                </textarea>-->
+                                                <div *ngIf="(formAppShortListed.controls['comment'].touched || !(pristineShortedFlag$ | async)) && formAppShortListed.controls['comment'].errors"
+                                                     class="alert alert-danger alert-dismissible martop5-nagative"
+                                                     role="alert">
+                                                    {{fixedTextHash['please_enter_feedback'][currLan]}}
+                                                </div>
+                                                <input type="hidden" formControlName="status">
+                                            </form>
+                                        </div>
+                                        <div class="block-footer border-none padding-0 full-bt-inside">
+
+                                            <!-- notify -->
+                                            <div class="clicks box-notif">
+                                                <div class="fltr-check">
+                                                    <input class="css-checkbox" #notifymeShortlisted (click)="setNotifyShortlisted(notifymeShortlisted.checked)" type="checkbox" id="checkboxFarea1" value="" name="checkboxFarea1">
+                                                    <label class="css-label" for="checkboxFarea1">{{fixedTextHash['notify_candidates'][currLan]}}</label>
+                                                </div>
+                                            </div>
+                                                
+                                            <button *ngIf="accountService.getJobApplicationStatus()"
+                                                    (click)="shareFeedbackShortlisted()">
+                                                {{fixedTextHash['move_to_shortlisted'][currLan]}}
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Interview -->
+                                    <!-- ============================================ -->
+                                    <div role="tabpanel" class="tab-pane" *ngIf="jobAppStatusId <= 3"
+                                         [class.active]="jobAppStatusId == 2" id="interview">
+                                        <div *ngIf="!validInterviewTime"
+                                             class="alert alert-danger alert-dismissible martop5" role="alert">
+                                            {{fixedTextHash['interview_request_three_hours_before'][currLan]}}
+                                        </div>
+                                        <form [formGroup]="formAppInterview">
+                                            <div>
+                                                <div class="settings-text-fix">
+                                                    {{fixedTextHash['interview_schedule_settings'][currLan]}}
+                                                </div>
+                                                <div class="interview-schedule-grid">
+
+                                                    <div class="full-box">
+                                                        
+                                                        <div class="interview-feild">
+                                                            <div>
+                                                                <div class="full-box relative">
+                                                                    <input type="hidden" id="datepicker1"
+                                                                            formControlName="date"
+                                                                            placeholder="Date">
+                                                                    <datePicker-block [dp_placeholder]="fixedTextHash['date'][currLan]"
+                                                                                        [minDate]="minDate"
+                                                                                        (emitSelDate)="formAppInterview.controls['date'].setValue($event['selDate'])"
+                                                                                        [sel_id]="'1'"
+                                                                                        [dp_value]="formAppInterview.controls['date'].value">
+                                                                    </datePicker-block>
+                                                                    <div class="absulute-btn-i block-title-2 padding-0 border-none">
+                                                                        <i class="zmdi zmdi-calendar-alt"></i>
+                                                                    </div>
+                                                                    <div *ngIf="(formAppInterview.controls['date'].touched || !(pristineInterviewFlag$ | async)) && formAppInterview.controls['date'].errors"
+                                                                            class="alert alert-danger alert-dismissible martop5"
+                                                                            role="alert">
+                                                                        {{fixedTextHash['please_select_date'][currLan]}}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    
+                                                        <div class="interview-feild">
+                                                            <div class="">
+                                                                <input type="hidden" class="feld-url"
+                                                                        placeholder="Time Zone"
+                                                                        formControlName="timeZone">
+                                                                <timezone [autoSelectTimeZone]="true"
+                                                                            [showSearch]="true"
+                                                                            (selectedId)="formAppInterview.controls['timeZone'].setValue($event.id)"
+                                                                            [placeholder]="fixedTextHash['select_time_zone'][currLan]"></timezone>
+                                                            </div>
+                                                            <div *ngIf="(formAppInterview.controls['timeZone'].touched || !(pristineInterviewFlag$ | async)) && formAppInterview.controls['timeZone'].errors"
+                                                                    class="alert alert-danger alert-dismissible martop5"
+                                                                    role="alert">
+                                                                {{fixedTextHash['please_select_time_zone'][currLan]}}
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+
+                                                    <div class="full-box">
+                                                        
+                                                        <div class="interview-feild">
+                                                            <div class="">
+                                                                <div class="full-box relative">
+                                                                    <timePicker-block [showSearch]="false"
+                                                                                        (selectedId)="formAppInterview.controls['time'].setValue($event.id)"
+                                                                                        [placeholder]="fixedTextHash['select_time'][currLan]" [currLan]='currLan'>
+                                                                    </timePicker-block>
+                                                                    <input type="hidden"
+                                                                            placeholder="{{fixedTextHash['time'][currLan]}}"
+                                                                            formControlName="time">
+                                                                    <div class="absulute-btn-i block-title-2 padding-0 border-none">
+                                                                        <i class="zmdi zmdi-time"></i>
+                                                                    </div>
+
+                                                                    <div *ngIf="(formAppInterview.controls['time'].touched || !(pristineInterviewFlag$ | async)) && formAppInterview.controls['time'].errors"
+                                                                            class="alert alert-danger alert-dismissible martop5"
+                                                                            role="alert">
+                                                                        {{fixedTextHash['please_select_time'][currLan]}}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    
+                                                        <div class="interview-feild">
+                                                            <div class="">
+                                                                <div class="full-box relative">
+                                                                    <timeduration-block [showSearch]="false"
+                                                                                        (selectedDuration)="formAppInterview.controls['duration'].setValue($event.id)"
+                                                                                        [placeholder]="fixedTextHash['select_duration'][currLan]" [currLan]='currLan'>
+                                                                    </timeduration-block>
+                                                                    <input type="hidden"
+                                                                            placeholder="{{fixedTextHash['duration'][currLan]}}"
+                                                                            formControlName="duration">
+                                                                    <div class="absulute-btn-i block-title-2 padding-0 border-none">
+                                                                        <i class="zmdi zmdi-time"></i>
+                                                                    </div>
+
+                                                                    <div *ngIf="(formAppInterview.controls['duration'].touched || !(pristineInterviewFlag$ | async)) && formAppInterview.controls['duration'].errors"
+                                                                            class="alert alert-danger alert-dismissible martop5"
+                                                                            role="alert">
+                                                                        {{fixedTextHash['please_select_duration'][currLan]}}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div class="clearfix"></div>
+
+                                                </div>
+                                            </div>
+
+                                            <!-- interview name -->
+                                            <div class="full-box">
+                                                <div class="drop-down-ats-arrow">
+                                                    <span class="caret"></span>
+                                                    <select formControlName="interviewee"  class="feld-url margin-top-5">
+                                                        <option  value="" selected>{{fixedTextHash['interviewer_name'][currLan]}}</option>
+                                                        <option [value]="selUser?.id" *ngFor="let selUser of allUsers"> {{selUser?.first_name}}&nbsp;{{selUser?.last_name}}</option>
+                                                    </select>
+                                                </div>
+
+                                                <div *ngIf="(formAppInterview.controls['interviewee'].touched || !(pristineInterviewFlag$ | async)) && formAppInterview.controls['interviewee'].errors"
+                                                    class="alert alert-danger alert-dismissible martop5" role="alert">
+                                                    {{fixedTextHash['please_enter_interviewer_name'][currLan]}}
+                                                </div>
+                                            </div>
+
+                                            <div class="full-box">
+                                                <textarea class="feld-url margin-top-5"
+                                                    placeholder="{{fixedTextHash['additional_comments'][currLan]}}"
+                                                    formControlName="additionalComment">
+                                                </textarea>
+
+                                                <div *ngIf="(formAppInterview.controls['additionalComment'].touched || !(pristineInterviewFlag$ | async)) && formAppInterview.controls['additionalComment'].errors"
+                                                    class="alert alert-danger alert-dismissible martop5" role="alert">
+                                                    {{fixedTextHash['please_enter_comment'][currLan]}}
+                                                </div>
+                                            </div>
+
+                                            <div class="full-box communi-interviewd">
+                                                <!-- clev help? -->
+                                                <div class="settings-text-fix">
+                                                    {{fixedTextHash['interview_channel'][currLan]}}
+                                                </div>
+                                                <div class="blovo-channel">
+
+                                                    <label><input type="radio" class="radio-inline"
+                                                                  formControlName="mode" value="Call"><span
+                                                            class="outside"><span class="inside"></span></span>{{fixedTextHash['bloovo_online_interview'][currLan]}}</label>
+                                                    <label><input type="radio" class="radio-inline"
+                                                                  formControlName="mode" value="Physical"><span
+                                                            class="outside"><span class="inside"></span></span>{{fixedTextHash['physical_interview'][currLan]}}</label>
+                                                </div>
+                                                <!-- clev help? -->
+                                                <textarea *ngIf='formAppInterview.value["mode"] == "Physical"'
+                                                          formControlName="comment"
+                                                          placeholder="{{fixedTextHash['interview_address'][currLan]}}"
+                                                          class="Address-chanel"></textarea>
+                                            </div>
+                                        </form>
+                                        <div class="block-footer border-none padding-0 block-display full-bt-inside">
+                                            <button *ngIf="accountService.getJobApplicationStatus()"
+                                                    (click)="shareFeedbackInterview()">
+                                                {{fixedTextHash['share_feedback'][currLan]}}
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Successful -->
+                                    <!-- ============================================ -->
+                                    <div role="tabpanel" class="tab-pane"
+                                         [class.active]="jobAppStatusId == 3 || jobAppStatusId == 4" id="successful">
+                                        <form [formGroup]="formAppSuccess">
+                                            <div class="full-box">
+                                                <input formControlName="status" type="hidden">
+                                                <textarea wrap="hard" formControlName="comment" rows="5" name="#"
+                                                          class="review" placeholder="{{fixedTextHash['please_enter_feedback'][currLan]}}">{{fixedTextHash['interview_completed'][currLan]}} </textarea>
+                                                <div *ngIf="(formAppSuccess.controls['comment'].touched || !(pristineSuccessFlag$ | async)) && formAppSuccess.controls['comment'].errors"
+                                                     class="alert alert-danger alert-dismissible" role="alert">
+                                                    {{fixedTextHash['please_enter_feedback'][currLan]}}
+                                                </div>
+                                            </div>
+                                            <!-- notify -->
+                                            <div class="clicks box-notif">
+                                                <div class="fltr-check">
+                                                    <input class="css-checkbox" #notifymeSuccessful (click)="setNotifySuccessful(notifymeSuccessful.checked)" type="checkbox" id="checkboxFarea2" value="" name="checkboxFarea2">
+                                                    <label class="css-label" for="checkboxFarea2">{{fixedTextHash['notify_candidates'][currLan]}}</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="genarate upload-dp"
+                                                 *ngIf="!offerLetterSelectedFlag  && !generateOfferSelectedFlag">
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+
+                                                    <div class="navy">
+                                                        {{fixedTextHash['upload_offer_letter'][currLan]}}
+                                                    </div>
+                                                    <div class='fancy-file'>
+                                                        <div class='fancy-file-name'>&nbsp;</div>
+                                                        <button class='fancy-file-button'>
+                                                            {{fixedTextHash['browse'][currLan]}}
+                                                        </button>
+                                                        <div class='input-container'>
+                                                            <input type="file" formControlName="fileName"
+                                                                   (change)="selectFile($event)"
+                                                                   placeholder="Upload Offer Letter" class="browser"
+                                                                   accept=".txt,.doc,.pdf">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                    <div class="barats">
+                                                        <div class="or">{{fixedTextHash['or'][currLan]}}</div>
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                                                    <a href="#" data-toggle="modal" data-target=".generate-offer">
+                                                        <div class="genrt-btn">
+                                                            {{fixedTextHash['generate_offer_letter'][currLan]}}
+                                                        </div>
+                                                    </a>
+
+                                                </div>
+                                                <div class=" clearfix "></div>
+                                            </div>
+                                        </form>
+
+                                        <!--After generate Offer letter     -->
+                                        <div class="offer-generate" *ngIf="offerLetterSelectedFlag">
+                                            <div class="left-offer-text">
+                                                <h3><i class="zmdi zmdi-file-text"></i>{{fixedTextHash['offer_letter'][currLan]}}
+                                                </h3>
+                                                <span> {{offerLetter?.name}}</span>
+                                            </div>
+                                            <div class="right-offer-text">
+                                                <button (click)="removeOfferLetter('upload')"><i
+                                                        class="zmdi zmdi-delete"></i>{{fixedTextHash['delete'][currLan]}}
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div *ngIf="(formAppSuccess.controls['fileName'].touched || !(pristineSuccessFlag$ | async)) && !offerLetterSelectedFlag && !generateOfferSelectedFlag"
+                                             class="alert alert-danger alert-dismissible martop5" role="alert">
+                                            {{fixedTextHash['please_upload_offer_letter'][currLan]}}
+                                        </div>
+
+                                        <div class="offer-generate" *ngIf="generateOfferSelectedFlag">
+                                            <div class="left-offer-text">
+                                                <h3><i class="zmdi zmdi-file-text"></i>{{fixedTextHash['offer_letter_generated_by_system'][currLan]}}
+                                                </h3>
+                                            </div>
+                                            <div class="right-offer-text  block-display full-bt-inside">
+                                                <button (click)="removeOfferLetter('generate')"><i
+                                                        class="zmdi zmdi-delete"></i>{{fixedTextHash['delete'][currLan]}}
+                                                </button>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="block-footer border-none padding-0 full-bt-inside full-bt-inside" *ngIf="postInProcess == false && (jobAppStatusStatus != 'Unsuccessful')">
+                                            <button *ngIf="accountService.getJobApplicationStatus()"
+                                                    (click)="shareFeedbackSucess()">
+                                                {{fixedTextHash['move_to_successful'][currLan]}}
+                                            </button>
+                                        </div>
+
+                                        <div class="block-footer border-none padding-0 full-bt-inside"
+                                             *ngIf="(jobAppStatusStatus == 'Unsuccessful') || postInProcess == true">
+                                            <button class="disabled_button">
+                                                {{fixedTextHash['move_to_successful'][currLan]}}
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- unsuccessful -->
+                                    <!-- ============================================ -->
+                                    <div role="tabpanel" class="tab-pane"
+                                         [class.active]=" (jobAppStatusId == 3 && jobAppStatusStatus != 'Successful' && jobAppStatusStatus != 'Interview') || jobAppStatusStatus == 'Unsuccessful'"
+                                         id="unsuccessful">
+                                        <div class="full-box">
+                                            <form [formGroup]="formAppUnSuccess">
+                                                <textarea wrap="hard" rows="5" formControlName="comment" class="review" placeholder="{{fixedTextHash['enter_comment'][currLan]}}">
+                                                </textarea>
+                                                <div *ngIf="(formAppUnSuccess.controls['comment'].touched || !(pristineUnSuccessFlag$ | async)) && formAppUnSuccess.controls['comment'].errors"
+                                                     class="alert alert-danger alert-dismissible martop5-nagative"
+                                                     role="alert">
+
+                                                    {{fixedTextHash['please_enter_feedback'][currLan]}}
+                                                </div>
+                                                <input type="hidden" formControlName="status">
+                                            </form>
+                                        </div>
+
+                                        <!-- notify -->
+                                        <div class="clicks box-notif">
+                                            <div class="fltr-check">
+                                                <input class="css-checkbox" #notifymeUnsuccessful (click)="setNotifyUnsuccessful(notifymeUnsuccessful.checked)" type="checkbox" id="checkboxFarea3" value="" name="checkboxFarea3">
+                                                <label class="css-label" for="checkboxFarea3">{{fixedTextHash['notify_candidates'][currLan]}}</label>
+                                            </div>
+                                        </div>
+                                        <div class="block-footer border-none padding-0 full-bt-inside" *ngIf="jobAppStatusStatus == 'Interview' || jobAppStatusStatus == 'Unprocessed' || jobAppStatusStatus == 'Reviewed'
+                                            || jobAppStatusStatus ==  'Shortlisted'">
+                                            <button *ngIf="accountService.getJobApplicationStatus()"
+                                                    (click)="shareFeedbackUnSuccess()">
+                                                {{fixedTextHash['move_to_unsuccessful'][currLan]}}
+                                            </button>
+                                        </div>
+                                        <div class="block-footer border-none padding-0 full-bt-inside" *ngIf="jobAppStatusStatus != 'Interview' &&  jobAppStatusStatus != 'Shortlisted' && jobAppStatusStatus != 'Unprocessed'
+                                            && jobAppStatusStatus != 'Reviewed'">
+                                            <button class="disabled_button">
+                                                {{fixedTextHash['move_to_unsuccessful'][currLan]}}
+                                            </button>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="arabic-right-left full-box">
+                                <div class="previous-comment-v21">
+                                    <div>
+                                        <h3>{{fixedTextHash['previous_comments'][currLan]}}</h3>
+                                        <div class="scrollbar" id="style-4">
+                                            <ng-container *ngFor="let selList of (stausChangeListObs | async)">
+
+                                                <!--Reviewed-->
+                                                <div class="conta-com-p"
+                                                     *ngIf="selList?.job_application_status?.id == 1">
+                                                    <div class="comments">
+                                                        <span class="head-user-n"><strong>{{selList?.employer_name}}</strong>{{accountService.getFormattedDate(selList?.created_at, 'MMM DD, YYYY h:mm a')}}</span>
+                                                        <span class="light" [innerHTML]="fixedTextHash['application_status_comment'][currLan]
+                                                        .replace('STATUS',selList?.job_application_status?.status).replace('COMMENT', selList?.comment)">
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+
+                                                <!--Shortlisted-->
+                                                <div class="conta-com-p"
+                                                     *ngIf="selList?.job_application_status?.id == 2">
+                                                    <div class="comments">
+                                                        <span class="head-user-n"><strong>{{selList?.employer_name}}</strong>{{accountService.getFormattedDate(selList?.created_at, 'MMM DD, YYYY h:mm a')}}</span>
+                                                        <ng-container *ngIf="selList?.comment">
+                                                        <span class="light" [innerHtml]="fixedTextHash['candidate_status_message'][currLan]
+                                                        .replace('STATUS',selList?.job_application_status?.status)
+                                                        .replace('COMMENT',selList?.comment)
+                                                        .replace('ENAME',selList?.employer_name)">
+                                                        </span>
+                                                        </ng-container>
+                                                        <ng-container *ngIf="!selList?.comment">
+                                                        <span class="light" [innerHtml]="fixedTextHash['candidate_status_message_no_comment'][currLan]
+                                                        .replace('STATUS',selList?.job_application_status?.status)
+                                                        .replace('COMMENT',selList?.comment)
+                                                        .replace('ENAME',selList?.employer_name)">
+                                                        </span>
+
+                                                        </ng-container>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <!--Interviewe Accept-->
+                                                <div class="conta-com-p "
+                                                     *ngIf="selList?.job_application_status?.id == 3 && selList?.interview?.status  == 'accept'">
+                                                    <div class="comments">
+                                                        <span class="head-user-n"><strong>{{candidateName}}</strong>{{accountService.getFormattedDate(selList?.created_at, 'MMM DD, YYYY h:mm a')}}</span>
+                                                        <span class="light"> {{fixedTextHash['accepted_your'][currLan]}} <span class="navy">{{fixedTextHash['interview_request'][currLan]}} </span>
+                              <ng-container *ngIf="selList?.interview?.jobseeker_reply"> {{fixedTextHash['with_comment'][currLan]}} "{{selList?.interview?.jobseeker_reply }}"</ng-container>
+                            </span>
+                                                    </div>
+                                                </div>
+
+                                                <!--Interviewe Rejected-->
+                                                <div class="conta-com-p reject-feed"
+                                                     *ngIf="selList?.job_application_status?.id == 3 && selList?.interview?.status == 'reject'">
+                                                    <div class="comments">
+                                                        <span class="head-user-n"><strong>{{candidateName}}</strong>{{accountService.getFormattedDate(selList?.created_at, 'MMM D, YYYY h:mm a')}}</span>
+                                                        <span class="light">
+                              {{fixedTextHash['declined_your'][currLan]}} <span class="navy">{{fixedTextHash['interview_request'][currLan]}}</span>
+                              <ng-container *ngIf="selList?.interview?.jobseeker_reply"> {{fixedTextHash['with_comment'][currLan]}} "{{selList?.interview?.jobseeker_reply }}"</ng-container>
+                            </span>
+                                                    </div>
+                                                </div>
+
+                                                <!--Interview sent-->
+                                                <div class="conta-com-p"
+                                                     *ngIf="selList?.job_application_status?.id == 3">
+                                                    <div class="comments ">
+                                                        <span class="head-user-n"><strong>{{selList?.employer_name}}</strong>{{accountService.getFormattedDate(selList?.created_at, 'MMM D, YYYY h:mm a')}}</span>
+                                                        <span class="light">
+                              <ng-container *ngIf="selList?.interview?.channel == 'Physical'">
+                                  <div [innerHTML]="fixedTextHash['physical_interview_request_msg'][currLan]
+                              .replace('INT_DATE',accountService.getFormattedDate(timeCorrection(selList?.interview?.appointment, selList?.interview?.time_zone), 'MMM D, YYYY'))
+                              .replace('INT_TIME',timeCorrection(selList?.interview?.appointment, selList?.interview?.time_zone) | date: 'h:mm a')
+                              .replace('INT_WITH', selList?.interview?.interviewee)
+                              .replace('INT_ADDRESS', selList?.interview?.comment)"> </div>
+                              </ng-container>
+                              <ng-container *ngIf="selList?.interview?.channel == 'Call'">
+                                  <div [innerHTML]="fixedTextHash['online_interview_request_msg'][currLan]
+                              .replace('INT_DATE',accountService.getFormattedDate(timeCorrection(selList?.interview?.appointment, selList?.interview?.time_zone), 'MMM DD, YYYY'))
+                              .replace('INT_TIME',timeCorrection(selList?.interview?.appointment, selList?.interview?.time_zone) | date: 'h:mm a')
+                              .replace('INT_WITH', selList?.interview?.interviewee)"> </div>
+                              </ng-container>
+                            </span>
+                                                    </div>
+                                                </div>
+
+                                                <!--Successful-->
+                                                <div class="conta-com-p succes-feed"
+                                                     *ngIf="selList?.job_application_status?.id == 4">
+                                                    <div class="comments">
+                                                        <span class="head-user-n"><strong>{{selList?.employer_name}}</strong>{{accountService.getFormattedDate(selList?.created_at, 'MMM DD, YYYY h:mm a')}}</span>
+                                                        <span class="light">
+                              {{fixedTextHash['candidate_status_changed_to'][currLan]}}
+                              <span class="navy">{{selList?.job_application_status?.status}}</span> {{fixedTextHash['with_following_feedback'][currLan]}}
+                              <span class="navy">"{{selList?.comment}}".</span>
+                            </span>
+                                                    </div>
+                                                </div>
+
+
+                                                <!--Unsuccessful-->
+                                                <div class="conta-com-p reject-feed"
+                                                     *ngIf="selList?.job_application_status?.id == 5">
+                                                    <div class="comments reject-feed">
+                                                        <span class="head-user-n"><strong>{{selList?.employer_name}}</strong>{{accountService.getFormattedDate(selList?.created_at, 'MMM DD, YYYY h:mm a')}}</span>
+                                                        <span class="light">
+                              {{fixedTextHash['candidate_status_changed_to'][currLan]}}
+                              <span class="navy">{{selList?.job_application_status?.status}} </span> {{fixedTextHash['with_following_feedback'][currLan]}}
+                              <span class="navy">"{{selList?.comment}}".</span>
+                            </span>
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- aditional notes -->
+                            <div class="arabic-right-left full-box">
+                                <div class="previous-comment-v21">
+                                    <div>
+                                        <h3>{{fixedTextHash['internal_notes'][currLan]}}</h3>
+                                        <div class="application notes">
+                                            <div>
+                                                <div class="scrollbar" id="style-4">
+                                                    <div class="note" *ngFor="let selNote of (noteListObs | async)">
+                            <span>
+                              <strong>{{selNote?.author_name}}</strong>{{this.accountService.getFormattedDate(selNote?.created_at, 'MMM DD, YYYY h:mm a')}}
+                            </span>
+                                                        <div class="light">{{selNote?.note}}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <form [formGroup]="formNote" class="note-form">
+                                                    <div class="full-box">
+                                                        <input type="text" wrap="hard" formControlName="note" rows="5" (keydown.enter)="postNote()" placeholder="{{fixedTextHash['add_note'][currLan]}}" />
+                                                    </div>
+                                                    <i>*{{fixedTextHash['press_enter_for_post'][currLan]}}</i>
+                                                </form>
+                                            </div>
+                                            <div class=" clearfix "></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ============================== -->
+<div class="popup">
+    <!-- upload-dp  -->
+    <div class="logout-pop">
+        <div class="modal generate-offer" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <form [formGroup]="formGenerateOffer">
+                        <div class="modal-body upload-dp">
+                            <button class="close following" aria-hidden="true" data-dismiss="modal" type="button">×
+                            </button>
+                            <h2>{{fixedTextHash['generate_office_letter'][currLan]}}</h2>
+                            <div><br></div>
+                            <div class="offer-box"><input type="text" formControlName="title" placeholder="{{fixedTextHash['title'][currLan]}}">
+                                <div *ngIf="(formGenerateOffer.controls['title'].touched || !(pristineOfferFlag$ | async)) && formGenerateOffer.controls['title'].errors"
+                                     class="alert alert-danger alert-dismissible martop5" role="alert">
+                                    {{fixedTextHash['enter_title'][currLan]}}
+                                </div>
+                            </div>
+                            <div class="offer-box"><textarea class="feedback-text mg-0" placeholder="{{fixedTextHash['content'][currLan]}}"
+                                                             formControlName="content"></textarea>
+                                <div *ngIf="(formGenerateOffer.controls['content'].touched || !(pristineOfferFlag$ | async)) && formGenerateOffer.controls['content'].errors"
+                                     class="alert alert-danger alert-dismissible margin-top-5" role="alert">
+                                   {{fixedTextHash['select_offer_letter'][currLan]}}
+                                </div>
+                            </div>
+                            <div class="pop-button">
+                                <button type="button" class="btn postive" (click)="generateOffer()">{{fixedTextHash['generate'][currLan]}}</button>
+                                <a href="#" data-toggle="modal" data-target=".previw"
+                                   [style.display]="formGenerateOffer.valid?'block':'none'"
+                                   (click)="showofferletterFlag = true">
+                                    <button type="button" class="btn negative">{{fixedTextHash['preview'][currLan]}}</button>
+                                </a>
+                                <button type="button" class="btn negative" (click)="closeGenerateBox()">{{fixedTextHash['cancel'][currLan]}}</button>
+                                <div class="clr"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="popup">
+    <!-- Logout -->
+    <div class="logout-pop">
+        <div class="modal previw" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button class="close following" aria-hidden="true" data-dismiss="modal" type="button">×</button>
+                        <h2>{{fixedTextHash['preview'][currLan]}}</h2>
+                        <div class="ofr-letter">
+                            <div *ngIf="downloadingFlag" class="offer-l-download">
+                                <spinner [visible]="downloadingFlag"></spinner>
+                            </div>
+                            <offer-letter *ngIf="showofferletterFlag"
+                                          [jobTitle]="formGenerateOffer.controls['title'].value"
+                                          [description]="formGenerateOffer.controls['content'].value"
+                                          [candidateDetailsObs]="candidateDetailsObs"></offer-letter>
+                        </div>
+                        <div class="pop-button">
+                            <button type="button" class="btn postive" (click)="onSaveOfferLetter()">{{fixedTextHash['save_draft'][currLan]}}
+                            </button>
+                            <button type="button" class="btn negative" aria-hidden="true" data-dismiss="modal">{{fixedTextHash['back'][currLan]}}
+                            </button>
+                            <div class="clr"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>

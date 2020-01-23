@@ -1,0 +1,219 @@
+<div class="container basic-height" [class.arabic] = "accountService.isArabic()">
+
+    <!-- Start Three Step indication header -->
+    <!--========================================================================-->
+    <complete-profile-progress-bar [step]="2"></complete-profile-progress-bar>
+    <!-- End Three Step indication header -->
+    <!--========================================================================-->
+
+    
+    <!--========================================================================-->
+    <!-- Start Step Two -->
+    <div class="fal-register-form-container">
+        <spinner *ngIf="!loadedFlag" [visible]="true"></spinner>
+        <ng-container *ngIf="loadedFlag">
+            <!--========================================================================-->
+            <!-- Start Step Two (Do you have prior work experience? If NO)-->
+            <div class="fal-register-form-container">
+                <form [formGroup]="completeSecondForm">
+                    <!-- start Do you have prior work experience -->
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 arabic-right-left margin-btm-15">
+                        <h4>{{fixedTextHash['you_have_work_experience'][currLan]}}</h4>
+                        <div class="clicks">
+                            <div class="radio radio-primary radio-inline">
+                                <input id="fal_work_experience_yes" type="radio" [checked]="havePriorWorkExp" (click)="setPriorWorkExp(true)">
+                                <label for="fal_work_experience_yes">
+                                    <span>{{fixedTextHash['yes'][currLan]}}</span>
+                                </label>
+                            </div>
+                            <div class="radio radio-primary radio-inline">
+                                <input id="fal_work_experience_no" type="radio" [checked]="!havePriorWorkExp" (click)="setPriorWorkExp(false)">
+                                <label for="fal_work_experience_no">
+                                    <span>{{fixedTextHash['no'][currLan]}}</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end Do you have prior work experience -->
+
+                    <!--========================================================================-->
+                    <!-- show only work experience checked YES-->
+                    <div *ngIf="havePriorWorkExp" class=" col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left margin-btm-15 hide">
+                        <h4>{{fixedTextHash['are_current_employed'][currLan]}}</h4>
+                        <div class="radio-inline">
+                            <input type="radio" name="fal_currently_employed" [checked]="isCurrentlyEmp" (click)="setCurrentlyEmp(true)">{{fixedTextHash['yes'][currLan]}}
+                        </div>
+                        <div class="radio-inline">
+                            <input type="radio" name="fal_currently_employed" [checked]="!isCurrentlyEmp" (click)="setCurrentlyEmp(false)">{{fixedTextHash['no'][currLan]}}
+                        </div>
+                    </div>
+                    <!-- show only work experience checked YES-->
+                    <!--========================================================================-->
+
+                    <div class="clearfix"></div>
+                    <!-- start preferred name -->
+                    <div *ngIf="!hidePreferedJobTitle && !havePriorWorkExp" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left margin-btm-15">
+                        <h4 *ngIf="!havePriorWorkExp">{{fixedTextHash['preferred_job_title_txt'][currLan]}}</h4>
+                        <h4 *ngIf="havePriorWorkExp && isCurrentlyEmp">{{fixedTextHash['current_job_title'][currLan]}}</h4>
+                        <h4 *ngIf="havePriorWorkExp && !isCurrentlyEmp">{{fixedTextHash['last_job_title'][currLan]}}</h4>
+                        <input type="text" formControlName="job_title" placeholder="{{fixedTextHash['job_title_txt'][currLan]}}" [class.error-feild]="(!(pristineFlag$ | async) || completeSecondForm.controls['job_title'].touched) && !getValidateJobTitle()" >
+                    </div>
+                    <!-- end preferred name -->
+
+                    <!-- start preferred sector -->
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left margin-btm-5">
+                        <h4 *ngIf="!havePriorWorkExp">{{fixedTextHash['preferred_sector'][currLan]}}</h4>
+                        <h4 *ngIf="havePriorWorkExp">{{fixedTextHash['sector_exp'][currLan]}}</h4>
+                        <input type="text" placeholder="{{ fixedTextHash['select_sector'][currLan] }}"  *ngIf="!(sectorList$ | async)">
+                        <bootstrap-selectbox *ngIf="(sectorList$ | async)" (selectedId)="completeSecondForm .controls['sector_id'].setValue($event.id)"
+                                             [selectedValue]="completeSecondForm.controls['sector_id'].value"  [placeholder]="fixedTextHash['select_sector'][currLan]"
+                                             [selectOneEnter]="true"
+                                             (onEmptyText)="makeControlInvalid(completeSecondForm.controls['sector_id'])"
+                                             [error]="(!(pristineFlag$ | async) || completeSecondForm.controls['sector_id'].touched) && !completeSecondForm.controls['sector_id'].valid"
+                                             [selectList]="(sectorList$ | async)">
+                        </bootstrap-selectbox>
+                        <input type="hidden" name="sector_id"  formControlName="sector_id">
+                    </div>
+                    <!-- end preferred sector -->
+
+                    <!-- start preferred functional area -->
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left margin-btm-5">
+                        <h4 *ngIf="!havePriorWorkExp">{{fixedTextHash['preferred_functional_area'][currLan]}}</h4>
+                        <h4 *ngIf="havePriorWorkExp">{{fixedTextHash['functional_area'][currLan]}}</h4>
+                        <input type="text" placeholder="fixedTextHash['select_functional_area'][currLan]"  *ngIf="!(functionalAreaList$ | async)">
+
+                        <bootstrap-selectbox *ngIf="(functionalAreaList$ | async)"
+                                             (selectedId)="completeSecondForm.controls['functional_area_id'].setValue($event.id)"
+                                             [selectedValue]="completeSecondForm.controls['functional_area_id'].value"
+                                             [placeholder]="fixedTextHash['select_functional_area'][currLan]"
+                                             [selectOneEnter]="true"
+                                             (onEmptyText)="makeControlInvalid(completeSecondForm.controls['functional_area_id'])"
+                                             [error]="(!(pristineFlag$ | async) || completeSecondForm.controls['functional_area_id'].touched) && !completeSecondForm.controls['functional_area_id'].valid"
+                                             [selectList]="(functionalAreaList$ | async)">
+                        </bootstrap-selectbox>
+                        <input type="hidden" name="functional_area_id"   formControlName="functional_area_id"  >
+                    </div>
+                    <!-- end preferred functional area -->
+
+                    <!-- start experience level -->
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left margin-btm-5">
+                        <h4>{{fixedTextHash['exp_level'][currLan]}}</h4>
+                        <input type="text" placeholder="Select Experience Level"  *ngIf="!(experienceLevelList$ | async)">
+                        <bootstrap-selectbox *ngIf="(experienceLevelList$ | async)"
+                                             (selectedId)="completeSecondForm.controls['job_experience_level_id'].setValue($event.id)"
+                                             [selectedValue]="completeSecondForm.controls['job_experience_level_id'].value"
+                                             [placeholder]="fixedTextHash['select_exp_level'][currLan]"
+                                             [selectOneEnter]="true"
+                                             (onEmptyText)="makeControlInvalid(completeSecondForm.controls['job_experience_level_id'])"
+                                             [error]="(!(pristineFlag$ | async) || completeSecondForm.controls['job_experience_level_id'].touched) && !completeSecondForm.controls['job_experience_level_id'].valid"
+                                             [selectList]="(experienceLevelList$ | async)">
+                        </bootstrap-selectbox>
+                        <input type="hidden" name="job_experience_level_id"   formControlName="job_experience_level_id"  >
+                    </div>
+                    <!-- end experience level -->
+
+                    <!--  Show only if hae prior experience -->
+                    <ng-container *ngIf="havePriorWorkExp">
+                        <!-- start Total Years of Experience -->
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left margin-btm-15">
+                            <h4>{{fixedTextHash['year_exp'][currLan]}}</h4>
+                            <input type="number" formControlName="total_years_experience" placeholder="{{fixedTextHash['emp_year_exp'][currLan]}}" [class.error-feild]="(!(pristineFlag$ | async) || completeSecondForm.controls['total_years_experience'].touched) && (!completeSecondForm.controls['total_years_experience'].valid || !getTotalYearsExpCustomValidation())" >
+                        </div>
+                        <!-- end Total Years of Experience -->
+
+                        <!-- start Last Month Salary -->
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left margin-btm-15">
+                            <h4>{{fixedTextHash['last_monthly_salary'][currLan].replace('CURRCODE',fixedTextHash[accountService.getCurrency()][currLan])}}</h4>
+                            <input type="number" formControlName="current_salary" placeholder="5,000"  [class.error-feild]="(!(pristineFlag$ | async) || completeSecondForm.controls['current_salary'].touched) && (!completeSecondForm.controls['current_salary'].valid || !getCurrentSalaryCustomValidation())" >
+                        </div>
+                        <!-- end Last Month Salary -->
+                    </ng-container>
+
+
+                    <!-- start expected Month salary -->
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left margin-btm-15">
+                        <h4>{{fixedTextHash['expected_monthly_salary'][currLan].replace('CURRCODE',fixedTextHash[accountService.getCurrency()][currLan])}}</h4>
+                        <input type="number" placeholder="5,000" formControlName="expected_salary" [class.error-feild]="(!(pristineFlag$ | async) || completeSecondForm.controls['expected_salary'].touched) && !completeSecondForm.controls['expected_salary'].valid" >
+                    </div>
+                    <!-- end expected Month salary -->
+
+                    <!-- start upload your cv -->
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left margin-btm-15">
+                        <h4>{{fixedTextHash['cv'][currLan]}}</h4>
+                        <div class="new-upload">
+
+                            <div class="input-group">
+                                <div *ngIf="getValidateHasResume() && !notShowAttachment">
+                                    <a  href="{{resumeList[0]['document']}}" target="_blank">{{fixedTextHash['attached_resume'][currLan]}}</a>
+                                    <i class="zmdi zmdi-delete cv_delete cursor_pointer1" (click)="removeResume()"></i>
+                                </div>
+                                <input type="hidden" formControlName="cv_document">
+                                <ng-container *ngIf="!getValidateHasResume() || notShowAttachment">
+                                    <label id="browsebutton" class="btn btn-default input-group-addon bt-up-ats" for="file-upload2">
+                                        <input id="file-upload2" type="file" (change)="selectFile($event,'cv_document')" style="display:none;" >
+                                        {{fixedTextHash['browse'][currLan]}}...
+                                    </label>
+                                    <input type="text" class="form-control js_cv_document" readonly=""  >
+                                </ng-container>
+                            </div>
+                            <span class="help-block"></span>
+                        </div>
+                        <!--info message-->
+                        <ng-container *ngIf="!getValidateHasResume() || notShowAttachment">
+                            <div class="font-12" [innerHTML]="fixedTextHash['upload_message'][currLan]
+                            .replace('{file_types}','PDF, DOC').replace('{file_types}','PDF, DOC')
+                            .replace('{file_types}','PDF, DOC').replace('{file_size_with_units}', this.documentFileSizeInMB + ' MB')"></div>
+                            <!--CV error message-->
+                            <div *ngIf="(tooSmallCv$ | async)" class="alert alert-danger alert-dismissible martop5" role="alert">{{fixedTextHash['minimum_sized_req'][currLan]}}</div>
+                            <div *ngIf="(invalidCv$ | async)" class="alert alert-danger alert-dismissible martop5" role="alert">{{fixedTextHash['invalid_file_format'][currLan]}}</div>
+                            <div *ngIf="(tooLargeCv$ | async)" class="alert alert-danger alert-dismissible martop5" role="alert">{{fixedTextHash['file_size_large'][currLan]}}</div>
+                            <div *ngIf="(completeSecondForm.controls['cv_document'].touched || !(pristineFlag$ | async)) && completeSecondForm.controls['cv_document'].errors"
+                                 class="alert alert-danger alert-dismissible martop5" role="alert">
+                                {{fixedTextHash['upload_your_cv'][currLan]}}
+                            </div>
+                        </ng-container>
+                    </div>
+                    <!-- end upload your cv -->
+
+                    <step-two-skills (selectSkills)="setSkills($event)" [maxCount]="skillLimit"
+                            [error]="(!(pristineFlag$ | async) || completeSecondForm.controls['skills'].touched) && completeSecondForm.controls['skills'].value.length != skillLimit"
+                            [skillList]="skillList">
+                    </step-two-skills>
+
+
+
+                    <div class="clearfix"></div>
+                    <!-- Add/Edit Work-->
+                    <!-- =============================================-->
+                    <ng-container *ngIf="havePriorWorkExp">
+                        <ng-container *ngFor="let selWorkExp of workExperienceList, let i =index">
+                            <add-work-experience-step-two *ngIf="selWorkExp && !selWorkExp['_destroy'] || selWorkExp['_destroy'] == 0" [allowDelete]="getValidateDelete(workExperienceList)" [workExperienceIndex]="i" [prestineForm$]="workPrestine" [workExp]="selWorkExp" (removeMe)="removeWork(i)" (changeWorkExp)="changeWorkExp($event, i, selWorkExp)"></add-work-experience-step-two>
+                        </ng-container>
+                        <!-- start add more button -->
+                        <div class="fal-addmore">
+                            <span class="help-txt">{{fixedTextHash['fill_previous_and_add_more'][currLan]}}</span>
+                            <button *ngIf="getValidateWork()" class="btn-addmore" (click)="addWork()">{{fixedTextHash['add_work_exp'][currLan]}}</button>
+                            <button *ngIf="!getValidateWork()" class="btn-addmore disabled_button">{{fixedTextHash['add_work_exp'][currLan]}}</button>
+                        </div>
+                        <!-- end add more button -->
+                    </ng-container>
+
+                    <!-- start button group -->
+                    <div class="fal-register-btn-group">
+                        <button *ngIf="!postInProcess" class="fal-btn-primary" type="button" (click)="getSubmit()">{{fixedTextHash['next'][currLan]}}</button>
+                        <button *ngIf="postInProcess" class="fal-btn-primary disabled_button" type="button">{{fixedTextHash['next'][currLan]}}</button>
+                        <button class="fal-btn-secondary" type="button" (click)="onBack()">{{fixedTextHash['back'][currLan]}}</button>
+                    </div>
+                    <!-- end button group -->
+                </form>
+            </div>
+            <!-- End Step Two -->
+            <!--========================================================================-->
+        </ng-container>
+
+    </div>
+    <!-- End Step One -->
+    <!--========================================================================-->
+
+
+</div>

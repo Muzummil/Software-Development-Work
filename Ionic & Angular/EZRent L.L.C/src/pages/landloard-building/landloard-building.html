@@ -1,0 +1,79 @@
+<ion-header class="animated fadeIn no-shadow">
+
+  <ion-navbar class="no-border" color="primary" hideBackButton="false">
+    <ion-title>
+      Property Set Up
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="common-bg landlord_building">
+  <h5>Please input the information of one of your rental properties below.</h5>
+  <form #myForm="ngForm" [formGroup]="onPropertySetupForm" (ngSubmit)="PropertyInfo()" class="list-form" margin-top>
+    <ion-item>
+      <ion-label fixed>
+        <img src="../assets/icon/building_icon.png" width="30">
+      </ion-label>
+      <ion-input type="text" formControlName="BuildingName" placeholder="Building Name(optional)"></ion-input>
+    </ion-item>
+    <p ion-text color="danger" class="text-1x has-error" *ngIf="myForm.submitted && onPropertySetupForm.get('BuildingName').hasError('required')">{{ nameMessage }}</p>
+
+    <ion-item>
+      <ion-label fixed>
+        <img src="../assets/icon/address_icon.png" width="30">
+      </ion-label>
+      <ion-input type="text" formControlName="Address" placeholder="Address"></ion-input>
+    </ion-item>
+    <p ion-text color="danger" class="text-1x has-error" *ngIf="myForm.submitted &&  onPropertySetupForm.get('Address').hasError('required')">{{ addressMessage }}</p>
+
+    <ion-item>
+      <ion-label fixed>
+        <img src="../assets/icon/city_icon.png" width="30">
+      </ion-label>
+      <ion-input type="text" formControlName="City" placeholder="City"></ion-input>
+    </ion-item>
+    <p ion-text color="danger" class="text-1x has-error" *ngIf="myForm.submitted &&  onPropertySetupForm.get('City').hasError('required')">{{ cityMessage }}</p>
+
+    <ion-item>
+      <ion-label fixed>
+        <img src="../assets/icon/state_icon.png" width="30">
+      </ion-label>
+      <ion-input type="text" formControlName="State" placeholder="State"></ion-input>
+    </ion-item>
+    <p ion-text color="danger" class="text-1x has-error" *ngIf="myForm.submitted &&  onPropertySetupForm.get('State').hasError('required')">{{ stateMessage }}</p>
+
+    <ion-item>
+      <ion-label fixed>
+        <img src="../assets/icon/zip-icon.png" width="30">
+      </ion-label>
+      <ion-input type="number" formControlName="Entercode" placeholder="Zip Code"></ion-input>
+    </ion-item>
+    <p ion-text color="danger" class="text-1x has-error" *ngIf="myForm.submitted &&  onPropertySetupForm.get('Entercode').hasError('required')">{{ zip_codeMessage }}</p>
+
+    <ion-item>
+      <ion-label class="m-l" fixed>
+        <img src="../assets/icon/building_icon.png" width="30">
+      </ion-label>
+      <ion-input type="number" formControlName="Noapartments" placeholder="Number of Apartments"></ion-input>
+    </ion-item>
+    <p ion-text color="danger" class="text-1x has-error" *ngIf="myForm.submitted &&  onPropertySetupForm.get('Noapartments').hasError('required')">{{ no_of_apartmentsMessage }}</p>
+
+    <ion-card no-margin margin-bottom class="full-width">
+      <ion-item>
+        <ion-label class="ion_labelicon" ion-text>
+          <img src="../../assets/icon/race_icon.png" width="30">
+        </ion-label>
+        <ion-select placeholder="Format" formControlName="formatApartments" multiple="false" cancelText="Cancel" okText="OK">
+          <ion-option value="1, 2, 3">1, 2, 3</ion-option>
+          <ion-option value="A, B, C">A, B, C</ion-option>
+          <ion-option value="1A, 2A, 3A">1A, 2A, 3A</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-card>
+    <p ion-text color="danger" class="text-1x has-error" *ngIf="myForm.submitted &&  onPropertySetupForm.get('formatApartments').hasError('required')">{{ formatMessage }}</p>
+
+    <button ion-button class="btn-fb signfb" full>Next</button>
+
+  </form>
+
+</ion-content>

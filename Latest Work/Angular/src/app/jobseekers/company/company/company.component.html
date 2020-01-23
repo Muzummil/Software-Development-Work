@@ -1,0 +1,42 @@
+<div class=" main-tab load-data-js mobile-tab-top" *ngIf="(isAuthorized$ | async)">
+    <div class="container">
+    <!-- Desktop-Tap -->
+    <ul class="nav nav-tabs hidden-xs" role="tablist">
+        <li role="presentation" [class.active]="allCompaniesFlag" >
+            <a [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/companies']" [queryParams]="{page: '1'}" >
+                {{fixedTextHash['all_companies'][currLan]}}
+            </a>
+        </li>
+        <li role="presentation" [class.active]="mostFollowedCompaniesFlag" >
+            <a [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/companies/top-followed-companies']" >
+                {{fixedTextHash['top_followed_companies'][currLan]}}
+            </a>
+        </li>
+    </ul>
+    <!-- ****** -->
+
+    <!-- Mobile-Tap -->
+    <ul class="mobile-scroll-tab hidden-lg hidden-md hidden-sm" role="tablist">
+        <li role="presentation" [class.active]="allCompaniesFlag" >
+            <a [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/companies']" [queryParams]="{page: '1'}"  >
+                {{fixedTextHash['all_companies'][currLan]}}
+            </a>
+        </li>
+        <li role="presentation" [class.active]="mostFollowedCompaniesFlag" >
+            <a [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/companies/top-followed-companies']">
+                {{fixedTextHash['top_followed_companies'][currLan]}}
+            </a>
+        </li>
+    </ul>
+    <!-- ****** -->
+</div>
+
+</div>
+
+<div class="tab-content job-bloovo">
+    <div role="tabpanel" class="tab-pane active" id="all-companies">
+            <all-company-listing *ngIf="allCompaniesFlag || mostFollowedCompaniesFlag" [currentPageObs]="currentPageObs" (companyDetailsClick)="onClickCompanyDetail($event)"></all-company-listing>
+            <company-details *ngIf="companyDetailsFlag" [companyId]="companyId"  [fromPage]="fromPage" (backClick)="onClickBack($event)"></company-details>
+            <company-premium *ngIf="companyDetailsFlag" [companyId]="companyId" [editMode]="false"></company-premium>
+    </div>
+</div>

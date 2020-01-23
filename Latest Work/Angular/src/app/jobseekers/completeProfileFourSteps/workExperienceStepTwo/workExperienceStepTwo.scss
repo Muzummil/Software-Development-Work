@@ -1,0 +1,120 @@
+@import '../../../../styles/sass/base/_variables.scss';
+.error-feild{
+    border: 1px solid #e74c3c !important;
+}
+.fal-shadow-container{
+    padding: 20px 10px 10px 10px;
+    background: $white;
+    margin-top:10px;
+    border:1px solid $light-border;
+    position: relative;
+    box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.05);
+    .light-label{
+        color: $secondarycolor!important;
+        display: block;
+        font-weight: normal!important;
+        &:after{
+            content: " *";
+            color: red;
+            font-weight: bold;
+        }
+    }
+    .no-mandatory{
+        &:after{
+            content: none;
+        }
+    }
+    .btn-delete-work-experience{
+        width:  35px;
+        height: 35px;
+        color: $white;
+        background: $secondarycolor;
+        border: none;
+        float: right;
+        margin-bottom: 11px;
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        z-index: 9;
+    }
+    .fal-currently-work-here{
+        margin-top: 31px;
+        input[type=checkbox]{
+            width: 23px;
+            float: left;
+            margin: -6px 0px !important;
+        }
+        label{
+            top: 4px;
+            position: relative;
+            left: 6px;
+        }
+    }
+    .fal-btn-delete-roles, .fal-btn-add-roles{
+        width: 70px;
+        height: $button-height;
+        color: $white;
+        background: $secondarycolor;
+        border: none;
+        float: right;
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        z-index: 9;
+        font-weight: 600;
+    }
+}
+
+// ===============================================
+.arabic{
+    .fal-shadow-container{
+        .btn-delete-work-experience{
+            left: 0px;
+            right: inherit;
+        }
+        .light-label{
+            text-align: right;
+        }
+        .fal-currently-work-here{
+            float: right;
+            label{
+                margin-right: 34px;
+                text-align: right;
+            }
+        }
+        .fal-btn-delete-roles, .fal-btn-add-roles{
+            left: 0px;
+            right: inherit;
+        }
+    }
+}
+
+
+
+
+/* Respopnsive breakpoint */
+// ============bigScreen===========
+@media all and (max-width: 991px) {
+    .fal-shadow-container{
+        .fal-currently-work-here{
+            margin-top: 0px !important;
+        }
+    }
+}
+
+// ============MediumScreen========
+@media all and (max-width: 768px) {
+    .arabic{
+        .fal-currently-work-here{
+            right: -6px;
+            label{
+                margin-right: 34px;
+            }
+        }
+    }
+}
+
+// ============SmallScreen=========
+@media all and (max-width: 480px) {
+
+}

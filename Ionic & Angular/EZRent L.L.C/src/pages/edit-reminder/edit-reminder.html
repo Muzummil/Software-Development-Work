@@ -1,0 +1,44 @@
+<ion-header class="animated fadeIn no-shadow">
+  <ion-navbar class="no-border" color="primary">
+    <ion-title>Edit Reminder</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form #myForm="ngForm" [formGroup]="onRemainder" (ngSubmit)="updateReminder()" class="list-form" margin-top>
+  <ion-item *ngIf="tenants==null">
+      <ion-label fixed>
+        Select User
+      </ion-label>
+      <ion-select  formControlName="User" placeholder="users" col-5 multiple="false" cancelText="Cancel" okText="OK">
+        <ion-option value={{userId}}>Self</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="tenants!=null">
+      <ion-label fixed>
+        Select User
+      </ion-label>
+      <ion-select *ngFor="let item of tenants"  formControlName="User" placeholder="users" col-5 multiple="false" cancelText="Cancel" okText="OK">
+        <ion-option value={{userId}}>Self</ion-option>
+        <ion-option value={{item.id}}>{{item.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <p ion-text color="danger" class="has-error" *ngIf="onRemainder.get('User').hasError('required') && myForm.submitted">please select user</p>
+    <ion-item>
+      <ion-label fixed>
+        <img src="../assets/icon/signup_1.png" width="30">
+      </ion-label>
+      <ion-input type="text" formControlName="Title" value={{reminderData.title}}></ion-input>
+    </ion-item>
+    <p ion-text color="danger" class="has-error" *ngIf="onRemainder.get('Title').hasError('required') && myForm.submitted">title requiered</p>
+    <ion-item>
+      <ion-label fixed>
+        <img src="../assets/icon/signup_1.png" width="30">
+      </ion-label>
+      <ion-textarea class="textarea" formControlName="Description" value={{reminderData.description}}></ion-textarea>      
+    </ion-item>
+    <p ion-text color="danger" class="has-error" *ngIf="onRemainder.get('Description').hasError('required') && myForm.submitted">description requiered</p>    
+    <button ion-button full type="submit" color="primary">Update Reminder</button>
+  </form>
+  <button ion-button full type="button" color="primary" (click)="backToReminder()">Back to reminder page</button>
+</ion-content>

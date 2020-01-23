@@ -1,0 +1,503 @@
+input:-webkit-autofill {
+  -webkit-animation-name: autofill;
+  -webkit-animation-fill-mode: both;
+}
+
+h1, h2, h3, h4, h5, span, label, a, button, p {
+  font-family: #666;
+}
+
+.arabic h1, .arabic h2, .arabic h3, .arabic h4, .arabic h5, .arabic span, .arabic label, .arabic a, .arabic button, .arabic p, .arabic input, .arabic .cmpny-txt {
+  font-family: source-sans-pro, "Noto Kufi Arabic", sans-serif !important;
+}
+
+.block .block-title-2 h2 {
+  padding: 10px 0px !important;
+}
+
+.block .block-title-2 h2 h2 {
+  line-height: 40px;
+}
+
+.brg-lgt {
+  border-bottom: solid 5px #545455;
+}
+
+.brg-lgt .post i {
+  color: #37a312;
+  display: block;
+  padding-bottom: 10px;
+}
+
+.brg-lgt .done {
+  margin-bottom: -20px;
+}
+
+.brg-lgt .done i {
+  color: #545455;
+  background: #fff;
+  border-radius: 50%;
+  height: 25px;
+}
+
+.brg-lgt h3 {
+  color: #37a312;
+}
+
+.block .block-title-2 button {
+  float: right;
+}
+
+.box-set {
+  float: right;
+  width: 100%;
+}
+
+.box-set label {
+  color: #545455;
+}
+
+.job-status {
+  padding: 0px 15px;
+}
+
+.job-status .radio {
+  display: inline-block;
+  padding-top: 0px;
+  margin-left: 15px;
+  line-height: 16px;
+}
+
+.job-status h3 {
+  font-size: 16px;
+  color: #37a312;
+  margin-top: 13px;
+  margin-bottom: 0px;
+}
+
+.refine-serch {
+  float: left;
+  width: 100%;
+  border-bottom: 1px solid #ececec !important;
+  padding: 10px 0px !important;
+}
+
+.jobs-employer {
+  border: 1px solid #ececec;
+}
+
+.dim-lgt {
+  border-bottom: solid 5px rgba(195, 227, 184, 0.41);
+}
+
+.dim-lgt i {
+  color: rgba(195, 227, 184, 0.41);
+}
+
+.dim-lgt h3 {
+  color: #545455;
+}
+
+.blu-bg {
+  background: rgba(195, 227, 184, 0.41);
+  padding: 0px 10px;
+}
+
+#post-job .half-box-post {
+  text-align: left;
+}
+
+#post-job .half-box-post .light {
+  color: #37a312;
+}
+
+#post-job .full-box-post .light {
+  color: #37a312;
+}
+
+#post-job .radio {
+  color: #545455;
+}
+
+#post-job .clicks .radio-primary input[type="radio"]:checked + label::before {
+  color: #37a312;
+}
+
+.devider-jb {
+  display: block;
+  width: 100%;
+  float: left;
+}
+
+.tag-secton .dropdown-menu {
+  height: 100px !important;
+}
+
+.tag-secton .tagss {
+  height: auto;
+  display: inline-table;
+  margin-right: 3px;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  margin-top: 7px;
+}
+
+.tag-secton .tagss .tag-main {
+  border: solid #e1e1e1 1px;
+  padding: 8px 10px;
+  padding-left: 0px;
+  border-radius: 0px;
+}
+
+.tag-secton .tagss .tag-main .hash {
+  background: #37a312;
+  color: #fff;
+  padding: 9px 13px;
+  border-radius: 0px;
+}
+
+.tag-secton .tagss .tag-main .hash1 {
+  background: #fff;
+  color: #37a312;
+  padding: 10px 13px;
+  border-right: solid 1px #e1e1e1;
+}
+
+.tag-secton .tagss .tag-main .tag-txt {
+  color: #545455;
+  padding: 0px 10px;
+  text-transform: capitalize;
+}
+
+.tag-secton .light {
+  color: #545455;
+}
+
+.tag-secton .light i {
+  color: #37a312;
+}
+
+.tag-secton input {
+  padding: 8px 10px !important;
+  color: #545455 !important;
+}
+
+.tag-secton div.tagsinput {
+  padding: 0px 0px;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.tag-secton div.tagsinput span.tag {
+  border: 1px solid #e1e1e1;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  display: block;
+  float: left;
+  text-decoration: none;
+  height: 40px;
+  background: #fff;
+  color: #545455;
+  font-size: 16px;
+  padding: 0px;
+  padding-right: 0px;
+}
+
+.tag-secton div.tagsinput span.tag a {
+  font-weight: bold;
+  padding: 13px 15px;
+  border-left: solid 1px #e1e1e1;
+  top: 0px;
+  line-height: 40px;
+  color: #37a312;
+  text-decoration: none;
+  font-size: 11px;
+}
+
+.tag-secton div.tagsinput input {
+  width: 80px;
+  margin: 0px;
+  font-size: 13px;
+  border: 1px solid transparent;
+  padding: 5px;
+  background: transparent;
+  color: #000;
+  outline: 0px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.tag-secton div.tagsinput div {
+  display: block;
+  float: left;
+}
+
+.tag-secton .tags_clear {
+  clear: both;
+  width: 100%;
+  height: 0px;
+}
+
+.tag-secton .not_valid {
+  background: #FBD8DB !important;
+  color: #90111A !important;
+}
+
+.tag-new {
+  display: inline-block;
+  background: #fff;
+  float: left;
+  border: solid 1px #e1e1e1;
+  padding: 0px;
+  height: 40px;
+  margin-right: 5px;
+  position: relative;
+  margin-bottom: 5px;
+  border-radius: 0px;
+}
+
+.tag-new input {
+  font-size: 14px !important;
+}
+
+.tag-new span {
+  box-shadow: none;
+}
+
+.tag-new .txt {
+  border-right: solid 1px #e1e1e1;
+  display: inline-block;
+  line-height: 40px !important;
+  padding: 0 15px;
+  color: #37a312 !important;
+  padding-bottom: 0px !important;
+}
+
+.tag-new .close-tag {
+  display: inline-block;
+  color: #37a312;
+  padding: 0px 8px 8px 5px;
+}
+
+.tag-new .close-tag:hover {
+  color: #545455;
+}
+
+.benafit-box:hover {
+  background: #37a312;
+  cursor: pointer;
+}
+
+.benafit-box:hover p {
+  color: #fff !important;
+}
+
+.benafit-box:hover .ben-icn {
+  background: none !important;
+}
+
+.benafit-box:hover .ben-icn i {
+  color: #fff !important;
+}
+
+.benafit-box-active {
+  background: #37a312;
+  cursor: pointer;
+}
+
+.benafit-box-active p {
+  color: #fff !important;
+}
+
+.benafit-box-active .ben-icn {
+  background: none !important;
+}
+
+.benafit-box-active .ben-icn i {
+  color: #fff !important;
+}
+
+.benefits .benafit-box {
+  float: left;
+  width: 14.2857%;
+  text-align: center;
+  padding: 10px 0px;
+  height: 130px;
+}
+
+.benefits .benafit-box {
+  float: left;
+  width: 13.7%;
+  text-align: center;
+  padding: 20px 5px;
+  border: 1px solid #ececec;
+  margin-top: 3px;
+  margin-left: 3px;
+  margin-right: 3px;
+  border-radius: 0px;
+  min-height: 152px;
+}
+
+.benefits .benafit-box p {
+  margin-top: 0px;
+  color: #545455;
+}
+
+.benefits .ben-icn {
+  background: #fff;
+  width: 75px;
+  height: 30px;
+  border-radius: 50%;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.benefits .ben-icn i {
+  font-size: 30px;
+  color: #37a312;
+}
+
+.filter_sub {
+  line-height: 25px !important;
+}
+
+.arabic .tag-new {
+  float: right !important;
+  width: auto;
+  height: 42px;
+}
+
+.arabic .tag-new .txt {
+  border-right: none;
+  border-left: 1px solid #ececec;
+}
+
+.arabic .tag-main {
+  padding: 8px 0px !important;
+}
+
+.arabic #post-job .half-box-post label {
+  text-align: right !important;
+}
+
+.arabic #post-job .half-box-post {
+  text-align: right !important;
+}
+
+.arabic #post-job .half-box-post .light {
+  text-align: right !important;
+}
+
+.arabic .full-box .light {
+  text-align: right !important;
+}
+
+.arabic .arabic-right-left .light {
+  text-align: right !important;
+}
+
+.arabic .boxformcompanyats .caret {
+  left: 15px !important;
+  right: inherit;
+}
+
+.arabic .avatar-job-add {
+  margin-right: 0px;
+  margin-left: 10px;
+}
+
+.draft-bt {
+  background-color: #37a312 !important;
+}
+
+#emp-jobs {
+  margin: 0px auto;
+  width: 570px;
+  padding-bottom: 20px;
+  text-align: center;
+}
+
+#emp-jobs button {
+  background: #1abc9c;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  height: 40px;
+  line-height: 40px;
+  padding: 0px 90px;
+  margin: 0px 0px 20px 0px;
+  border-radius: 0px;
+}
+
+#emp-jobs button:hover {
+  opacity: 0.76;
+}
+
+.avatar-job-add {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  border: 1px solid #ececec;
+  float: left;
+  margin-right: 10px;
+}
+
+.avatar-job-add img {
+  width: 100%;
+  height: 100px;
+  object-fit: contain;
+}
+
+.boxformcompanyats {
+  width: calc(40% - 110px);
+  float: left;
+  margin-top: 60px;
+}
+
+.press-add {
+  float: left;
+  line-height: 0px;
+  width: 100%;
+  color: #999;
+}
+
+@media (max-width: 991px) {
+  .boxformcompanyats {
+    width: calc(100% - 110px);
+    float: left;
+    margin-top: 60px;
+  }
+  .arabic .ar-mar-rgt-0 {
+    margin-right: 0px !important;
+  }
+  .arabic .ar-p-0 {
+    padding: 0px !important;
+  }
+  .arabic .ar-txt-rgt {
+    text-align: right !important;
+  }
+}
+
+@media (max-width: 768px) {
+  #emp-jobs {
+    width: 270px;
+  }
+  #emp-jobs button {
+    padding: 0px 18px;
+  }
+  #emp-jobs .requr-full {
+    float: right;
+    margin-right: 0px;
+  }
+}
+
+@media (max-width: 480px) {
+  #emp-jobs {
+    width: 270px;
+  }
+  #emp-jobs button {
+    padding: 0px 18px;
+  }
+}

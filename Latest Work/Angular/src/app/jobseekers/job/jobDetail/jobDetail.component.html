@@ -1,0 +1,1072 @@
+<div [class.arabic] = "accountService.isArabic()">
+<div class="main-tab load-data-js"></div>
+<job-menu></job-menu>
+<div class="container">
+<div *ngIf="!applyJobFlag && !invalidJob" role="tabpanel" class="tab-pane active top-gap jobDetail" id="all-jobs">
+    <div *ngIf="!(selJob$ | async)" class="empty-min2">
+            <i class="small_loading"><spinner></spinner></i>
+    </div>
+        <div class="box-row">
+            <!--title-->
+            <div class="refine-serch col-lg-12 col-md-12 col-sm-12 col-xs-12" [class.mobil-full-text-heading]="isPublic" >
+                <div class="box-row block-title-2 top-back-sec">
+                    <a  *ngIf="(isAuthorized$ | async) && showBack" (click)="onClickBack()">
+                        <button>
+                            <span><i class="zmdi zmdi-arrow-left"></i></span><span class="hide">{{fixedTextHash['back'][currLan]}}</span>
+                        </button>
+                    </a>
+                    <a *ngIf="(isAuthorized$ | async) && !showBack">
+                        <button>
+                            <span><i class="zmdi zmdi-arrow-left"></i></span>
+                            <span class="hide">{{fixedTextHash['back'][currLan]}}</span>
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+            <div class="first-section">
+                <div class="col-md-12 col-sm-12 col-xs-12 arabic-right-left" [class.col-lg-8]="(similarJob$ | async)?.length > 0" [class.col-lg-12]="(similarJob$ | async)?.length == 0">
+                    <div  class="block  bottom-gap">
+               
+
+                    <!--Desktop-->
+                    <div class="box-row company-details">
+                        <div class="detail-jobseeker-job arabic-right-left">
+                            <div class="compny-details">
+
+                                <!-- picture -->
+                                <div class="atsCompany">
+                                    <img *ngIf="(selJob$ | async)?.branch?.avatar" src="{{(selJob$ | async)?.branch?.avatar}}">
+                                    <img *ngIf="!(selJob$ | async)?.branch?.avatar" src="/assets/images/custom-images/logo2.svg">
+                                </div>
+                                <div class="detailViewJobAts">
+                                    <!-- details -->
+                                    <div class="box-row">
+                                        <div class="cmpny-txt">
+                                            <h1 class="dark bold padding-0">{{(selJob$ | async)?.title}}</h1>
+                                        </div>
+                                        <span *ngIf="(selJob$ | async)?.branch?.name" class="cmpny-txt bold">{{(selJob$ | async)?.branch?.name}}</span>
+                                        <span *ngIf="!(selJob$ | async)?.branch?.name" class="cmpny-txt bold">{{(selJob$ | async)?.companyObj?.name}}</span>
+                                        <span class="cmpny-txt">{{(selJob$ | async)?.city}}{{fixedTextHash['comma'][currLan]}} {{(selJob$ | async)?.countryCountry}}</span>
+                                        <span class="cmpny-txt">{{(selJob$ | async)?.sector}} {{fixedTextHash['sector'][currLan]}}</span>
+                                        <span class="cmpny-txt">{{accountService.getFormattedDate((selJob$ | async)?.createdDate, 'MMM DD, YYYY')}}</span>
+                                    </div>
+                                </div>
+                                <!-- social media -->
+                                <div class="box-row block-title-2 border-none ">
+                                    <div class="apply-detail">
+                                                <a data-toggle="modal"    [attr.data-target] = "'.apply-job'">
+                                                    <button  *ngIf="(selJob$ | async)?.appliedDate == null && (isAuthorized$ | async)" class="float-left-detail-only">
+                                                    {{fixedTextHash['apply_now'][currLan]}}
+                                                    </button>
+                                                </a>
+
+                                                <a  *ngIf="!(isAuthorized$ | async)"  data-toggle="modal" (click)="createReffererUrl()">
+                                                    <button  class="float-left-detail-only">
+                                                    {{fixedTextHash['apply_now'][currLan]}}
+                                                    </button>
+                                                </a>
+
+                                        <!-- <button *ngIf="!(isAuthorized$ | async)"
+                                                [routerLink]="accountService.getCurrLangUrl()+accountService.getPath()+'/login'"
+                                                class="float-left-detail-only">
+                                        {{fixedTextHash['apply_now'][currLan]}}
+                                        </button> -->
+                                        <span class="appliedbitui"  *ngIf="(isAuthorized$ | async) && (selJob$ | async)?.appliedDate != null"><i class="zmdi zmdi-check-circle applied"></i>{{fixedTextHash['applied'][currLan]}}</span>
+                                        <div class=" clearfix"></div>
+                                    </div>
+                                    <div class="job-socail"><span>{{fixedTextHash['share'][currLan]}}</span>
+                                        <share-social-media *ngIf="(jobUrl$ | async)"
+                                                            [url]="(jobUrl$ | async)"
+                                                            [title]="(jobUrltitle$ | async)"
+                                                            [image]="(selJob$ | async)?.companyObj?.profileImage"
+                                                            [description]="(jobUrlDesc$ | async)">
+                                        </share-social-media>
+
+                                    </div>
+                                </div>
+                                
+
+                            </div>
+
+               
+
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <!-- matching percentage -->
+                        <div class="maching-jobseeker-job-detail arabic-right-left">
+                            <div class="box-row">
+                                <div class="tooltip-x" *ngIf="isPublic">
+                                  <!--Tool Tip-->
+                                <strong class="tooltiptext-xv" [innerHtml]="fixedTextHash['signup_checking_matching_percentage'][currLan]">
+                                   
+                                </strong>
+                                    <div class="prg-cercle">
+                                        <div [class]="'c100 p'+(((selJob$ | async)?.matchingPercent) | number:'1.0-1')+' small'" >
+                                            <span *ngIf="isPublic">?%</span>
+                                            <div class="slice">
+                                                <div class="bar"></div>
+                                                <div class="fill"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <div class="matching">
+                                    <div class="req-dark">{{fixedTextHash['match_profile'][currLan]}}</div>
+                                </div>
+                                <div class="clearfix"></div>
+                                </div>
+
+                                <div  *ngIf="!isPublic">
+                                  <!--Tool Tip-->
+
+                                 <animate-cicle *ngIf="(selJob$ | async)?.matchingPercent"
+                                                [textVal]="fixedTextHash['match_profile'][currLan]"
+                                                [val]="(selJob$ | async)?.matchingPercent"></animate-cicle>
+
+                                <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!--requirement-->
+                    <div class="box-row requirement">
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  arabic-right-left">
+                            <div class="req-1"><i class="zmdi zmdi-chart-donut"></i></div>
+                            <div class="req-2">
+                                <div class="txt"><h5>{{fixedTextHash['sector'][currLan]}}</h5></div>
+                                <div class="req-dark">{{(selJob$ | async)?.sector}}</div></div>
+                            <div class=" clearfix"></div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  arabic-right-left">
+                            <div class="req-1"><i class="zmdi zmdi-view-dashboard"></i></div>
+                            <div class="req-2">
+                                <div class="txt"><h5>{{fixedTextHash['functional_area'][currLan]}}</h5></div>
+                                <div class="req-dark">{{(selJob$ | async)?.companyObj?.functionalArea}}</div></div>
+                            <div class=" clearfix"></div>
+                        </div>
+                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  arabic-right-left">
+                            <div class="req-1"><i class="zmdi zmdi-case"></i></div>
+                            <div class="req-2">
+                                <div class="txt"><h5>{{fixedTextHash['year_exp_view'][currLan]}}</h5></div>
+                                <div class="req-dark">{{(selJob$ | async)?.experienceFrom}} <span *ngIf="(selJob$ | async)?.experienceTo"> - {{(selJob$ | async)?.experienceTo}}</span>  {{fixedTextHash['years'][currLan]}} </div></div>
+                            <div class=" clearfix"></div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  arabic-right-left">
+                            <div class="req-1"><i class="icon-experience"></i></div>
+                            <div class="req-2">
+                                <div class="txt"><h5>{{fixedTextHash['exp_level'][currLan]}}</h5> </div>
+                                <div class="req-dark">{{(selJob$ | async)?.experienceLevel}}</div></div>
+                            <div class=" clearfix"></div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  arabic-right-left">
+                            <div class="req-1"><i class="zmdi zmdi-money-box"></i></div>
+                            <div class="req-2">
+                                <div class="txt"><h5>{{fixedTextHash['monthy_salary_range'][currLan].replace('CURRCODE',fixedTextHash[accountService.getCurrency()][currLan])}}</h5></div>
+
+                                <div class="req-dark" *ngIf="((selJob$ | async)?.salaryFrom || (selJob$ | async)?.salaryFrom == 0) && (selJob$ | async)?.salaryFrom < 10000">{{(selJob$ | async)?.salaryFrom | number}} - {{(selJob$ | async)?.salaryTo | number}}</div>
+                                <div class="req-dark" *ngIf="(selJob$ | async)?.salaryFrom &&  (selJob$ | async)?.salaryFrom >= 10000">10k+</div>
+                                <div class="req-dark navy" *ngIf="!(selJob$ | async)?.salaryFrom && (selJob$ | async)?.salaryFrom != 0">{{getEmptySalaryValidation()}}</div>
+                            </div>
+                            <div class=" clearfix"></div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  arabic-right-left">
+                            <div class="req-1"><i class="zmdi zmdi-graduation-cap"></i></div>
+                            <div class="req-2">
+                                <div class="txt"><h5>{{fixedTextHash['education_req'][currLan]}}</h5></div>
+                                <div class="req-dark">{{(selJob$ | async)?.educationLevel}}</div></div>
+                            <div class=" clearfix"></div>
+                        </div>
+
+                       <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  arabic-right-left">
+                            <div class="req-1"><i class="icon-notice-period"></i></div>
+                            <div class="req-2">
+                                <div class="txt"><h5>{{fixedTextHash['certificates_req'][currLan]}}</h5></div>
+                                <!--<div class="req-dark" *ngIf="(selJob$ | async)?.certificates?.length == 0">Not Required</div>-->
+                                <div class="req-dark" *ngIf="(selJob$ | async)?.certificates?.length > 0" >
+                                    <span *ngFor="let selCert of (selJob$ | async)?.certificates,let certIndex = index">{{selCert?.name}}
+                                        <span  *ngIf="certIndex <= ((selJob$ | async)?.certificates?.length-2)">,</span>
+                                    </span>
+                                </div>
+                                    <div class="req-dark navy" *ngIf="(selJob$ | async)?.certificates && (selJob$ | async)?.certificates?.length ==0 ">
+                                        N/A
+                                    </div>
+
+                            </div>
+                            <div class=" clearfix"></div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  arabic-right-left">
+                            <div class="req-1"><i class="icon-language"></i></div>
+                            <div class="req-2">
+                                <div class="txt"><h5>{{fixedTextHash['languages'][currLan]}}</h5></div>
+
+                                <div class="req-dark" *ngIf="(selJob$ | async)?.languageList">
+                                    <span *ngFor="let selLan of (selJob$ | async)?.languageList,let certIndex = index">{{selLan?.name}}<span  *ngIf="certIndex <= ((selJob$ | async)?.languageList?.length-2)">, </span></span>
+                                    <div class=" clearfix"></div>
+                                </div>
+
+                                <div class="req-dark navy" *ngIf="(selJob$ | async)?.languageList && (selJob$ | async)?.languageList?.length ==0 ">
+                                    &nbsp;N/A
+                                </div>
+
+
+
+                            </div>
+                            <div class=" clearfix"></div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  arabic-right-left">
+                            <div class="req-1"><i class="icon-gender"></i></div>
+                            <div class="req-2">
+                                <div class="txt"><h5>{{fixedTextHash['gender_preference'][currLan]}}</h5></div>
+                                <div class="req-dark" *ngIf="(selJob$ | async)?.genderType">{{genderHash[(selJob$ | async)?.genderType]}}</div>
+                                <div class="req-dark navy"  *ngIf="!(selJob$ | async)?.genderType">{{fixedTextHash['any'][currLan]}}</div>
+                            </div>
+                            <div class=" clearfix"></div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  arabic-right-left">
+                            <div class="req-1"><i class="icon-current-Job font-12"></i></div>
+                            <div class="req-2">
+                                <div class="txt"><h5>{{fixedTextHash['job_type'][currLan]}}</h5></div>
+                                <div class="req-dark">{{(selJob$ | async)?.jobTypeName}}</div></div>
+                            <div class=" clearfix"></div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  arabic-right-left">
+                            <div class="req-1"><i class="zmdi zmdi-calendar-alt"></i></div>
+                            <div class="req-2">
+                                <div class="txt"><h5>{{fixedTextHash['joining_date'][currLan]}}</h5></div>
+                                <div class="req-dark" *ngIf="(selJob$ | async)?.join_date">{{accountService.getFormattedDate((selJob$ | async)?.join_date, 'MMM DD, YYYY')}}</div>
+                                <div class="req-dark" *ngIf="!(selJob$ | async)?.join_date">{{fixedTextHash['immediately'][currLan]}}</div>
+                            </div>
+                            <div class=" clearfix"></div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  arabic-right-left">
+                            <div class="req-1"><i class="icon-License"></i></div>
+                            <div class="req-2">
+                                <div class="txt"><h5>{{fixedTextHash['driving_license'][currLan]}}</h5> </div>
+                                <div class="req-dark">
+                                    <span *ngIf="(selJob$ | async)?.drivingLicense">{{fixedTextHash['required'][currLan]}}</span>
+                                    <span *ngIf="!(selJob$ | async)?.drivingLicense">{{fixedTextHash['not_required'][currLan]}}</span>
+                                </div></div>
+                            <div class=" clearfix"></div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  arabic-right-left">
+                            <div class="req-1"><i class="zmdi zmdi-accounts-outline"></i></div>
+                            <div class="req-2">
+                                <div class="txt"><h5>{{fixedTextHash['age_group'][currLan]}}</h5></div>
+                                <div class="req-dark" *ngIf="(selJob$ | async)?.ageRange">{{(selJob$ | async)?.ageRange}}</div>
+                            </div>
+                            <div class=" clearfix"></div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  arabic-right-left">
+                            <div class="req-1"><i class="zmdi zmdi-flag"></i></div>
+                            <div class="req-2">
+                                <div class="txt"><h5>{{fixedTextHash['nationality'][currLan]}}</h5></div>
+                                <div class="req-dark" *ngIf="(selJob$ | async)?.nationality">{{(selJob$ | async)?.nationality}}</div>
+                            </div>
+                            <div class=" clearfix"></div>
+                        </div>
+
+                    </div>
+                </div>
+
+                </div>
+                <div *ngIf="(similarJob$ | async)?.length >0" class="similar-jobs col-lg-4 col-md-12 col-sm-12 col-xs-12 filter-hide">
+                    <!--Similar Jobs-->
+                    <div class="box-row">
+                        <div class="block bottom-gap">
+                            <div class="block-title-2"><h2>{{fixedTextHash['similar_jobs'][currLan]}}</h2></div>
+                            <div class="scroll">
+                                <ul>
+                                    <li class="filter-jobs"  *ngFor="let selJob of (similarJob$ | async),let jobcount =index">
+                                        <!--<a class="cursor_pointer1" (click)="onClickJobDetail(selJob.id)">-->
+
+                                        <a class="cursor_pointer1"   (click)="getJobUrl('/'+accountService.getPath()+'/'
+                                        +accountService.getSpaceToDashLowerCase(selJob.countryCountry)+'/jobs/'
+                                        +accountService.getSpaceToDashLowerCase(selJob.city)+'/'+accountService.getSpaceToDashLowerCase(selJob.sector)
+                                        +'/'+accountService.getSpaceToDashLowerCase(selJob.title)+'-'+selJob.id)"  >
+
+                                            <div class="featured-box">
+                                                    <div class="feturd-compny-dtls">
+                                                        <div class="txt-white">{{selJob.title}}</div>
+                                                        <div class="cmpny-txt">
+                                                            <span>{{selJob.companyObj.name}}</span>
+                                                        </div>
+                                                        <div class="cmpny-txt">
+                                                            <span>{{selJob.city}}, {{selJob.countryCountry}}</span>
+                                                        </div>
+                                                        <div class="cmpny-txt">
+                                                            <span>{{selJob.sector}} {{fixedTextHash['sector'][currLan]}}</span>
+                                                        </div>
+                                                    </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="second-section">
+                <div class="col-md-12 col-sm-12 col-xs-12 arabic-right-left"  [class.col-lg-8]="(similarCompanies$ | async)?.length > 0"
+                     [class.col-lg-12]="(similarCompanies$ | async)?.length == 0">
+
+                    <!-- New Features -->
+                    <div class="box-row block bottom-gap veiw-secton2">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 probability padd-15  arabic-right-left">
+                            <div class="applicants-numbers blue-silver" *ngIf="selJob.views_count">
+                                {{ selJob.views_count | number}}
+                            </div>
+                            <div class="applicants-numbers blue-silver" *ngIf="!selJob.views_count">
+                                0
+                            </div>
+                            <div class="applicants-txt blue-silver-txt bold">{{fixedTextHash['count_views'][currLan]}}</div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 probability padd-15  arabic-right-left">
+                            <div class="applicants-numbers blue-dark" *ngIf="selJob.count_applications">
+                                {{selJob.count_applications  | number}}
+                            </div>
+                            <div class="applicants-numbers blue-dark" *ngIf="!selJob.count_applications">
+                                0
+                            </div>
+                            <div class="applicants-txt blue-dark-txt bold">{{fixedTextHash['count_applications'][currLan]}}</div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 probability padd-15  arabic-right-left">
+                            <div class="applicants-numbers navy-light" *ngIf=" showRank">
+                                <img src="/assets/images/balls.svg"  style="width: 11px;" *ngIf="showRankSpinner">
+                                <div *ngIf="(selJob$ | async)?.appliedDate == null && !showRankSpinner">
+                                    {{rank | number }}/{{(selJob.count_applications + 1) | number }}
+                                </div>
+                                <div *ngIf="(selJob$ | async)?.appliedDate != null && !showRankSpinner">
+                                    {{rank | number }}/{{selJob.count_applications | number }}
+                                </div>
+
+                            </div>
+
+                            <div class="applicants-numbers navy-light" *ngIf="!accountService.getAuth()">
+                                ?
+                            </div>
+                            <div class="applicants-txt navy-light-txt bold" *ngIf="(selJob$ | async)?.appliedDate == null && showRank">
+                              {{fixedTextHash['your_rank'][currLan]}}
+                            </div>
+                            <div class="applicants-txt navy-light-txt bold" *ngIf="!accountService.getAuth()">
+                              {{fixedTextHash['your_rank'][currLan]}}
+                            </div>
+                            <div class="applicants-txt navy-light-txt bold" *ngIf="(selJob$ | async)?.appliedDate != null && showRank">
+                              {{fixedTextHash['current_rank'][currLan]}}
+                            </div>
+
+
+
+
+                            <div class="calculate-propability" *ngIf="!showRank && accountService.getAuth()">
+                                <span [innerHtml]="fixedTextHash['check_your_rank'][currLan]"></span>
+                                <button class="calculate-bt" (click)="getRank()">{{fixedTextHash['calculate'][currLan]}}</button>
+                            </div>
+                        </div>
+
+                        <!--In Future Probability of success will be added back-->
+
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 probability padd-15 no-border-right arabic-right-left" *ngIf="!isPublic">
+                            <div class="spinner-inside-probability"  *ngIf="showSpinner">
+                                <img src="/assets/images/balls.svg"  style="width: 11px;" >
+                            </div>
+                            <div class="{{'circlep'}} circle" [class.hide]="!showAnimate">
+                                <strong></strong>
+                                <span>{{fixedTextHash['probability_success'][currLan]}}</span>
+                            </div>
+                            <div class="calculate-propability" *ngIf="!showAnimate">
+                                <span *ngIf="!showSpinner" [innerHtml]="fixedTextHash['check_probability_success'][currLan]"></span>
+                                <span *ngIf="showSpinner">{{fixedTextHash['probability_success'][currLan]}}</span>
+
+                                <button class="calculate-bt" (click)="showAnimation('.circlep')">{{fixedTextHash['calculate'][currLan]}}</button>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 probability padd-15 no-border-right" *ngIf="isPublic">
+
+                            <div class="applicants-numbers navy-light">  ?  </div>
+                            <div class="applicants-txt navy-light-txt bold">{{fixedTextHash['your_probability_success'][currLan]}}</div>
+                        </div>
+                    </div>
+
+
+                    <!--Applicant Analysis-->
+                    <div class="box-row block bottom-gap analysis" *ngIf="!isPublic">
+                        <div class="box-row block-title"><h2>{{fixedTextHash['applicant_analysis'][currLan]}}</h2></div>
+
+                        <div class="box-row blue-rel" *ngIf="(!isPublic && !isViewAnalytics)">
+                            <div class="blur-txt">
+                                <div class="block-contant">
+                                    <div class="error">
+                                        <h3>{{fixedTextHash['see_job_analytics'][currLan]}}</h3>
+                                        <a (click)="getJobAnalytics()" > <button>{{fixedTextHash['click_here'][currLan]}}</button></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="blue-blur"></div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fade_ele">
+                                <div class="row block-title padding-10-20">
+                                    <h4>{{fixedTextHash['by_country'][currLan]}}</h4>
+                                </div>
+                                <div class="padding-10-15">
+                                    <!-- each progress -->
+                                    <div class="progress-bloovo app-analysis orange-c">
+                                        <div class="prograss-title">
+                                            <h5 class="prograss-txt pull-left arabic-right-left">{{fixedTextHash['united_arab_emirates'][currLan]}}</h5>
+                                            <div class="h5-feel  prograss-txt pull-right percentage-color arabic-right-left">60%</div>
+                                            <div class=" clr"></div>
+                                        </div>
+                                        <div class="progress mg-0">
+                                            <div aria-valuemax="100" aria-valuemin="0" class="progress-bar progress-bar-success"
+                                                 data-percentage="0%" role="progressbar" style="width: 60%;">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- each progress -->
+                                    <div class="progress-bloovo app-analysis orange-c">
+                                        <div class="prograss-title">
+                                            <h5 class="prograss-txt pull-left arabic-right-left">{{fixedTextHash['oman'][currLan]}}</h5>
+                                            <div class="h5-feel prograss-txt pull-right percentage-color arabic-right-left">55%</div>
+                                            <div class=" clr"></div>
+                                        </div>
+                                        <div class="progress mg-0">
+                                            <div aria-valuemax="100" aria-valuemin="0" class="progress-bar progress-bar-success"
+                                                 data-percentage="0%" role="progressbar" style="width: 55%;">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- each progress -->
+                                    <div class="progress-bloovo app-analysis orange-c">
+                                        <div class="prograss-title">
+                                            <h5 class="prograss-txt pull-left arabic-right-left">{{fixedTextHash['saudi_arabia'][currLan]}}</h5>
+                                            <div class="h5-feel prograss-txt pull-right percentage-color arabic-right-left">66.0%</div>
+                                            <div class=" clr"></div>
+                                        </div>
+                                        <div class="progress mg-0">
+                                            <div aria-valuemax="100" aria-valuemin="0" class="progress-bar progress-bar-success" data-percentage="0%"
+                                                 role="progressbar" style="width: 66%;">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- each progress -->
+                                    <div class="progress-bloovo app-analysis orange-c">
+                                        <div class="prograss-title">
+                                            <h5 class="prograss-txt pull-left arabic-right-left">{{fixedTextHash['jordan'][currLan]}}</h5>
+                                            <div class="h5-feel prograss-txt pull-right percentage-color arabic-right-left">25%</div>
+                                            <div class=" clr"></div>
+                                        </div>
+                                        <div class="progress mg-0">
+                                            <div aria-valuemax="100" aria-valuemin="0" class="progress-bar progress-bar-success" data-percentage="0%" role="progressbar" style="width: 25%;">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- each progress -->
+                                    <div class="progress-bloovo app-analysis orange-c">
+                                        <div class="prograss-title">
+                                            <h5 class="prograss-txt pull-left arabic-right-left">{{fixedTextHash['others'][currLan]}}</h5>
+                                            <div class="h5-feel prograss-txt pull-right percentage-color arabic-right-left">30%</div>
+                                            <div class=" clr"></div>
+                                        </div>
+                                        <div class="progress mg-0">
+                                            <div aria-valuemax="100" aria-valuemin="0" class="progress-bar progress-bar-success" data-percentage="0%" role="progressbar" style="width: 30%;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!--BY EDUCATION-->
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fade_ele">
+                                <div class="row block-title padding-10-20">
+                                    <h4>{{fixedTextHash['by_education_level'][currLan]}}</h4>
+                                </div>
+
+                                <div class="padding-10-15">
+                                    <!-- each progress -->
+                                    <div class="progress-bloovo app-analysis green-c">
+                                        <div class="prograss-title">
+                                            <h5 class="prograss-txt pull-left arabic-right-left">{{fixedTextHash['bachelor_degree'][currLan]}}</h5>
+                                            <div class="h5-feel prograss-txt pull-right percentage-color arabic-right-left">66.0%</div>
+                                            <div class=" clr"></div>
+                                        </div>
+                                        <div class="progress mg-0">
+                                            <div aria-valuemax="100" aria-valuemin="0" class="progress-bar progress-bar-success" data-percentage="0%"
+                                                 role="progressbar" style="width: 66%;">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- each progress -->
+                                    <div class="progress-bloovo app-analysis green-c">
+                                        <div class="prograss-title">
+                                            <h5 class="prograss-txt pull-left arabic-right-left">{{fixedTextHash['master_degree'][currLan]}}</h5>
+                                            <div class="h5-feel prograss-txt pull-right percentage-color arabic-right-left">70%</div>
+                                            <div class=" clr"></div>
+                                        </div>
+                                        <div class="progress mg-0">
+                                            <div aria-valuemax="100" aria-valuemin="0" class="progress-bar progress-bar-success" data-percentage="0%"
+                                                 role="progressbar" style="width: 70%;">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- each progress -->
+                                    <div class="progress-bloovo app-analysis green-c">
+                                        <div class="prograss-title">
+                                            <h5 class="prograss-txt pull-left arabic-right-left">{{fixedTextHash['diploma'][currLan]}}</h5>
+                                            <div class="h5-feel prograss-txt pull-right percentage-color arabic-right-left">66%</div>
+                                            <div class=" clr"></div>
+                                        </div>
+                                        <div class="progress mg-0">
+                                            <div aria-valuemax="100" aria-valuemin="0" class="progress-bar progress-bar-success" data-percentage="0%"
+                                                 role="progressbar" style="width: 66%;">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- each progress -->
+                                    <div class="progress-bloovo app-analysis green-c">
+                                        <div class="prograss-title">
+                                            <h5 class="prograss-txt pull-left arabic-right-left">{{fixedTextHash['mba'][currLan]}}</h5>
+                                            <div class="h5-feel prograss-txt pull-right percentage-color arabic-right-left">22%</div>
+                                            <div class=" clr"></div>
+                                        </div>
+                                        <div class="progress mg-0">
+                                            <div aria-valuemax="100" aria-valuemin="0" class="progress-bar progress-bar-success" data-percentage="0%"
+                                                 role="progressbar" style="width: 22%;">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- each progress -->
+                                    <div class="progress-bloovo app-analysis green-c">
+                                        <div class="prograss-title">
+                                            <h5 class="prograss-txt pull-left arabic-right-left">{{fixedTextHash['other'][currLan]}}</h5>
+                                            <div class="h5-feel prograss-txt pull-right percentage-color arabic-right-left">50%</div>
+                                            <div class=" clr"></div>
+                                        </div>
+                                        <div class="progress mg-0">
+                                            <div aria-valuemax="100" aria-valuemin="0" class="progress-bar progress-bar-success" data-percentage="0%"
+                                                 role="progressbar" style="width: 50%;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+
+                            <!--BY SECTOR-->
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fade_ele">
+                                <div class="box-row block-title padding-10-20">
+                                    <h4>{{fixedTextHash['by_sector'][currLan]}}</h4>
+                                </div>
+
+                                <div class="padding-10-15">
+                                    <!-- each progress -->
+                                    <div class="progress-bloovo app-analysis blue-c">
+                                        <div class="prograss-title">
+                                            <h5 class="prograss-txt pull-left arabic-right-left">{{fixedTextHash['administration'][currLan]}}</h5>
+                                            <div class="h5-feel prograss-txt pull-right percentage-color arabic-right-left">60%</div>
+                                            <div class=" clr"></div>
+                                        </div>
+                                        <div class="progress mg-0">
+                                            <div aria-valuemax="100" aria-valuemin="0" class="progress-bar progress-bar-success" data-percentage="0%"
+                                                 role="progressbar" style="width: 60%;">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- each progress -->
+                                    <div class="progress-bloovo app-analysis blue-c">
+                                        <div class="prograss-title">
+                                            <h5 class="prograss-txt pull-left arabic-right-left">{{fixedTextHash['human_resources'][currLan]}}</h5>
+                                            <div class="h5-feel prograss-txt pull-right percentage-color arabic-right-left">55%</div>
+                                            <div class=" clr"></div>
+                                        </div>
+                                        <div class="progress mg-0">
+                                            <div aria-valuemax="100" aria-valuemin="0" class="progress-bar progress-bar-success" data-percentage="0%"
+                                                 role="progressbar" style="width: 55%;">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- each progress -->
+                                    <div class="progress-bloovo app-analysis blue-c">
+                                        <div class="prograss-title">
+                                            <h5 class="prograss-txt pull-left arabic-right-left">{{fixedTextHash['human_resources'][currLan]}}</h5>
+                                            <div class="h5-feel prograss-txt pull-right percentage-color arabic-right-left">66.0%</div>
+                                            <div class=" clr"></div>
+                                        </div>
+                                        <div class="progress mg-0">
+                                            <div aria-valuemax="100" aria-valuemin="0" class="progress-bar progress-bar-success" data-percentage="0%"
+                                                 role="progressbar" style="width: 66%;">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- each progress -->
+                                    <div class="progress-bloovo app-analysis blue-c">
+                                        <div class="prograss-title">
+                                            <h5 class="prograss-txt pull-left arabic-right-left">{{fixedTextHash['administration'][currLan]}}</h5>
+                                            <div class="h5-feel prograss-txt pull-right percentage-color arabic-right-left">25%</div>
+                                            <div class=" clr"></div>
+                                        </div>
+                                        <div class="progress mg-0">
+                                            <div aria-valuemax="100" aria-valuemin="0" class="progress-bar progress-bar-success" data-percentage="0%"
+                                                 role="progressbar" style="width: 25%;">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- each progress -->
+                                    <div class="progress-bloovo app-analysis blue-c">
+                                        <div class="prograss-title">
+                                            <h5 class="prograss-txt pull-left">{{fixedTextHash['other'][currLan]}}</h5>
+                                            <div class="h5-feel prograss-txt pull-right percentage-color arabic-right-left">30%</div>
+                                            <div class=" clr"></div>
+                                        </div>
+                                        <div class="progress mg-0">
+                                            <div aria-valuemax="100" aria-valuemin="0" class="progress-bar progress-bar-success" data-percentage="0%"
+                                                 role="progressbar" style="width: 30%;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+
+                            <!--BY AGE GROUP-->
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fade_ele">
+                                <div class="box-row block-title padding-10-20">
+                                    <h4>{{fixedTextHash['by_age_group'][currLan]}}</h4>
+                                </div>
+
+                                <div class="padding-10-15">
+                                    <!-- each progress -->
+                                    <div class="progress-bloovo app-analysis red-c">
+                                        <div class="prograss-title">
+                                            <h5 class="prograss-txt pull-left arabic-right-left">18 - 25</h5>
+                                            <div class="h5-feel prograss-txt pull-right percentage-color arabic-right-left">60%</div>
+                                            <div class=" clr"></div>
+                                        </div>
+                                        <div class="progress mg-0">
+                                            <div aria-valuemax="100" aria-valuemin="0" class="progress-bar progress-bar-success" data-percentage="0%"
+                                                 role="progressbar" style="width: 60%;">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- each progress -->
+                                    <div class="progress-bloovo app-analysis red-c">
+                                        <div class="prograss-title">
+                                            <h5 class="prograss-txt pull-left arabic-right-left">31 - 35</h5>
+                                            <div class="h5-feel prograss-txt pull-right percentage-color arabic-right-left">55%</div>
+                                            <div class=" clr"></div>
+                                        </div>
+                                        <div class="progress mg-0">
+                                            <div aria-valuemax="100" aria-valuemin="0" class="progress-bar progress-bar-success" data-percentage="0%"
+                                                 role="progressbar" style="width: 55%;">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- each progress -->
+                                    <div class="progress-bloovo app-analysis red-c">
+                                        <div class="prograss-title">
+                                            <h5 class="prograss-txt pull-left arabic-right-left">26 - 30</h5>
+                                            <div class="h5-feel prograss-txt pull-right percentage-color arabic-right-left">66.0%</div>
+                                            <div class=" clr"></div>
+                                        </div>
+                                        <div class="progress mg-0">
+                                            <div aria-valuemax="100" aria-valuemin="0" class="progress-bar progress-bar-success" data-percentage="0%"
+                                                 role="progressbar" style="width: 66%;">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- each progress -->
+                                    <div class="progress-bloovo app-analysis red-c">
+                                        <div class="prograss-title">
+                                            <h5 class="prograss-txt pull-left arabic-right-left">36 - 40</h5>
+                                            <div class="h5-feel prograss-txt pull-right percentage-color arabic-right-left">25%</div>
+                                            <div class=" clr"></div>
+                                        </div>
+                                        <div class="progress mg-0">
+                                            <div aria-valuemax="100" aria-valuemin="0" class="progress-bar progress-bar-success" data-percentage="0%"
+                                                 role="progressbar" style="width: 25%;">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- each progress -->
+                                    <div class="progress-bloovo app-analysis red-c">
+                                        <div class="prograss-title">
+                                            <h5 class="prograss-txt pull-left arabic-right-left">{{fixedTextHash['others'][currLan]}}</h5>
+                                            <div class="h5-feel prograss-txt pull-right percentage-color arabic-right-left">30%</div>
+                                            <div class=" clr"></div>
+                                        </div>
+                                        <div class="progress mg-0">
+                                            <div aria-valuemax="100" aria-valuemin="0" class="progress-bar progress-bar-success" data-percentage="0%"
+                                                 role="progressbar" style="width: 30%;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+                        <div class="box-row" *ngIf="(!isPublic && isViewAnalytics)">
+                            <div *ngIf="(jobCharts$ | async)?.country" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fal-app-analysis">
+                                <div class="block-title padding-15 light-blue">
+                                    <h4>{{fixedTextHash[(jobCharts$ | async)?.country.mainLabel][currLan]}}</h4>
+                                </div>
+
+                                <!-- Empty-Design Country-->
+                                <div class="box-row h-253"
+                                     *ngIf="!(jobCharts$ | async)?.country?.data[1]?.length || (jobCharts$ | async)?.country?.data[1]?.length == 0" >
+                                    <div class="empty-prf ">
+                                        <i class="icon-empty-app-cntry"></i>
+                                        <h5>{{fixedTextHash['applicants_by_country'][currLan]}}</h5>
+                                    </div>
+                                </div>
+
+
+
+                                <!-- New Layout -->
+
+                                <div class="padding-10-15 min310" *ngIf="(jobCharts$ | async)?.country?.data[1]?.length >0">
+                                    <!-- each progress -->
+                                    <div *ngFor="let selval of (jobCharts$ | async)?.country?.data;let idx= index" class="progress-bloovo app-analysis orange-c">
+                                        <div class="prograss-title" *ngIf="idx >0">
+                                            <h5 class="prograss-txt pull-left arabic-right-left">{{selval[0]}}</h5>
+                                            <div class="h5-feel prograss-txt pull-right percentage-color arabic-left-right">
+                                              {{(selval[1]*100)/selJob.count_applications  | number : '1.0-1'}}%
+                                            </div>
+                                            <div class=" clr"></div>
+                                        </div>
+                                        <div class="progress mg-0" *ngIf="idx >0">
+                                            <div aria-valuemax="100" aria-valuemin="0" class="progress-bar progress-bar-success" data-percentage="0%"
+                                                 role="progressbar"  [style.width.%]="(selval[1]*100)/selJob.count_applications">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div *ngIf="(jobCharts$ | async)?.education" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fal-app-analysis">
+                                <div class="box-row block-title padding-15 light-blue">
+                                    <h4>{{fixedTextHash[(jobCharts$ | async)?.education.mainLabel][currLan]}}</h4>
+                                </div>
+
+                                <!-- Empty Design Education -->
+                                <div class="box-row h-253"
+                                     *ngIf="!(jobCharts$ | async)?.education?.data[1]?.length || (jobCharts$ | async)?.education?.data[1]?.length == 0">
+                                    <div class="empty-prf">
+                                        <i class="icon-empty-app-education"></i>
+                                        <h5>{{fixedTextHash['applicants_by_education'][currLan]}}</h5>
+                                    </div>
+                                </div>
+
+                                <!-- New Layout -->
+                                <div class="padding-10-15 min310" *ngIf="(jobCharts$ | async)?.education?.data[1]?.length >0">
+                                    <!-- each progress -->
+                                    <div  *ngFor="let selval of (jobCharts$ | async)?.education?.data;let idx= index"
+                                          class="progress-bloovo app-analysis green-c">
+                                        <div class="prograss-title"  *ngIf="idx >0">
+                                            <h5 class="prograss-txt pull-left arabic-right-left">{{selval[0]}}</h5>
+                                            <div class="h5-feel prograss-txt pull-right percentage-color arabic-left-right">
+                                              {{(selval[1]*100)/selJob.count_applications  | number : '1.0-1'}}%
+                                            </div>
+                                            <div class=" clr"></div>
+                                        </div>
+                                        <div class="progress mg-0"  *ngIf="idx >0">
+                                            <div aria-valuemax="100" aria-valuemin="0" class="progress-bar progress-bar-success"
+                                                 data-percentage="0%" role="progressbar"
+                                                 [style.width.%]="(selval[1]*100)/selJob.count_applications">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="clearfix"></div>
+
+                            <div *ngIf="(jobCharts$ | async)?.sector" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fal-app-analysis">
+                                <div class="box-row block-title padding-15 light-blue">
+                                    <h4>{{fixedTextHash[(jobCharts$ | async)?.sector.mainLabel][currLan]}}</h4>
+                                </div>
+
+                                <!-- Empty Design Sector -->
+                                <div class="box-row h-253" *ngIf="!(jobCharts$ | async)?.sector?.data[1]?.length || (jobCharts$ | async)?.sector?.data[1]?.length == 0">
+                                    <div class="empty-prf ">
+                                        <i class="icon-empty-app-sector"></i>
+                                        <h5>{{fixedTextHash['applicants_by_sector'][currLan]}}</h5>
+                                    </div>
+                                </div>
+
+                                <!-- New Layout -->
+                                <div class="padding-10-15 min310" *ngIf="(jobCharts$ | async)?.sector?.data[1]?.length >0" >
+                                    <!-- each progress -->
+                                    <div  *ngFor="let selval of (jobCharts$ | async)?.sector?.data;let idx= index" class="progress-bloovo app-analysis blue-c">
+                                        <div class="prograss-title" *ngIf="idx >0">
+                                            <h5 class="prograss-txt pull-left arabic-right-left">{{selval[0]}}</h5>
+                                            <div class="h5-feel prograss-txt pull-right percentage-color arabic-left-right">
+                                              {{(selval[1]*100)/selJob.count_applications   | number : '1.0-1'}}%
+                                            </div>
+                                            <div class=" clr"></div>
+                                        </div>
+                                        <div class="progress mg-0" *ngIf="idx >0">
+                                            <div aria-valuemax="100" aria-valuemin="0" class="progress-bar progress-bar-success"
+                                                 data-percentage="0%" role="progressbar"  [style.width.%]="(selval[1]*100)/selJob.count_applications">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+                            <div *ngIf="(jobCharts$ | async)?.age" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fal-app-analysis">
+                                <div class="box-row block-title padding-15 light-blue">
+                                    <h4>{{fixedTextHash[(jobCharts$ | async)?.age.mainLabel][currLan]}}</h4>
+                                </div>
+
+                                <!-- Empty Design Age Group -->
+                                <div class="box-row h-253" *ngIf="!(jobCharts$ | async)?.age?.data[1]?.length || (jobCharts$ | async)?.age?.data[1]?.length == 0" >
+                                    <div class="empty-prf ">
+                                        <i class="icon-empty-app-group"></i>
+                                        <h5>{{fixedTextHash['applicants_by_age_group'][currLan]}}</h5>
+                                    </div>
+                                </div>
+
+                                <!-- New Layout -->
+                                <div class="padding-10-15 min310" *ngIf="(jobCharts$ | async)?.age?.data[1]?.length >0">
+                                    <!-- each progress -->
+                                    <div  *ngFor="let selval of (jobCharts$ | async)?.age?.data;let idx= index"  class="progress-bloovo app-analysis red-c">
+                                        <div class="prograss-title" *ngIf="idx >0">
+                                            <h5 class="prograss-txt pull-left arabic-right-left">{{selval[0]}}</h5>
+                                            <div class="h5-feel prograss-txt pull-right percentage-color arabic-left-right">
+                                              {{(selval[1]*100)/selJob.count_applications   | number : '1.0-1'}}%
+                                            </div>
+                                            <div class=" clr"></div>
+                                        </div>
+                                        <div class="progress mg-0" *ngIf="idx >0">
+                                            <div aria-valuemax="100" aria-valuemin="0" class="progress-bar progress-bar-success" data-percentage="0%"
+                                                 role="progressbar" [style.width.%]="(selval[1]*100)/selJob.count_applications">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="(similarCompanies$ | async)?.length >0" class="similar-jobs col-lg-4 col-md-12 col-sm-12 col-xs-12 filter-hide">
+                    <div class="box-row">
+                        <div class="block bottom-gap">
+                            <div class="block-title-2"><h2>{{fixedTextHash['similar_employers'][currLan]}}</h2></div>
+                            <div class="scroll-employer">
+                                <ul>
+                                    <li class="filter-jobs" *ngFor="let selCom of (similarCompanies$ | async),let comcount =index" >
+                                            <div class="featured-box similar-employers ">
+                                                <div class="box-row">
+
+                                                    <div class="box-company">
+                                                        <div class="feturd-compny" *ngIf="!selCom.profileImage">
+                                                            <i class="zmdi zmdi-city-alt empty-blank"></i>
+                                                        </div>
+                                                        <div class="feturd-compny" *ngIf="selCom.profileImage">
+                                                            <span>
+                                                                <img src="{{selCom.profileImage}}">
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="feturd-compny-dtls">
+                                                        <div class="txt-white">{{selCom.name}}</div>
+                                                        <div class="cmpny-txt">
+                                                            <span>{{selCom.city?.name}}, {{selCom.city?.country?.name}}</span>
+                                                        </div>
+                                                        <div class="cmpny-txt">
+                                                            <span>{{selCom.sector}}</span>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                    </li>
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <!--Job Description-->
+
+        <div class="box-row">
+            <div class="col-lg-12">
+                <div class="block bottom-gap">
+                    <div class="block-title"><h2>{{fixedTextHash['job_description'][currLan]}}</h2></div>
+                    <div class="block-contant job_description_spacing">
+                        <div class="fal-bullet bullet description">
+                            <span class="fit-content" [innerHTML]="(selJob$ | async)?.jobDescription"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Job Requirements -->
+        <div class="box-row">
+            <div class="col-lg-12">
+                <div class="block bottom-gap">
+                    <div class="block-title"><h2>{{fixedTextHash['job_requirements'][currLan]}}</h2></div>
+                    <div class="block-contant">
+                        <div class="fal-bullet bullet description">
+                            <span [innerHTML]="(selJob$ | async)?.jobRequirement"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <!-- Job Skills -->
+
+         <div class="col-lg-12">
+        <div class="box-row job-detail-description"  *ngIf="(selJob$ | async)?.skills?.length >0">
+            <div class="block bottom-gap">
+                <div class="block-title"><h2>{{fixedTextHash['skills_required'][currLan]}}</h2></div>
+                <div class="block-contant">
+                    <ul class="skills-j-b-v">
+                        <li *ngFor="let selSkills of (selJob$ | async)?.skills">{{selSkills?.name}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <div  *ngIf="(selJob$ | async)?.jobBenefitList?.length >0"  class="box-row benefits">
+            <div class="box-row">
+                <div class="col-lg-12">
+                    <div class="block">
+                        <div class="block-title"><h2>{{fixedTextHash['benefits'][currLan]}}</h2></div>
+                        <div class="box-row padding-top-job">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div  *ngFor="let selbenefit of (selJob$ | async)?.jobBenefitList,let i =index" class="benafit-box block"
+                                        [class.margin-rgt-0]="i >= ((selJob$ | async)?.jobBenefitList?.length - 1) " >
+                                    <div class="ben-icn"><i  [class]="selbenefit.icon_code" class="icon-medical-insurance"></i> </div>
+                                    <p>{{selbenefit.name}}</p>
+                                </div>
+            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+
+</div>
+<apply-jobs *ngIf="applyJobFlag && !invalidJob"
+            [jobTitle]="(selJob$ | async)?.title"
+            [jobId]=" (selJob$ | async)?.id">
+</apply-jobs>
+<div class="clearfix"></div>
+
+<div class="popup"  *ngIf="(selJob$ | async)?.appliedDate == null && (isAuthorized$ | async) && !invalidJob">
+    <div class="logout-pop">
+        <div class="modal close_delete apply-job" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button class="close following" aria-hidden="true" data-dismiss="modal" type="button">×</button>
+                        <div class="pad-5">
+                            <div *ngIf="(errrorFlag$ |async) == true" class="alert alert-danger alert-dismissible mar15" role="alert">
+                              {{fixedTextHash['error_while_apply_job'][currLan]}}
+                            </div>
+                            <div *ngIf="(errrorMessage$ |async) != null " class="alert alert-danger alert-dismissible mar15" role="alert">
+                                {{(errrorMessage$ |async)}}
+                            </div>
+                            <div *ngIf="(successFlag$ |async) == true"   class="comen-alert mar15">
+                                <i class="zmdi zmdi-check-circle"></i>
+                                {{fixedTextHash['success_apply'][currLan]}}
+                            </div>
+                        </div>
+                        <div *ngIf="(errrorFlag$ |async) != true && (errrorMessage$ |async) == null && (successFlag$ |async) != true" >
+                            <h2>{{fixedTextHash['sure_apply'][currLan]}}</h2>
+
+                            <div class="pop-button">
+                                <button  type="button" class="btn postive" (click)="onApplyJob()">{{fixedTextHash['apply'][currLan]}}</button>
+                                <button  type="button" class="btn negative" data-dismiss="modal">{{fixedTextHash['cancel'][currLan]}}</button>
+                                <div class="clr"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- InValid Job -->
+<div *ngIf="invalidJob" role="tabpanel" class="tab-pane active">
+    <div *ngIf="!(selJob$ | async)" class="empty-min2">
+        <i class="small_loading"><spinner></spinner></i>
+    </div>
+        <div class="box-row">
+            <div class="common-error-job">
+                <i class="icon-jobs-posted"></i>
+                <h1 [innerHTML]="fixedTextHash['job_expired'][currLan]"></h1>
+                <button [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/jobs']">{{fixedTextHash['view_all_jobs'][currLan]}}</button>
+            </div>
+        </div>
+</div>
+</div>
+</div>

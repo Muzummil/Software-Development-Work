@@ -1,0 +1,207 @@
+<div class="container career-fair fair-deatils-sec" [class.arabic]="accountService.isArabic()">
+    <div>
+        <spinner *ngIf="showSpinner" [visible]="true"></spinner>
+
+        <ng-container *ngIf="!showSpinner">
+            <div class="detail_career-fair-logo">
+                <img *ngIf="selCareerFair?.logo_image" src="{{selCareerFair?.logo_image}}">
+                <i *ngIf="!selCareerFair?.logo_image" class="zmdi zmdi-image-o"></i>
+            </div>
+            <ul>
+                <li><strong>{{selCareerFair?.title}}</strong></li>
+                <li>{{selCareerFair?.city?.name}}</li>
+                <li>{{selCareerFair?.country?.name}}</li>
+                <li>{{selCareerFair?.address}}</li>
+                <li *ngIf="selCareerFair?.gender == 'any'">{{fixedTextHash['for_both_males_and_females'][currLan]}}</li>
+                <li *ngIf="selCareerFair?.gender == 'male'">{{fixedTextHash['for_males'][currLan]}}</li>
+                <li *ngIf="selCareerFair?.gender == 'female'">{{fixedTextHash['for_females'][currLan]}}</li>
+                <li>{{fixedTextHash['start_date'][currLan]}}:
+                    {{accountService.getFormattedDate(selCareerFair?.from, 'MMM DD, YYYY')}} |
+                    {{fixedTextHash['end_date'][currLan]}}:
+                    {{accountService.getFormattedDate(selCareerFair?.to, 'MMM DD, YYYY')}}</li>
+            </ul>
+
+            <div class="col-xs-12">
+                <hr>
+                <!-- Success Msg -->
+                <div *ngIf="successfulMsg" class="alert alert-success pointer-none" role="alert">
+                    <span>
+                        {{fixedTextHash['success_register_career_fair'][currLan]}}
+                    </span>
+                </div>
+                <!-- Ask to SignIn MsG -->
+                <div class="alert alert-warning pointer-none" *ngIf="showEmailError" role="alert">
+                    <span [innerHTML]="getMsg()" (click)="createReffererUrl()">
+                    </span>
+                </div>
+                <!-- Already register to careerfair -->
+                <div class="alert alert-warning pointer-none" *ngIf="alreadyAppliedError" role="alert">
+                    <span>
+                        {{fixedTextHash['already_applied_career_fair'][currLan]}}
+                    </span>
+                </div>
+            </div>
+
+            <form [formGroup]="careerFairForm">
+                <div class="common-block mg-bottom-20">
+                    <div class="col-md-4 col-xs-12 arabic-right-left">
+                        <label>{{fixedTextHash['first_name'][currLan]}}</label>
+                        <input type="text"
+                            [class.error-feild]="(!(pristineFlag$ | async) || careerFairForm.controls['first_name'].touched) && !careerFairForm.controls['first_name'].valid"
+                            formControlName="first_name" placeholder="{{fixedTextHash['first_name'][currLan]}}"
+                            value="">
+                    </div>
+                    <div class="col-md-4 col-xs-12 arabic-right-left">
+                        <label>{{fixedTextHash['last_name'][currLan]}}</label>
+                        <input type="text"
+                            [class.error-feild]="(!(pristineFlag$ | async) || careerFairForm.controls['last_name'].touched) && !careerFairForm.controls['last_name'].valid"
+                            formControlName="last_name" placeholder="{{fixedTextHash['last_name'][currLan]}}"
+                            value="Doe">
+                    </div>
+                    <div class="col-md-4 col-xs-12 arabic-right-left">
+                        <label>{{fixedTextHash['email_word'][currLan]}}</label>
+                        <input type="text" name="email" placeholder="{{fixedTextHash['email'][currLan]}}"
+                            formControlName="email" [attr.disabled]="mailDisabled == true ? true : null"
+                            [class.error-feild]="(careerFairForm.controls['email'].touched || !(pristineFlag$ | async)) && careerFairForm.controls['email'].errors">
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 arabic-right-left margin-btm-15">
+                        <label>{{fixedTextHash['mobile'][currLan]}}</label>
+                        <jquery-tel [placeholder]="fixedTextHash['mobile'][currLan]"
+                            (getProcessedPhoneNo)="careerFairForm.controls['mobile_phone'].setValue($event.phone_no)"
+                            [match]="'phone_no'" [isArabic]="accountService.isArabic()"
+                            [errorFlag]="(!(pristineFlag$ | async) || careerFairForm.controls['mobile_phone'].touched) && !careerFairForm.controls['mobile_phone'].valid"
+                            [phone_no]="careerFairForm.controls['mobile_phone'].value">
+                        </jquery-tel>
+                        <input type="hidden" formControlName="mobile_phone">
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 arabic-right-left margin-btm-5">
+                        <label>{{fixedTextHash['nationality'][currLan]}}</label>
+                        <bootstrap-selectbox *ngIf="countryList"
+                            (selectedId)="careerFairForm.controls['nationality_id'].setValue($event.id);"
+                            [selectOneEnter]="true" [expandNewList]="false"
+                            [selectedValue]="careerFairForm.controls['nationality_id'].value"
+                            [placeholder]="fixedTextHash['nationality'][currLan]" [selectList]="countryList"
+                            (onEmptyText)="makeControlInvalid(careerFairForm.controls['nationality_id'])"
+                            [error]="(!(pristineFlag$ | async) || careerFairForm.controls['nationality_id'].touched) && !careerFairForm.controls['nationality_id'].valid">
+                        </bootstrap-selectbox>
+                        <input type="text" *ngIf="!countryList" [placeholder]="fixedTextHash['nationality'][currLan]">
+                        <input type="hidden" name="nationality_id" formControlName="nationality_id">
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 arabic-right-left margin-btm-5">
+                        <label>{{fixedTextHash['gender'][currLan]}}</label>
+                        <input type="hidden" name="gender" formControlName="gender">
+                        <bootstrap-selectbox (selectedId)="careerFairForm.controls['gender'].setValue($event.id)"
+                            [selectedValue]="careerFairForm.controls['gender'].value"
+                            [placeholder]="fixedTextHash['gender'][currLan]" [selectOneEnter]="true"
+                            (onEmptyText)="makeControlInvalid(careerFairForm.controls['gender'])"
+                            [selectList]="[{id:'male',name:fixedTextHash['male'][currLan]},{id:'female',name:fixedTextHash['female'][currLan]}]"
+                            [error]="(!(pristineFlag$ | async) || careerFairForm.controls['gender'].touched) && !careerFairForm.controls['gender'].valid">
+                        </bootstrap-selectbox>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 arabic-right-left margin-btm-5">
+                        <label>{{fixedTextHash['date_birth'][currLan]}}</label>
+                        <input type="hidden" [ngModel]="birthDate" formControlName="birth_date">
+                        <datePicker-block (emitSelDate)="setDate($event)" [setDefaultDate]="defaultBirthDate"
+                            [sel_id]="'1'" [dp_value]="birthDate" [toYear]="toYearDob"
+                            (onEmptyText)="makeControlInvalid(careerFairForm.controls['birth_date'])" [error]="(!(pristineFlag$ | async) ||
+                                       careerFairForm.controls['birth_date'].touched)
+                                       && !careerFairForm.controls['birth_date'].valid" [maxDate]="maxDateDob"
+                            [dp_placeholder]="fixedTextHash['date_birth'][currLan]">
+
+                        </datePicker-block>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 arabic-right-left margin-btm-5">
+                        <label>{{fixedTextHash['exp_level'][currLan]}}</label>
+                        <input type="text" placeholder="Select Experience Level"
+                            *ngIf="!(experienceLevelList$ | async)">
+                        <bootstrap-selectbox *ngIf="(experienceLevelList$ | async)"
+                            (selectedId)="careerFairForm.controls['job_experience_level_id'].setValue($event.id)"
+                            [selectedValue]="careerFairForm.controls['job_experience_level_id'].value"
+                            [placeholder]="fixedTextHash['select_exp_level'][currLan]" [selectOneEnter]="true"
+                            (onEmptyText)="makeControlInvalid(careerFairForm.controls['job_experience_level_id'])"
+                            [error]="(!(pristineFlag$ | async) || careerFairForm.controls['job_experience_level_id'].touched) && !careerFairForm.controls['job_experience_level_id'].valid"
+                            [selectList]="(experienceLevelList$ | async)">
+                        </bootstrap-selectbox>
+                        <input type="hidden" name="job_experience_level_id" formControlName="job_experience_level_id">
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 arabic-right-left margin-btm-5">
+                        <label>{{fixedTextHash['high_edu'][currLan]}}</label>
+                        <input type="hidden" #heduInpt name="careerFairForm_highest_edu_name"
+                            formControlName="highest_edu_name_id">
+                        <bootstrap-selectbox *ngIf="educationList"
+                            (selectedId)="careerFairForm.controls['highest_edu_name_id'].setValue($event.id)"
+                            [selectedValue]="heduInpt.value" [placeholder]="fixedTextHash['add_high_edu'][currLan]"
+                            [error]="(!(pristineFlag$ | async) || careerFairForm.controls['highest_edu_name_id'].touched) && !careerFairForm.controls['highest_edu_name_id'].valid"
+                            (onEmptyText)="heduInpt.value=null;makeControlInvalid(careerFairForm.controls['highest_edu_name_id'])"
+                            [selectList]="educationList">
+                        </bootstrap-selectbox>
+                    </div>
+
+                    <div class="col-md-4 col-xs-12 arabic-right-left">
+                        <label>{{fixedTextHash['study'][currLan]}}</label>
+                        <input type="text"
+                            [class.error-feild]="(!(pristineFlag$ | async) || careerFairForm.controls['field_of_study'].touched) && !careerFairForm.controls['field_of_study'].valid"
+                            formControlName="field_of_study" placeholder="{{fixedTextHash['study'][currLan]}}" value="">
+                    </div>
+
+                    <div class="col-md-12 col-xs-12 arabic-right-left">
+                        <button (click)="registerCareerFair()">
+                            {{fixedTextHash['join_now'][currLan]}}
+                        </button>
+
+                    </div>
+                </div>
+            </form>
+
+
+            <!-- <a data-toggle="modal" [attr.data-target]="'.apply-career-fair'">
+                <button *ngIf="selCareerFair?.applied_date == null && (isAuthorized$ | async)" class="primary-btn float-left-detail-only">
+                {{fixedTextHash['join_now'][currLan]}}
+            </button>
+            </a>
+            <span class="appliedbitui" *ngIf="(isAuthorized$ | async) && selCareerFair?.applied_date != null">
+        <i class="zmdi zmdi-check-circle applied"></i>{{fixedTextHash['joined'][currLan]}}</span> -->
+            <!-- <a *ngIf="!(isAuthorized$ | async)" data-toggle="modal" (click)="createReffererUrl()">
+                <button>
+                {{fixedTextHash['join_now'][currLan]}}
+            </button>
+            </a> -->
+            <!-- <div class="popup" *ngIf="selCareerFair?.applied_date == null && (isAuthorized$ | async)">
+                <div class="logout-pop">
+                    <div class="modal close_delete apply-career-fair" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                        <div class="modal-dialog modal-md">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <button class="close following" aria-hidden="true" data-dismiss="modal" type="button">×</button>
+                                    <div class="pad-5">
+                                        <div *ngIf="(errrorMessage$ |async) != null " class="alert alert-danger alert-dismissible mar15" role="alert">
+                                            {{(errrorMessage$ |async)}}
+                                        </div>
+                                        <div *ngIf="(successFlag$ |async) == true" class="comen-alert mar15">
+                                            <i class="zmdi zmdi-check-circle"></i> {{fixedTextHash['success_apply'][currLan]}}
+                                        </div>
+                                    </div>
+                                    <div *ngIf="(errrorMessage$ |async) == null && (successFlag$ |async) != true">
+                                        <h2>{{fixedTextHash['sure_apply_career_fair'][currLan]}}</h2>
+
+                                        <div class="pop-button">
+                                            <button type="button" class="btn postive" (click)="onApplyCareerFair()">{{fixedTextHash['join'][currLan]}}</button>
+                                            <button type="button" class="btn negative" data-dismiss="modal">{{fixedTextHash['cancel'][currLan]}}</button>
+                                            <div class="clr"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </ng-container>
+    </div>
+
+</div>

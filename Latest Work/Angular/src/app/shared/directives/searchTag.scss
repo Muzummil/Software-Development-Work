@@ -1,0 +1,32 @@
+@import '../../../styles/sass/base/_variables.scss';
+
+#tag-job{
+    border:none;
+    padding:0px;
+}
+
+.Profile-tag {
+    display: inline-block;
+    margin-bottom: 5px;
+    background:$bg;
+    margin-right: 5px;
+    color: $primarycolor;
+    border: solid 1px $boredr-color;
+    height: $button-height;
+    line-height: $button-height;
+    float: left;
+    border-radius: $border-radius;
+    span{
+        color: $primarycolor;
+        i{
+            border-left: solid 1px $boredr-color;
+        }
+    }
+}
+
+.arabic{
+    .Profile-tag{
+        float: right!important;
+    }
+}
+

@@ -1,0 +1,75 @@
+<ion-header class="no-shadow">
+
+  <ion-navbar class="no-border" color="primary" hideBackButton="true">
+    <ion-title>
+      Signup
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content class="common-bg register">
+  <div class="login-content">
+
+    <!-- Logo -->
+    <div padding-horizontal text-center class="animated fadeInDown">
+      <div class="logo">
+        <img src="../assets/img/logo.png" width="80%" height="auto">
+      </div>
+    </div>
+
+    <!-- Register form -->
+    <form #myForm="ngForm" [formGroup]="onRegisterForm" (ngSubmit)="onRigister()" class="list-form" margin-top>
+      <ion-item class="align-space">
+        <ion-label fixed>
+          <img src="../assets/icon/signup_1.png" width="30">
+        </ion-label>
+        <ion-input type="text" formControlName="firstName" placeholder="First Name"></ion-input>
+      </ion-item>
+      <p ion-text color="danger" class="text-1x has-error" *ngIf="onRegisterForm.get('firstName').hasError('required') || myForm.submitted">{{ userNameMessage }}</p>
+      <ion-item class="align-space">
+        <ion-label fixed>
+          <img src="../assets/icon/signup_1.png" width="30">
+        </ion-label>
+        <ion-input type="text" formControlName="lastName" placeholder="Last Name"></ion-input>
+      </ion-item>
+      <p ion-text color="danger" class="text-1x has-error" *ngIf="onRegisterForm.get('lastName').hasError('required') || myForm.submitted">{{ userNameMessage }}</p>
+
+      <ion-item>
+        <ion-label fixed>
+          <img src="../assets/icon/signup_3.png" width="30">
+        </ion-label>
+        <ion-input type="email" formControlName="email" placeholder="Email Address"></ion-input>
+      </ion-item>
+      <p ion-text color="danger" class="text-1x has-error" *ngIf="onRegisterForm.get('email').hasError('required') || myForm.submitted">{{ emailMessage }}</p>
+
+      <ion-item class="align-btm">
+        <ion-label class="m-l" fixed>
+          <img src="../assets/icon/signup_4.png" width="30">
+        </ion-label>
+        <ion-input class="mobile-input" (keyup)="onKey(num)" [(ngModel)]="num" type="text" formControlName="pnumber" placeholder="Phone Number" maxlength="13"></ion-input>
+      </ion-item>
+      <p ion-text color="danger" class="text-1x has-error" *ngIf="onRegisterForm.get('pnumber').hasError('required') || myForm.submitted">{{ numberMessage }}</p>
+
+      <ion-item>
+        <ion-label fixed>
+          <img src="../assets/icon/signup_6.png" width="30">
+        </ion-label>
+        <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
+      </ion-item>
+      <p ion-text color="danger" class="text-1x has-error" *ngIf="onRegisterForm.get('password').hasError('required') || myForm.submitted">{{ passwordMessage }}</p>
+
+
+      <button ion-button block tappable type="submit">
+        SIGN UP
+      </button>
+    </form>
+
+
+
+    <!-- Other links -->
+    <div class="account_text" text-center>
+      <span ion-text color="light" tappable (click)="login()">I have an account</span>
+    </div>
+
+  </div>
+</ion-content>

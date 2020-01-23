@@ -1,0 +1,522 @@
+<div class="information" [class.arabic]="accountService.isArabic()">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 arabic-right-left">
+        <div class="block bottom-gap info-min">
+            <div *ngIf="tab_status == 'read'">
+                <!-- save -->
+                <div class="block-title">
+                    <div class="left arabic-right-left">
+                        <h4>{{fixedTextHash['my_info'][currLan]}}</h4>
+                    </div>
+                    <div class="right"><a (click)="onEdit()"><span class="light"><i class="zmdi zmdi-edit"></i>
+                                {{fixedTextHash['edit'][currLan]}}</span></a></div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="block-contant padding-0">
+                    <div class="info preview-signle-grid">
+
+                        <div *ngIf="(jobseekerType!='coops' && jobseekerType!='summer_training') && !hideNoExpFields" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left">
+                            <div class="left1 inf-icn"><i class="zmdi zmdi-chart-donut"></i></div>
+                            <div class="left1">
+                                <div class="txt">{{fixedTextHash['sector'][currLan]}}</div>
+                                <div class="dark" *ngIf="(jobSeekerGeneralInfo | async)?.sector_name">
+                                    {{ (jobSeekerGeneralInfo | async)?.sector_name}}</div>
+                                <div class="dark" *ngIf="!(jobSeekerGeneralInfo | async)?.sector_name">N/A</div>
+                            </div>
+                        </div>
+
+                        <div *ngIf="(jobseekerType!='coops' && jobseekerType!='summer_training') && !hideNoExpFields" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="left1 inf-icn"><i class="zmdi zmdi-view-dashboard"></i></div>
+                            <div class="left1">
+                                <div class="txt">{{fixedTextHash['functional_area'][currLan]}}</div>
+                                <div class="dark" *ngIf="(jobSeekerGeneralInfo | async)?.functional_area_name">
+                                    {{ (jobSeekerGeneralInfo | async)?.functional_area_name }}</div>
+                                <div class="dark" *ngIf="!(jobSeekerGeneralInfo | async)?.functional_area_name">N/A
+                                </div>
+                            </div>
+                        </div>
+                   
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left">
+                            <div class="left1 inf-icn"><i class="zmdi zmdi-graduation-cap"></i></div>
+                            <div class="left1">
+                                <div class="txt">{{fixedTextHash['high_edu'][currLan]}}</div>
+                                <div class="dark" *ngIf="(jobSeekerGeneralInfo | async)?.highest_edu_name">
+                                    {{ (jobSeekerGeneralInfo | async)?.highest_edu_name }}</div>
+                                <div class="dark" *ngIf="!(jobSeekerGeneralInfo | async)?.highest_edu_name">N/A</div>
+                            </div>
+                        </div>
+
+                        <div *ngIf="jobseekerType!='coops' && jobseekerType!='summer_training' && !hideNoExpFields" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="left1 inf-icn"><i class="icon-experience"></i></div>
+                            <div class="left1">
+                                <div class="txt">{{fixedTextHash['exp_level'][currLan]}} </div>
+                                <div class="dark" *ngIf="(jobSeekerGeneralInfo | async)?.experince_level_name">
+                                    {{ (jobSeekerGeneralInfo | async)?.experince_level_name }}</div>
+                                <div class="dark" *ngIf="!(jobSeekerGeneralInfo | async)?.experince_level_name">N/A
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="jobseekerType!='coops' && jobseekerType!='summer_training' && !hideNoExpFields" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left">
+                            <div class="left1 inf-icn"><i class="zmdi zmdi-case"></i></div>
+                            <div class="left1">
+                                <div class="txt">{{fixedTextHash['year_exp_view'][currLan]}} </div>
+                                <div class="dark" *ngIf="(jobSeekerGeneralInfo | async)?.total_years_experience">
+                                    {{ (jobSeekerGeneralInfo | async)?.total_years_experience }}</div>
+                                <div class="dark" *ngIf="!(jobSeekerGeneralInfo | async)?.total_years_experience">0
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="jobseekerType!='coops' && jobseekerType!='summer_training' && !hideNoExpFields" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="left1 inf-icn"><i class="zmdi zmdi-money-box"></i></div>
+                            <div class="left1">
+                                <div class="txt">
+                                    {{fixedTextHash['cur_month_salary'][currLan].replace('CURRCODE',fixedTextHash[accountService.getCurrency()][currLan])}}
+                                </div>
+                                <div class="dark" *ngIf="(jobSeekerGeneralInfo | async)?.current_salary">
+                                    {{ (jobSeekerGeneralInfo | async)?.current_salary | number}}</div>
+                                <div class="dark" *ngIf="!(jobSeekerGeneralInfo | async)?.current_salary">N/A</div>
+                            </div>
+                        </div>
+                        <div *ngIf="jobseekerType!='coops' && jobseekerType!='summer_training' && !hideNoExpFields" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left">
+                            <div class="left1 inf-icn"><i class="zmdi zmdi-money-box"></i></div>
+                            <div class="left1">
+                                <div class="txt">
+                                    {{fixedTextHash['exp_month_salary'][currLan].replace('CURRCODE',fixedTextHash[accountService.getCurrency()][currLan])}}
+                                </div>
+                                <div class="dark" *ngIf="(jobSeekerGeneralInfo | async)?.expected_salary">
+                                    {{ (jobSeekerGeneralInfo | async)?.expected_salary | number }} </div>
+                                <div class="dark" *ngIf="!(jobSeekerGeneralInfo | async)?.expected_salary">N/A</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="left1 inf-icn"><i class="zmdi zmdi-flag"></i></div>
+                            <div class="left1">
+                                <div class="txt">{{fixedTextHash['nationality'][currLan]}}</div>
+                                <div class="dark" *ngIf="(jobSeekerGeneralInfo | async)?.nationality_name">
+                                    {{ (jobSeekerGeneralInfo | async)?.nationality_name }}</div>
+                                <div class="dark" *ngIf="!(jobSeekerGeneralInfo | async)?.nationality_name">N/A</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12  arabic-right-left">
+                            <div class="left1 inf-icn"><i class="icon-language"></i></div>
+                            <div class="left1">
+                                <div class="txt">{{fixedTextHash['languages'][currLan]}}</div>
+                                <div class="dark" *ngIf="(jobSeekerGeneralInfo | async)?.languages?.length >0">
+                                    <span class="pull-left"
+                                        *ngFor="let selLang of (jobSeekerGeneralInfo | async)?.languages,let selIndex = index">
+                                        <b *ngIf="selIndex >0">{{fixedTextHash['comma'][currLan]}}
+                                        </b>{{selLang.name}}</span>
+                                </div>
+                                <div class="dark" *ngIf="(jobSeekerGeneralInfo | async)?.languages?.length ==0">N/A
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="left1 inf-icn"><i class="zmdi zmdi-account-circle"></i></div>
+                            <div class="left1">
+                                <div class="txt">{{fixedTextHash['age'][currLan]}}</div>
+                                <div class="dark" *ngIf="(jobSeekerGeneralInfo | async)?.dob">
+                                    {{ (jobSeekerGeneralInfo | async)?.dob | calcAge }}
+                                    {{fixedTextHash['years_old'][currLan]}}</div>
+                                <div class="dark" *ngIf="!(jobSeekerGeneralInfo | async)?.dob">N/A</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12  arabic-right-left">
+                            <div class="left1 inf-icn"><i class="icon-gender"></i></div>
+                            <div class="left1">
+                                <div class="txt">{{fixedTextHash['gender'][currLan]}}</div>
+                                <div class="dark" *ngIf="(jobSeekerGeneralInfo | async)?.gender">
+                                    {{ fixedTextHash[(jobSeekerGeneralInfo | async)?.gender][currLan] }}</div>
+                                <div class="dark" *ngIf="!(jobSeekerGeneralInfo | async)?.gender">N/A</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="left1 inf-icn"><i class="zmdi zmdi-account"></i></div>
+                            <div class="left1">
+                                <div class="txt">{{fixedTextHash['marital_status'][currLan]}}</div>
+                                <div class="dark" *ngIf="(jobSeekerGeneralInfo | async)?.marital_status">
+                                    {{ fixedTextHash[(jobSeekerGeneralInfo | async)?.marital_status][currLan] }}</div>
+                                <div class="dark" *ngIf="!(jobSeekerGeneralInfo | async)?.marital_status">N/A</div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left">
+                            <div class="left1 inf-icn"><i class="icon-visa-status"></i></div>
+                            <div class="left1">
+                                <div class="txt">{{fixedTextHash['visa_status'][currLan]}}</div>
+                                <div class="dark" *ngIf="(jobSeekerGeneralInfo | async)?.visa_status?.name">
+                                    {{ (jobSeekerGeneralInfo | async)?.visa_status?.name }}</div>
+                                <div class="dark" *ngIf="!(jobSeekerGeneralInfo | async)?.visa_status?.name">N/A</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="left1 inf-icn"><i class="icon-License"></i></div>
+                            <div class="left1">
+                                <div class="txt">{{fixedTextHash['drive_country'][currLan]}}</div>
+                                <div class="dark" *ngIf="generalInfo?.driving_license_issued_from?.name">
+                                    {{ generalInfo?.driving_license_issued_from?.name }}</div>
+                                <div class="dark" *ngIf="!generalInfo?.driving_license_issued_from?.name">N/A</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- edit mode -->
+            <div *ngIf="tab_status == 'edit'" class="edit">
+                <div class="block-title-2">
+                    <div class="left arabic-right-left">
+                        <h4>{{fixedTextHash['my_info'][currLan]}}</h4>
+                    </div>
+                    <div class="right">
+                        <button (click)="saveDetails()" class="left-mobole-only arabic-right-left"><i
+                                class="zmdi zmdi-floppy"></i> {{fixedTextHash['save'][currLan]}}</button>
+                        <span class="cancel padding-0"><button (click)="onRead()"><i class="zmdi zmdi-close"></i>
+                                {{fixedTextHash['cancel'][currLan]}}</button></span>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <i class="inf-spn" *ngIf="(generalInfoLoader$ | async)">
+                    <spinner [visible]="(generalInfoLoader$ | async)"></spinner>
+                </i>
+
+                <form *ngIf="!(generalInfoLoader$ | async) && activeForm" [formGroup]="generalInfo_form">
+
+                    <div class="block-contant padding-0">
+                        <div class="info edit-general-info-v2">
+
+                            <div *ngIf="jobseekerType!='coops' && jobseekerType!='summer_training' && !hideNoExpFields " class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left">
+                                <div class="left1 inf-icn"><i class="zmdi zmdi-chart-donut"></i></div>
+                                <div class="left2">
+                                    <div class="txt">{{fixedTextHash['sector'][currLan]}}</div>
+                                    <div class="full-box">
+                                        <input type="hidden" #sectorInpt name="generalInfo_form_sector_name"
+                                            formControlName="sector_id">
+                                        <bootstrap-selectbox *ngIf="sectorList"
+                                            (selectedId)="generalInfo_form.controls['sector_id'].setValue($event.id)"
+                                            [selectedValue]="sectorInpt.value"
+                                            [placeholder]="fixedTextHash['add_sector'][currLan]"
+                                            [selectList]="sectorList">
+                                        </bootstrap-selectbox>
+                                        <div *ngIf="( generalInfo_form.controls['sector_id'].touched || (formPostedValid$ | async)) && !generalInfo_form.controls['sector_id'].valid"
+                                            class="alert alert-danger martop5">{{fixedTextHash['add_sector'][currLan]}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" clearfix"></div>
+                            </div>
+
+                            <div *ngIf="jobseekerType!='coops' && jobseekerType!='summer_training' && !hideNoExpFields" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="left1 inf-icn"><i class="zmdi zmdi-view-dashboard"></i></div>
+                                <div class="left2">
+                                    <div class="txt">{{fixedTextHash['functional_area'][currLan]}}</div>
+                                    <div class="full-box">
+
+                                        <input type="hidden" #fareaInpt name="generalInfo_form_functional_area_name"
+                                            formControlName="functional_area_id">
+                                        <bootstrap-selectbox *ngIf="functionalAreaList"
+                                            (selectedId)="generalInfo_form.controls['functional_area_id'].setValue($event.id)"
+                                            [selectedValue]="fareaInpt.value"
+                                            [placeholder]="fixedTextHash['add_functional_area'][currLan]"
+                                            [selectList]="functionalAreaList">
+                                        </bootstrap-selectbox>
+
+
+
+                                        <div *ngIf="(generalInfo_form.controls['functional_area_id'].touched || (formPostedValid$ | async))&& !generalInfo_form.controls['functional_area_id'].valid"
+                                            class="alert alert-danger martop5">
+                                            {{fixedTextHash['add_functional_area'][currLan]}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left">
+                                <div class="left1 inf-icn"><i class="zmdi zmdi-graduation-cap"></i></div>
+                                <div class="left2">
+                                    <div class="txt">{{fixedTextHash['high_edu'][currLan]}}</div>
+                                    <div class="full-box">
+
+
+                                        <input type="hidden" #heduInpt name="generalInfo_form_highest_edu_name"
+                                            formControlName="highest_edu_name_id">
+                                        <bootstrap-selectbox *ngIf="educationList"
+                                            (selectedId)="generalInfo_form.controls['highest_edu_name_id'].setValue($event.id)"
+                                            [selectedValue]="heduInpt.value"
+                                            [placeholder]="fixedTextHash['add_high_edu'][currLan]"
+                                            [selectList]="educationList">
+                                        </bootstrap-selectbox>
+
+
+
+                                        <div *ngIf=" (generalInfo_form.controls['highest_edu_name_id'].touched || (formPostedValid$ | async)) && !generalInfo_form.controls['highest_edu_name_id'].valid"
+                                            class="alert alert-danger martop5">
+                                            {{fixedTextHash['add_high_edu'][currLan]}}
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div *ngIf="jobseekerType!='coops' && jobseekerType!='summer_training' && !hideNoExpFields" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="left1 inf-icn"><i class="icon-experience"></i></div>
+                                <div class="left2">
+                                    <div class="txt">{{fixedTextHash['exp_level'][currLan]}} </div>
+                                    <div class="full-box">
+
+                                        <input type="hidden" #expLevInpt name="generalInfo_form_experince_level_name"
+                                            formControlName="experience_level_id">
+                                        <bootstrap-selectbox *ngIf="experienceLevelList"
+                                            (selectedId)="generalInfo_form.controls['experience_level_id'].setValue($event.id)"
+                                            [selectedValue]="expLevInpt.value"
+                                            [placeholder]="fixedTextHash['add_exp_level'][currLan]"
+                                            [selectList]="experienceLevelList">
+                                        </bootstrap-selectbox>
+
+                                        <div *ngIf="(generalInfo_form.controls['experience_level_id'].touched || (formPostedValid$ | async)) && !generalInfo_form.controls['experience_level_id'].valid"
+                                            class="alert alert-danger martop5">
+                                            {{fixedTextHash['add_exp_level'][currLan]}}
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div *ngIf="jobseekerType!='coops' && jobseekerType!='summer_training' && !hideNoExpFields" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left">
+                                <div class="left1 inf-icn"><i class="zmdi zmdi-case"></i></div>
+                                <div class="left2">
+                                    <div class="txt">{{fixedTextHash['year_exp'][currLan]}} </div>
+
+
+                                    <div class="full-box">
+
+                                        <!--<bootstrap-selectbox   (selectedId)="generalInfo_form.controls['total_years_experience'].setValue($event.id)"  [selectedValue]="generalInfo_form.controls['total_years_experience'].value"  [placeholder]="'Total Years of Experience'"  [showSearch]="false" [selectList]="yearsExpList" >-->
+                                        <!--</bootstrap-selectbox>-->
+                                        <input type="text" name="generalInfo_form_total_years_experience"
+                                            formControlName="total_years_experience" #total_years_experience
+                                            placeholder="{{fixedTextHash['year_exp'][currLan]}}">
+                                    </div>
+
+                                    <div *ngIf="(generalInfo_form.controls['total_years_experience'].touched || (formPostedValid$ | async))&& !generalInfo_form.controls['total_years_experience'].valid"
+                                        class="alert alert-danger alert-dismissible martop5" role="alert">
+                                        {{fixedTextHash['emp_year_exp'][currLan]}}
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div *ngIf="jobseekerType!='coops' && jobseekerType!='summer_training' && !hideNoExpFields" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="left1 inf-icn"><i class="zmdi zmdi-money-box"></i></div>
+                                <div class="left2">
+                                    <div class="txt">
+                                        {{fixedTextHash['cur_month_salary'][currLan].replace('CURRCODE',fixedTextHash[accountService.getCurrency()][currLan])}}
+                                    </div>
+                                    <div class="full-box">
+                                        <input type="number" name="generalInfo_form_currently_monthly_salary"
+                                            formControlName="currently_monthly_salary"
+                                            placeholder="{{fixedTextHash['cur_month_salary'][currLan].replace('CURRCODE',fixedTextHash[accountService.getCurrency()][currLan])}}">
+                                    </div>
+                                    <div *ngIf="(generalInfo_form.controls['currently_monthly_salary'].touched || (formPostedValid$ | async))&& !generalInfo_form.controls['currently_monthly_salary'].valid"
+                                        class="alert alert-danger alert-dismissible martop5" role="alert">
+                                        {{fixedTextHash['valid_cur_month_salary'][currLan].replace('CURRCODE',fixedTextHash[accountService.getCurrency()][currLan])}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="jobseekerType!='coops' && jobseekerType!='summer_training' && !hideNoExpFields" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left">
+                                <div class="left1 inf-icn"><i class="zmdi zmdi-money-box"></i></div>
+                                <div class="left2">
+                                    <div class="txt">
+                                        {{fixedTextHash['exp_month_salary'][currLan].replace('CURRCODE',fixedTextHash[accountService.getCurrency()][currLan])}}
+                                    </div>
+                                    <div class="full-box">
+                                        <input type="number" class=" minimal" name="expected_monthly_salary"
+                                            formControlName="expected_monthly_salary">
+                                        <div *ngIf="(generalInfo_form.controls['expected_monthly_salary'].touched || (formPostedValid$ | async)) && !generalInfo_form.controls['expected_monthly_salary'].valid"
+                                            class="alert alert-danger martop5">
+                                            {{fixedTextHash['valid_exp_month_salary'][currLan].replace('CURRCODE',fixedTextHash[accountService.getCurrency()][currLan])}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="left1 inf-icn"><i class="zmdi zmdi-flag"></i></div>
+                                <div class="left2">
+                                    <div class="txt">{{fixedTextHash['nationality'][currLan]}}</div>
+                                    <div class="full-box">
+                                        <input type="hidden" #nationalityInpt name="generalInfo_form_nationality_id"
+                                            formControlName="nationality_id">
+                                        <bootstrap-selectbox *ngIf="countryList"
+                                            (selectedId)="generalInfo_form.controls['nationality_id'].setValue($event.id);onChangeNationality($event.id)"
+                                            [selectedValue]="nationalityInpt.value"
+                                            [placeholder]="fixedTextHash['add_nationality'][currLan]"
+                                            [selectList]="countryList">
+                                        </bootstrap-selectbox>
+                                        <div *ngIf="(generalInfo_form.controls['nationality_id'].touched || (formPostedValid$ | async)) && !generalInfo_form.controls['nationality_id'].valid"
+                                            class="alert alert-danger martop5">
+                                            {{fixedTextHash['add_nationality'][currLan]}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left">
+                                <div class="left1 inf-icn"><i class="icon-language"></i></div>
+                                <div class="left2 edit">
+                                    <div class="txt">
+                                        <div class="pull-left arabic-right-left">{{fixedTextHash['languages'][currLan]}}
+                                        </div>
+                                        <div class="pull-right">{{fixedTextHash['limit_lang'][currLan]}}</div>
+                                        <div class=" clearfix"></div>
+                                    </div>
+                                    <div class="language-tag">
+                                        <lang-tag (onLanChange)="onChangeLan($event)" [languageList]="languagesList">
+                                        </lang-tag>
+                                        <div class=" clearfix"></div>
+                                        <div *ngIf="(language_touched || (formPostedValid$ | async))&& !language_valid"
+                                            class="alert alert-danger martop5">
+                                            {{fixedTextHash['add_lang'][currLan]}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="left1 inf-icn"><i class="zmdi zmdi-account-circle"></i></div>
+                                <div class="left2">
+                                    <div class="txt">{{fixedTextHash['age'][currLan]}}</div>
+                                    <div class="full-box">
+                                        <datePicker-block (emitSelDate)="setDOB($event)"
+                                            [dp_placeholder]="fixedTextHash['birthday'][currLan]" [toYear]="toDOBYear"
+                                            [sel_id]="'14'" [toYear]="toYear" [maxDate]="maxDate"
+                                            [dp_value]="generalInfo_form.controls['dob'].value | date: 'MMM yyyy dd'">
+                                        </datePicker-block>
+                                        <input type="hidden" placeholder="Day" name="generalInfo_form_dob_day"
+                                            formControlName="dob" placeholder="Day">
+
+                                        <div *ngIf="(generalInfo_form.controls['dob'].touched || (formPostedValid$ | async)) && !generalInfo_form.controls['dob'].valid"
+                                            class="alert alert-danger alert-dismissible martop5" role="alert">
+                                            {{fixedTextHash['add_age'][currLan]}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left">
+                                <div class="left1 inf-icn"><i class="icon-gender"></i></div>
+                                <div class="left2">
+                                    <div class="txt">{{fixedTextHash['gender'][currLan]}}</div>
+                                    <div class="full-box">
+                                        <input type="hidden" #genderInpt name="generalInfo_form_gender"
+                                            formControlName="gender">
+                                        <bootstrap-selectbox *ngIf="genderList"
+                                            (selectedId)="generalInfo_form.controls['gender'].setValue($event.id)"
+                                            [selectedValue]="genderInpt.value"
+                                            [placeholder]="fixedTextHash['gender'][currLan]" [selectList]="genderList">
+                                        </bootstrap-selectbox>
+                                        <div *ngIf="(generalInfo_form.controls['gender'].touched || (formPostedValid$ | async))&& !generalInfo_form.controls['gender'].valid"
+                                            class="alert alert-danger">{{fixedTextHash['add_gender'][currLan]}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="left1 inf-icn"><i class="zmdi zmdi-account"></i></div>
+                                <div class="left2">
+                                    <div class="txt">{{fixedTextHash['marital_status'][currLan]}}</div>
+                                    <div class="full-box">
+                                        <input type="hidden" #maritalInpt name="generalInfo_form_marital_status"
+                                            formControlName="marital_status">
+                                        <bootstrap-selectbox *ngIf="maritalList"
+                                            (selectedId)="generalInfo_form.controls['marital_status'].setValue($event.id)"
+                                            [selectedValue]="maritalInpt.value"
+                                            [placeholder]="fixedTextHash['marital_status'][currLan]"
+                                            [selectList]="maritalList">
+                                        </bootstrap-selectbox>
+
+                                        <div *ngIf="(generalInfo_form.controls['marital_status'].touched || (formPostedValid$ | async))&& !generalInfo_form.controls['marital_status'].valid"
+                                            class="alert alert-danger martop5">
+                                            {{fixedTextHash['add_marital_status'][currLan]}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left">
+                                <div class="left1 inf-icn"><i class="icon-visa-status"></i></div>
+                                <div class="left2">
+                                    <div class="txt">{{fixedTextHash['visa_status'][currLan]}}</div>
+                                    <div class="full-box">
+
+                                        <input type="hidden" #visaStatusInpt name="generalInfo_form_visa_status"
+                                            formControlName="visa_status">
+                                        <input *ngIf="isSaudi" type="text" readonly="readonly"
+                                            [value]="saudiArabiaObj.visa_name">
+                                        <bootstrap-selectbox *ngIf="filteredVisaList && !isSaudi"
+                                            (selectedId)="generalInfo_form.controls['visa_status'].setValue($event.id)"
+                                            [selectedValue]="visaStatusInpt.value"
+                                            [placeholder]="fixedTextHash['visa_status'][currLan]"
+                                            [selectList]="filteredVisaList">
+                                        </bootstrap-selectbox>
+
+                                        <div *ngIf="( generalInfo_form.controls['visa_status'].touched || (formPostedValid$ | async))&& ! generalInfo_form.controls['visa_status'].valid"
+                                            class="alert alert-danger martop5">
+                                            {{fixedTextHash['add_visa_status'][currLan]}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="left1 inf-icn"><i class="icon-License"></i></div>
+                                <div class="left2 clicks">
+                                    <div class="txt">{{fixedTextHash['drive_country'][currLan]}}</div>
+                                    <div class=" twenty-box">
+                                        <div class="radio radio-primary">
+                                            <input type="radio" name="radio2" id="radio1"
+                                                (click)="clickSelectDrivingLicense()" value="option1"
+                                                name="generalInfo_form_driving_license_status_id"
+                                                [checked]="(jobSeekerGeneralInfo | async)?.driving_license">
+                                            <label for="radio1"> <span>{{fixedTextHash['yes'][currLan]}} </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class=" twenty-box">
+                                        <div class="radio radio-primary">
+                                            <input type="radio" name="radio2" (click)="clickUnSelectDrivingLicense()"
+                                                id="radio2" value="option2"
+                                                name="generalInfo_form_driving_license_status_id"
+                                                [checked]="!drivingLicenseFlag">
+                                            <label for="radio2">
+                                                <span>{{fixedTextHash['no'][currLan]}}</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="ten-box" *ngIf="drivingLicenseFlag">
+                                        <div class="txt">{{fixedTextHash['from'][currLan]}}</div>
+                                    </div>
+
+                                    <div class="half-box-rgt" *ngIf="drivingLicenseFlag">
+                                        <div class="full-box">
+                                            <input type="hidden" #drivingLicenseInpt
+                                                name="generalInfo_form_driving_license_country_id"
+                                                formControlName="driving_license_country_id">
+                                            <bootstrap-selectbox *ngIf="countryList"
+                                                (selectedId)="generalInfo_form.controls['driving_license_country_id'].setValue($event.id)"
+                                                [selectedValue]="drivingLicenseInpt.value"
+                                                [placeholder]="fixedTextHash['add_country'][currLan]"
+                                                [selectList]="countryList">
+                                            </bootstrap-selectbox>
+                                            <div *ngIf="(generalInfo_form.controls['driving_license_country_id'].touched || (formPostedValid$ | async)) && !generalInfo_form.controls['driving_license_country_id'].valid"
+                                                role="alert">
+                                                Please select the Issuing CountryFile size is too large!
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

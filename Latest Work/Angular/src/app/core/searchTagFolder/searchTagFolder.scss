@@ -1,0 +1,100 @@
+@import '../../../styles/sass/base/_variables.scss';
+
+h1, h2, h3, h4, h5, h6, span, p, a{
+  margin:0px;
+  font-family: $primary-Fonts;
+}
+
+.arabic{
+  h1, h2, h3, h4, h5, h6, span, p, a, button, .req-dark, .applicants-txt {
+    margin:0px;
+    font-family: $arabic-primary-Fonts!important;
+  }
+  .action-button-candi{
+    float: left!important;
+  }
+}
+
+
+// hasTagsats
+.hash-search{
+  width: 100%;
+  height: auto;
+  float: left;
+  border-bottom: 1px solid #F1F1F1;
+  padding: 10px 0px;
+  margin-bottom: 15px;
+}
+.hasTagsats{
+  width: 100%;
+  display: block;
+  li{
+    display: inline-block;
+    width: auto;
+    height: 40px;
+    background-color: $bg-default;
+    float: left;
+    margin-right: 5px;
+    padding: 0px!important;
+    line-height: 40px;
+    padding-left: 10px!important;
+    i{
+      display: block;
+      float: right;
+      display: block;
+      width: 40px;
+      height: 40px;
+      text-align: center;
+      line-height: 40px;
+      background: $primarycolor;
+      color: $white;
+      margin-left: 10px;
+    }
+  }
+}
+
+.searchFolder{
+  width: 100%;
+  float: right;
+}
+
+.arabic{
+  .hasTagsats{
+    li{
+      float: right;
+      padding-right: 10px!important;
+      padding-left: inherit!important;
+      i{
+        float: left;
+        margin-right: 10px;
+        margin-left: inherit;
+      }
+    }
+  }
+}
+
+
+/* Respopnsive breakpoint */
+// ============bigScreen===========
+@media all and (max-width: 991px) {
+
+}
+
+// ============MediumScreen========
+@media all and (max-width: 768px) {
+
+  .footer-signin-v5{
+    max-width:90%;
+  }
+  .searchFolder{
+    width: 100%!important;
+  }
+
+}
+
+// ============SmallScreen=========
+@media all and (max-width: 480px) {
+  .searchFolder{
+    width: 100%!important;
+  }
+}

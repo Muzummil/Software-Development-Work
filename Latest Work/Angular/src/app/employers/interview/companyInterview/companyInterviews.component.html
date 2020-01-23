@@ -1,0 +1,92 @@
+
+<div class="main-tab load-data-js mobile-tab-top"></div>
+<div role="tabpanel" class="tab-pane active basic-height margin-top-space" id="interviews">
+  <div class="container"  [class.arabic] = "accountService.isArabic()">
+    <div *ngIf="this.allInterviewDetails?.length == 0" class=" block block-contant empty-min2">
+      <div class="empty-prf">
+        <span>  <i class="icon-empty-nodata"></i>  <h5>{{fixedTextHash['no_interviews'][currLan]}}</h5></span>
+      </div>
+    </div>
+
+    <div *ngIf="loadingFlag" class=" block block-contant empty-min2">
+      <div class="empty-prf">
+        <spinner [visible]="loadingFlag"></spinner>
+      </div>
+    </div>
+
+    <ng-container *ngIf="!loadingFlag && this.allInterviewDetails?.length > 0">
+
+      <div class="row" *ngFor="let sel_interview of allInterviewDetails,let count =index">
+        <div class="jobtitle-int">{{sel_interview?.job?.title}}</div>
+        <!--interview listing section-->
+        <section id="interview-list-all" 
+        [class.int-with-address]="sel_interview?.channel != 'Call'"
+        [class.int-no-address]="sel_interview?.channel == 'Call'" class="">
+
+          <!--candidate details-->
+          <div class="col-lg-5 col-md-4 col-sm-12 col-xs-12 arabic-right-left">
+            <div class="int-candi-detail">
+              <div class="int-cand-image arabic-right-left">
+                <!--image here-->
+                <i *ngIf="!sel_interview?.jobseeker?.avatar" class="icon-profile"></i>
+                <img *ngIf="sel_interview?.jobseeker?.avatar" src="{{sel_interview?.jobseeker?.avatar}}">
+              </div>
+              <ul>
+                <li class="int-nam"><strong>{{sel_interview?.jobseeker?.first_name}} {{sel_interview?.jobseeker?.last_name}}</strong></li>
+                <li *ngIf="sel_interview?.current_jobseeker_company?.position"><i class="zmdi zmdi-account"></i><span>{{sel_interview?.current_jobseeker_company?.position}}</span></li>
+                <li *ngIf="sel_interview?.current_jobseeker_company?.company_name"><i class="zmdi zmdi-city-alt"></i><strong>{{sel_interview?.current_jobseeker_company?.company_name}}</strong></li>
+                <li *ngIf="sel_interview?.jobseeker?.city?.name && sel_interview?.jobseeker?.country?.name"><i class="zmdi zmdi-pin"></i><span>{{sel_interview?.jobseeker?.city?.name}},
+                    {{sel_interview?.jobseeker?.country?.name}}</span></li>
+                <li *ngIf="sel_interview?.jobseeker?.city?.name && !sel_interview?.jobseeker?.country?.name"><i class="zmdi zmdi-pin"></i><span>{{sel_interview?.jobseeker?.city?.name}}</span></li>
+                <li><i class="zmdi zmdi-chart-donut"></i><span>{{sel_interview?.jobseeker?.sector?.name}}</span></li>
+              </ul>
+            </div>
+          </div>
+
+
+          <!--interview details-->
+          <div class="col-lg-5 col-md-4 col-sm-12 col-xs-12 arabic-right-left">
+          <div class="int-detail">
+            <strong>{{fixedTextHash['interview_details'][currLan]}}</strong>
+            <a [routerLink]="accountService.getCurrLangUrl()+'/employer/candidate/'+sel_interview?.job_application_status_change?.jobseeker_id+'/'+accountService.getSpaceToDashLowerCase(sel_interview?.jobseeker?.first_name)+'-'+accountService.getSpaceToDashLowerCase(sel_interview?.jobseeker?.last_name)+'/profile'" [queryParams]="{job_id:sel_interview?.job?.id}">{{fixedTextHash['click'][currLan]}}</a> {{fixedTextHash['here_to_open_application'][currLan]}}
+            <ul>
+              <li><span>{{fixedTextHash['interviewer'][currLan]}}</span><i>: {{sel_interview?.interviewee }}</i></li>
+              <li><span>{{fixedTextHash['date_time'][currLan]}}</span><i>: {{accountService.getFormattedDate(timeCorrection(sel_interview?.appointment, sel_interview?.time_zone), 'MMM DD, YYYY - hh:mm a') }} ({{browserTimeZone }})</i></li>
+              <li><span>{{fixedTextHash['duration'][currLan]}}</span><i>: {{sel_interview?.duration }} {{fixedTextHash['minutes'][currLan]}}</i></li>
+            </ul>
+          </div>
+          </div>
+
+          <!--interview-type-->
+          <div class="col-lg-2 col-md-4 col-sm-12 col-xs-12 arabic-right-left">
+
+          <div class="int-type">
+            <strong>{{fixedTextHash['interview_type'][currLan]}}</strong>
+            <!--online interview-->
+            <div *ngIf="sel_interview?.channel == 'Call'">
+              <span>{{fixedTextHash['online_interview'][currLan]}}</span>
+              <p><a [routerLink]="accountService.getCurrLangUrl()+'/applications/'+sel_interview?.job_application_status_change?.job_application_id+'/interviews/'+sel_interview?.id">{{fixedTextHash['click'][currLan]}}</a> {{fixedTextHash['open_interview'][currLan]}}</p>
+            </div>
+            <!--physical interview-->
+            <div   *ngIf="sel_interview?.channel == 'Physical'">
+              <p>{{fixedTextHash['office_interview'][currLan]}}</p>
+            </div>
+          </div>
+
+          <!--physical interivew address-->
+          <div  *ngIf="sel_interview?.channel == 'Physical'" class="int-address">
+            <strong>{{fixedTextHash['interview_address'][currLan]}}</strong>
+            <p>
+              {{sel_interview?.job_application_status_change?.comment}}
+            </p>
+          </div>
+          </div>
+        </section>
+
+      </div>
+    </ng-container>
+
+
+
+  </div>
+</div>

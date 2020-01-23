@@ -1,0 +1,41 @@
+<ion-header class="animated fadeIn no-shadow">
+
+  <ion-navbar class="no-border" color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Apartment {{appartmentID}}
+    </ion-title>
+    <ion-buttons *ngIf="userRole == 3" end>
+      <button ion-button tappable (click)="presentPopover($event)">
+        <ion-icon full name="more" class="more-icon"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="common-bg apartment_tenants">
+
+
+
+  <ion-grid class="table_grid">
+    <div class="no-data" *ngIf="!tenants">
+      <img src="../../assets/icon/no-data.png" alt="image">
+      <h4>Select the <ion-icon full name="more" class="more-icon"></ion-icon>button in the top right corner to add tenant or edit this apartment</h4>
+    </div>
+    <ion-row *ngFor="let tenant of tenants">
+      <!-- <ion-row *ngFor="let tenant of tenants"> -->
+
+      <ion-col col-7>
+        <h5 *ngIf="tenant">{{tenant.name}}</h5>
+        <span *ngIf="tenant">{{tenant.tenant.building_name}}</span>
+      </ion-col>
+      <ion-col col-5 *ngIf="tenants">
+        <button type="button" class="btn-danger">Unpaid</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!-- <button ion-button full class="btn-fb signfb" (click)="addTanent()">Add Tanent</button> -->
+  <!-- <button type="button" ion-button full class="deleteDanger" (click)="delApartment(appartmentID)"> Leave Apartment</button> -->
+</ion-content>

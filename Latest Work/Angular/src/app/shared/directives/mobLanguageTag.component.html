@@ -1,0 +1,17 @@
+
+<div [class.arabic] = "accountService.isArabic()">
+<ul class="languages-v2" *ngIf="languageList.length >0">
+    <li *ngFor="let selLan of languageList;let lanIndex = index" >{{selLan.name}}&nbsp;
+        <a (click)="onRemoveElement(lanIndex)"><i class="zmdi zmdi-close"></i></a>
+    </li>
+</ul>
+<div class="select-new-mobile" *ngIf="languageList.length < maxCount">
+    <select (change)="onAddElement2(moblang.value);moblang.value=null" #moblang [class.error-feild]="errorFlag">
+        <option value="null" selected disabled>{{fixedTextHash['add_language'][currLan]}}</option>
+        <option  value="{{selLang?.id}}" *ngFor="let selLang of (languages$ | async)">{{selLang?.name}}</option>
+
+    </select>
+    <div class="select__arrow"></div>
+</div>
+</div>
+

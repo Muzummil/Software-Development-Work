@@ -1,0 +1,227 @@
+<div *ngIf="(filterList$ |async )!= null &&
+(
+(filterList$ |async )?.locations?.length  >0 ||
+(filterList$ |async )?.cities?.length   >0 ||
+(filterList$ |async )?.sectors?.length   >0 ||
+(filterList$ |async )?.fareas?.length   >0 ||
+(filterList$ |async )?.jobtypes?.length   >0 ||
+(filterList$ |async )?.job_type?.length   >0 ||
+(filterList$ |async )?.expect_sal?.length   >0 ||
+(filterList$ |async )?.current_sal?.length   >0 ||
+(filterList$ |async )?.salarylevels?.length   >0 ||
+(filterList$ |async )?.edulevels?.length   >0 ||
+(filterList$ |async )?.explevels?.length   >0 ||
+(filterList$ |async )?.nationality?.length   >0 ||
+(filterList$ |async )?.notice_period?.length   >0 ||
+(filterList$ |async )?.last_active?.length   >0 ||
+(filterList$ |async )?.exprange?.length   >0 ||
+(filterList$ |async )?.gender?.length   >0 ||
+(filterList$ |async )?.marital_status?.length   >0 ||
+(filterList$ |async )?.age_group?.length   >0 ||
+(filterList$ |async )?.visa_status?.length   >0 ||
+(filterList$ |async )?.language?.length   >0 ||
+(filterList$ |async )?.companies?.length   >0
+) || (titleObs| async) != null || (loctitleObs | async) != null ">
+    <div class="block-contant" id="tag-job">
+        <div *ngIf="(titleObs| async)" class="Profile-tag">
+            <span class="tage-name">{{(titleObs| async)}}</span>
+            <span><i (click)="onClickTag(null,'title')" class="zmdi zmdi-close"></i></span>
+        </div>
+
+        <div *ngIf="(loctitleObs| async)" class="Profile-tag">
+            <span class="tage-name">{{(loctitleObs| async)}}</span>
+            <span><i (click)="onClickTag(null,'loctitle')"
+                     class="zmdi zmdi-close"></i></span>
+        </div>
+
+
+        <span *ngIf="(filterList$ |async )!= null &&
+(
+(filterList$ |async )?.locations?.length  >0 ||
+(filterList$ |async )?.cities?.length   >0 ||
+(filterList$ |async )?.sectors?.length   >0 ||
+(filterList$ |async )?.expect_sal?.length   >0 ||
+(filterList$ |async )?.current_sal?.length   >0 ||
+(filterList$ |async )?.fareas?.length   >0 ||
+(filterList$ |async )?.jobtypes?.length   >0 ||
+(filterList$ |async )?.job_type?.length   >0 ||
+(filterList$ |async )?.salarylevels?.length   >0 ||
+(filterList$ |async )?.edulevels?.length   >0 ||
+(filterList$ |async )?.explevels?.length   >0 ||
+(filterList$ |async )?.visa_status?.length   >0 ||
+(filterList$ |async )?.nationality?.length   >0 ||
+(filterList$ |async )?.notice_period?.length   >0 ||
+(filterList$ |async )?.last_active?.length   >0 ||
+(filterList$ |async )?.exprange?.length   >0 ||
+(filterList$ |async )?.gender?.length   >0 ||
+(filterList$ |async )?.marital_status?.length   >0 ||
+(filterList$ |async )?.age_group?.length   >0 ||
+(filterList$ |async )?.language?.length   >0 ||
+(filterList$ |async )?.companies?.length   >0
+) ">
+
+
+<div *ngFor="let selectedObj of (filterList$ |async).locations,let i =index"
+     class="Profile-tag">
+
+<span class="tage-name">{{selectedObj.name}}</span>
+<span><i (click)="onClickTag(i,'locations')"
+         class="zmdi zmdi-close"></i></span>
+</div>
+<div *ngFor="let selectedObj of (filterList$ |async).cities,let i =index"
+     class="Profile-tag">
+<span class="tage-name">{{selectedObj.name}}</span>
+<span><i (click)="onClickTag(i,'cities')"
+         class="zmdi zmdi-close"></i></span>
+</div>
+<div *ngFor="let selectedObj of (filterList$ |async).sectors,let i =index"
+     class="Profile-tag">
+<span class="tage-name">{{selectedObj.name}}</span>
+<span><i (click)="onClickTag(i,'sectors')" class="zmdi zmdi-close"></i></span>
+</div>
+
+<div *ngFor="let selectedObj of (filterList$ |async).gender,let i =index"
+     class="Profile-tag">
+<span class="tage-name">{{selectedObj.name}}</span>
+<span><i (click)="onClickTag(i,'gender')"
+         class="zmdi zmdi-close"></i></span>
+</div>
+
+<div *ngFor="let selectedObj of (filterList$ |async).marital_status,let i =index"
+     class="Profile-tag">
+<span class="tage-name">{{selectedObj.name}}</span>
+<span><i (click)="onClickTag(i,'marital_status')"
+         class="zmdi zmdi-close"></i></span>
+</div>
+
+<div *ngFor="let selectedObj of (filterList$ |async).notice_period,let i =index"
+     class="Profile-tag">
+<span class="tage-name">{{selectedObj.name}}</span>
+<span><i (click)="onClickTag(i,'notice_period')"
+         class="zmdi zmdi-close"></i></span>
+</div>
+
+
+
+<div *ngFor="let selectedObj of (filterList$ |async).last_active,let i =index"
+     class="Profile-tag">
+<span class="tage-name">{{selectedObj.name}}</span>
+<span><i (click)="onClickTag(i,'last_active')"
+         class="zmdi zmdi-close"></i></span>
+</div>
+
+
+<div *ngFor="let selectedObj of (filterList$ |async).exprange,let i =index"
+     class="Profile-tag">
+<span class="tage-name">{{selectedObj.name}}</span>
+<span><i (click)="onClickTag(i,'exprange')" class="zmdi zmdi-close"></i></span>
+</div>
+
+<div *ngFor="let selectedObj of (filterList$ |async).expect_sal,let i =index"
+     class="Profile-tag">
+<span class="tage-name">{{selectedObj.name}}</span>
+<span><i (click)="onClickTag(i,'expect_sal')"
+         class="zmdi zmdi-close"></i></span>
+</div>
+
+<div *ngFor="let selectedObj of (filterList$ |async).current_sal,let i =index"
+     class="Profile-tag">
+<span class="tage-name">{{selectedObj.name}}</span>
+<span><i (click)="onClickTag(i,'current_sal')"
+         class="zmdi zmdi-close"></i></span>
+</div>
+
+<div *ngFor="let selectedObj of (filterList$ |async).language,let i =index"
+     class="Profile-tag">
+<span class="tage-name">{{selectedObj.name}}</span>
+<span><i (click)="onClickTag(i,'language')" class="zmdi zmdi-close"></i></span>
+</div>
+
+<div *ngFor="let selectedObj of (filterList$ |async).visa_status,let i =index"
+     class="Profile-tag">
+<span class="tage-name">{{selectedObj.name}}</span>
+<span><i (click)="onClickTag(i,'visa_status')"
+         class="zmdi zmdi-close"></i></span>
+</div>
+
+<div *ngFor="let selectedObj of (filterList$ |async).age_group,let i =index"
+     class="Profile-tag">
+<span class="tage-name">{{selectedObj.name}}</span>
+<span><i (click)="onClickTag(i,'age_group')"
+         class="zmdi zmdi-close"></i></span>
+</div>
+
+
+<div *ngFor="let selectedObj of (filterList$ |async).job_type,let i =index"
+     class="Profile-tag">
+<span class="tage-name">{{selectedObj.name}}</span>
+<span><i (click)="onClickTag(i,'job_type')" class="zmdi zmdi-close"></i></span>
+</div>
+
+
+
+<div *ngFor="let selectedObj of (filterList$ |async).fareas,let i =index"
+     class="Profile-tag">
+<span class="tage-name">{{selectedObj.name}}</span>
+<span><i (click)="onClickTag(i,'fareas')"
+         class="zmdi zmdi-close"></i></span>
+</div>
+<div *ngFor="let selectedObj of (filterList$ |async).jobtypes,let i =index"
+     class="Profile-tag">
+<span class="tage-name">{{selectedObj.name}}</span>
+<span><i (click)="onClickTag(i,'jobtypes')" class="zmdi zmdi-close"></i></span>
+</div>
+
+
+
+<div *ngFor="let selectedObj of (filterList$ |async).salarylevels,let i =index"
+     class="Profile-tag">
+<span class="tage-name"
+      *ngIf="selectedObj.salary_to <= 100000">{{selectedObj.salary_from | number}}
+    -{{selectedObj.salary_to | number}}</span>
+<span class="tage-name"
+      *ngIf="selectedObj.salary_to > 100000">{{selectedObj.salary_from | number}}
+    +</span>
+<span><i (click)="onClickTag(i,'salarylevels')"
+         class="zmdi zmdi-close"></i></span>
+</div>
+
+
+<div *ngFor="let selectedObj of (filterList$ |async).edulevels,let i =index"
+     class="Profile-tag">
+<span class="tage-name">{{selectedObj.name}}</span>
+<span><i (click)="onClickTag(i,'edulevels')"
+         class="zmdi zmdi-close"></i></span>
+</div>
+
+
+<div *ngFor="let selectedObj of (filterList$ |async).explevels,let i =index"
+     class="Profile-tag">
+<span class="tage-name">{{selectedObj.name}}</span>
+<span><i (click)="onClickTag(i,'explevels')"
+         class="zmdi zmdi-close"></i></span>
+</div>
+
+
+<div *ngFor="let selectedObj of (filterList$ |async).companies,let i =index"
+     class="Profile-tag">
+<span class="tage-name">{{selectedObj.name}}</span>
+<span><i (click)="onClickTag(i,'companies')"
+         class="zmdi zmdi-close"></i></span>
+</div>
+
+
+
+
+<div *ngFor="let selectedObj of (filterList$ |async).nationality,let i =index"
+     class="Profile-tag">
+<span class="tage-name">{{selectedObj.name}}</span>
+<span><i (click)="onClickTag(i,'nationality')"
+         class="zmdi zmdi-close"></i></span>
+</div>
+
+</span>
+
+    </div>
+
+</div>

@@ -1,0 +1,146 @@
+<div class="main-tab load-data-js mobile-tab-top"></div>
+<emp-profile-topmenu [activeFlag]="'mostViewedJobs'"></emp-profile-topmenu>
+<div class="tab-content job-bloovo">
+    <!--Companies edit details-->
+    <div role="tabpanel" class="tab-pane active" id="viewed-Profile">
+        <div class="container margin-top-space">
+            <div class="col-lg-12 col-sm-12 col-xs-12" *ngIf="(topViewedJobs$ | async)?.jobs?.length ==0 || (showSpinner$ | async)">
+                <div class="row empty-min2 white"  >
+                    <div  class="row empty-min2">
+                        <div class="empty-prf" *ngIf="(showSpinner$ | async)"><spinner [visible]="(showSpinner$ | async)"></spinner></div>
+                        <div class="empty-prf " *ngIf="(topViewedJobs$ | async)?.jobs?.length ==0">
+                            <i class="icon-empty-job"></i>
+                            <h5>{{fixedTextHash['no_jobs'][currLan]}}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="!(showSpinner$ | async) && (topViewedJobs$ | async)?.jobs?.length >0">
+                <div class="col-lg-12 col-sm-12 col-xs-12">
+                    <div class="block filter-jobs">
+                        <div class="block-title">
+                            <h1> {{fixedTextHash['most_jobs'][currLan]}} </h1>
+                        </div>
+
+                        <div class="row tracking-title hidden-sm hidden-xs hidden-md">
+                            <div class="headding-box-dash arabic-right-left">&nbsp;&nbsp;{{fixedTextHash['job_title'][currLan]}}</div>
+                            <div class="headding-box-dash-action arabic-left-right">
+                                <div class="equal-box-actions arabic-right-left">{{fixedTextHash['count_views'][currLan]}}</div>
+                                <div class="equal-box-actions arabic-right-left">{{fixedTextHash['count_applications'][currLan]}}</div>
+                                <div class="equal-box-actions arabic-right-left">{{fixedTextHash['days_close'][currLan]}}</div>
+                                <div class="equal-box-actions arabic-right-left">{{fixedTextHash['job_type'][currLan]}}</div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="row featured-box veiw-secton"
+                                 *ngFor="let selJob of (topViewedJobs$ | async)?.jobs,let selJobIndex = index">
+
+                                <!-- Desktop -->
+
+                                <div  class="cursor_pointer1 hidden-xs hvr-shutter-out-vertical">
+
+                                    <div class="box-dash-profile-left arabic-right-left">
+                                        <div>
+                                            <div class="feturd-compny-dtls">
+                                                <div class="txt-white">{{selJob?.title}}</div>
+                                                <div class="cmpny-txt bold">{{selJob?.company?.name}}</div>
+                                                <div class="cmpny-txt">{{selJob?.city?.name}}, {{selJob?.country?.name}}</div>
+                                                <div class="cmpny-txt">{{selJob?.sector?.name}} {{fixedTextHash['sector'][currLan]}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="box-dash-profile-right arabic-right-left">
+                                        <div class="row tablet-men">
+                                            <div class="col-sm-3">{{fixedTextHash['count_views'][currLan]}}</div>
+                                            <div class="col-sm-3">{{fixedTextHash['count_applications'][currLan]}}</div>
+                                            <div class="col-sm-3">{{fixedTextHash['days_close'][currLan]}}</div>
+                                            <div class="col-sm-3">{{fixedTextHash['job_type'][currLan]}}</div>
+                                        </div>
+
+                                        <div class="equal-box-action arabic-right-left">
+                                            <div class="probability">
+                                                <div class="applicants-numbers">{{selJob?.views_count | number}}</div>
+                                                <div class="applicants-txt blue-silver-txt hidden-md hidden-sm hidden-lg">
+                                                    {{fixedTextHash['count_views'][currLan]}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="equal-box-action arabic-right-left">
+                                            <div class="probability">
+                                                <div class="applicants-numbers">{{selJob?.job_applications_count | number}}</div>
+                                                <div class="applicants-txt navy-light-txt hidden-md hidden-sm hidden-lg">{{fixedTextHash['no_of_applicants'][currLan]}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="equal-box-action arabic-right-left">
+                                            <div class="hidden-xs">
+                                                <div>
+                                                    <div>{{selJob?.days_to_expired}} {{fixedTextHash['days'][currLan]}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="equal-box-action arabic-right-left">
+                                            <div>
+                                                <div class="stnderd" *ngIf="!selJob?.is_featured"> {{fixedTextHash['standard'][currLan]}}</div>
+                                                <div class="featured"  *ngIf="selJob?.is_featured"> {{fixedTextHash['featured'][currLan]}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix"></div>
+                                </div>
+
+
+                                <!-- Mobile -->
+                                <a class="hidden-md hidden-lg hidden-sm">
+                                    <div>
+                                        <div class="mob-most-view">
+                                            <div class="feturd-compny-dtls">
+                                                <div class="txt-white">{{selJob?.title}}</div>
+                                                <div class="light bold">{{selJob?.company?.name}}</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="mob-most-view">
+                                            <div class="light">{{selJob?.city?.name}}, {{selJob?.country?.name}}</div>
+                                            <div class="light">{{selJob?.sector?.name}}</div>
+                                        </div>
+
+                                        <div class="mob-most-view">
+                                            <div class="light">
+                                                <div class="text-left">{{fixedTextHash['job_type'][currLan]}}:</div>
+                                                <div class="text-right">{{fixedTextHash['standard'][currLan]}}</div>
+                                            </div>
+                                            <div class="light">
+                                                <div class="text-left">{{fixedTextHash['status'][currLan]}}:</div>
+                                                <div class="text-right">{{selJob?.days_to_expired}} {{fixedTextHash['days'][currLan]}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6">
+                                        <div class="probability">
+                                            <div class="applicants-numbers">{{selJob?.views_count | number}}</div>
+                                            <div class="applicants-txt blue-silver-txt hidden-md hidden-lg">{{fixedTextHash['count_views'][currLan]}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6">
+                                        <div class="probability">
+                                            <div class="applicants-numbers">{{selJob?.job_applications_count | number}}</div>
+                                            <div class="applicants-txt navy-light-txt hidden-md hidden-lg">{{fixedTextHash['count_applications'][currLan]}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

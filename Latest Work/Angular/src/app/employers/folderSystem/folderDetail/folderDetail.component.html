@@ -1,0 +1,31 @@
+<section class="cvFolderSystem container" [class.arabic] = "accountService.isArabic()">
+        <!-- header part -->
+        <!-- ================================================= -->
+        <div class="headerFolder">
+            <!-- header & search -->
+         
+            <!-- add new folder -->
+            <div class="addNewFolderSelect">
+
+                <!-- search -->
+                <div class="searchName">
+                    <folder-breadcrumb [ancestors]="ancestors" [activeClass]="'folder'" [level]="level"></folder-breadcrumb>
+                    <!-- add new -->
+                    <a class="addnew arabic-left-right" data-toggle="modal" data-target="#addNewFolder">{{fixedTextHash['add_sub_folders'][currLan]}}</a>
+                    <div class="searchFolder arabic-right-left">
+                        <search-tag-folder [url]="getUrl()"></search-tag-folder>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <!-- Body Listing folder -->
+        <spinner [visible]="showSpinner"></spinner>
+        <folder-chart [folderList$]="folderList$" [parentId]="folderId"></folder-chart>
+        <pagination-new  [url]="urlPath" [totalRecords]="totalRecords$"></pagination-new>
+
+</section>
+
+
+        
+

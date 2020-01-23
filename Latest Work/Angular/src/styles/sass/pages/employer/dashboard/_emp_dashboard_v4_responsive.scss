@@ -1,0 +1,289 @@
+// ============bigScreen===========
+@media all and (max-width: 991px) {
+    .audience-v4 .active-view-v4{
+        width: 100%;
+        height: 100px;
+        margin-bottom: 10px;
+        .blue-box{
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+    }
+    .job-posted-v4 .whitebox-v4{
+        height: 100px;
+    }
+    .job-posted-v4 .whitebox-v4 h2{
+        padding-top:20px;
+    }
+    .job-posted-v4 .equal-v4{
+        margin-right: 0px!important;
+    }
+    .keyword-row{
+        margin-left:-10px!important;
+    }
+    .line-v4{
+        border-right:none!important;;
+        border: 1px solid #f1f1f1;
+        padding:10px 0px;
+        h2{
+            padding-top:0px;
+        }
+    }
+    .most-recent-job-v4 .list-v4{
+        margin-top: 5px;
+    }
+    .chart-bar-v4{
+        height: 100px;
+    }
+}
+
+// ============MediumScreen========
+@media all and (max-width: 768px) {
+    .audience-v4 .active-view-v4{
+        width: 100%;
+        height: 100px;
+        margin-bottom: 10px;
+        .blue-box{
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+    }
+    .audience-v4 .active-view-stats-v4{
+        width: 100%;
+    }
+    .audience-v4 .active-view-v4 .blue-box h1{
+        padding-top:10px;
+    }
+    .audience-v4 .active-view-stats-v4 .countries-v4 ul .graph-v4{
+        margin:0px;
+        width: 100%;
+    }
+    .audience-v4 .active-view-stats-v4 .graph-views-v4{
+        width: 100%;
+        height: auto;
+    }
+
+    .audience-v4 .active-view-stats-v4 .countries-v4{
+        width: 100%;
+    }
+    .job-posted-v4 .whitebox-v4{
+        height: 100px;
+        margin: 5px 0px;
+    }
+    .job-posted-v4 .whitebox-v4 h2{
+        padding-top:20px;
+    }
+    .job-post-graph-v4 .raph-job-v4 .graph-v4 ul li{
+        width: 6%;
+        margin:0 1%;
+    }
+    .job-post-graph-v4 .raph-job-v4 .graph-v4 ul{
+        width:96%;
+        float: right;
+        margin:0px auto;
+    }
+    .job-posted-v4 .equal-v4{
+        margin-right: 0px!important;
+    }
+    .audience-v4 .active-view-stats-v4{
+        padding-left:0px;
+    }
+    .job-posted-v4 .mg-v4-10{
+        margin:5px 0px;
+    }
+    .job-posted-v4{
+        margin-top: 0px;
+    }
+    .keyword-row{
+        margin-left:-10px!important;
+    }
+    .job-posted-v4 .keyword-v4, .job-count-v4 .job-count-box-v4{
+        margin-bottom: 5px;
+    }
+    .job-count-v4 .job-count-box-v4{
+        height: 100px;
+    }
+    .job-count-v4 .job-count-box-v4 h2{
+        padding-top:30px;
+    }
+    .job-post-graph-v4 .raph-job-v4{
+        margin-bottom: 5px;
+    }
+    .all-bar-stats-v4 .box-bra-graph-v4{
+        margin-bottom: 5px;
+    }
+    .line-v4{
+        border-right:none!important;;
+        border: 1px solid #f1f1f1;
+        padding:10px 0px;
+        h2{
+            padding-top:0px;
+        }
+    }
+    .most-recent-job-v4 .list-v4{
+        margin-top: 5px;
+    }
+    .chart-bar-v4{
+        height: 100px;
+    }
+    .funel-graphics-v4{
+        img{
+            width: 100%!important;
+            height: auto;
+            display: none;
+        }
+    }
+    .application-funel-v4{
+        position: static!important;
+       strong{
+            margin-left: 0px!important;
+            font-family: $primary-Fonts;
+            font-size: 16px;
+            color: $secondarycolor;
+            margin-top: 0px!important;
+            left: 0px;
+            font-weight: 600!important;
+            display: block!important;
+            width: 100%!important;
+            margin-top: 14px!important;
+        }
+        span{
+            margin-left: 0px!important;
+            margin-top: 0px!important;
+            font-weight: 600;
+            color: $primarycolor!important;
+        }
+    }
+    .interview-funel-v4{
+        position: static!important;
+        strong{
+            margin-left: 0px!important;
+            font-family: $primary-Fonts;
+            font-size: 16px;
+            color: $primarycolor!important;
+            margin-top: 0px!important;
+            left: 0px;
+            font-weight: 600!important;
+        }
+        span{
+            margin-left: 0px!important;
+            margin-top: 0px!important;
+            font-weight: 600;
+        }
+    }
+    .shortlisted-funel-v4{
+        position: static!important;
+        strong{
+            margin-left: 0px!important;
+            font-family: $primary-Fonts;
+            font-size: 16px;
+            color: $primarycolor!important;
+            margin-top: 0px!important;
+            left: 0px;
+            font-weight: 600!important;
+        }
+        span{
+            margin-left: 0px!important;
+            margin-top: 0px!important;
+            font-weight: 600;
+        }
+    }
+    .success-funel-v4{
+        position: static!important;
+        strong{
+            margin-left: 0px!important;
+            font-family: $primary-Fonts;
+            font-size: 16px;
+            color: $primarycolor!important;
+            margin-top: 0px!important;
+            left: 0px;
+            font-weight: 600!important;
+        }
+        span{
+            margin-left: 0px!important;
+            margin-top: 0px!important;
+            font-weight: 600;
+        }
+    }
+    .application-funel-v4, .interview-funel-v4, .shortlisted-funel-v4, .success-funel-v4{
+     width: 100%;
+     height: 80px;
+     text-align: left;
+     border:1px solid #f1f1f1;
+     padding:0px 20px;
+     margin-bottom: 5px;
+     span{
+        line-height: normal;
+        font-weight: normal!important;
+     }
+    }
+    .funel-analatycs-v4 .funel-graphics-v4{
+        height: auto;
+    } 
+    .employer-dashborad-v5{
+        margin-top: 0px!important;
+    }
+
+    .hight-auto-mobile-v5{
+        height: auto;
+        min-height: auto!important;
+    }
+    .audience-v4 .active-view-v4{
+        margin-right: 0px!important;
+    }
+    .filter-v4 h3{
+        width:100%!important;
+        text-align: center;
+    }
+    .filter-v4{
+        height: auto;
+        float: left;
+        width: 100%;
+        padding-bottom: 10px;
+        .select-v4{
+            float: none;
+            margin:5px auto;
+        }
+    }
+    .job-posted-v4 .keyword-v4 a{
+        text-align: center;
+        i{
+            display: none;
+        }
+    }
+    .funel-analatycs-v4 .funel-graphics-v4 .shortlisted-funel-v4 strong, .funel-analatycs-v4 .funel-graphics-v4 .interview-funel-v4 strong, .funel-analatycs-v4 .funel-graphics-v4 .success-funel-v4 strong{
+        width: 100%!important;
+        margin-top: 14px!important;
+    }
+
+
+}
+
+
+// ============SmallScreen=========
+@media all and (max-width: 480px) {
+     .audience-v4 .active-view-v4{
+        width: 100%;
+        height: 100px;
+        margin-bottom: 10px;
+        .blue-box{
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+    }
+    .audience-v4 .active-view-stats-v4{
+        width: 100%;
+    }
+    .audience-v4 .active-view-stats-v4 .countries-v4{
+        width: 100%;
+        height: auto;
+    }
+    .job-post-graph-v4 .raph-job-v4 .graph-v4 ul li{
+        width: 6%;
+        margin:0 1%;
+    }
+
+}

@@ -1,0 +1,268 @@
+@import '../../../../styles/sass/base/variables';
+/* remember to define focus styles! */
+
+*:focus {
+    outline: none;
+}
+
+.career-fair-emp {
+    .header-career-emp {
+        padding: 20px 0px;
+        margin-bottom: 30px;
+        border-bottom: 1px solid #e1e1e1;
+        h2 {
+            font-size: 22px;
+            font-weight: 500;
+            color: $heading-text;
+            display: block;
+            width: calc(100% - 100px);
+            float: left;
+        }
+        .add-new-career {
+            width: 100px;
+            background: $button-primary;
+            color: $white;
+            border: none;
+            font-size: 16px;
+            height: $button-height;
+            border-radius: 3px;
+            float: left;
+        }
+    }
+}
+
+.arabic {
+    .career-fair-emp {
+        .header-career-emp {
+            h2 {
+                float: right!important;
+            }
+        }
+    }
+}
+
+.career-fair {
+    padding-top: 80px;
+    padding-bottom: 50px;
+    .carousel {
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+    .carousel-control.left,
+    .carousel-control.right {
+        background-image: none;
+    }
+    .carousel-control {
+        opacity: 1;
+        .glyphicon-chevron-left {
+            text-shadow: none;
+            color: $white;
+            font-size: 30px;
+            width: 40px;
+            height: 40px;
+            background: $tertiarycolor;
+            -webkit-clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            &:before {
+                content: '\f2fa';
+                font-family: "Material-Design-Iconic-Font";
+                top: 4px;
+                position: relative;
+                right: 2px;
+            }
+        }
+        .glyphicon-chevron-right {
+            text-shadow: none;
+            color: $white;
+            font-size: 30px;
+            width: 40px;
+            height: 40px;
+            background: $tertiarycolor;
+            -webkit-clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            &:before {
+                content: '\f2fb';
+                font-family: "Material-Design-Iconic-Font";
+                top: 4px;
+                position: relative;
+                left: 2px;
+            }
+        }
+    }
+    .carousel-indicators {
+        .active {
+            background: $tertiarycolor;
+            border: none;
+            width: 16px;
+            height: 16px;
+        }
+        li {
+            background: $light-color;
+            border: 1px solid $light-color;
+            -webkit-clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            width: 14px;
+            height: 14px;
+        }
+    }
+    p {
+        color: $secondarycolor;
+        font-size: 18px;
+        line-height: 28px;
+    }
+    h2 {
+        font-size: 34px;
+        text-align: center;
+        font-weight: 600;
+        color: $primarycolor;
+        &:after {
+            content: "";
+            display: block;
+            text-align: center;
+            background: transparent url(../../../../assets/images/custom-images/ATS/title-divider.svg) no-repeat;
+            width: 54px;
+            height: 13px;
+            margin: 20px auto 50px auto;
+        }
+    }
+    .upcoming-event {
+        margin-top: 80px;
+        .upcoming-event-container {
+            min-height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .help-text {
+                color: $light-color;
+                font-size: 18px;
+                text-align: center;
+            }
+        }
+    }
+}
+
+.arabic.career-fair {
+    .carousel-control {
+        .glyphicon-chevron-left {
+            &:before {
+                top: 2px;
+            }
+        }
+        .glyphicon-chevron-right {
+            &:before {
+                top: 2px;
+            }
+        }
+    }
+}
+
+// career-fair-loop
+.career-fair-loop {
+    margin-bottom: 20px;
+    padding: 20px 0px;
+    border-bottom: 1px solid #EDECF1;
+}
+
+// box-career-logo
+.box-career-logo {
+    width: 140px;
+    height: 140px;
+    float: left;
+    background-color: #f9f9f9;
+    border: 1px solid #f1f1f1;
+    img {
+        width: 100%;
+        height: 138px;
+        object-fit: contain;
+    }
+    i {
+        line-height: 140px;
+        font-size: 40px;
+        color: $primarycolor;
+        text-align: center;
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+// box-career-details
+.box-career-details {
+    width: calc(100% - 280px);
+    float: left;
+    padding: 0px 10px;
+    height: 140px;
+    ul {
+        li {
+            display: block;
+            font-size: 14px;
+            color: $secondarycolor;
+            strong {
+                font-weight: 500;
+                font-size: 16px;
+                font-size: 20px!important;
+                color: $heading-text;
+            }
+        }
+    }
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+// box-career-code
+.box-career-code {
+    width: 140px;
+    height: 140px;
+    background-color: #f9f9f9;
+    float: left;
+    border: 1px solid #f1f1f1;
+}
+
+.career-empty {
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+// ============MediumScreen========
+@media all and (max-width: 768px) {
+    .career-fair {
+        h2 {
+            font-size: 28px;
+        }
+    }
+    .box-career-details {
+        width: 100%;
+        padding: 10px 0px;
+    }
+    .box-career-code {
+        float: right;
+    }
+    .career-fair-loop {
+        margin-bottom: 0px;
+        padding-bottom: 0px;
+    }
+    .box-career-details {
+        height: auto;
+    }
+    .career-fair-emp {
+        .header-career-emp {
+            text-align: center;
+            h2 {
+                width: 100%;
+                text-align: center;
+            }
+            .add-new-career {
+                width: 80%;
+                margin: 10px auto;
+                float: none!important;
+            }
+        }
+    }
+}

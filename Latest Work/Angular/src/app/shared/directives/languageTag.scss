@@ -1,0 +1,145 @@
+@import '../../../styles/sass/base/_variables.scss';
+
+
+input:-webkit-autofill {
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
+}
+
+h1, h2, h3, h4, h5, span, label, a, button, p{
+    font-family: $primary-Fonts;
+}
+
+.arabic{
+    h1, h2, h3, h4, h5, span, label, a, button, p, input, .cmpny-txt, .txt{
+       font-family: $arabic-primary-Fonts!important;
+    }
+}
+
+h3{
+	font-size: $form-txt;
+	color: $text-normal-color;
+	span{
+		color: $not-color;
+		font-weight: $thin-weight;
+		font-size: $small-font;
+	}
+}
+h4{
+	font-size:$medium-size;
+	color: $heading-text;
+	display: block;
+	border-bottom:1px solid $light-border;
+	padding-bottom:20px;
+	margin-top: 30px;
+}
+
+input, select {
+	width: 100%;
+	border: solid 1px $boredr-color;
+	color: $text-normal-color !important;
+	height: $form-height!important;
+	padding: 0px 10px;
+	margin-bottom: 10px;
+	font-size: 14px !important;
+	line-height: $button-height !important;
+	border-radius: $border-radius!important;
+	background-color:$form-bg!important; 
+}
+@-webkit-keyframes autofill {
+  to {
+      color: $primary-font;
+      background: transparent;
+  }
+}
+
+input:-webkit-autofill {
+  -webkit-animation-name: autofill;
+  -webkit-animation-fill-mode: both;
+}
+
+.tag-new{
+	display:inline-block;
+	background:$white;
+	float:left;
+	border: solid 1px $boredr-color;
+	padding:0px;
+	height: $button-height;
+	margin-right:5px;
+	position:relative;
+	margin-bottom: 5px;
+	border-radius: $border-radius;
+	input{font-size: 14px !important;}
+	span { box-shadow: none}
+	.txt{
+			border-right: solid 1px $boredr-color;
+			display:inline-block;
+			line-height:$button-height!important;
+			padding:0 15px;
+			color: $primarycolor!important;
+			padding-bottom:0px !important;
+	}
+	.close-tag{
+			display:inline-block;
+			color: $primarycolor;
+			padding:0px 8px 8px 5px;
+	}
+	.close-tag:hover{
+			color: $secondarycolor;
+	}
+}
+
+// .tag-register{
+// 	background:$white;
+// 	border: solid 1px $boredr-color;
+// 	padding:0px;
+// 	height: $button-height;
+// 	position:relative;
+// 	margin-bottom: 5px;
+// 	border-radius: $border-radius;
+// 	width: 100%;
+// 	input{font-size: 14px !important;}
+// 	span { box-shadow: none}
+// 	.txt{
+// 			line-height:$button-height!important;
+// 			padding:0 15px;
+// 			color: $primarycolor!important;
+// 			padding-bottom:0px !important;
+// 			float: left;
+// 	}
+// 	.close-tag{
+// 			color: $primarycolor;
+// 			padding:0px 8px 0px 8px;
+// 			float: right;
+// 			border-left: solid 1px $boredr-color;
+// 			line-height: 40px
+// 	}
+// 	.close-tag:hover{
+// 			color: $secondarycolor;
+// 	}
+// }
+
+
+// ARABIC
+// ============================
+.arabic{
+	
+	.tag-new{
+			 float: right!important;
+			 width: auto;
+			 margin-right:0px!important;
+			 margin-left:5px!important
+	 }
+	 .txt{
+			border-right: none;
+			border-left: none;
+	 }
+	 .close-tag{
+			float: left !important;
+			padding: 9px 8px 9px 8px;
+			border-right: solid 1px $boredr-color;
+	 }
+	 .tag-main{
+			 padding: 8px 0px!important;
+	 }
+}

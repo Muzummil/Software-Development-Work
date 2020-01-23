@@ -1,0 +1,74 @@
+<ion-header class="animated fadeIn no-shadow">
+
+  <ion-navbar class="no-border" color="primary" hideBackButton="true">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Home
+    </ion-title>
+    <ion-buttons *ngIf="userRole == 3" end>
+      <button ion-button tappable (click)="presentPopover($event)">
+        <ion-icon full name="more" class="more-icon"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-card *ngIf="userRole == 3 || userRole == 4" full class="no-border home-card">
+      <ion-card-content full style="font-weight:bold">
+        Welcome, {{name}}
+      </ion-card-content>      
+    </ion-card>
+    <!-- <div *ngIf="!buildings || buildings.length != 0"> -->
+    <div>
+      <ion-searchbar [(ngModel)]="searchText"></ion-searchbar>
+    </div>
+</ion-header>
+<ion-content class="common-bg home">
+    
+  <!-- <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar> -->
+  <ion-grid class="table_grid" *ngIf="userRole == 3 && buildings">
+    <div class="no-data" *ngIf="buildings.length == 0">
+      <img src="../../assets/icon/no-data.png" alt="image">
+      <h4>Select the <ion-icon full name="more" class="more-icon"></ion-icon>button in the top right corner to add property or edit your profile</h4>
+    </div>
+    <ion-row *ngFor="let building of buildings | searchFilter:searchText" (click)="apartmentPreview(building)" id="{{building.id}}">
+      <ion-col col-7>
+        <h5>{{ building.name }}</h5>
+        <span>{{ building.address }}</span>
+      </ion-col>
+      <ion-col col-5>
+        <button type="button" [ngClass]="{'btn-warning': building.status == 'Partially', 'btn-success': building.status == 'Paid', 'btn-danger': building.status == 'Unpaid'}">{{ building.status }}</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <p *ngIf="userRole == 3 && !buildingSearchFlag">No building found</p>
+
+  <ion-grid class="table_grid" *ngIf="userRole == 4 && buildings">
+    <div class="no-data home-text-center" *ngIf="buildings.length == 0">
+      <p>Please enter the invitation code sent to you via text message</p>
+      <ion-item item-content class="tenant-home">
+        <ion-input type="number" [(ngModel)]="varificationCode"  placeholder="Invitation Code" item-content></ion-input>
+      </ion-item>
+      <button ion-button text-capitalize (click)="onVerify()" class="tenant-home-button">Submit Code</button>
+      
+      <p>If you have not yet receieved an invitation code from your landlord, request one below:</p>
+      <ion-item item-content class="tenant-home">
+        <ion-input type="number" placeholder="Landlord Phone#" item-content></ion-input>
+      </ion-item>
+      <button ion-button text-capitalize class="tenant-home-button">Request Code from Landlord</button>
+      <!-- <img src="../../assets/icon/no-data.png" alt="image"> -->
+    </div>
+    <div *ngFor="let building of buildings">
+      <ion-row *ngFor="let build of building" (click)="apartmentPreview(build)" id="{{build.id}}">
+        <ion-col col-7>
+          <h5>{{ build.name }}</h5>
+          <span>{{ build.address }}</span>
+        </ion-col>
+        <ion-col col-5>
+          <button type="button" [ngClass]="{'btn-warning': build.status == 'Partially', 'btn-success': build.status == 'Paid', 'btn-danger': build.status == 'Unpaid'}">{{ build.status }}</button>
+        </ion-col>
+      </ion-row>
+    </div>
+  </ion-grid>
+
+</ion-content>

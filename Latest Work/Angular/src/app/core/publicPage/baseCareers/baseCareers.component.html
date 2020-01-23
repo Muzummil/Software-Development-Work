@@ -1,0 +1,408 @@
+<div class="career-landing" [class.arabic] = "accountService.isArabic()">
+<!-- ================================= -->
+<!-- banner -->
+
+<section class="banner-career">
+
+    <!-- banner content -->
+    <div class="banner-content-ats">
+        <div class="container">
+            <h1>{{fixedTextHash['join_zamil'][currLan]}}</h1>
+            <p>{{fixedTextHash['join_zamil_message'][currLan]}}</p>
+            <button [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/jobs']">{{fixedTextHash['explore_roles'][currLan]}}</button>
+            
+        </div>
+    </div>
+</section>
+
+<!-- value section -->
+<!-- ================================= -->
+<section class="valuats">
+    <div class="container">
+        <div class="value arabic-right-left">
+            <h2>{{fixedTextHash['our_core_values'][currLan]}}</h2>
+            <p>{{fixedTextHash['core_values_desc'][currLan]}}</p>
+            <!-- <a href="http://zamil.com/our-core-values.html">More</a> -->
+        </div>
+        <div class="hr arabic-right-left">
+            <h2>{{fixedTextHash['hr_overview'][currLan]}}</h2>
+            <p>{{fixedTextHash['hr_overview_desc'][currLan]}}</p>
+            <!-- <a href="#">More</a> -->
+        </div>
+    </div>
+</section>
+
+<!-- slider -->
+<!-- ================================= -->
+<section class="slider-ats">
+        <!-- slider English -->
+        <!-- ================================= -->
+        <div *ngIf="!accountService.isArabic()" class="container englislogos">
+                <h2>{{fixedTextHash['our_companies'][currLan]}}</h2>
+                    <div class="MultiCarousel" data-items="1,3,5,6" data-slide="1" id="MultiCarousel"  data-interval="1000">
+                        <div class="MultiCarousel-inner">
+                            <div class="item">
+                                <div class="pad15">
+                                   <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/1.svg"></i>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/2.svg"></i>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/3.svg"></i>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/4.svg"></i>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/5.svg"></i>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="pad15">
+                                     <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/6.svg"></i>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/7.svg"></i>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/8.svg"></i>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/9.svg"></i>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/10.svg"></i>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/11.svg"></i>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/12.svg"></i>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/13.svg"></i>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/14.svg"></i>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/15.svg"></i>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/16.svg"></i>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/17.svg"></i>
+                                </div>
+                            </div>
+
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/18.svg"></i>
+                                </div>
+                            </div>
+
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/19.svg"></i>
+                                </div>
+                            </div>
+
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/20.svg"></i>
+                                </div>
+                            </div>
+
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/21.svg"></i>
+                                </div>
+                            </div>
+
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/22.svg"></i>
+                                </div>
+                            </div>
+
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/23.svg"></i>
+                                </div>
+                            </div>
+
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/24.svg"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary leftLst"><b class="zmdi zmdi-chevron-left"></b></button>
+                        <button class="btn btn-primary rightLst"><b class="zmdi zmdi-chevron-right"></b></button>
+                    </div>
+        </div>
+        <!-- slider Arabic -->
+        <!-- ================================= -->
+        <div *ngIf="accountService.isArabic()" class="container arabiclogos">
+                <h2>{{fixedTextHash['our_companies'][currLan]}}</h2>
+                    <div class="MultiCarousel" data-items="1,3,5,6" data-slide="1" id="MultiCarousel"  data-interval="1000">
+                        <div class="MultiCarousel-inner">
+                            <div class="item">
+                                <div class="pad15">
+                                   <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/1-ar.svg"></i>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/2-ar.svg"></i>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/3-ar.svg"></i>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/4-ar.svg"></i>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/5-ar.svg"></i>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="pad15">
+                                     <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/6-ar.svg"></i>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/7-ar.svg"></i>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/8-ar.svg"></i>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/9-ar.svg"></i>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/10-ar.svg"></i>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/11-ar.svg"></i>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/12-ar.svg"></i>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/13-ar.svg"></i>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/14-ar.svg"></i>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/15-ar.svg"></i>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/16-ar.svg"></i>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="pad15">
+                                    <i><img src="../../../../assets/images/custom-images/ATS/Logo-zamil/17-ar.svg"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary leftLst"><b class="zmdi zmdi-chevron-left"></b></button>
+                        <button class="btn btn-primary rightLst"><b class="zmdi zmdi-chevron-right"></b></button>
+                    </div>
+        </div>
+</section>
+
+
+
+<!-- all jobs -->
+<!-- ================================= -->
+<section class="alljobsAts">
+    <div class="container">
+        <h2>{{fixedTextHash['available_jobs'][currLan]}}</h2>
+        <!-- list 1-->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" *ngFor="let selJob of (jobList$ | async),let jobcount =index;" >
+            <div class="listjobpostats">
+                <div  class="col-lg-7 col-md-7 col-sm-12 col-xs-12 arabic-right-left">
+                    <!-- picture -->
+                    <div *ngIf="!selJob?.branch?.avatar"  class="atsCompany">
+                        <img  src="/assets/images/custom-images/logo2.svg" alt="avatar">
+                    </div>
+                    <span *ngIf="selJob?.branch?.avatar"  class="atsCompany">
+                        <img [src]="selJob?.branch?.avatar">
+                    </span>
+
+                    <h3 class="cursor_pointer1" [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/'+accountService.getSpaceToDashLowerCase(selJob.countryCountry)+'/jobs/' +
+                    accountService.getSpaceToDashLowerCase(selJob.city)+'/'+accountService.getSpaceToDashLowerCase(selJob.sector)+'/'+accountService.getSpaceToDashLowerCase(selJob.title)+'-'+selJob.id]">{{selJob.title}}</h3>
+                    <ul>
+                        <li *ngIf="selJob?.branch?.name">{{selJob?.branch?.name}}</li>
+                        <li *ngIf="!selJob?.branch?.name">{{selJob?.companyObj?.name}}</li>
+                        <li>
+                            <div class="inline">{{selJob.sector}}</div>&nbsp;<div class="arabic-right-left sp-arabic-sm inline">{{fixedTextHash['sector_word_in_job_list'][currLan]}}&nbsp;</div>
+                        </li>
+                        <li>{{selJob.city}}{{fixedTextHash['comma'][currLan]}} {{selJob.countryCountry}}</li>
+                        <li>{{fixedTextHash['job_posted_on'][currLan]}}<span>&nbsp;{{accountService.getFormattedDate(selJob.createdDate, 'MMM DD, YYYY')}}</span></li>
+                    </ul>
+                    <button [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/login']">{{fixedTextHash['apply_now'][currLan]}}</button>
+                    <button class="reverse-bt-ats" [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/'+accountService.getSpaceToDashLowerCase(selJob.countryCountry)+'/jobs/' +
+                    accountService.getSpaceToDashLowerCase(selJob.city)+'/'+accountService.getSpaceToDashLowerCase(selJob.sector)+'/'+accountService.getSpaceToDashLowerCase(selJob.title)+'-'+selJob.id]">
+                        {{fixedTextHash['details'][currLan]}}
+                    </button>
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 arabic-right-left">
+                    <div [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/login']" class="cursor_pointer1 bx-ats-half arabic-right-left">
+                        <i>?</i>
+                        <span>{{fixedTextHash['count_applications'][currLan]}}</span>
+                    </div>
+                    <div [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/login']" class="cursor_pointer1 bx-ats-half border-none arabic-right-left">
+                        <i>?</i>
+                        <span>{{fixedTextHash['matching_percentage'][currLan]}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <a class="cursor_pointer1" [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/jobs']">{{fixedTextHash['view_all_jobs'][currLan]}}</a>
+    </div>
+</section>
+
+<!-- video bg -->
+<!-- ================================= -->
+<section class="videobgats">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left">
+        <div class="text-video-ats">
+            <h2>{{fixedTextHash['life_at_zamil'][currLan]}}</h2>
+            <h3 [innerHTML]="fixedTextHash['together_build_message'][currLan]" ></h3>
+            <button><i class="zmdi zmdi-play"></i>{{fixedTextHash['watch_video'][currLan]}}</button>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 image arabic-right-left"></div>
+</section>
+
+<!-- Hiring Process -->
+<!-- ================================= -->
+<section class="hiringprocessats">
+    <div class="container">
+        <h2>{{fixedTextHash['hiring_process'][currLan]}}</h2>
+        <!-- p -->
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 arabic-right-left">
+        <div class="box-pro-ats">
+            <h3>{{currLan == 'en' ? 1 : '١' }}</h3>
+            <i><img src="../../../../assets/images/custom-images/ATS/s1.svg"></i>
+            <span>{{fixedTextHash['application'][currLan]}}</span>
+        </div>
+        </div>
+        <!-- p -->
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 arabic-right-left">
+            <div class="box-pro-ats">
+                <h3>{{currLan == 'en' ? 2 : '٢' }}</h3>
+                <i><img src="../../../../assets/images/custom-images/ATS/s2.svg"></i>
+                <span>{{fixedTextHash['initial_interview'][currLan]}}</span>
+            </div>
+        </div>
+            <!-- p -->
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 arabic-right-left">
+            <div class="box-pro-ats">
+                <h3>{{currLan == 'en' ? 3 : '٣' }}</h3>
+                <i><img src="../../../../assets/images/custom-images/ATS/s3.svg"></i>
+                <span>{{fixedTextHash['final_interview'][currLan]}}</span>
+            </div>
+        </div>
+            <!-- p -->
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 arabic-right-left">
+            <div class="box-pro-ats">
+                <h3>{{currLan == 'en' ? 4 : '٤' }}</h3>
+                <i><img src="../../../../assets/images/custom-images/ATS/s4.svg"></i>
+                <span>{{fixedTextHash['assessment'][currLan]}}</span>
+            </div>
+        </div>
+            <!-- p -->
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 arabic-right-left">
+            <div class="box-pro-ats">
+                <h3>{{currLan == 'en' ? 5 : '٥' }}</h3>
+                <i><img src="../../../../assets/images/custom-images/ATS/s5.svg"></i>
+                <span>{{fixedTextHash['decision'][currLan]}}</span>
+            </div>
+        </div>
+            <!-- p -->
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 arabic-right-left">
+            <div class="box-pro-ats">
+                <h3>{{currLan == 'en' ? 6 : '٦' }}</h3>
+                <i><img src="../../../../assets/images/custom-images/ATS/s6.svg"></i>
+                <span>{{fixedTextHash['offer'][currLan]}}</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Questions about joining Zamil Group? -->
+<!-- ================================= -->
+<section class="questions">
+    <div class="container">
+        <i><img src="../../../../assets/images/custom-images/ATS/lightbulb.svg"></i>
+        <h2>{{fixedTextHash['question_about_joining'][currLan]}}</h2>
+        <a  class="cursor_pointer1" href="http://www.zamil.com/feedback.html" target="_blank">
+            <p [innerHTML]="fixedTextHash['faq_questions'][currLan]"></p></a>
+    </div>
+</section>
+
+<!-- ================================= -->
+</div>

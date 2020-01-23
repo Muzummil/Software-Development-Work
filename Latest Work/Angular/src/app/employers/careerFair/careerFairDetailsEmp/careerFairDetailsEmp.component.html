@@ -1,0 +1,190 @@
+<div [class.arabic]="accountService.isArabic()">
+    <div class="container career-fair">
+        <!-- spinner -->
+        <div *ngIf="showSpinner" class="career-empty">
+            <div>
+                <spinner></spinner>
+            </div>
+        </div>
+
+
+        <!-- CAREE DETAILS -->
+        <ng-container *ngIf="!showSpinner">
+            <div class="career-fair-loop">
+
+                <!-- LOGO OF CAREER FARE -->
+                <div class="box-career-logo arabic-right-left">
+                    <img *ngIf="selCareerFair?.logo_image" src="{{selCareerFair?.logo_image}}">
+                    <i *ngIf="!selCareerFair?.logo_image" class="zmdi zmdi-image-o"></i>
+                </div>
+                <div class="box-career-code arabic-right-left hidden-lg hidden-md">
+                    <button (click)="goBack()">{{fixedTextHash['back'][currLan]}}</button>
+                </div>
+
+                <!-- DETAILS OF CAREER FARE -->
+                <div class="box-career-details arabic-right-left">
+                    <ul>
+                        <li><strong>{{selCareerFair?.title}}</strong></li>
+                        <li>{{selCareerFair?.city?.name}}</li>
+                        <li>{{selCareerFair?.country?.name}}</li>
+                        <li>{{selCareerFair?.address}}</li>
+                        <li *ngIf="selCareerFair?.gender == 'any'">{{fixedTextHash['for_both_males_and_females'][currLan]}}</li>
+                        <li *ngIf="selCareerFair?.gender == 'male'">{{fixedTextHash['for_males'][currLan]}}</li>
+                        <li *ngIf="selCareerFair?.gender == 'female'">{{fixedTextHash['for_females'][currLan]}}</li>
+                        <li>{{fixedTextHash['start_date'][currLan]}}:
+                            {{accountService.getFormattedDate(selCareerFair?.from, 'MMM DD, YYYY')}} |
+                            {{fixedTextHash['end_date'][currLan]}}:
+                            {{accountService.getFormattedDate(selCareerFair?.to, 'MMM DD, YYYY')}}</li>
+
+                    </ul>
+                    <button
+                        [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/career-fairs/'+selCareerFair?.id+'/edit']"
+                        class="primary-btn float-left-detail-only">
+                        {{fixedTextHash['edit'][currLan]}}
+                    </button>
+                    <button data-toggle="modal" data-target="#deletefair" class="career_delete">
+                        <i _ngcontent-c4="" class="zmdi zmdi-delete"></i>
+                    </button>
+                </div>
+
+                <!-- CODE OF CAREER FARE DESKTOP ONLY-->
+                <div class="box-career-code arabic-right-left hidden-xs hidden-sm">
+                    <button (click)="goBack()">{{fixedTextHash["back"][currLan]}}</button>
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+        </ng-container>
+    </div>
+
+
+    <div class="container">
+        <h2 class="alllist-title-career">{{fixedTextHash["career_fair_applicants"][currLan]}}</h2>
+        <!-- no record -->
+        <div *ngIf="!showSpinner && !(gotApplicants$ | async)">
+            <div class="empty-prf career-empty">
+                <div>
+                    <i class="icon-empty-user"></i>
+                    <h5>{{fixedTextHash['no_applicant'][currLan]}}</h5>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- list of applicants -->
+        <div *ngIf="!showSpinner && (gotApplicants$ | async)">
+            <!-- list of canidate -->
+
+            <div class="table-responsive">
+                    <table class="table table-striped">
+                    <thead class="table_head">
+                        <tr>
+                            <th>{{fixedTextHash['full_name'][currLan]}}</th>
+                            <th>{{fixedTextHash['email_word'][currLan]}}</th>
+                            <th>{{fixedTextHash['mobile'][currLan]}}</th>
+                            <th>{{fixedTextHash['nationality'][currLan]}}</th>
+                            <th>{{fixedTextHash['gender'][currLan]}}</th>
+                            <th>{{fixedTextHash['date_birth'][currLan]}}</th>
+                            <th>{{fixedTextHash['level_experience'][currLan]}}</th>
+                            <th>{{fixedTextHash['education_level'][currLan]}}</th>
+                            <th>{{fixedTextHash['study'][currLan]}}</th>
+                            <th>{{fixedTextHash['registration_date'][currLan]}}</th>
+                            <th>{{fixedTextHash['status'][currLan]}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let selApplicant of careerFairApplicants">
+                            <td><a *ngIf="selApplicant?.jobseeker?.complete_step >= 3" [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/candidate/'+selApplicant.jobseeker?.user_id+'/'+this.accountService.getSpaceToDash(selApplicant.jobseeker?.first_name+' '+selApplicant.jobseeker?.last_name)+'/profile']"
+                                target="_blank">
+                                {{selApplicant.jobseeker?.first_name}}&nbsp;{{selApplicant.jobseeker?.last_name}}
+                                </a>
+                                <a class="no-link" *ngIf="selApplicant?.jobseeker?.complete_step < 3">{{selApplicant.jobseeker?.first_name}}&nbsp;{{selApplicant.jobseeker?.last_name}}</a>
+                            </td>
+                            <td>{{selApplicant.jobseeker?.user?.email}}</td>
+                            <td class="arbic_phone_number">{{selApplicant.jobseeker?.mobile_phone}}</td>
+                            <td>{{selApplicant.jobseeker?.nationality?.name}}</td>
+                            <td>{{genderObject[selApplicant.jobseeker?.user?.gender]}}</td>
+                            <td>{{accountService.getFormattedDate(selApplicant.jobseeker?.user?.birthday, 'MMM DD, YYYY')}}</td>
+                            <td>{{selApplicant.jobseeker?.job_experience_level?.name}}</td>
+                            <td>{{selApplicant.jobseeker?.job_education?.name}}</td>
+                            <td>{{selApplicant.jobseeker?.jobseeker_educations[selApplicant.jobseeker?.jobseeker_educations.length-1]?.field_of_study}}</td>
+                            <td>{{accountService.getFormattedDate(selApplicant?.applied_date, 'MMM DD, YYYY')}}</td>
+                            <td *ngIf="selApplicant?.jobseeker?.complete_step >= 3" class="st_active">{{fixedTextHash['completed'][currLan]}}</td>
+                            <td *ngIf="selApplicant?.jobseeker?.complete_step < 3" class="st_uncompleted">{{fixedTextHash['incompleted'][currLan]}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
+                <pagination-new [url]="url" [totalRecords]="totalApplicants$">
+                </pagination-new>
+            </div>
+
+
+            <!--Delettabindexe CareerFair-->
+
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<!-- test -->
+<!-- Modal -->
+
+
+
+
+<!--Delete Pop up-->
+<div class="popup">
+    <div class="logout-pop">
+        <div class="modal close_delete" id="deletefair" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <div *ngIf="!(deletionSuccess$ | async) && !(deletionError$ | async) && !(deletionSpinner$ | async)"
+                        class="modal-body">
+                        <button class="close following" aria-hidden="true" data-dismiss="modal" type="button">×
+                        </button>
+                        <h2>{{fixedTextHash['delete_careerfair'][currLan]}}</h2>
+
+                        <h4><span class="navy"> {{fixedTextHash['sure_delete'][currLan]}}</span>
+                        </h4>
+                        <div class="pop-button">
+                            <button (click)="deleteFair()" type="button" class="btn postive">
+                                {{fixedTextHash['yes'][currLan]}}
+                            </button>
+                            <button type="button" class="btn negative" data-dismiss="modal">
+                                {{fixedTextHash['no'][currLan]}}
+                            </button>
+                            <div class="clr"></div>
+                        </div>
+                    </div>
+
+                    <!-- deletion success -->
+                    <div *ngIf="(deletionSuccess$ | async) && !(deletionSpinner$ | async)" class="modal-body">
+                        <button class="close following" aria-hidden="true" data-dismiss="modal" type="button">×
+                        </button>
+                        <h4><span class="navy"> {{fixedTextHash['deleted'][currLan]}}</span></h4>
+                    </div>
+
+                    <!-- deletion error -->
+                    <div *ngIf="(deletionError$ | async) && !(deletionSpinner$ | async)" class="modal-body">
+                        <button class="close following" aria-hidden="true" data-dismiss="modal" type="button">×
+                        </button>
+                        <h4><span class="navy"> {{fixedTextHash['delete_fair_error'][currLan]}}</span></h4>
+                    </div>
+
+                    <!-- deletion spinner -->
+                    <div *ngIf="!(deletionSuccess$ | async) && !(deletionError$ | async) && (deletionSpinner$ | async)"
+                        class="modal-body">
+                        <spinner [visible]="(deletionSpinner$ | async)"></spinner>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

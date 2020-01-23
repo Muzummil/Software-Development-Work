@@ -1,0 +1,31 @@
+<div  class="new-drop-down" (mouseleave)="mouseLeave()">
+<form [formGroup]="formAuto" >
+    <input type="text"
+           formControlName="search_string"
+           #autocomp
+           autocomplete="off" minlength="1" maxlength="50"
+           (click)="activateSearch()"
+           (keydown)="inputEvent($event)"
+           (keyup)="inputEvent($event, true)"
+           (data)="refreshValue($event)"
+           (selected)="selected($event)"
+           (removed)="removed($event)"
+           (typed)="typed($event)"
+           [attr.placeholder]="placeholder"
+           [class.error-feild]="error">
+            <span *ngIf="showCaret == true" class="caret"></span>
+</form>
+
+<!--dropdown-menu-->
+<ul class="autocomplete_v2"  [class.hide]="hideList" [class.dropdown-menu]="showTopDrop">
+    <li *ngFor="let selItem of (items$ | async),let selIndex = index"
+        [class.active-auto-v2]="(items$ | async)?.length == 0"
+        [class.active-auto-v2]="autocomp.value == selItem?.text"
+        class="option-{{selIndex}}"
+        (click)="autocomp.value=selItem.text;selected(selItem)"
+    >
+        {{selItem?.text}}
+    </li>
+</ul>
+
+</div>

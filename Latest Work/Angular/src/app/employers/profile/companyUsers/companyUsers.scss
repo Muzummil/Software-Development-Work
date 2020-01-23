@@ -1,0 +1,75 @@
+@import '../../../../styles/sass/base/_variables.scss';
+
+
+input:-webkit-autofill {
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
+}
+
+h1, h2, h3, h4, h5, span, label, a, button, p{
+    font-family: $primary-Fonts;
+}
+
+.arabic{
+    h1, h2, h3, h4, h5, span, label, a, button, p, input, .cmpny-txt{
+       font-family: $arabic-primary-Fonts!important;
+    }
+}
+.user-window{
+    min-height: 768px;
+}
+
+.block{
+    border:1px solid $light-border;
+    border-radius: $border-radius;
+  }
+  
+  .block-contant{
+      padding: 10px;
+  }
+  .block-title-2,  .block-title{
+      padding: 10px;
+      h2{
+          color: $primarycolor;
+      }
+  }
+  
+
+.block{
+    padding: 10px;
+}
+
+.block-title-2{
+    button{
+        height: $button-height;
+        border:1px solid $light-border;
+        background: $bg;
+        color: $primarycolor;
+        border-radius: $border-radius;
+        padding: 0px 20px;
+    }
+    .cancel{
+        button{
+            background: $primarycolor;
+            color: $bg;
+        }
+    }
+}
+
+.user-section{
+    
+    button{
+        height: $button-height;
+        border-radius: $border-radius;
+    }
+}
+.user-bk{
+    box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.05);
+}
+
+.arabic{
+    .user-section .block-title-2 span{
+        float: right;
+        margin-left: 10px;
+    }
+}

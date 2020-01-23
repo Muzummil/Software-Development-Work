@@ -1,0 +1,19 @@
+page-home,
+.home{
+  .searchbar-has-value.searchbar-has-focus .searchbar-clear-icon {display: none;}
+  ion-navbar[hidebackbutton] button[menutoggle] {display: block !important;}
+
+  ion-searchbar input{
+    border-radius: 40px !important;
+  }
+  ion-searchbar{
+  background: #ccc !important;
+}
+  .home-card{
+    background: skyblue;
+    border-radius: 0;
+    margin: 0;
+    text-align: center;
+    width: 100%;
+  }
+}

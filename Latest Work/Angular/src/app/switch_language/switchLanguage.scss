@@ -1,0 +1,55 @@
+@import '../../styles/sass/base/_variables.scss';
+.arabic-text{
+    right: 0px;
+    position: absolute;
+    color: $primarycolor;
+    font-family: $arabic-primary-Fonts;
+    top: 30px;
+}
+
+.arabic{
+    .english-text-v5{
+        left:0px!important;
+        text-align: left;
+        top: 30px;
+    }
+}
+
+
+
+// ============MediumScreen========
+   @media all and (max-width: 768px) {
+
+    .arabic-text{
+        top: -89px;
+        left:45%!important;
+    }
+
+    .arabic{
+        .english-text-v5{
+            left:45%!important;
+            text-align: left;
+            top: -105px;
+        }
+    }
+    
+   }
+   
+   // ============SmallScreen=========
+   @media all and (max-width: 480px) {
+   
+    .arabic-text{
+        top: -89px;
+        right: 45%;
+    }
+
+    .arabic{
+        .english-text-v5{
+            left:45%!important;
+            text-align: left;
+            top: -105px;
+            left: 45%;
+        }
+    }
+      
+    }

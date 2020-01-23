@@ -1,0 +1,445 @@
+@import '../../../../styles/sass/base/_variables.scss';
+input:-webkit-autofill {
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
+}
+
+h1, h2, h3, h4, h5, span, label, a, button, p{
+    font-family: $primary-Fonts;
+}
+
+.arabic{
+    h1, h2, h3, h4, h5, span, label, a, button, p, input, .cmpny-txt{
+       font-family: $arabic-primary-Fonts!important;
+    }
+ 
+}
+
+.block .block-title-2 h2{
+    padding: 10px 0px!important;
+    h2{
+        line-height: 40px;
+    }
+}
+
+.brg-lgt{
+    border-bottom:solid 5px $secondarycolor;
+    .post{
+        i{
+        color: $primarycolor;
+            display: block;
+            padding-bottom: 10px;
+        }
+    }
+    .done{
+        margin-bottom:-20px;
+        i{ color: $secondarycolor;
+            background:$white;
+            border-radius:50%;
+            height: 25px; }
+    }
+        h3{ color:$primarycolor}
+}
+
+.block .block-title-2{
+    button{
+        float: right;
+    }
+}
+.box-set{
+    float: right;
+    width: 100%;
+    label{
+        color: $secondarycolor;
+    }
+}
+.job-status{
+    padding:0px 15px;;
+     .radio{ display: inline-block;
+        padding-top:0px;
+        margin-left:15px;
+        line-height: 16px;
+    }
+    h3{
+        font-size:$normal-font;
+        color:$primarycolor;
+        margin-top:13px;
+        margin-bottom: 0px;
+    }
+}
+
+.refine-serch{
+    float: left;
+    width: 100%;
+    border-bottom:1px solid $light-border!important;
+    padding: 10px 0px!important; 
+}
+.jobs-employer{
+    border:1px solid $light-border
+}
+.dim-lgt{
+    border-bottom:solid 5px $bg-default;
+    i{ color:  $bg-default}
+    h3{ color:  $secondarycolor}
+}
+.blu-bg{
+    background:$bg-default;
+    padding: 0px 10px;
+}
+
+#post-job{
+    .half-box-post{
+        text-align: left;
+        .light{color: $primarycolor}
+    }
+    .full-box-post{
+        .light{color: $primarycolor}
+    }
+    .radio{
+        color: $secondarycolor;
+    }
+    .clicks .radio-primary input[type="radio"]:checked + label::before{
+        color: $primarycolor;
+    }
+    
+}
+.devider-jb{
+    display: block;
+    width: 100%;
+    float: left;
+}
+
+// tag-section
+.tag-secton{
+    .dropdown-menu{
+    height: 100px!important;
+   }
+    .tagss{
+        height: auto;
+        display: inline-table;
+        margin-right: 3px;
+        margin-bottom: 5px;
+        padding-bottom:5px;
+        margin-top: 7px;
+        .tag-main{
+            border:solid $boredr-color 1px;
+            padding: 8px 10px;
+            padding-left: 0px;
+            border-radius: $border-radius;
+            .hash{
+                background:$primarycolor;
+                color:$white;
+                padding: 9px 13px;
+                border-radius: $border-radius;
+            }
+            .hash1{
+                background:$white;
+                color:$primarycolor;
+                padding: 10px 13px;
+                border-right:solid 1px $boredr-color;
+            }
+            .tag-txt{
+                color: $secondarycolor;
+                padding: 0px 10px;
+                text-transform: capitalize;
+            }
+        }
+    }
+    .light{
+        color: $secondarycolor;
+        i {
+            color:$primarycolor;
+        }
+    }
+    input{
+        padding: 8px 10px!important;
+        color: $secondarycolor!important
+    }
+    div.tagsinput {
+        padding:0px 0px;
+        width:100%;
+        overflow-y: auto;
+    }
+    div.tagsinput span.tag {
+        border: 1px solid $boredr-color;
+        margin-right: 5px; margin-bottom:5px;
+        display: block;
+        float: left;
+        text-decoration:none;
+        height: $button-height;
+        background:$white;
+        color:$secondarycolor;
+        font-size:16px;
+        padding: 0px;
+        padding-right:0px;
+    }
+
+    div.tagsinput span.tag a {
+        font-weight: bold;
+        padding: 13px 15px;
+        border-left: solid 1px $boredr-color;
+        top: 0px;
+        line-height: $button-height;
+        color: $primarycolor;
+        text-decoration:none;
+        font-size: 11px
+    }
+    div.tagsinput input {
+        width:80px;
+        margin:0px;
+        font-size: 13px;
+        border:1px solid transparent;
+        padding:5px;
+        background: transparent;
+        color: #000;
+        outline:0px;
+        margin-right:5px;
+        margin-bottom:5px;
+    }
+    div.tagsinput div {
+        display:block;
+        float:left
+    }
+    .tags_clear {
+        clear: both;
+        width: 100%;
+        height: 0px
+    }
+    .not_valid {
+        background: #FBD8DB !important;
+        color: #90111A !important}
+}
+
+.tag-new{
+    display:inline-block;
+    background:$white;
+    float:left;
+    border: solid 1px $boredr-color;
+    padding:0px;
+    height: $button-height;
+    margin-right:5px;
+    position:relative;
+    margin-bottom: 5px;
+    border-radius: $border-radius;
+    input{font-size: 14px !important;}
+    span { box-shadow: none}
+    .txt{
+        border-right: solid 1px $boredr-color;
+        display:inline-block;
+        line-height:$button-height!important;
+        padding:0 15px;
+        color: $primarycolor!important;
+        padding-bottom:0px !important;
+    }
+    .close-tag{
+        display:inline-block;
+        color: $primarycolor;
+        padding:0px 8px 8px 5px;
+    }
+    .close-tag:hover{
+        color: $secondarycolor;
+    }
+}
+
+.benafit-box:hover{
+    background:$primarycolor;
+    cursor: pointer;
+    p{ color: $white!important }
+    .ben-icn{
+        background:none !important;
+        i{
+            color: $white !important;
+        }
+    }
+}
+.benafit-box-active{
+  background:$primarycolor;
+  cursor: pointer;
+  p{ color: $white!important }
+  .ben-icn{
+      background:none !important;
+      i{
+          color: $white !important;
+      }
+  }
+}
+.benefits{
+    .benafit-box{
+        float: left;
+        width: 14.2857%;
+        text-align: center;
+        padding: 10px 0px;
+        height: 130px;
+    }
+}
+.benefits{
+
+    .benafit-box{
+        float: left;
+	    width: 13.7%;
+	    text-align: center;
+	    padding: 20px 5px;
+	    border: 1px solid $light-border;
+	    margin-top: 3px;
+	    margin-left: 3px;
+	    margin-right: 3px;
+        border-radius:$border-radius;
+        min-height: 152px;
+
+         p{ margin-top:0px;
+            color:$text-normal-color;
+         }
+     }
+     .ben-icn{
+        background:$bg;
+        width: 75px;
+        height: 30px;
+        border-radius:50%;
+        margin: 0 auto;
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+           i{ font-size:30px;
+               color:$primarycolor;
+           }
+     }
+}
+
+.filter_sub{
+    line-height: 25px!important;
+}
+
+// ARABIC
+// ============================
+.arabic{
+   .tag-new{
+        float: right!important;
+        width: auto;
+        height: 42px;
+        .txt{
+            border-right: none;
+            border-left: 1px solid $light-border;
+        }
+    }
+    .tag-main{
+        padding: 8px 0px!important;
+    }
+    #post-job .half-box-post label{
+        text-align: right!important;
+    }
+    #post-job .half-box-post{
+        text-align: right!important;
+    }
+    #post-job .half-box-post .light{
+        text-align: right!important;
+    }
+    .full-box .light{
+        text-align: right!important;
+    }
+    .arabic-right-left{
+        .light{
+            text-align: right!important;
+        }
+    }
+    .boxformcompanyats .caret{
+        left: 15px !important;
+        right: inherit;
+    }
+    .avatar-job-add{
+        margin-right: 0px;
+        margin-left: 10px;
+    }
+    
+}
+.draft-bt{
+    background-color: $primarycolor!important;
+}
+#emp-jobs{
+    margin: 0px auto;
+    width: 570px;
+    padding-bottom: 20px;
+    text-align: center;
+    button{
+        background:#1abc9c;
+        color:$white;
+        border:none;
+        font-size:$normal-font;
+        height: $button-height;
+        line-height: $button-height;
+        padding:0px 90px;
+        margin: 0px 0px 20px 0px;
+        border-radius: $border-radius;
+    }
+    button:hover{
+        opacity:0.76
+    }
+}
+
+.avatar-job-add{
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border:1px solid $light-border;
+    float: left;
+    margin-right: 10px;
+    img{
+        width: 100%;
+        height: 100px;
+        object-fit: contain;
+    }
+}
+.boxformcompanyats{
+    width: calc(40% - 110px);
+    float: left;
+    margin-top: 60px;
+}
+
+.press-add{
+    float: left;
+    line-height: 0px;
+    width: 100%;
+    color: #999;
+}
+
+
+
+// =======================================================
+@media (max-width: 991px) {
+    .boxformcompanyats{
+        width: calc(100% - 110px);
+        float: left;
+        margin-top: 60px;
+    }
+    .arabic{
+        .ar-mar-rgt-0{
+            margin-right: 0px !important;
+        }
+        .ar-p-0{
+            padding: 0px !important;
+        }
+        .ar-txt-rgt{
+            text-align: right !important;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    #emp-jobs{
+        width: 270px;
+        button{
+            padding:0px 18px;
+        }
+        .requr-full{
+            float: right;
+            margin-right: 0px;
+        }
+    }
+}
+@media (max-width: 480px) {
+    #emp-jobs{
+        width: 270px;
+        button{
+            padding:0px 18px;
+        }
+    }
+}

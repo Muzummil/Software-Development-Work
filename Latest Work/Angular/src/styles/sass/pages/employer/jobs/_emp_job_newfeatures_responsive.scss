@@ -1,0 +1,153 @@
+
+/*---------------------------------------------------1-------------------------------------------------------*/
+
+@media (max-width: 1200px){
+}
+
+/*---------------------------------------------------2-------------------------------------------------------*/
+
+@media (min-width: 768px) and (max-width: 1024px){
+
+
+  .jobapplicant .new-list .newlist-experience{
+    width: 100%;
+  }
+  .jobapplicant .new-list .newlist-experience .exp-box{
+    width: 50%;
+    float: left;
+  }
+
+}
+
+
+// ===========================================
+@media all and (max-width: 991px) {
+
+    .jobapplicant .new-list .newlist-experience{
+        width: 100%;
+    }
+    .jobapplicant .new-list .newlist-experience .exp-box{
+        width: 50%;
+        float: left;
+    }
+}
+
+/*---------------------------------------------------3-------------------------------------------------------*/
+@media (max-width: 767px) {
+
+    .jobapplicant{
+        .jobapp-top-10{ margin-top:0px; }
+         .right-bx{ width:100%!important;}
+         .left-bx{ width: 100%!important}
+         .block{
+         .block-title-2{
+            h2{ padding-bottom:5px;}
+            .btn-jobapplicant{ background:#95B0BE;  width: calc(100% - 69px); }
+            .btn-jobapplicant-back{ width:64px;}
+        }
+        }
+
+
+.new-list{
+    padding:5px;
+    .newlistleft{width: 100%;
+    // .newlistdp-left{ width:50px; height:50px;}
+    .newlistdp-right{ width: calc(100% - 125px);
+        h2{ padding-bottom:0px; }
+     }
+    }
+    .newlistright{ width:calc(100% - 50%); float:left;
+        .newlist-percentage{ width:100%; float:right;
+            .per-cercle-mob{ width:120px; display:block; margin:0px auto; padding-top:5px;}
+            .hide-inout{ display:none}
+        }
+        .newlist-experience{ width:50%; float:left; padding-top:5px; padding-right:5px;
+            .jobapp-btm-10{  margin-bottom:5px; }
+            .exp-box{ padding:4px 0px; }
+        }
+    }
+    .new-succes, .new-unsucces, .new-reviewed, .new-shortlisted{ padding-bottom:10px; }
+    .hide-bigscreens{ display:block }
+    }
+.newlist{
+    .new-list{
+        .newlistright{
+            .newlist-experience{width:100%;padding-right: 0px; padding-top:8px;
+                .exp-box{ width:49.3%; }
+            }
+            }
+
+}
+    .lft-mob{ float:left}
+        .rgt-mob{ float:right}
+        }
+        .jobapp-btm-10{ margin-bottom:5px;}
+
+}
+
+.jobapplicant .new-list .newlist-experience .exp-box{
+    width: 50%;
+    float: left;
+}
+.jobapplicant .new-list .newlist-experience{
+    width: 100%;
+}
+
+.newlistright{ width:calc(100% - 145px)!important; float:left;
+        .newlist-percentage{ width:100%; float:right;
+            .per-cercle-mob{ width:120px; display:block; margin:0px auto; padding-top:5px;}
+            .hide-inout{ display:none}
+        }
+        .newlist-experience{ width:50%; float:left; padding-top:5px; padding-right:5px;
+            .jobapp-btm-10{  margin-bottom:5px; }
+            .exp-box{ padding:4px 0px; }
+        }
+    }
+
+.job-anlytics-info{
+    .col-lg-2{
+        width:33.33%!important;
+    }
+ }
+ .jobapplicant .left-bx{
+    width: 100%!important;
+ }
+ .jobapplicant .new-list .newlistleft .newlistdp-right .applicant-name-dt{
+    position: relative;
+    h2{
+        text-align: left!important;
+    }
+    ul{
+        position:absolute;
+        right:0px;
+    }
+ }
+
+
+}
+
+/*---------------------------------------------------4-------------------------------------------------------*/
+
+@media (max-width: 480px) {
+
+    .jobapplicant .new-list .newlistleft .newlistdp-left{
+        width: 50%;
+        img{
+            width: 100%;
+        }
+    }
+    .jobapplicant .new-list .newlist-experience{
+        width: 100%;
+    }
+    .newlistright{ width:calc(100% - 50%)!important; float:left;
+        .newlist-percentage{ width:100%; float:right;
+            .per-cercle-mob{ width:120px; display:block; margin:0px auto; padding-top:5px;}
+            .hide-inout{ display:none}
+        }
+        .newlist-experience{ width:50%; float:left; padding-top:5px; padding-right:5px;
+            .jobapp-btm-10{  margin-bottom:5px; }
+            .exp-box{ padding:4px 0px; }
+        }
+    }
+}
+

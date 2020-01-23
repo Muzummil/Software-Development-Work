@@ -1,0 +1,73 @@
+@import '../../../../styles/sass/base/_variables.scss';
+
+
+input:-webkit-autofill {
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
+}
+
+h1, h2, h3, h4, h5, span, label, a, button, p{
+    font-family: $primary-Fonts;
+}
+
+.arabic{
+    h1, h2, h3, h4, h5, span, label, a, button, p, input, .cmpny-txt{
+       font-family: $arabic-primary-Fonts!important;
+    }
+    .add-new-user-forms .box-action h2{
+        float: right;
+    }
+    .add-new-user-forms .box-action-body h4{
+        float: right;
+    }
+    .clicks{
+        float: left;
+    }
+}
+
+.block{
+    border:1px solid $light-border;
+    border-radius: $border-radius;
+  }
+  
+  .block-contant{
+      padding: 10px;
+  }
+  .block-title-2,  .block-title{
+      padding: 10px;
+  }
+  
+
+#new_user{
+    border:1px solid $light-border;
+}
+
+@-webkit-keyframes autofill {
+    to {
+        color: $primary-font;
+        background: transparent;
+    }
+  }
+  
+  input:-webkit-autofill {
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
+  }
+  
+  .arabic{
+    .add-new-user .block-title-2 h2{
+        text-align: right;
+        float: right;
+    }
+    .user-footer button{
+        margin-left: 10px;
+        margin-right: inherit;
+    }
+    .add-new-user-forms .col-lg-4{
+        margin-left: 10px;
+        margin-right: inherit;
+    }
+  }
+  .alert.alert-danger{
+      margin-top: 5px;
+  }

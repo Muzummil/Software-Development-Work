@@ -1,0 +1,29 @@
+<!-- Start Three Step indication header -->
+<!--========================================================================-->
+<div *ngIf="isGotData" class="fal-steps-container" [class.arabic] = "accountService.isArabic()">
+    <h1 *ngIf="step == 1">{{fixedTextHash['personal_info'][currLan]}}</h1>
+    <h1 *ngIf="step == 2 && (jobseekerType!='coops' && jobseekerType!='summer_training')">{{fixedTextHash['professional_info'][currLan]}}</h1>
+    <h1 *ngIf="step == 2 && (jobseekerType=='coops' || jobseekerType=='summer_training')">{{fixedTextHash[jobseekerType][currLan]}}</h1>
+    <h1 *ngIf="step == 3 && (jobseekerType!='coops' && jobseekerType!='summer_training')">{{fixedTextHash['educational_info'][currLan]}}</h1>
+    <h1 *ngIf="step == 4">{{fixedTextHash['visual_info'][currLan]}}</h1>
+    <div class="step-bar" [class.three-step-bar]="jobseekerType=='coops' || jobseekerType=='summer_training'">
+        <div class="bar-stage">
+            <div class="arabic-right-left" [class.active-step]="step >= 2"></div>
+            <div *ngIf="(jobseekerType!='coops' && jobseekerType!='summer_training')" class="arabic-right-left" [class.active-step]="step >= 3"></div>
+            <div class="arabic-right-left" [class.active-step]="step >= 4"></div>
+        </div>
+        <ul class="stats-step">
+            <li><i class="step1l leftfix active-step" [class.active-step]="step >= 1">1</i><span><ng-container *ngIf="currLan == 'en'">{{fixedTextHash['personal'][currLan]}}<br>{{fixedTextHash['information'][currLan]}}</ng-container><ng-container *ngIf="currLan == 'ar'">{{fixedTextHash['personal_info'][currLan]}}</ng-container></span></li>
+            <li *ngIf="(jobseekerType!='coops' && jobseekerType!='summer_training')"><i class="step2l middfix" [class.active-step]="step >= 2">2</i><span><ng-container *ngIf="currLan == 'en'">{{fixedTextHash['professional'][currLan]}}<br>{{fixedTextHash['experience'][currLan]}}</ng-container><ng-container *ngIf="currLan == 'ar'">{{fixedTextHash['professional_info'][currLan]}}</ng-container></span></li>
+            <li *ngIf="(jobseekerType=='coops' || jobseekerType=='summer_training')"><i class="step2l middfix" [class.active-step]="step >= 2">2</i><span><ng-container *ngIf="currLan == 'en'">{{fixedTextHash[firstText][currLan]}}<br>{{fixedTextHash['program'][currLan]}}</ng-container></span></li>
+
+            <li *ngIf="(jobseekerType!='coops' && jobseekerType!='summer_training')"><i class="step3l middfix" [class.active-step]="step >= 3">3</i><span><ng-container *ngIf="currLan == 'en'">{{fixedTextHash['education'][currLan]}}<br>{{fixedTextHash['information'][currLan]}}</ng-container><ng-container *ngIf="currLan == 'ar'">{{fixedTextHash['educational_info'][currLan]}}</ng-container></span></li>
+            <li><i class="step4l rightfix" [class.active-step]="step >= 4">
+                <div *ngIf="(jobseekerType!='coops' && jobseekerType!='summer_training')">4</div>
+                <div *ngIf="(jobseekerType=='coops' || jobseekerType=='summer_training')">3</div>
+            </i><span><ng-container *ngIf="currLan == 'en'">{{fixedTextHash['visual'][currLan]}}<br>{{fixedTextHash['information'][currLan]}}</ng-container><ng-container *ngIf="currLan == 'ar'">{{fixedTextHash['visual_info'][currLan]}}</ng-container></span></li>
+            <div class="clearfix"></div>
+        </ul>
+    </div>
+</div>
+<!-- End Three Step indication header -->

@@ -1,0 +1,63 @@
+<header class="ats-alnding-header">
+    <div class="container">
+        <div class="ats-lan-logo arabic-right-left">
+            <a *ngIf="currLan == 'en'" href="http://www.zamil.com">
+                <img src="../../../../assets/images/custom-images/ATS/logo-lan.svg" class="engli-logo">
+            </a>
+            <a *ngIf="currLan == 'ar'" href="http://www.zamil.com/?lang=ar">
+                <img src="../../../../assets/images/custom-images/ATS/logo-lan-ar.svg" class="arab-logo">
+            </a>
+
+        </div>
+        <div class="ats-lan-action arabic-left-right">
+            <!-- sign in sign up -->
+            <ul>
+                <li class="inner-laguage-ats"><switch-language></switch-language></li>
+                <li *ngIf="hasSignUpChanel" [routerLink]="accountService.getCurrLangUrl()+accountService.getPath()+'signup-jobseeker/channel'">{{fixedTextHash['register'][currLan]}}</li>
+                <li *ngIf="!hasSignUpChanel" [routerLink]="accountService.getCurrLangUrl()+accountService.getPath()+'signup-jobseeker'">{{fixedTextHash['register'][currLan]}}</li>
+                <li [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'login']" class="border-none">{{fixedTextHash['login'][currLan]}}</li>
+            </ul>
+            <!-- saerch -->
+            <div class="searchats">
+                <i class="zmdi zmdi-search cursor_pointer1" (click)="searchFilter(titleSearch.value)"></i>
+                <input type="text"
+                       #titleSearch placeholder="{{fixedTextHash['job_search'][currLan]}}">
+            </div>
+        </div>
+    </div>
+</header>
+<div class="sub-hed-ats">
+        <div class="container">
+            <ul class="desk-menu-ats">
+                <li><a [routerLink]="accountService.getCurrLangUrl()+accountService.getPath()+'/careers'">{{fixedTextHash['careers'][currLan]}}</a></li>
+                <li><a href="http://www.zamil.com/overview.html" target="_blank">{{fixedTextHash['about_us'][currLan]}}</a></li>
+                <li><a href="http://www.zamil.com/chairmans-message.html" target="_blank">{{fixedTextHash['our_stakeholders'][currLan]}}</a></li>
+                <li ><a href="http://www.zamil.com/corporate-responsibility-overview.html" target="_blank">{{fixedTextHash['corporate_responsibility'][currLan]}}</a></li>
+                <li><a href="http://zamil.com/corporate-responsibility-overview.html" target="_blank">{{fixedTextHash['media_center'][currLan]}}</a></li>
+                <li><a href="http://zamil.com/contact-us.html" target="_blank">{{fixedTextHash['contact_us'][currLan]}}</a></li>
+                <li *ngIf="hasCareerFair"><a [routerLink]="accountService.getCurrLangUrl()+accountService.getPath()+'/career-fairs'">{{fixedTextHash['career_fair'][currLan]}}</a></li>
+            </ul>
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light mobile-menu-ats">
+                <div class="full-bar">
+                    <a class="navbar-brand" href="#">{{fixedTextHash['menu'][currLan]}}</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="zmdi zmdi-menu"></i>
+                    </button>
+                </div>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li><a [routerLink]="accountService.getCurrLangUrl()+accountService.getPath()+'/careers'">{{fixedTextHash['careers'][currLan]}}</a></li>
+                        <li><a href="http://www.zamil.com/overview.html" target="_blank">{{fixedTextHash['about_us'][currLan]}}</a></li>
+                        <li><a href="http://www.zamil.com/chairmans-message.html" target="_blank">{{fixedTextHash['our_stakeholders'][currLan]}}</a></li>
+                        <li ><a href="http://www.zamil.com/corporate-responsibility-overview.html" target="_blank">{{fixedTextHash['corporate_responsibility'][currLan]}}</a></li>
+                        <li><a href="http://zamil.com/corporate-responsibility-overview.html" target="_blank">{{fixedTextHash['media_center'][currLan]}}</a></li>
+                        <li><a href="http://zamil.com/contact-us.html" target="_blank">{{fixedTextHash['contact_us'][currLan]}}</a></li>
+                        <li *ngIf="hasCareerFair"><a [routerLink]="accountService.getCurrLangUrl()+accountService.getPath()+'/career-fairs'">{{fixedTextHash['career_fair'][currLan]}}</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+        </div>
+    </div>

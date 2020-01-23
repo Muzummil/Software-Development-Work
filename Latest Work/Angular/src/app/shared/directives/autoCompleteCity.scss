@@ -1,0 +1,28 @@
+@import '../../../styles/sass/base/_variables.scss';
+
+input, select {
+    width: 100%;
+    border: solid 1px $boredr-color;
+    color: $text-normal-color !important;
+    height: $form-height!important;
+    padding: 0px 10px;
+    margin-bottom: 10px;
+    font-size: 14px !important;
+    line-height: $button-height !important;
+    border-radius: $border-radius!important;
+    background-color:$form-bg!important; 
+    background: #000;
+}
+
+.edit input, .edit select{
+    height: $form-height!important;
+}
+
+.error-feild{
+    border:1px solid $unsuccessful!important;
+}
+.arabic{
+    input, select{
+        text-align: right;
+    }
+}

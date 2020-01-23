@@ -1,0 +1,1112 @@
+<div *ngIf="(companyDetails$ | async)?.isPremium || (accountService.getCheckEmployer() && accountService.getAuth())" [class.commen-container-v5]="!isPublic">
+<div class="premium">
+    <!--New Employer Profile-->
+    <!-- ================================================= -->
+    <section class="comapny-profile-bannerv2">
+
+         <!--Mobile Video banner-->
+          <!-- ================================================= -->
+         <div class="hidden-lg hidden-md">
+            <div *ngIf="viewCoverFlag && screenwidth <= tabletScreen" class="banner-c-v2 ">
+                <video #video1 autoplay muted loop id='myVideo'
+                    *ngIf="companyObj?.coverImage && companyObj?.coverType == 'video/mp4'">
+                    <source src="{{companyObj?.coverImage}}" type="video/mp4">
+                    {{fixedTextHash['your_browser_does_not_support_html5'][currLan]}}
+                </video>
+                <div class="company-cover" *ngIf="companyObj?.coverImage && companyObj?.coverType != 'video/mp4'"
+                    [ngStyle]="{'background-image': 'url(' +  companyObj?.coverImage + ')'}">
+                </div>
+
+                <div class="company-cover" *ngIf="!companyObj?.coverImage"
+                    [ngStyle]="{'background-image': 'url(' +  '/assets/images/company_cover.png' + ')'}">
+                </div>
+
+                <div class="content ">
+                    <button id="myBtn" (click)="myFunction('myBtn', 'myVideo')" class="arabic-right-left">
+                        <i *ngIf="companyObj?.coverImage && companyObj?.coverType == 'video/mp4'"
+                        class="zmdi zmdi-pause-circle-outline"></i>
+                    </button>
+                    <button *ngIf="!isPublic && isEmployer" class="video-edit-v2 arabic-right-left" (click)="viewCoverFlag =false">
+                        <i class="zmdi zmdi-edit"></i>&nbsp;{{fixedTextHash['edit'][currLan]}}
+                    </button>
+                </div>
+            </div>
+
+            <!-- banner Edit -->
+            <!-- =========================================== -->
+            <div *ngIf="!viewCoverFlag && !isPublic && isEmployer" class="banner-c-v2 edit-banner ">
+
+                <!-- PREVIEW -->
+                <div *ngIf="companyObj?.coverImage" class="preview-image-v2">
+                    <a *ngIf="companyObj?.coverImage" href="#" data-toggle="modal"
+                    [attr.data-target]="'.delete-'+file_cover.classMap">
+                        <i class="zmdi zmdi-delete"></i>
+                    </a>
+                    <img src="{{(companyObj?.coverType == 'video/mp4')? companyObj?.coverScreenShot
+                    : companyObj?.coverImage}}">
+                </div>
+                <!-- normal view -->
+                <ul *ngIf="!companyObj?.coverImage">
+                    <li><i class="zmdi zmdi-play-circle-outline"></i>&nbsp;/&nbsp;</li>
+                    <li><i class="zmdi zmdi-image-o"></i></li>
+                </ul>
+                <!-- Upload Tips -->
+                <h2>{{fixedTextHash['upload_company_branded_video_image'][currLan]}}</h2>
+                <p>{{fixedTextHash['video_formats_accepted'][currLan]}}</p>
+
+                <!-- Progress -->
+                <div class="progress hide" style="">
+                    <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 30%;"></div>
+                </div>
+
+                <!-- Upload Button -->
+                <a data-toggle="modal" [attr.data-target]="'.'+file_cover.classMap">
+                    <button class="save-color-v5"><i class="zmdi zmdi-image-alt"></i><strong class="hidden-xs"> {{fixedTextHash['upload'][currLan]}}</strong></button>
+                </a>
+                <button (click)="viewCoverFlag = true">{{fixedTextHash['cancel'][currLan]}}</button>
+
+
+            </div><!-- close banner edit -->
+            <div class="clearfix"></div>
+        </div>
+        <!-- profile -->
+        <!-- ================================================= -->
+        <div class="profile-c-v2 arabic-right-left" *ngIf="viewProfileFlag">
+            <div class="profile-picture-v2">
+                <div class="company-profile-pic">
+                    <img *ngIf="(companyDetails$ | async)?.profileImage"
+                         src="{{(companyDetails$ | async)?.profileImage}}">
+                </div>
+
+                <!-- Save & Edit -->
+                <div class="action-bt-v2" *ngIf="!isPublic && isEmployer">
+                    <button class="edit-v2 edit-bt-v4" (click)="viewProfileFlag =false"><i class="zmdi zmdi-edit"></i>&nbsp;{{fixedTextHash['edit'][currLan]}}
+                    </button>
+                </div>
+            </div>
+
+            <!-- company details -->
+            <div class="company-detailsv2">
+                <div class="normal-detail-sec-v2">
+                    <h2>{{(companyDetails$ | async)?.name}}</h2>
+                    <span *ngIf="(companyDetails$ | async)?.sector">{{(companyDetails$ | async)?.sector}}</span>
+                    <span *ngIf="!(companyDetails$ | async)?.sector">N/A</span>
+
+
+                    <div class="social-m-v2">
+                        <a target="_blank" *ngIf="(companyDetails$ | async)?.facebookUrl"
+                           href="{{(companyDetails$ | async)?.facebookUrl}}">
+                            <div class="s-v2 fb">
+                                <i class="zmdi zmdi-facebook"></i>
+                            </div>
+                        </a>
+                        <div class="s-v2 fb social-desable" *ngIf="!(companyDetails$ | async)?.facebookUrl">
+                            <i class="zmdi zmdi-facebook"></i>
+                        </div>
+
+
+                        <a target="_blank" *ngIf="(companyDetails$ | async)?.facebookUrl"
+                           href="{{(companyDetails$ | async)?.twitterUrl}}">
+                            <div class="s-v2 twitter">
+                                <i class="zmdi zmdi-twitter"></i>
+                            </div>
+                        </a>
+                        <div class="s-v2 twitter social-desable" *ngIf="!(companyDetails$ | async)?.twitterUrl">
+                            <i class="zmdi zmdi-twitter"></i>
+                        </div>
+
+
+                        <a target="_blank" *ngIf="(companyDetails$ | async)?.linkedInUrl"
+                           href="{{(companyDetails$ | async)?.linkedInUrl}}">
+                            <div class="s-v2 linkedin">
+                                <i class="zmdi zmdi-linkedin"></i>
+                            </div>
+                        </a>
+                        <div class="s-v2 linkedin social-desable" *ngIf="!(companyDetails$ | async)?.linkedInUrl">
+                            <i class="zmdi zmdi-linkedin"></i>
+                        </div>
+
+
+                        <a target="_blank" *ngIf="(companyDetails$ | async)?.googlePlusUrl"
+                           href="{{(companyDetails$ | async)?.googlePlusUrl}}">
+                            <div class="s-v2 plus">
+                                <i class="zmdi zmdi-google-plus"></i>
+                            </div>
+                        </a>
+                        <div class="s-v2 plus social-desable" *ngIf="!(companyDetails$ | async)?.googlePlusUrl">
+                            <i class="zmdi zmdi-google-plus "></i>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+       
+
+        <!-- profile edit -->
+        <!-- ================================================= -->
+        <div class="profile-c-v2 edit arabic-right-left" *ngIf="!viewProfileFlag && !isPublic && isEmployer">
+            <form [formGroup]="profileForm">
+
+                <div class="profile-picture-v2">
+
+                    <div class="company-profile-pic">
+                        <div class="edit-delete-v2">
+                            <ul>
+                                <li><a data-toggle="modal" [attr.data-target]="'.'+file_profile.classMap"><i
+                                        class="zmdi zmdi-edit"></i></a></li>
+                                <li>
+                                    <a *ngIf="companyObj.profileImage" data-toggle="modal"
+                                       [attr.data-target]="'.delete-'+file_profile.classMap">
+                                        <i class="zmdi zmdi-delete"></i>
+                                    </a>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                        <img *ngIf="(companyDetails$ | async)?.profileImage"
+                             src="{{(companyDetails$ | async)?.profileImage}}">
+                    </div>
+
+                    <!-- Save & Edit -->
+                    <div class="action-bt-v2">
+                        <button class="save-v2 save-color-v5" (click)="onSave('profile','viewProfileFlag')">{{fixedTextHash['save'][currLan]}}</button>
+                        <button class="save-v2" (click)="viewProfileFlag =true">{{fixedTextHash['cancel'][currLan]}}</button>
+
+                    </div>
+                </div>
+
+                <!-- company details -->
+                <div class="company-detailsv2">
+                    <!-- edit -->
+                    <div class="normal-detail-sec-v2 edit">
+                        <div class="input-full-v2">
+                            <input type="text" name="company_name" placeholder="{{fixedTextHash['company_name'][currLan]}}"
+                                   formControlName="company_name">
+                            <div *ngIf="(profileForm.controls['company_name'].touched || !(pristineFlag$ | async)) && profileForm.controls['company_name'].errors"
+                                 class="alert alert-danger alert-dismissible margin-top-5" role="alert">
+                                {{fixedTextHash['enter_company_name'][currLan]}}
+                            </div>
+                        </div>
+                        <div class="input-full-v2">
+                            <bootstrap-selectbox *ngIf="(sectors$ | async)"
+                                                 (selectedId)="sector_id =$event.id;profileForm.controls['sector_id'].markAsTouched()"
+                                                 [selectedValue]="sector_id" [placeholder]="fixedTextHash['select_sector'][currLan]"
+                                                 [selectList]="(sectors$ | async)">
+                            </bootstrap-selectbox>
+
+                            <!-- just hide this section we no need this -->
+                            <input type="text" name="sector_id" [ngModel]="sector_id" formControlName="sector_id"
+                                   class="hide">
+                            <div *ngIf="(profileForm.controls['sector_id'].touched || !(pristineFlag$ | async)) && profileForm.controls['sector_id'].errors"
+                                 class="alert alert-danger alert-dismissible martop5" role="alert">
+                                {{fixedTextHash['select_sector'][currLan]}}
+                            </div>
+                        </div>
+
+
+                        <div class="social-m-v2">
+                            <div class="input-full-v2">
+                                <div class="s-v2 fb"><i class="zmdi zmdi-facebook"></i></div>
+                                <input type="text" class="feld-url" placeholder="url" name="facebook_link"
+                                       formControlName="facebook">
+                                <div *ngIf="(profileForm.controls['facebook'].touched || !(pristineFlag$ | async)) && profileForm.controls['facebook'].errors"
+                                     class="alert alert-danger alert-dismissible" role="alert">
+                                   {{fixedTextHash['invalid_facebook_url'][currLan]}}
+                                </div>
+                            </div>
+                            <div class="input-full-v2">
+                                <div class="s-v2 twitter"><i class="zmdi zmdi-twitter"></i></div>
+                                <input type="text" class="feld-url" placeholder="url" name="twitter_link"
+                                       formControlName="twitter">
+                                <div *ngIf="(profileForm.controls['twitter'].touched || !(pristineFlag$ | async)) && profileForm.controls['twitter'].errors"
+                                     class="alert alert-danger alert-dismissible" role="alert">
+                                    {{fixedTextHash['invalid_twitter_url'][currLan]}}
+                                </div>
+                            </div>
+                            <div class="input-full-v2">
+                                <div class="s-v2 linkedin"><i class="zmdi zmdi-linkedin"></i></div>
+                                <input type="text" class="feld-url" placeholder="url" name="linked_in"
+                                       formControlName="linked_in">
+                                <div *ngIf="(profileForm.controls['linked_in'].touched || !(pristineFlag$ | async)) && profileForm.controls['linked_in'].errors"
+                                     class="alert alert-danger alert-dismissible" role="alert">
+                                    <button aria-label="Close" class="close" data-dismiss="alert"
+                                            type="button close-error">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                    {{fixedTextHash['invalid_linked_in_url'][currLan]}}
+                                </div>
+                            </div>
+                            <div class="input-full-v2">
+                                <div class="s-v2 plus"><i class="zmdi zmdi-google-plus"></i></div>
+                                <input type="text" class="feld-url" placeholder="url" name="google_plus_in"
+                                       formControlName="google_plus">
+                                <div *ngIf="(profileForm.controls['google_plus'].touched || !(pristineFlag$ | async)) && profileForm.controls['google_plus'].errors"
+                                     class="alert alert-danger alert-dismissible" role="alert">
+                                    {{fixedTextHash['invalid_googleplus_url'][currLan]}}
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+        <!-- Desktop Video banner-->
+        <!-- =========================================== -->
+        <div class="hidden-xs hidden-sm">
+            <div *ngIf=" viewCoverFlag && screenwidth > tabletScreen"  class="banner-c-v2 ">
+                <video #video1 autoplay muted loop id='myVideo'
+                    *ngIf="companyObj?.coverImage && companyObj?.coverType == 'video/mp4'">
+                    <source src="{{companyObj?.coverImage}}" type="video/mp4">
+                    {{fixedTextHash['your_browser_does_not_support_html5'][currLan]}}
+                </video>
+                <div class="company-cover" *ngIf="companyObj?.coverImage && companyObj?.coverType != 'video/mp4'"
+                    [ngStyle]="{'background-image': 'url(' +  companyObj?.coverImage + ')'}">
+                </div>
+
+                <div class="company-cover" *ngIf="!companyObj?.coverImage"
+                    [ngStyle]="{'background-image': 'url(' +  '/assets/images/company_cover.png' + ')'}">
+                </div>
+
+                <div class="content ">
+                    <button id="myBtn" (click)="myFunction('myBtn', 'myVideo')" class="arabic-right-left">
+                        <i *ngIf="companyObj?.coverImage && companyObj?.coverType == 'video/mp4'"
+                        class="zmdi zmdi-pause-circle-outline"></i>
+                    </button>
+                    <button *ngIf="!isPublic && isEmployer" class="video-edit-v2 arabic-right-left" (click)="viewCoverFlag =false">
+                        <i class="zmdi zmdi-edit"></i>&nbsp;{{fixedTextHash['edit'][currLan]}}
+                    </button>
+                </div>
+            </div>
+
+
+            <!-- banner Edit -->
+            <!-- =========================================== -->
+            <div *ngIf="!viewCoverFlag && !isPublic && isEmployer" class="banner-c-v2 edit-banner ">
+                <!-- PREVIEW -->
+                <div *ngIf="companyObj?.coverImage" class="preview-image-v2">
+                    <a *ngIf="companyObj?.coverImage" href="#" data-toggle="modal"
+                    [attr.data-target]="'.delete-'+file_cover.classMap">
+                        <i class="zmdi zmdi-delete"></i>
+                    </a>
+                    <img src="{{(companyObj?.coverType == 'video/mp4')? companyObj?.coverScreenShot
+                    : companyObj?.coverImage}}">
+                </div>
+                <!-- normal view -->
+                <ul *ngIf="!companyObj?.coverImage">
+                    <li><i class="zmdi zmdi-play-circle-outline"></i>&nbsp;/&nbsp;</li>
+                    <li><i class="zmdi zmdi-image-o"></i></li>
+                </ul>
+                <!-- Upload Tips -->
+                <h2>{{fixedTextHash['upload_company_branded_video_image'][currLan]}}</h2>
+                <p>{{fixedTextHash['video_formats_accepted'][currLan]}}</p>
+
+                <!-- Progress -->
+                <div class="progress hide" style="">
+                    <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 30%;"></div>
+                </div>
+
+                <!-- Upload Button -->
+                <a data-toggle="modal" [attr.data-target]="'.'+file_cover.classMap">
+                    <button class="save-color-v5"><i class="zmdi zmdi-image-alt"></i><strong class="hidden-xs"> {{fixedTextHash['upload'][currLan]}}</strong></button>
+                </a>
+                <button (click)="viewCoverFlag = true">{{fixedTextHash['cancel'][currLan]}}</button>
+
+
+            </div><!-- close banner edit -->
+            <div class="clearfix"></div>
+        </div>
+
+    </section>
+
+
+    <!-- contact details -->
+    <!-- =================================================== -->
+    <section class="company_contact_detail_v2">
+
+        <!-- contact details -->
+        <!-- ==================================== -->
+        <div class="contact_details_v2 arabic-right-left" *ngIf="viewContactFlag">
+            <h2>
+                {{fixedTextHash['contact_details'][currLan]}}
+                <a *ngIf="!isPublic && isEmployer" class="edit-bt-v4" (click)="viewContactFlag = false"><i class="zmdi zmdi-edit"></i>&nbsp;{{fixedTextHash['edit'][currLan]}}</a>
+            </h2>
+            <div class="two-box-v2">
+                <span *ngIf="(companyDetails$ | async)?.addressLine">{{(companyDetails$ | async)?.addressLine}}</span>
+                <span *ngIf="!(companyDetails$ | async)?.addressLine">N/A</span>
+                <span *ngIf="(companyDetails$ | async)?.addressLine2">{{(companyDetails$ | async)?.addressLine2}}</span>
+                <span>{{(companyDetails$ | async)?.city?.name}}{{fixedTextHash['comma'][currLan]}}  {{(companyDetails$ | async)?.country?.name}}</span>
+            </div>
+
+            <!--phone-->
+            <div class="two-box-v2">
+        <span *ngIf="(companyDetails$ | async)?.phoneNo">
+          <i class="zmdi zmdi-phone"></i>{{(companyDetails$ | async)?.phoneNo}}
+        </span>
+
+                <!--email-->
+                <span *ngIf="(companyDetails$ | async)?.contactEmail">
+          <i class="zmdi zmdi-email"></i>
+                    {{(companyDetails$ | async)?.contactEmail}}
+        </span>
+                <!--website-->
+                <span *ngIf="(companyDetails$ | async)?.websiteUrl">
+          <i class="zmdi zmdi-view-web"></i>{{(companyDetails$ | async)?.websiteUrl}}
+        </span>
+
+            </div>
+
+
+        </div>
+
+        <!-- edit contact details -->
+        <!-- ==================================== -->
+        <div *ngIf="!viewContactFlag && !isPublic && isEmployer" class="contact_details_v2 edit_contact_details_v2 arabic-right-left">
+            <h2>
+                {{fixedTextHash['contact_details'][currLan]}}
+                <a (click)="viewContactFlag = true" class="save_bt_v2">{{fixedTextHash['cancel'][currLan]}}</a>
+                <a (click)="onSave('contact','viewContactFlag')" class="save_bt_v2 save-color-v5">{{fixedTextHash['save'][currLan]}}</a>
+
+            </h2>
+            <form [formGroup]="contactForm">
+
+                <div class="two-box-v2">
+                    <div class="input-full-v2">
+                        <div class="input-half-v2">
+                            <bootstrap-selectbox *ngIf="countryList?.countries"
+                                                 (selectedId)="onSelectCountry($event);contactForm.controls['contact_country_id'].markAsTouched()"
+                                                 [selectedValue]="contact_country_id" [placeholder]="'Select a Country'"
+                                                 [selectList]="countryList?.countries">
+                            </bootstrap-selectbox>
+
+                            <!-- just hide the section its no needed in design  -->
+                            <input type="text" name="contact_country_id" [ngModel]="contact_country_id"
+                                   formControlName="contact_country_id" class="hide">
+
+                            <!-- just hide the section its no needed in design  -->
+                            <div *ngIf="(contactForm.controls['contact_country_id'].touched || !(pristineFlag$ | async)) && contactForm.controls['contact_country_id'].errors"
+                                 class="alert alert-danger alert-dismissible" role="alert">
+                                {{fixedTextHash['empty_country'][currLan]}}
+                            </div>
+                        </div>
+                        <div class="input-half-v2">
+                            <div *ngFor="let sel_country of countryList?.countries">
+                                <auto-comp1 *ngIf="sel_country.id == contact_country_id"
+                                            [resetOnEmpty]="true"
+                                            [countryId]="sel_country.id"
+                                            [current_city]="cityObj"
+                                            [initData]="sel_country.id == cityObj.country_id ?[cityObj]:[]"
+                                            (changeCityId)="cityObj.id = $event.id;cityObj.name = $event.name;getCoOrdinates()">
+                                </auto-comp1>
+                            </div>
+                            <input type="hidden" name="contact_city_id" [ngModel]="cityObj.id"
+                                   formControlName="contact_city_id">
+
+                            <div *ngIf="(contactForm.controls['contact_city_id'].touched || !(pristineFlag$ | async)) &&
+            contactForm.controls['contact_city_id'].errors" class="alert alert-danger alert-dismissible martop5"
+                                 role="alert">
+                                {{fixedTextHash['empty_city'][currLan]}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-full-v2">
+                        <input (change)="getCoOrdinates()" type="text" name="addressline1 " placeholder="{{fixedTextHash['address_line'][currLan]}}"
+                               formControlName="address_line1">
+                        <div *ngIf="(contactForm.controls['address_line1'].touched || !(pristineFlag$ | async)) && contactForm.controls['address_line1'].errors"
+                             class="alert alert-danger alert-dismissible" role="alert">
+                           {{fixedTextHash['please_enter_address_1'][currLan]}}
+                        </div>
+                    </div>
+                    <div class="input-full-v2">
+                        <input (change)="getCoOrdinates(3)" type="text" name="addressline2" placeholder="{{fixedTextHash['address_line'][currLan]}}"
+                               formControlName="address_line2">
+                    </div>
+                    <div class="input-full-v2">
+                        <input (change)="getCoOrdinates(3)" type="text" name="po_box" placeholder="{{fixedTextHash['po_box'][currLan]}}"
+                               formControlName="po_box">
+                    </div>
+                </div>
+                <div class="two-box-v2">
+                    <div class="input-full-v2 with-icon-v2"><i class="zmdi zmdi-phone"></i>
+                        <jquery-tel (getProcessedPhoneNo)="getProcessedPhoneNo($event)"
+                                    [match]="'phone_no'"
+                                    [isArabic]="accountService.isArabic()"
+                                    [phone_no]="phoneNo">
+                        </jquery-tel>
+                        <input name="phn" type="hidden" [(ngModel)]="phoneNo" placeholder="{{fixedTextHash['empty_phone'][currLan]}}"
+                               formControlName="phone_no">
+
+                        <div *ngIf="(contactForm.controls['phone_no'].touched || !(pristineFlag$ | async)) && contactForm.controls['phone_no'].errors"
+                             class="alert alert-danger alert-dismissible martop5" role="alert">
+                            {{fixedTextHash['empty_phone'][currLan]}}
+                        </div>
+
+                    </div>
+                    <div class="input-full-v2 with-icon-v2"><i class="zmdi  zmdi-email"></i>
+                        <input type="text" name="email_id" placeholder="Email ID" formControlName="email_address">
+                        <div *ngIf="(contactForm.controls['email_address'].touched || !(pristineFlag$ | async)) && contactForm.controls['email_address'].errors"
+                             class="alert alert-danger alert-dismissible martop5" role="alert">
+                            {{fixedTextHash['enter_company_generic_email'][currLan]}}
+                        </div>
+                    </div>
+                    <div class="input-full-v2 with-icon-v2"><i class="zmdi zmdi-globe"></i>
+                        <input type="text" name="website" placeholder="{{fixedTextHash['website'][currLan]}}" formControlName="website_url">
+                    </div>
+                </div>
+            </form>
+
+
+        </div>
+
+
+        <!-- map -->
+        <!-- ==================================== -->
+        <div class="contact_map_v2">
+            <h2>
+                {{fixedTextHash['location'][currLan]}}
+            </h2>
+            <div class="map_v2" *ngIf="(companyDetails$ | async)?.lat">
+                <iframe [src]="locationOffice$.google_url | safe"
+                        width="100%" height="55" frameborder="0" style="border:0"
+                        allowfullscreen>
+
+                </iframe>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- Company aditional details -->
+    <!-- ========================================================== -->
+    <section class="company_adtional_detail_v2">
+
+        <!-- Establishment Date -->
+        <!-- ===================================== -->
+        <div *ngIf="viewEstablishmentFlag" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 arabic-right-left">
+            <div class="padd-v2-15">
+                <a *ngIf="!isPublic && isEmployer" (click)="viewEstablishmentFlag = false" class="edit-postion-v2"><i class="zmdi zmdi-edit"></i>&nbsp;{{fixedTextHash['edit'][currLan]}}</a>
+                <h3 *ngIf="(companyDetails$ | async)?.establishmentDate">
+                    {{ accountService.getFormattedDate((companyDetails$ | async)?.establishmentDate, 'MMM DD, YYYY')}}
+                </h3>
+                <span>{{fixedTextHash['establish_date'][currLan]}}</span>
+            </div>
+        </div>
+
+        <!-- edit -->
+        <!-- ===================== -->
+        <div *ngIf="!viewEstablishmentFlag && !isPublic && isEmployer" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 edit-company-aditional-v2 arabic-right-left">
+            <div class="padd-v2-15">
+                <form [formGroup]="establishmentForm">
+                    <span>{{fixedTextHash['establish_date'][currLan]}}</span>
+                    <input type="hidden" [ngModel]="establishmentDate" placeholder="{{fixedTextHash['from'][currLan]}}"
+                           formControlName="establishment_date">
+                    <datePicker-block (emitSelDate)="setDate($event)"
+                                      [sel_id]="'1'"
+                                      [maxDate]="maxDate"
+                                      [dp_value]="establishmentDate">
+
+                    </datePicker-block>
+                </form>
+
+                <div class="bt-group-v5">
+                    <a class="save_bt_v2 save-color-v5" (click)="onSave('establishment','viewEstablishmentFlag')">{{fixedTextHash['save'][currLan]}}</a>
+                    <a (click)="viewEstablishmentFlag = true" class="save_bt_v2 cancel-bt-v2">{{fixedTextHash['cancel'][currLan]}}</a>
+                </div>
+
+                <div *ngIf="(establishmentForm.controls['establishment_date'].touched || !(pristineFlag$ | async))
+      && establishmentForm.controls['establishment_date'].errors"
+                     class="alert alert-danger alert-dismissible martop5" role="alert">
+                    {{fixedTextHash['empty_establish_date'][currLan]}}
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Total Employee Count -->
+        <!-- ===================================== -->
+        <div *ngIf="viewEmployerCountFlag" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 arabic-right-left">
+            <div class="padd-v2-15">
+                <a *ngIf="!isPublic && isEmployer" (click)="viewEmployerCountFlag = false" class="edit-postion-v2"><i class="zmdi zmdi-edit"></i>&nbsp;{{fixedTextHash['edit'][currLan]}}</a>
+                <h3>{{company?.maleCount + company?.femaleCount}}</h3>
+                <span>{{fixedTextHash['total_employee_count'][currLan]}}</span>
+                <div class="m-f-v2">
+                    <div class="m-v2">
+                        <!-- Progress -->
+                        <span>{{fixedTextHash['male'][currLan]}} <i>{{getAverage(company?.maleCount, company?.maleCount + company?.femaleCount)
+                            | number : '1.0-1'}}%</i></span>
+                        <div class="progress" style="">
+                            <div class="progress-bar progress-bar-striped" role="progressbar" [style.width.%]=
+                                    "getAverage(company?.maleCount, company?.maleCount + company?.femaleCount)"></div>
+                        </div>
+
+                    </div>
+                    <div class="f-v2">
+                        <!-- Progress -->
+                        <span>{{fixedTextHash['female'][currLan]}} <i>{{getAverage(company?.femaleCount, company?.maleCount + company?.femaleCount)
+                            | number : '1.0-1'}}%</i></span>
+                        <div class="progress" style="">
+                            <div class="progress-bar progress-bar-striped" role="progressbar" [style.width.%]=
+                                    "getAverage(company?.femaleCount, company?.maleCount + company?.femaleCount)"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- edit -->
+        <!-- ===================== -->
+        <div *ngIf="!viewEmployerCountFlag && !isPublic && isEmployer" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 edit-company-aditional-v2 arabic-right-left">
+            <div class="padd-v2-15 m-f-edit-v2">
+                <span>{{fixedTextHash['total_employee_count'][currLan]}}</span>
+                <form [formGroup]="employerGenderForm">
+                <div class="m-f-v2">
+                    <div class="m-v2">
+                        <!-- Progress -->
+                        <span>{{fixedTextHash['male'][currLan]}}</span>
+                        <input  formControlName="male_employees"  type="number"  placeholder="{{fixedTextHash['total_male_employee_count'][currLan]}}">
+
+                    </div>
+                    <div class="f-v2">
+                        <!-- Progress -->
+                        <span>{{fixedTextHash['female'][currLan]}}</span>
+                        <input formControlName="female_employees" type="number"  placeholder="{{fixedTextHash['total_female_employee_count'][currLan]}}">
+                    </div>
+                </div>
+                </form>
+                <div class="bt-group-v5">
+                    <a (click)="onSave('employerGender','viewEmployerCountFlag')" class=" save_bt_v2 save-color-v5">{{fixedTextHash['save'][currLan]}}</a>
+                    <a (click)="viewEmployerCountFlag = true" class=" save_bt_v2 cancel-bt-v2">{{fixedTextHash['cancel'][currLan]}}</a>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Employer Type -->
+        <!-- ===================================== -->
+        <div *ngIf="viewEmployerTypeFlag" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 arabic-right-left">
+            <div class="padd-v2-15">
+                <a *ngIf="!isPublic && isEmployer"  (click)="viewEmployerTypeFlag = false" class="edit-postion-v2"><i class="zmdi zmdi-edit"></i>&nbsp;{{fixedTextHash['edit'][currLan]}}</a>
+                <h3 class="req-dark"
+                    *ngIf="(companyDetails$ | async)?.companyType">{{(companyDetails$ | async)?.companyType}}</h3>
+                <h3 class="req-dark light-color-text" *ngIf="!(companyDetails$ | async)?.companyType">N/A</h3>
+                <span>{{fixedTextHash['employer_type'][currLan]}}</span>
+            </div>
+        </div>
+        <!-- edit -->
+        <!-- ===================== -->
+        <div *ngIf="!viewEmployerTypeFlag && !isPublic && isEmployer" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 edit-company-aditional-v2 arabic-right-left">
+            <form [formGroup]="employerTypeForm">
+                <div class="padd-v2-15">
+                    <span>{{fixedTextHash['employer_type'][currLan]}}</span>
+
+                    <bootstrap-selectbox *ngIf="(typeList$ | async)"
+                                         (selectedId)="type_id =$event.id;employerTypeForm.controls['type_id'].markAsTouched()"
+                                         [selectedValue]="type_id" [placeholder]="'Select Company Type'"
+                                         [selectList]="(typeList$ | async)">
+                    </bootstrap-selectbox>
+
+                    <!-- Hide these area -->
+                    <input type="text" name="type_id" [ngModel]="type_id" formControlName="type_id" class="hide">
+                    <div *ngIf="(employerTypeForm.controls['type_id'].touched || !(pristineFlag$ | async)) && employerTypeForm.controls['type_id'].errors"
+                         class="alert alert-danger alert-dismissible martop5 " role="alert">
+                        {{fixedTextHash['select_company_type'][currLan]}}
+                    </div>
+                    <div class="bt-group-v5">
+                        <a (click)="onSave('employerType','viewEmployerTypeFlag')"
+                            class="save_bt_v2 save-color-v5">{{fixedTextHash['save'][currLan]}}</a>
+                            <a (click)="viewEmployerTypeFlag = true" class="save_bt_v2 cancel-bt-v2">{{fixedTextHash['cancel'][currLan]}}</a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+
+        <!-- Classification -->
+        <!-- ===================================== -->
+        <div *ngIf="viewClassificationFlag" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 arabic-right-left">
+            <div class="padd-v2-15">
+                <a  *ngIf="!isPublic && isEmployer" (click)="viewClassificationFlag = false" class="edit-postion-v2"><i class="zmdi zmdi-edit"></i>&nbsp;{{fixedTextHash['edit'][currLan]}}</a>
+
+                <h3 class="req-dark"
+                    *ngIf="(companyDetails$ | async)?.classification">{{(companyDetails$ | async)?.classification}}</h3>
+                <h3 class="req-dark light-color-text" *ngIf="!(companyDetails$ | async)?.classification">N/A</h3>
+                <span>{{fixedTextHash['classification'][currLan]}}</span>
+            </div>
+        </div>
+        <!-- edit -->
+        <!-- ===================== -->
+        <div *ngIf="!viewClassificationFlag && !isPublic && isEmployer" class="col-lg-3 col-md-3 col-sm-6 col-xs-12 edit-company-aditional-v2 arabic-right-left">
+            <div class="padd-v2-15">
+                <form [formGroup]="classificationForm">
+                    <span>{{fixedTextHash['classification'][currLan]}}</span>
+                    <bootstrap-selectbox *ngIf="(classificationsList$ | async)"
+                                         (selectedId)="classification_id =$event.id;classificationForm.controls['classification_id'].markAsTouched()"
+                                         [selectedValue]="classification_id" [placeholder]="'Select a Classification'"
+                                         [selectList]="(classificationsList$ | async)">
+                    </bootstrap-selectbox>
+                    <!--class="hide"-->
+                    <!-- Hide these area -->
+                    <input type="hidden" name="classification_id" [ngModel]="classification_id"
+                           formControlName="classification_id">
+                    <div *ngIf="(classificationForm.controls['classification_id'].touched || !(pristineFlag$ | async)) && classificationForm.controls['classification_id'].errors"
+                         class="alert alert-danger alert-dismissible martop5" role="alert">
+                        {{fixedTextHash['select_company_classification'][currLan]}}
+                    </div>
+                </form>
+                <div class="bt-group-v5">
+                    <a (click)="onSave('classification','viewClassificationFlag')"
+                        class="save_bt_v2 save-color-v5">{{fixedTextHash['save'][currLan]}}</a>
+                     <a (click)="viewClassificationFlag = true" class="save_bt_v2 cancel-bt-v2">{{fixedTextHash['cancel'][currLan]}}</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- About Company -->
+    <!-- ============================================ -->
+    <section *ngIf="viewAboutCompanyFlag" class="about-company-v2">
+        <h2>
+            {{fixedTextHash['about_company'][currLan]}}
+            <a *ngIf="!isPublic && isEmployer"  (click)="viewAboutCompanyFlag = false"><i class="zmdi zmdi-edit"></i>&nbsp;{{fixedTextHash['edit'][currLan]}}</a>
+        </h2>
+        <p [innerHTML]="(companyDetails$ | async)?.aboutUs"></p>
+    </section>
+
+    <!-- Edit -->
+    <!-- ======================== -->
+    <section *ngIf="!viewAboutCompanyFlag && !isPublic && isEmployer" class="about-company-v2 ">
+        <h2>
+            About Company
+            <a (click)="viewAboutCompanyFlag = true" class="save_bt_v2">{{fixedTextHash['cancel'][currLan]}}</a>
+            <a (click)="onSave('about','viewAboutCompanyFlag')" class="save_bt_v2 save-color-v5">{{fixedTextHash['save'][currLan]}}</a>
+        </h2>
+        <form [formGroup]="aboutForm">
+            <textarea class="about_company_mob" name="summary"
+                      placeholder="{{fixedTextHash['write_company_profile_summary'][currLan]}}"
+                      formControlName="summary"></textarea>
+            <div class="alert alert-danger"
+                 *ngIf="(aboutForm.controls['summary'].touched || !(pristineAboutFlag$ | async)) && aboutForm.controls['summary'].errors">
+                {{fixedTextHash['write_company_profile_summary'][currLan]}}
+            </div>
+        </form>
+    </section>
+
+
+    <!-- Company Benefits -->
+    <!-- ============================================ -->
+    <section *ngIf="companyAnalytics?.benefits.length > 0" class="company-benefits-v2">
+        <h2>
+            {{fixedTextHash['company_benefits'][currLan]}}
+        </h2>
+        <ng-container *ngIf="companyAnalytics?.benefits">
+            <div *ngFor="let selBenefit of companyAnalytics.benefits" class="col-lg-2 col-md-2 col-sm-3 col-xs-6 arabic-right-left">
+                <div class="benefit-box-v2">
+                    <i class="{{selBenefit.icon}}"></i>
+                    <span>{{(currLan === 'en')? selBenefit.name : selBenefit.ar_name}}</span>
+                </div>
+            </div>
+        </ng-container>
+
+
+    </section>
+
+
+    <!-- New Hires -->
+    <!-- ============================================ -->
+    <section class="new-hire-v2">
+
+        <div class="new-hire-graph-v2 arabic-right-left">
+            <h2>{{fixedTextHash['new_hires'][currLan]}}</h2>
+            <div class="row">
+                <div *ngFor="let selStat of companyAnalytics?.monthly_jobs_posted[1], let i =index"
+                     class="col-lg-1 col-md-1 col-sm-1 col-xs-1 arabic-right-left">
+                        <span>
+                              <i [style.height.%]="selStat*75/maxCountJobsMonthly"
+                                 class="shade-{{ 12 - selStat*10/maxCountJobsMonthly | number:'1.0-1'}}"></i>
+                              <strong>{{companyAnalytics.monthly_jobs_posted[0][i]}}</strong>
+                        </span>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="active-job-v2">
+            <h3>{{companyAnalytics?.active_job_count | number}}</h3>
+            <span>{{fixedTextHash['active_jobs'][currLan]}}</span>
+        </div>
+
+    </section>
+
+
+    <!-- Salaries  -->
+    <!-- ====================================================== -->
+    <section *ngIf="companyAnalytics?.job_analytics.length > 0" class="salaries-v2">
+        <h2>{{fixedTextHash['salaries'][currLan]}}</h2>
+        <div *ngFor="let selJob of companyAnalytics?.job_analytics, let i =index"
+             class="col-lg-3 col-md-3 col-sm-12 col-xs-12 arabic-right-left">
+            <ng-container *ngIf="i < 4">
+                <h3>{{selJob.title}}</h3>
+
+                <div class="progress-bloovo company-v2">
+                    <div class="prograss-title">
+                        <div class="prograss-txt pull-left arabic-right-left">{{fixedTextHash['company'][currLan]}}</div>
+                        <div class="prograss-txt pull-right percentage-color arabic-left-right">{{selJob.salary}}</div>
+                        <div class=" clr"></div>
+                    </div>
+                    <div class="progress">
+                        <div [style.width.%]="selJob.salary*75/(selJob.salary  + selJob.similar_job_salary)  | number:'2.0-0'"
+                             aria-valuemax="100" aria-valuemin="0" class="progress-bar progress-bar-success"
+                             data-percentage="0%" role="progressbar"></div>
+                    </div>
+                </div>
+
+                <div class="progress-bloovo industry-v2">
+                    <div class="prograss-title">
+                        <div class="prograss-txt pull-left arabic-right-left">{{fixedTextHash['industry'][currLan]}}</div>
+                        <div class="prograss-txt pull-right percentage-color arabic-left-right">{{selJob.similar_job_salary}}</div>
+
+                        <div class=" clr"></div>
+                    </div>
+                    <div class="progress">
+                        <div [style.width.%]="selJob.similar_job_salary*75/(selJob.salary  + selJob.similar_job_salary)  | number:'2.0-0'"
+                             aria-valuemax="100" aria-valuemin="0" class="progress-bar progress-bar-success"
+                             data-percentage="0%" role="progressbar"></div>
+                    </div>
+                </div>
+            </ng-container>
+
+        </div>
+    </section>
+
+    <!-- A Message from Our Management -->
+    <!-- ========================================== -->
+    <section class="culture-v2">
+        <!-- A Message from Our Management -->
+        <!-- ============================================ -->
+        <div *ngIf="company?.managementVideo" class="message-from-management-v2 ">
+            <h2>
+                {{fixedTextHash['message_from_management'][currLan]}}
+            </h2>
+            <div class="video-v2">
+                <video #video2 autoplay muted loop id="myVideo2">
+                    <source [attr.src]="company?.managementVideo" type="video/mp4">
+                    {{fixedTextHash['your_browser_does_not_support_html5'][currLan]}}
+                </video>
+                <div class="content">
+                    <button id="myBtn2" (click)="myFunction('myBtn2', 'myVideo2')"><i
+                            class="zmdi zmdi-pause-circle-outline"></i></button>
+                </div>
+                <div class="video-title-v2">
+                    <h4>{{company?.ownerName}}</h4>
+                    <span>{{company?.ownerDesignation}} {{fixedTextHash['of'][currLan]}} {{company?.name}}</span>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Image Gallery -->
+        <!-- ============================================ -->
+        <div *ngIf="viewPhotoGalleryFlag" class="photo-gallery-v2">
+            <h2>
+                {{fixedTextHash['photo_gallery'][currLan]}}
+                <a *ngIf="!isPublic && isEmployer" (click)="viewPhotoGalleryFlag = false;geBuildDropUpload()">
+                <i class="zmdi zmdi-edit"></i>&nbsp;{{fixedTextHash['edit'][currLan]}}</a>
+            </h2>
+
+        <!-- Empty gallery section -->
+        <!-- ============================================ -->
+        <div *ngIf="(companyCultureObs | async)?.length == 0">
+            <a (click)="viewPhotoGalleryFlag = false;geBuildDropUpload()">
+                <div class="empty_profile_gallery_v5">
+                    <i class="zmdi zmdi-image-o"></i>
+                    <h2>{{fixedTextHash['photo_gallery'][currLan]}}</h2>
+                    <p>{{fixedTextHash['upload_your_company_photos'][currLan]}}.</p>
+                </div>
+            </a>
+        </div>
+
+
+            <div id="jssor_1" *ngIf="(companyCultureObs | async)?.length > 0">
+                <!-- Loading Screen -->
+                <div data-u="loading" class="jssorl-009-spin">
+                    <img src="/assets/images/balls.svg"/>
+                </div>
+                <div data-u="slides"
+                     style="cursor:default;position:relative;top:0px;left:0px;width:980px;height:380px;overflow:hidden;">
+                    <div *ngFor="let selCulture of (companyCultureObs | async),let cultureIndex = index">
+                        <img data-u="image" class="main-img" src="{{selCulture.image_url}}"/>
+                        <img data-u="thumb" src="{{selCulture.image_url}}"/>
+                    </div>
+                </div>
+                <!-- Thumbnail Navigator -->
+                <div data-u="thumbnavigator" class="jssort101"
+                     style="position:absolute;left:0px;bottom:0px;width:980px;height:100px;background-color:#fff;"
+                     data-autocenter="1" data-scale-bottom="0.75">
+                    <div data-u="slides">
+                        <div data-u="prototype" class="p">
+                            <div data-u="thumbnailtemplate" class="t"></div>
+                            <svg viewBox="0 0 16000 16000" class="cv">
+                                <circle class="a" cx="8000" cy="8000" r="3238.1"></circle>
+                                <line class="a" x1="6190.5" y1="8000" x2="9809.5" y2="8000"></line>
+                                <line class="a" x1="8000" y1="9809.5" x2="8000" y2="6190.5"></line>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <!-- Arrow Navigator -->
+                <div data-u="arrowleft" class="jssora106" style="width:55px;height:55px;bottom:0px;left:0px;"
+                     data-scale="0.75">
+                    <svg viewBox="0 0 16000 16000" class="left-arrow-v2">
+                        <circle class="c" cx="8000" cy="8000" r="6260.9"></circle>
+                        <polyline class="a" points="7930.4,5495.7 5426.1,8000 7930.4,10504.3 "></polyline>
+                        <line class="a" x1="10573.9" y1="8000" x2="5426.1" y2="8000"></line>
+                    </svg>
+                </div>
+                <div data-u="arrowright" class="jssora106" style="width:55px;height:55px;top:162px;right:30px;"
+                     data-scale="0.75">
+                    <svg viewBox="0 0 16000 16000" class="right-arrow-v2">
+                        <circle class="c" cx="8000" cy="8000" r="6260.9"></circle>
+                        <polyline class="a" points="8069.6,5495.7 10573.9,8000 8069.6,10504.3 "></polyline>
+                        <line class="a" x1="5426.1" y1="8000" x2="10573.9" y2="8000"></line>
+                    </svg>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Edit -->
+        <!-- ======================== -->
+        <div *ngIf="!viewPhotoGalleryFlag && !isPublic && isEmployer" class="photo-gallery-v2">
+            <h2>
+                {{fixedTextHash['photo_gallery'][currLan]}}
+                <a (click)="viewPhotoGalleryFlag = true; sliderRenderedFlag = false" class="save_bt_v2">{{fixedTextHash['close'][currLan]}}</a>
+            </h2>
+
+            <div class="upload-v2">
+                <!-- After upload preview section -->
+                <div *ngFor="let selCulture of (companyCultureObs | async),let cultureIndex = index"
+                     class="preview-image-v2">
+                    <a data-toggle="modal" [attr.data-target]="'.delete-culture-member-'+cultureIndex">
+                        <i class="zmdi zmdi-delete"></i>
+                    </a>
+                    <img src="{{selCulture.image_url}}">
+                </div>
+
+                <!-- Upload Button -->
+
+
+                <div id="drag-and-drop-zone" class="upload-v2-section">
+                    <i class="zmdi zmdi-cloud-upload"></i>
+                    <div class="progress v4-progress" style="" *ngIf="showpercentUploadFlag">
+                        <div class="progress-bar progress-bar-striped" role="progressbar"
+                             [style.width.%]="percentUpload"></div>
+                    </div>
+                    <!-- <input type="file" title="Click to add Files"> -->
+                    <span id="fileselector">
+                <label class="bt-upoload-v2" for="upload-file-selector">
+                    <input id="upload-file-selector" type="file">
+                    <i class="fa_icon icon-upload-alt margin-correction"></i>{{fixedTextHash['choose_file_to_upload'][currLan]}}
+                </label>
+            </span>
+
+                    <span>{{fixedTextHash['or_drag_here'][currLan]}}</span>
+
+
+                </div>
+                <!-- Progress -->
+
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Our Team -->
+    <company-team *ngIf="(companyTeamObs | async) != null" [companyTeamObs]="companyTeamObs"
+    [companyId]="companyId"></company-team>
+
+    <!-- Our Team -->
+    <!-- ========================================== -->
+    <section *ngIf="companyAnalytics?.job_analytics.length > 0" class="our-active-jobs">
+        <h2>{{fixedTextHash['our_active_jobs'][currLan]}}</h2>
+        <div *ngFor="let selJob of companyAnalytics?.job_analytics, let i =index"
+             class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+            <div class="list-active-job-v2">
+                <div class="title-area-v2">
+                    <h3>{{selJob.title}}</h3>
+                    <span><i class="zmdi zmdi-chart-donut"></i>{{(currLan == 'en')? selJob.sector.name :
+                        selJob.sector.ar_name}}
+                    </span>
+                    <span><i class="zmdi zmdi-calendar-alt"></i>{{ accountService.getFormattedDate(selJob.created_at , 'MMM DD, YYYY')}}</span>
+                </div>
+                <div class="stats-side-v2">
+                    <ul>
+                        <li>
+                            <h2>{{selJob.views_count | number}}</h2>
+                            <span>{{fixedTextHash['count_views'][currLan]}}</span>
+                        </li>
+                        <li>
+                            <h2>{{selJob.applicant_count | number}}</h2>
+                            <span>{{fixedTextHash['count_applications'][currLan]}}</span>
+                        </li>
+                        <li class="app-ratio-v2">
+                            <h2>{{((selJob.views_count > 0) ? selJob.applicant_count * 100 / selJob.views_count : 0)| number: '1.0-1'}}
+                                %</h2>
+                            <span>{{fixedTextHash['application_ratio'][currLan]}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Our Social Media -->
+    <!-- ============================================================ -->
+    <section class="socialmedia-v2" *ngIf="viewProfileFlag && ((companyDetails$ | async)?.facebookUrl || (companyDetails$ | async)?.twitterUrl)">
+        <h2>
+            {{fixedTextHash['our_social_media'][currLan]}}
+        </h2>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left">
+            <div class="social-frame-v2">
+                <i class="zmdi zmdi-facebook"></i>
+                <!-- iframe here -->
+                <div class="iframe-box" *ngIf="(companyDetails$ | async)?.facebookUrl">
+                    <iframe [src]="'https://www.facebook.com/plugins/page.php?href=' + (companyDetails$ | async)?.facebookUrl + '&tabs=timeline&width=650&height=400&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=224586120946714' | safe" width="600" height="400" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left">
+            <div class="social-frame-v2 twitter-iframe-v2">
+                <i class="zmdi zmdi-twitter"></i>
+                <!-- iframe here -->
+                <div class="iframe-box twitter-box-js">
+                    <a class="twitter-timeline" href="{{(companyDetails$ | async)?.twitterUrl}}"></a>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+
+
+    <!--Popups-->
+
+    <up-load *ngIf="!isPublic && isEmployer" [mode]="'imageCrop'" [file]="file_profile" (onUpload)="onAvatarUploaded($event)"></up-load>
+    <up-load *ngIf="!isPublic && isEmployer" [file]="file_cover" (onUpload)="onCoverUploaded($event)"></up-load>
+
+
+    <!--Deletion block-->
+
+    <!--Delete Profile image-->
+    <div class="popup" *ngIf="companyObj?.profileImage && !isPublic && isEmployer">
+        <div class="upload-pop">
+
+            <div class="close_delete modal delete-{{file_profile.classMap}}" tabindex="-1" role="dialog"
+                 aria-labelledby="myLargeModalLabel">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-body upload-dp">
+                            <button class="close" aria-hidden="true" data-dismiss="modal" type="button">×</button>
+
+                            <h2>{{fixedTextHash['delete_logo'][currLan]}} </h2>
+
+                            <h4><span class="navy">{{fixedTextHash['sure_delete_the'][currLan]}} <b>{{fixedTextHash['comp_logo'][currLan]}}</b>?</span></h4>
+
+                            <div class="pop-button">
+                                <button type="button" class="btn postive" (click)="onDeleteImage()"> {{fixedTextHash['delete'][currLan]}}
+                                </button>
+                                <button type="button" class="btn negative" data-dismiss="modal" aria-hidden="true">
+                                    {{fixedTextHash['cancel'][currLan]}}
+                                </button>
+                                <div class="clr"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Delete Cover Image-->
+    <div class="popup" *ngIf="companyObj?.coverImage && !isPublic && isEmployer">
+        <div class="upload-pop">
+
+            <div class="close_delete modal delete-{{file_cover.classMap}}" tabindex="-1" role="dialog"
+                 aria-labelledby="myLargeModalLabel">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-body upload-dp">
+                            <button class="close" aria-hidden="true" data-dismiss="modal" type="button">×</button>
+
+                            <h2>{{fixedTextHash['delete_cover_picture_video'][currLan]}}</h2>
+
+                            <h4><span class="navy"> {{fixedTextHash['sure_delete_the'][currLan]}}  <b>{{fixedTextHash['cover_picture_video'][currLan]}}</b>?</span>
+                            </h4>
+
+                            <div class="pop-button">
+                                <button type="button" class="btn postive" (click)="onDeleteCoverImage()"> {{fixedTextHash['delete'][currLan]}}
+                                </button>
+                                <button type="button" class="btn negative" data-dismiss="modal" aria-hidden="true">
+                                    {{fixedTextHash['cancel'][currLan]}}
+                                </button>
+                                <div class="clr"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Add Image pop up box-->
+    <up-load *ngIf="fileNew && !isPublic && isEmployer" [mode]="'imageCrop'" [file]="fileNew" (onUpload)="onMainUploaded($event)"></up-load>
+
+
+    <!--Edit company images pop up box-->
+    <ng-container *ngIf="!isPublic && isEmployer">
+        <div *ngFor="let selCulture of (companyCultureObs | async),let cultureIndex = index">
+            <up-load *ngIf="fileMainList[cultureIndex]" [mode]="'imageCrop'" [file]="fileMainList[cultureIndex]"
+                     (onUpload)="onMainUploaded($event)"></up-load>
+            <div class="popup">
+                <div class="logout-pop">
+                    <div class="modal close_delete delete-culture-member-{{cultureIndex}}" tabindex="-1" role="dialog"
+                         aria-labelledby="myLargeModalLabel">
+                        <div class="modal-dialog modal-md">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <button class="close following" aria-hidden="true" data-dismiss="modal" type="button">
+                                        ×
+                                    </button>
+                                    <h2>{{fixedTextHash['delete_office_img'][currLan]}}</h2>
+                                    <h4><span class="navy"> {{fixedTextHash['sure_to_delete'][currLan]}}  </span></h4>
+                                    <div class="pop-button">
+                                        <button (click)="onDeleteCultureMember(selCulture.id,cultureIndex)" type="button"
+                                                class="btn postive">{{fixedTextHash['delete'][currLan]}}
+                                        </button>
+                                        <button type="button" class="btn negative" data-dismiss="modal">{{fixedTextHash['cancel'][currLan]}}</button>
+                                        <div class="clr"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+</div>
+</div>

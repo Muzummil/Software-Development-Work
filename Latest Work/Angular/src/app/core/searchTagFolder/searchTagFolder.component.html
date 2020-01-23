@@ -1,0 +1,26 @@
+<div [class.arabic] = "accountService.isArabic()">
+<div class="searchName">
+    <div class="searchFolder arabic-left-right">
+        <ng2-select *ngIf="searchableTags?.length > 0"
+                    [items]="searchableTags"
+                    [showJobsCount]="false"
+                    [resetOnSelect]="true"
+                    [selectOneEnter]="true"
+                    [resetOnEmpty]="true"
+                    [selectOnType]="true"
+                    [showCaret]="true"
+                    (selected)="selectedTag($event)"
+                    placeholder="{{fixedTextHash['search_tag_placeholder'][currLan]}}">
+        </ng2-select>
+    </div>
+</div>
+
+<!-- tags -->
+<!-- ==================================== -->
+<div class="hash-search" *ngIf="selectedTagsList?.length > 0">
+    <ul class="hasTagsats">
+        <li class="cursor_pointer1 arabic-right-left" *ngFor="let selTag of selectedTagsList, let selIndex = index"><span class="hashtx">#</span>{{selTag?.name}}<i
+                class="zmdi zmdi-delete" (click)="getRemoveTag(selTag)"></i></li>
+    </ul>
+</div>
+</div>

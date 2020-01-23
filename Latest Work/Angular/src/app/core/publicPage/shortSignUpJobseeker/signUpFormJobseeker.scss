@@ -1,0 +1,639 @@
+@import '../../../../styles/sass/base/_variables.scss';
+
+h1, h2, h3, h4, h5, span, label, a, button, p{
+  font-family: $primary-Fonts;
+}
+
+.arabic{
+    h1, h2, h3, h4, h5, span, label, a, button, p, input{
+    font-family: $arabic-primary-Fonts!important;
+  }
+}
+
+button:focus {
+  outline: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+
+span:focus {
+  outline: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.bg-login{
+  background-color: $by-body!important;
+  height: auto;
+}
+
+.public-sign-in-both{
+  max-width: 500px;
+  margin: 0px auto;
+}
+
+.new-user-sign-form{
+  h2{
+    padding: 10% 0%!important; 
+    color: $heading-text;
+  }
+  p{
+    color: $text-normal-color;
+  }
+}
+
+.home-full{
+  input, select {
+    width: 100%;
+    border: solid 1px $boredr-color;
+    color: $text-normal-color !important;
+    height: $form-height!important;
+    padding: 0px 10px;
+    margin-bottom: 10px;
+    font-size: 14px !important;
+    line-height: $button-height!important;
+    border-radius: $border-radius!important;
+    background-color:$form-bg!important; 
+  }
+  @-webkit-keyframes autofill {
+      to {
+          color: $primary-font;
+          background: transparent;
+      }
+  }
+
+  input:-webkit-autofill {
+      -webkit-animation-name: autofill;
+      -webkit-animation-fill-mode: both;
+  }
+}
+
+
+.sign-v3{ 
+  margin: 0 auto; max-width: 290px; margin-bottom: 10px;
+  button{ 
+    width: 130px; 
+    margin: 0px 5px;
+    margin-bottom:4px; 
+    font-weight: bold; 
+    height: $button-height; 
+    border-radius: $border-radius;
+    font-size:14px; 
+    border: none; 
+    color:$text-dark-bg;
+    text-align: center;
+      i{ padding-top: 0px; margin:0px!important; 
+        padding: 0px!important;font-size:18px;width: 18px; 
+        img{
+          width: 20px;
+          height: auto;
+        }
+      }
+      span{ padding-left: 3px;}
+   }
+  button:hover{ opacity: 0.8  }
+     .link-v3{ background: $linkedin;padding: 0px;border-radius: $border-radius }
+     .face-v3{ background: $fb;padding: 0px; }
+     .goog-v3{ background: $google;padding: 0px;border-radius: $border-radius  }
+     .twitter-v3{background: $twitter;padding: 0px;}
+  .bt-spinner2{ width: 18px;}
+} 
+
+
+//signpage
+.sign-page{
+  position: relative;
+  z-index: 99;
+
+  label{
+    color: $text-normal-color!important;
+  }
+
+  h3{
+      color:$text-normal-color;
+      padding-top: 10px;
+      margin-bottom: 0px;
+      line-height: 20px;
+      font-size: 14px !important;
+      font-weight: normal;
+  }
+  .bg{
+      overflow:hidden;
+      background-image: url(../../../../assets/images/sign-bg.jpg);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+      height: 100vh;
+      background-position:center;
+  }
+  .bg-sign-up-common{
+      width: 100%;
+      height: 100vh;
+  }
+  .sign-fixed{
+      position:fixed;
+      z-index: 9999;
+      top: 0px;
+      width:100%;
+  }
+  .sign-cont{
+      position:absolute;
+      z-index: 9999;
+      top: 0px;
+      width:100%;
+  }
+  .sign{
+      background:$white;
+      padding: 30px;
+      padding-top:4px;
+      .postive{
+          background:$button-primary;
+          color: $text-dark-bg;
+          border-radius:$border-radius;
+      }
+      .postive:hover{
+          background:$hover-bt-primary;
+      }
+  }
+  .sign-logo{
+      padding: 40px 0px;
+      text-align: center;
+      img{
+          height:90px;
+      }
+  }
+  .sign-ftr{
+      text-align: center;
+      h5{
+          color: $primary-font;
+          margin-top:20px;
+      }
+  }
+
+
+ 
+  .col-lg-6,.col-lg-12,.col-lg-2,.col-lg-4{
+      padding-left:5px!important;
+      padding-right:5px!important
+  }
+  .row{
+      margin-left:-5px;
+      margin-right:-5px;
+  }
+  .relative{
+      position:relative
+  }
+  .absulute-btn-i{
+      color: $primary-font;
+      line-height: $button-height;
+      position: absolute;
+      right: 9px;
+      top: 11px;
+  }
+  .dropdown-menu{
+      top: 49px;
+  }
+  .btn-group, .edit .btn-group-vertical{
+      margin-bottom:0px;
+  }
+
+  .sk-radio{
+      display: inline-block;
+      padding-right:10px;
+      margin-top:6px;
+      span{
+          color:$primary-font;
+      }
+      .gnder-title{
+          span{
+              color:$primary-font;
+          }
+      }
+  }
+  .icon-sign{
+      text-align: center;
+      color:$Progress;
+      font-size:$font-46 ;
+      margin:20px 0px;
+  }
+  .icon-sign2{
+      text-align: center;
+      color:$successful;
+      font-size:$font-46 ;
+      margin:20px 0px;
+  }
+}
+
+.error-feild{
+  border:1px solid $unsuccessful!important;
+}
+
+.mobile-new-signiup-from{
+  background-color:#fff;
+  position:relative;
+  width:100%;
+  .brand-logo{
+    padding: 37px 0px 20px 0px;
+    img{
+      height: 90px;
+      display: block;
+      margin: 0px auto;
+    }
+  }
+  h1{
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    font-family: $primary-Fonts;
+    font-size: 30px;
+    color: $heading-text;
+    padding-bottom:35px;
+  }
+  h2{
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    font-family: $primary-Fonts;
+    font-size: 20px;
+    color: $heading-text;
+    padding-bottom:35px;
+    padding-top:10%;
+  }
+  h5{
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    font-family: $primary-Fonts;
+    font-size: 20px;
+    color: $heading-text;
+    padding-bottom:35px;
+    padding-top:10%;
+  }
+  h3{
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    font-family: $primary-Fonts;
+    font-size: 20px;
+    color: $heading-text;
+    padding:20px 0px 20px 0px;
+    margin: 0px;
+  }
+  h4{
+    display: block;
+    text-align: left;
+    font-weight: bold;
+    font-family: $primary-Fonts;
+    font-size: 14px;
+    color: $heading-text;
+    padding:20px 0px 10px 0px;
+    margin: 0px;
+    font-weight: bold;
+  }
+  span{
+    display: block;
+    text-align: center;
+    font-family: $primary-Fonts;
+    font-size: 14px;
+    color: $text-normal-color;
+    padding-bottom:10px;
+    float: left;
+    width: 100%;
+    a{
+      color: $hyperlink;
+    }
+  }
+  a{
+    color: $hyperlink!important;
+  }
+  p{
+    display: block;
+    text-align: center;
+    font-family: $primary-Fonts;
+    font-size: 13px;
+    color: $text-normal-color;
+    padding-bottom:10px;
+  }
+
+
+
+  // input feild
+  input[type="text"]{
+    border-radius:$border-radius!important;
+    height: 50px!important;
+    border:1px solid $boredr-color;
+    margin-bottom: 7px;
+    font-family: $primary-Fonts;
+  }
+  input[type="number"]{
+    border-radius:$border-radius!important;
+    height: 50px!important;
+    border:1px solid $boredr-color;
+    margin-bottom: 7px;
+    font-family: $primary-Fonts;
+  }
+  input[type="tel"]{
+    border-radius:$border-radius!important;
+    height: 50px!important;
+    border:1px solid $boredr-color;
+    margin-bottom: 7px;
+    font-family: $primary-Fonts;
+  }
+  input[type="password"]{
+    border-radius:$border-radius!important;
+    height: 50px!important;
+    border:1px solid $boredr-color;
+    margin-bottom: 7px;
+    font-family: $primary-Fonts;
+  }
+  // Error
+  .error-feild{
+    border:1px solid #F0C7C7!important;
+    box-shadow: 0 0 1em #F0C7C7!important;
+    -moz-box-shadow: 0 0 1em #F0C7C7!important;
+    -webkit-box-shadow:0 0 1em #F0C7C7!important;
+  }
+
+
+  .checkbox{
+    margin: 0px!important;
+    label{
+      font-family: $primary-Fonts;
+      color: $primary-font;
+    }
+  }
+  input[type="checkbox"]{
+    border-radius:$border-radius!important;
+    height: auto;
+    border:1px solid $boredr-color!important;
+  }
+  .half-regi-width{
+    width: 50%;
+    float: left;
+    height: auto;
+    a{
+      font-family: $primary-Fonts;
+      color: $primarycolor;
+      text-align: right;
+      float: right;
+      display: block;
+    }
+  }
+  .form-sp{
+    padding:0px 15px;
+    float: none;
+
+  }
+  .call-bt{
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    font-size: 18px;
+    text-align: center;
+    color: $text-dark-bg;
+    background-color: $button-primary;
+    border:none;
+    font-family:$primary-Fonts;
+    position:absolute;
+    bottom:-50px;
+    left: 0px;
+    a{
+      display: block;
+      color: $text-dark-bg;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+ 
+
+ 
+  .success-text-new{
+    background-color:$alert-bg;
+    border:1px solid $alert-border;
+    width: 100%;
+    float: left;
+    margin:10px 0px;
+    font-family:$primary-Fonts;
+    p{
+      color: $primary-font;
+      text-align: left!important;
+      padding:5px 10px;
+      font-size: 14px;
+      margin: 0px;
+    }
+  }
+
+  .error-text-new{
+    background-color:#F2DEDE;
+    border:1px solid #F0C7C7;
+    width: 100%;
+    float: left;
+    margin:10px 0px;
+    font-family:$primary-Fonts;
+    p{
+      color: #C96E6E;
+      text-align: left!important;
+      padding:5px 10px;
+      font-size: 14px;
+      margin: 0px;
+    }
+  }
+
+
+
+  .each-area-input{
+    width: 100%;
+    float: left;
+    .int-tel-phoneNum{
+      height: 50px;
+      margin-bottom: 5px!important;
+    }
+    .flag-container{
+      height: 50px;
+      .country-list{
+        width: 300px;
+        span{
+          padding:0px;
+          float: none;
+          text-align: left;
+          width: auto;
+        }
+      }
+    }
+  }
+  .relative-v2{
+    position: relative;
+  }
+
+  .autocomplete_v2{
+    position: absolute;
+    z-index: 100;
+    display: block;
+    width:100%;
+    background-color: #fff;
+    border: 1px solid $boredr-color;
+    li{
+      display: block;
+      padding: 5px 10px;
+      font-size:14px;
+      &:hover{
+        background-color: $button-primary;
+        color:$text-dark-bg;
+      }
+    }
+    .active-auto-v2{
+      background-color: $button-primary;
+      color:$text-dark-bg;
+    }
+  }
+}
+
+
+.full-widthv3{
+  width: 49%;
+  float: left;
+  font-size: 16px;
+  background-color:$hover-bt-primary!important;
+  color:$text-dark-bg;
+}
+.respv3-color{
+  background-color:$button-primary!important;
+}
+.through-v3{ margin: 0 auto; width: 210px; margin-bottom: 10px;
+   button{ width: 55px; height: 55px; border-radius: $border-radius;  border: none; color:$text-dark-bg!important; margin: 0 6px; text-align: center;
+       i{ padding-top: 0px; margin:0px!important; padding: 0px!important;font-size:28px; }
+       .hide-sml-screen{ display: none }
+    }
+   .bt-spinner2 img{ height: 24px!important;}
+}
+
+.devider-login{
+  margin:30px 0px; 
+}
+
+.login-bt-margin{
+  margin-top: 20px!important;
+}
+
+.clicks label.css-label{
+  background-size: 25px!important;
+  height: 25px!important;
+}
+.clicks input[type=checkbox].css-checkbox + label.css-label{
+  line-height: 25px!important;
+  color:$text-normal-color!important;
+}
+.clicks input[type=checkbox].css-checkbox:checked + label.css-label {
+  background-position: -3px 0px!important;
+}
+.clicks input[type=checkbox].css-checkbox + label.css-label{
+  background-position: -3px -23px!important;
+}
+.cancel-signin{
+  display: block;
+  text-align: center;
+  padding: 20px 0px;
+  text-decoration: underline;
+  font-size: $normal-font;
+}
+
+
+.ats-signup{
+    max-width: 510px;
+    margin: 0px auto;
+    padding: 50px 0px;
+    min-height: 768px;
+    h1{
+        font-size: 35px;
+        display: block;
+        padding-bottom:30px; 
+    }
+}
+.signin-box{
+    
+    p{
+        display: block;
+        text-align: center;
+    }
+}
+
+
+.sign-up-confirmation-v2{
+  min-height: 760px;
+  text-align: center;
+    i{
+      color: $green;
+      font-size: 50px;
+      display: block;
+      text-align: center;
+      padding-bottom: 20px;
+    }
+}
+
+// Arabic
+// ==========================================================
+.arabic{
+  .clicks input[type=checkbox].css-checkbox[_ngcontent-c1]:checked + label.css-label[_ngcontent-c1] {
+    background-position: 47px 0px !important;
+  }
+  .clicks input[type=checkbox].css-checkbox[_ngcontent-c1] + label.css-label[_ngcontent-c1] {
+    background-position: 47px -23px !important;
+  }
+
+}
+
+
+
+
+/* Respopnsive breakpoint */
+// ============bigScreen===========
+@media all and (max-width: 991px) {
+
+}
+
+// ============MediumScreen========
+@media all and (max-width: 768px) {
+
+  .footer-signin-v5{
+    max-width:90%;
+  }
+
+}
+
+// ============SmallScreen=========
+@media all and (max-width: 480px) {
+  .sign-v3{
+    button{
+      width: 45%;
+    }
+  }
+  .link-v3, .face-v3, .goog-v3{
+    
+    span{
+      display: none;
+    }
+  } 
+  .ats-bt-group{
+    width: 115px;
+    margin:0px auto;
+  }
+  .footer-signin-v5{
+    max-width:90%;
+  }
+  
+}
+
+.login-user-button-e2e{
+    width: 100%;
+    background: $primarycolor;
+    height: $button-height;
+    margin-bottom: 20px;
+    color: $white;
+  i{
+    img{
+      width: 20px;
+    }
+  }
+}

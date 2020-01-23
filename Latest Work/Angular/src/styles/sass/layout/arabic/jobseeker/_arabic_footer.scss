@@ -1,0 +1,38 @@
+ .arabic{
+    footer .footer-links a{
+        padding-left: 10px;
+        padding-right: inherit;
+    }
+    .social-media{
+    	width: 100%;
+    }
+    .footer-signin-v5{
+    	span{
+    		font-family: inherit;
+    		text-align: left;
+    		float: left;
+    	}
+    	h3{
+    		text-align: right;
+    	}
+    }
+ }
+
+
+/*---------------------------------------------------1-------------------------------------------------------*/
+@media (max-width: 767px) {
+	.arabic{
+		.footer-signin-v5{
+	        span{
+	            margin:0px;
+	            text-align: center;
+	            float: right;
+	            color: #7ba1b2;
+	            font-family: inherit!important;
+	            &:hover{
+	                cursor: pointer;     
+	            }
+	        }
+	    }
+	}
+}

@@ -1,0 +1,677 @@
+<div class="container">
+<div class="tab-content load-data-js jbProfile" *ngIf="(profile_completed$ | async)">
+    <div role="tabpanel" class="tab-pane" [class.active]="ismyProfile" id="my-profile">
+
+        <div *ngIf="!(cachedProfile$ | async)" class="empty-min2">
+            <i class="small_loading">
+                <spinner></spinner>
+            </i>
+        </div>
+
+        <div  *ngIf="(cachedProfile$ | async)">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="block display bottom-gap padd-15">
+                    <!-- TODO: Check with Sajeer -->
+                    <div class=" col-lg-9 col-md-9 col-sm-12 col-xs-12 arabic-right-left padding-left-none">
+                        <!-- dp section -->
+                        <i class="spinner-prf" *ngIf="(loadSpinner$ | async)">
+                            <spinner></spinner>
+                        </i>
+                        <div class="saved" *ngIf="profile_status == 'read' && !(loadSpinner$| async) "><!-- save -->
+                            <div class=" dp-lft arabic-right-left">
+                                <div class="right mobile visble-xs"><a (click)="onEditProfile()"><span class="light"><i
+                                        class="zmdi zmdi-edit"></i> {{fixedTextHash['edit'][currLan]}}</span></a>
+                                </div>
+                                <div class="dp">
+                                    <span *ngIf="(avatar$ | async) && (avatar$ | async) != ''">
+                                         <img [attr.src]="(avatar$ | async)" class="dp dp_egg">
+                                    </span>
+                                    <span *ngIf="!(avatar$ | async)">
+                                        <div class="dp-empty">
+                                            <a>
+                                                <i *ngIf="(cachedProfile$ | async)?.general_info?.gender == 'male'" class="icon-male-ats"></i>
+                                                <i *ngIf="(cachedProfile$ | async)?.general_info?.gender == 'female'" class="icon-female-ats"></i>
+                                            </a>
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="dp-rgt arabic-right-left">
+
+                                <div class="profile_name_txt border-none padding-0">
+                                    <div class="left-dp arabic-right-left"><h3 class="mob-center-text">{{first_name}}
+                                        {{last_name}}</h3></div>
+                                    <div class="desktop mobile-edit arabic-left-right"><a
+                                            (click)="onEditProfile()"><span class="light"><i
+                                            class="zmdi zmdi-edit"></i> {{fixedTextHash['edit'][currLan]}}</span></a>
+                                    </div>
+                                    <div class=" clearfix"></div>
+                                </div>
+
+
+                                <div class="box-manual">
+                                    <div class="dp-txt">
+
+                                        <h3 class="rounded">
+                                            <i class="zmdi zmdi-account"></i>
+                                            <span>{{(latestWorkPositionName$ | async )}}</span>
+                                        </h3>
+
+                                    </div>
+                                    <div class="dp-txt">
+                                        <h1 class="rounded">
+                                            <i class="zmdi zmdi-view-headline"></i>
+                                            <span class="navy bold">{{(latestWorkCompanyName$ | async)}}</span>
+                                        </h1>
+
+                                    </div>
+
+                                    <div class="dp-txt">
+                                        <h3 class="rounded">
+                                            <i class="zmdi zmdi-chart-donut"></i>
+                                            <span>{{(latestWorkSectorName$ | async)}}</span>
+                                        </h3>
+
+                                    </div>
+                                    <div class="dp-txt padding-btm-10">
+                                        <h3 class="rounded">
+                                            <i class="zmdi zmdi-pin"></i>
+                                            <span *ngIf="countryObj">{{cityObj.name}}{{fixedTextHash['comma'][currLan]}}&nbsp;{{countryObj.name}}</span>
+                                            <span *ngIf="!countryObj">{{cityObj.name}}</span>
+                                        </h3>
+                                        <div class="clearfix"></div>
+                                    </div>
+
+                                    <div class="social-section fit-on-mob">
+                                        <div class="left arabic-right-left">
+                                            <div class="social-media">
+                                                <a *ngIf="social_media_facebook"
+                                                   href="{{gethtpValidate(social_media_facebook)}}" target="_blank">
+                                                    <div class="s-media facebook"><i class="zmdi zmdi-facebook"></i>
+                                                    </div>
+                                                </a>
+                                                <a *ngIf="!social_media_facebook" target="_blank">
+                                                    <div class="s-media facebook social-desable"><i
+                                                            class="zmdi zmdi-facebook"></i></div>
+                                                </a>
+                                                <a *ngIf="social_media_twitter"
+                                                   href="{{gethtpValidate(social_media_twitter)}}" target="_blank">
+                                                    <div class="s-media twitter"><i class="zmdi zmdi-twitter"></i></div>
+                                                </a>
+                                                <a *ngIf="!social_media_twitter" target="_blank">
+                                                    <div class="s-media twitter social-desable"><i
+                                                            class="zmdi zmdi-twitter"></i></div>
+                                                </a>
+                                                <a *ngIf="social_media_linkedIn"
+                                                   href="{{gethtpValidate(social_media_linkedIn)}}" target="_blank">
+                                                    <div class="s-media linkdin"><i class="zmdi zmdi-linkedin"></i>
+                                                    </div>
+                                                </a>
+                                                <a *ngIf="!social_media_linkedIn" target="_blank">
+                                                    <div class="s-media linkdin social-desable"><i
+                                                            class="zmdi zmdi-linkedin"></i></div>
+                                                </a>
+                                                <a *ngIf="social_media_google_plus"
+                                                   href="{{gethtpValidate(social_media_google_plus)}}" target="_blank">
+                                                    <div class="s-media google-plus"><i
+                                                            class="zmdi zmdi-google-plus"></i>
+                                                    </div>
+                                                </a>
+                                                <a *ngIf="!social_media_google_plus" target="_blank">
+                                                    <div class="s-media google-plus social-desable"><i
+                                                            class="zmdi zmdi-google-plus"></i>
+                                                    </div>
+                                                </a>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="right block-title-2 border-none padding-0 arabic-left-right">
+                                            <span class="cancel padding-0 arabic-right-left">
+
+                                                <button class="bt-pdf" *ngIf="!showDownloadSpinner"
+                                                        (click)="onSavePDF()">
+                                                    <!-- Spinner -->
+                                                    <i class="zmdi zmdi-floppy"></i>
+                                                    {{fixedTextHash['save_profile_in_pdf'][currLan]}}
+                                                </button>
+                                                <button class="bt-pdf disabled_button" *ngIf="showDownloadSpinner">
+                                                  {{fixedTextHash['save_profile_in_pdf'][currLan]}}
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="edit" *ngIf="profile_status == 'edit'"><!-- edit -->
+
+                            <form [style.display]="!(loadSpinner$ | async) ?'block':'none'" [formGroup]="profile_form">
+
+                                <div *ngIf="profilePostError" class="main-alert error-message">{{fixedTextHash['could_not_update'][currLan]}}
+                                </div>
+
+                                <div *ngIf="(!profile_form.valid && profile_form.dirty) || !profilePristine"
+                                     class="main-alert2 error-message">
+                                </div>
+
+                                <div class="dp-lft arabic-right-left">
+                                    <div class="dp">
+
+                                        <div *ngIf="(avatar$ | async) == null " class="dp-empty">
+                                            <a href="#" data-toggle="modal" data-target=".upload-dp"><i
+                                                    class="zmdi zmdi-camera-add"></i></a>
+                                        </div>
+                                        <span *ngIf="(avatar$ | async) != null  && (avatar$ | async) != '' ">
+                                             <img [attr.src]="(avatar$ | async)" class="dp dp_egg">
+                                        </span>
+
+                                        <div class="dp-edit">
+                                            <a href="#" data-toggle="modal"
+                                               [attr.data-target]="'.'+file_profile.classMap">
+                                                <i class="zmdi zmdi-camera-add"></i>
+                                            </a>
+                                            <a *ngIf="(avatar$ | async)" href="#" data-toggle="modal"
+                                               [attr.data-target]="'.delete-'+file_profile.classMap">
+                                                <i class="zmdi zmdi-delete"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="dp-edit-right-section arabic-right-left">
+                                    <div class="dp-rgt-1 arabic-right-left">
+                                        <div class="dp-input">
+                                            <div class="half-box">
+                                                <input type="text"
+                                                       placeholder="{{fixedTextHash['first_name'][currLan]}}"
+                                                       [ngModel]="first_name"
+                                                       name="profile_first_name"
+                                                       formControlName="first_name" minlength="1" maxlength="15">
+
+                                                <ul>
+                                                    <li *ngIf="(profile_form.controls['first_name'].touched || !profilePristine) && profile_form.controls['first_name'].errors">
+                                                        <div class="alert alert-danger alert-dismissible" role="alert">
+                                                            {{fixedTextHash['empty_first_name'][currLan]}}
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="half-box">
+                                                <input type="text"
+                                                       [ngModel]="last_name"
+                                                       placeholder="{{fixedTextHash['last_name'][currLan]}}"
+                                                       name="profile_last_name"
+                                                       formControlName="last_name" minlength="1" maxlength="15">
+                                                <ul>
+                                                    <li *ngIf="(profile_form.controls['last_name'].touched || !profilePristine) && profile_form.controls['last_name'].errors">
+                                                        <div class="alert alert-danger alert-dismissible" role="alert">
+                                                            {{fixedTextHash['empty_last_name'][currLan]}}
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class=" clearfix"></div>
+                                        </div>
+
+                                        <div class="dp-txt">
+                                            <h3 class="rounded"><i class="zmdi zmdi-account"></i><span> {{(latestWorkPositionName$ | async )}}</span>
+                                            </h3>
+                                        </div>
+                                        <div class="dp-txt">
+                                            <h3 class="rounded">
+                                                <i class="zmdi zmdi-view-headline"></i>
+                                                <span class="navy">{{(latestWorkCompanyName$ | async)}}</span>
+                                            </h3>
+
+                                        </div>
+                                        <div class="dp-txt">
+                                            <h3 class="rounded">
+                                                <i class="zmdi zmdi-chart-donut"></i>
+                                                <span> {{(latestWorkSectorName$ | async)}}</span>
+                                            </h3>
+                                        </div>
+
+                                        <div class="dp-input margin-top-5">
+                                            <div class="half-box">
+                                                <div class="btn-group">
+                                                    <bootstrap-selectbox
+                                                            *ngIf="countryList"
+                                                            (selectedId)="country_id =$event.id;countryObj.id = $event.id;profile_form.controls['city_id'].setValue(null)"
+                                                            [selectedValue]="countryObj.id"
+                                                            [placeholder]="'Select a Country'"
+                                                            [selectList]="countryList">
+                                                    </bootstrap-selectbox>
+
+                                                    <input type="hidden" name="profile_country"
+                                                           [ngModel]="countryObj.id" formControlName="country_id">
+
+                                                </div>
+                                                <ul>
+                                                    <li *ngIf="(profile_form.controls['country_id'].touched || !profilePristine) && profile_form.controls['country_id'].errors">
+                                                        <div class="alert alert-danger alert-dismissible" role="alert">
+                                                            Please Select a Country
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="half-box relative">
+                                                <div class="btn-group margin-btm-5">
+                                                    <input type="hidden" name="profile_city"
+                                                           [ngModel]="cityObj.id" formControlName="city_id">
+
+
+                                                    <span *ngFor="let sel_country of countryList">
+                                                    <auto-comp1 *ngIf="sel_country.id == country_id"
+                                                                [resetOnEmpty]="true"
+                                                                [countryId]="sel_country.id"
+                                                                [current_city]="cityObj"
+                                                                [initData]="sel_country.id == cityObj.country_id ?[cityObj]:[]"
+                                                                (changeCityId)="onSelectCity($event)">
+                                                    </auto-comp1>
+                                                </span>
+                                                </div>
+                                                <ul>
+                                                    <li *ngIf="(profile_form.controls['city_id'].touched || !profilePristine) && (profile_form.controls['city_id'].errors)">
+                                                        <div class="alert alert-danger alert-dismissible martop5"
+                                                             role="alert">
+                                                            {{fixedTextHash['empty_city'][currLan]}}
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <div class=" clearfix"></div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="dp-rgt-2 block-title-2 padding-0 border-none desktop desktop1 arabic-right-left">
+                                        <button (click)="onSubmitProfile()"><i class="zmdi zmdi-floppy"></i>&nbsp;{{fixedTextHash['save'][currLan]}}
+                                        </button>
+                                        <span class="cancel padding-0 arabic-width-100">
+                                        <a (click)="onReadProfile()" class="cursor_pointer1">
+                                            <div class="prf-cncel"><i class="zmdi zmdi-close"></i>&nbsp;{{fixedTextHash['cancel'][currLan]}}</div>
+                                        </a>
+                                    </span>
+                                        <div class=" clearfix"></div>
+                                    </div>
+                                </div>
+
+                                <div class="soc">
+                                    <div class="social-section">
+                                        <div class="social-media desktop"><!-- desktop -->
+                                            <div class="fb">
+                                                <ul>
+                                                    <li>
+                                                        <span (click)="onToggleSocialMedia('facebook')"
+                                                              class="s-media facebook " id="fb">
+                                                            <i class="zmdi zmdi-facebook"></i>
+                                                        </span>
+                                                        <div id="fb-section" *ngIf="facebookToggleFlag"
+                                                             class="social-area">
+                                                            <input type="text"
+                                                                   class="feld-url"
+                                                                   name="profile_facebook"
+                                                                   formControlName="facebook"
+                                                                   placeholder="Facebook">
+                                                        </div>
+                                                        <div class=" clearfix"></div>
+                                                    </li>
+
+                                                    <li>
+                                                        <span (click)="onToggleSocialMedia('googleplus')"
+                                                              class="s-media google-plus " id="gp">
+                                                            <i class="zmdi zmdi-google-plus"></i>
+                                                        </span>
+
+                                                        <div id="gp-section" *ngIf="googleplusToggleFlag"
+                                                             class="social-area">
+                                                            <input type="text" class="feld-url"
+                                                                   formControlName="google_plus"
+                                                                   name="profile_google_plus"
+                                                                   placeholder="Google Plus">
+                                                        </div>
+                                                        <div class=" clearfix"></div>
+
+                                                    </li>
+
+
+                                                    <li>
+                                                        <span (click)="onToggleSocialMedia('twitter')"
+                                                              class="s-media twitter " id="tw">
+                                                            <i class="zmdi zmdi-twitter"></i>
+                                                        </span>
+                                                        <div id="tw-section" *ngIf="twitterToggleFlag"
+                                                             class="social-area">
+                                                            <input type="text"
+                                                                   class="feld-url"
+                                                                   name="profile_twitter"
+                                                                   formControlName="twitter"
+                                                                   placeholder="Twitter">
+                                                        </div>
+                                                        <div class=" clearfix"></div>
+
+                                                    </li>
+                                                    <li>
+                                                        <span (click)="onToggleSocialMedia('linkedIn')"
+                                                              class="s-media linkdin " id="in">
+                                                            <i class="zmdi zmdi-linkedin"></i>
+                                                        </span>
+                                                        <div id="in-section" *ngIf="linkedInToggleFlag"
+                                                             class="social-area">
+                                                            <input type="text"
+                                                                   class="feld-url"
+                                                                   formControlName="linkedIn"
+                                                                   name="profile_linkedIn"
+                                                                   placeholder="LinkedIn">
+                                                        </div>
+                                                        <div class=" clearfix"></div>
+
+                                                    </li>
+
+
+                                                    <div class=" clearfix"></div>
+                                                </ul>
+                                            </div>
+                                            <div *ngIf="((profile_form.controls['linkedIn'].touched || !profilePristine) && profile_form.controls['linkedIn'].errors) ||
+                                                         ((profile_form.controls['twitter'].touched || !profilePristine) && profile_form.controls['twitter'].errors) ||
+                                                         ((profile_form.controls['google_plus'].touched || !profilePristine) && profile_form.controls['google_plus'].errors) ||
+                                                         ((profile_form.controls['facebook'].touched || !profilePristine) && profile_form.controls['facebook'].errors)"
+                                                 class="alert alert-danger alert-dismissible social-alert-position"
+                                                 role="alert">
+                                                {{fixedTextHash['copy_url'][currLan]}}
+                                            </div>
+                                            <div class=" clearfix"></div>
+                                        </div>
+
+                                        <div class=" mobile"><!-- mobile -->
+                                            <div *ngIf="((profile_form.controls['linkedIn'].touched || !profilePristine) && profile_form.controls['linkedIn'].errors) ||
+                                                         ((profile_form.controls['twitter'].touched || !profilePristine) && profile_form.controls['twitter'].errors) ||
+                                                         ((profile_form.controls['google_plus'].touched || !profilePristine) && profile_form.controls['google_plus'].errors) ||
+                                                         ((profile_form.controls['facebook'].touched || !profilePristine) && profile_form.controls['facebook'].errors)"
+                                                 class="alert alert-danger alert-dismissible" role="alert">
+                                                {{fixedTextHash['copy_url'][currLan]}}
+                                            </div>
+                                            <div class="fb123">
+                                                <div class="full-box12 social-media">
+                                                    <input type="text"
+                                                           placeholder="{{fixedTextHash['url'][currLan]}}"
+                                                           name="profile_facebook"
+                                                           [ngModel]="social_media_facebook"
+                                                           formControlName="facebook">
+                                                    <div class="s-media facebook"><i class="zmdi zmdi-facebook"></i>
+                                                    </div>
+                                                </div>
+
+                                                <div class="full-box12 social-media">
+                                                    <input type="text"
+                                                           placeholder="{{fixedTextHash['url'][currLan]}}"
+                                                           name="profile_twitter"
+                                                           [ngModel]="social_media_twitter"
+                                                           formControlName="twitter">
+                                                    <div class="s-media twitter"><i class="zmdi zmdi-twitter"></i></div>
+                                                </div>
+
+                                                <div class="full-box12 social-media">
+                                                    <input type="text"
+                                                           placeholder="{{fixedTextHash['url'][currLan]}}"
+                                                           name="profile_linkedIn"
+                                                           [ngModel]="social_media_linkedIn"
+                                                           formControlName="linkedIn">
+                                                    <div class="s-media linkdin"><i class="zmdi zmdi-linkedin"></i>
+                                                    </div>
+                                                </div>
+
+                                                <div class="full-box12 social-media">
+                                                    <input type="text"
+                                                           placeholder="{{fixedTextHash['url'][currLan]}}"
+                                                           name="profile_google_plus"
+                                                           [ngModel]="social_media_google_plus"
+                                                           formControlName="google_plus">
+                                                    <div class="s-media google-plus"><i
+                                                            class="zmdi zmdi-google-plus"></i>
+                                                    </div>
+                                                </div>
+                                                <div class=" clearfix"></div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="dp-rgt-2 block-title-2 padding-0 border-none mobile mobile1 margin-top-5">
+                                    <button (click)="onSubmitProfile()">
+                                        <i class="zmdi zmdi-floppy"></i>&nbsp;{{fixedTextHash['save'][currLan]}}
+                                    </button>
+
+                                    <button (click)="onReadProfile()" class="bt-blank-button">
+                                        <i class="zmdi zmdi-close"></i>&nbsp;{{fixedTextHash['cancel'][currLan]}}
+                                    </button>
+
+                                    <div class=" clearfix"></div>
+                                </div>
+                                <div class=" clearfix"></div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class=" col-lg-3 col-md-3 col-sm-12 col-xs-12 video padding-left-none"><!-- video -->
+                        <div class="saved" *ngIf="profile_video == 'read'"><!--saved-->
+                            <div class="vedio-head">
+                                <div class="left arabic-right-left"><i class="zmdi zmdi-videocam "></i>{{fixedTextHash['my_video'][currLan]}}
+                                </div>
+                                <div class="right arabic-left-right"><a class="cursor_pointer1" (click)="onEditVideo()"><span
+                                        class="light"><i
+                                        class="zmdi zmdi-edit"></i> {{fixedTextHash['edit'][currLan]}}</span></a>
+                                </div>
+                                <div class=" clearfix"></div>
+                            </div>
+
+
+                            <video-style *ngIf="(social_media_video$ | async)"
+                                         [social_media_video]="social_media_video$"
+                                         [video_screenshot]="video_screenshot$">
+                            </video-style>
+
+                            <div *ngIf="!(social_media_video$ | async)" class="vedio-box">
+                                <div class="vedio-cover padding-12 cursor_pointer1" (click)="onEditVideo()">
+                                    <i class="icon-Elevator-Video"></i>
+                                    <h5> {{fixedTextHash['add_video'][currLan]}} </h5>
+                                </div>
+                                <div class=" clearfix"></div>
+                            </div>
+                        </div>
+
+                        <div class="edit" *ngIf="profile_video == 'edit'"><!--edit-->
+                            <div class="vedio-head">
+                                <div class="left"><i class="zmdi zmdi-videocam"></i>
+                                    {{fixedTextHash['my_video'][currLan]}}
+                                </div>
+                                <div class="right">
+
+                                    <a (click)="onReadVideo()" class="cursor_pointer1">
+                                        <span class="light"> {{fixedTextHash['cancel'][currLan]}}</span>
+                                    </a>
+
+                                </div>
+                                <div class=" clearfix"></div>
+                            </div>
+                            <div class="vedio-box">
+                                <div class="vedio-cover">
+                                    <div *ngIf="!(social_media_video$ | async)" class="vedio-cover">
+                                        <a href="#" data-toggle="modal"
+                                           [attr.data-target]="'.'+file_video.classMap">
+                                            <i class="icon-Elevator-Video"></i>
+                                            <h5>{{fixedTextHash['add_video'][currLan]}}</h5>
+                                        </a>
+                                    </div>
+                                    <img *ngIf="(social_media_video$ | async)" src="{{ (video_screenshot$ | async) }}"
+                                         width="100%">
+                                    <!--<img src="{{social_media?.video}}" width="100%">-->
+                                </div>
+
+                                <div class=" block-title-2 border-none padding-btm-0 pading-top-10">
+                                    <a href="#" data-toggle="modal"
+                                       [attr.data-target]="'.'+file_video.classMap">
+
+                                        <button> {{fixedTextHash['upload_video'][currLan]}}</button>
+
+                                    </a>
+                                    <a [style.display]="(social_media_video$ | async)?'inline':'none'"
+                                       data-toggle="modal" [attr.data-target]="'.delete-video'">
+                                        <button><i class="zmdi zmdi-delete"></i>&nbsp;{{fixedTextHash['delete'][currLan]}}
+                                        </button>
+                                    </a>
+                                </div>
+
+                                <div class=" clearfix"></div>
+                            </div>
+
+
+                            <div class=" clearfix"></div>
+                        </div>
+                    </div>
+                    <div class=" clearfix"></div>
+                </div>
+            </div>
+
+            <!--Address-->
+            <!--===========================================================================================-->
+            <address_contact_resume (onUpdateProfileStatus)="onUpdateProfileStatus()"
+                                    [cachedProfile]="cachedProfile$"
+                                    [jobSeekerAddress]="jobSeekerAddress$"
+                                    [jobSeekerContact]="jobSeekerContact$"
+                                    [resumes]="resume"
+                                    [coverLetters]="cover_letter"
+                                    [commonData]="commonData$">
+            </address_contact_resume>
+
+            <!--General Info-->
+            <!--===========================================================================================-->
+            <general_info [percentage]="percentage$"
+                          (onUpdateProfileStatus)="onUpdateProfileStatus()"
+                          [generalInfo]="generalInfo"
+                          [jobSeekerGeneralInfo]="jobSeekerGeneralInfo$">
+            </general_info>
+
+            <!--Summary-->
+            <!--===========================================================================================-->
+            <profile-summary [summary]="summary" (onUpdateProfileStatus)="onUpdateProfileStatus()"></profile-summary>
+
+            <!--Work Education Certificate-->
+            <!--===========================================================================================-->
+            <work-edu-cert [cachedProfile]="cachedProfile$"
+                           (onUpdateProfileStatus)="onUpdateProfileStatus()"
+                           [commonData]="commonData$">
+            </work-edu-cert>
+
+            <!--Skills-->
+            <!--===========================================================================================-->
+            <profile-skills [skills]="skills$" (onUpdateProfileStatus)="onUpdateProfileStatus()"></profile-skills>
+
+            <!--Tags-->
+            <!--===========================================================================================-->
+            <job-tags [tags]="tags$" (onUpdateProfileStatus)="onUpdateProfileStatus()"></job-tags>
+
+        </div>
+    </div>
+
+</div>
+<up-load *ngIf="(profile_completed$ | async)"
+         [file]="file_video"
+         (onUpload)="onVideoUploaded($event)">
+
+</up-load>
+<up-load *ngIf="profile_status == 'edit' && (profile_completed$ | async)"
+         [mode]="'imageCrop'" [file]="file_profile"
+         (onUpload)="onAvatarUploaded($event)">
+
+</up-load>
+
+<div class="popup" *ngIf="(avatar$ | async) && (profile_completed$ | async)">
+    <div class="upload-pop">
+
+        <div class="close_delete modal delete-{{file_profile.classMap}}" tabindex="-1" role="dialog"
+             aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <div class="modal-body upload-dp">
+                        <button class="close" aria-hidden="true" data-dismiss="modal" type="button">×</button>
+
+                        <h2>{{fixedTextHash['delete_pic'][currLan]}}</h2>
+
+                        <h4><span class="navy" [innerHTML]="fixedTextHash['sure_delete_pic'][currLan]"> </span></h4>
+
+                        <div class="pop-button">
+                            <button type="button" class="btn postive" (click)="onDeleteImage()">
+                                {{fixedTextHash['delete'][currLan]}}
+                            </button>
+                            <button type="button" class="btn negative" data-dismiss="modal" aria-hidden="true">
+                                {{fixedTextHash['cancel'][currLan]}}
+                            </button>
+                            <div class="clr"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Delete Saved Search Pop up-->
+<div class="popup" *ngIf="(profile_completed$ | async)">
+    <div class="logout-pop">
+        <div class="modal close_delete delete-avatar" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button class="close following" aria-hidden="true" data-dismiss="modal" type="button">×</button>
+                        <h2>Delete Video</h2>
+
+                        <h4><span class="navy" [innerHTML]="fixedTextHash['sure_delete_pic'][currLan]"></span></h4>
+                        <div class="pop-button">
+                            <button (click)="onDeleteImage()" type="button" class="btn postive">
+                                {{fixedTextHash['delete'][currLan]}}
+                            </button>
+                            <button type="button" class="btn negative" data-dismiss="modal">
+                                {{fixedTextHash['cancel'][currLan]}}
+                            </button>
+                            <div class="clr"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="popup" *ngIf="(profile_completed$ | async)">
+    <div class="logout-pop">
+        <div class="modal close_delete delete-video" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button class="close following" aria-hidden="true" data-dismiss="modal" type="button">×</button>
+                        <h2>{{fixedTextHash['delete_video'][currLan]}}</h2>
+
+                        <h4><span class="navy" [innerHTML]="fixedTextHash['sure_delete_video'][currLan]"></span></h4>
+                        <div class="pop-button">
+                            <button (click)="onDeleteVideo()" type="button" class="btn postive">
+                                {{fixedTextHash['delete'][currLan]}}
+                            </button>
+                            <button type="button" class="btn negative" data-dismiss="modal">
+                                {{fixedTextHash['cancel'][currLan]}}
+                            </button>
+                            <div class="clr"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="!(profile_completed$ | async)">
+</div>
+
+</div>

@@ -1,0 +1,217 @@
+// font-family
+@font-face {
+    font-family: 'Noto Kufi Arabic';
+    src: url('../../assets/fonts/kufi/NotoKufiArabic.woff2') format('woff2'),
+        url('../../assets/fonts/kufi/NotoKufiArabic.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Noto Kufi Arabic';
+    src: url('../../assets/fonts/kufi/NotoKufiArabic-Bold.woff2') format('woff2'),
+        url('../../assets/fonts/kufi/NotoKufiArabic-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+.jobapplicant .new-list .newlistleft .newlistdp-right .oth-sec h4{
+  margin:0px 10px;
+}
+
+.arabic{
+
+
+
+  // * All arabic font changed to new font family
+  // ===================================================
+
+ 
+
+  h1, h2, h3{
+    font-weight: bold;
+  }
+  
+  .feturd-matching-percentage .circle{
+    width: 100%;
+  }
+  .my-job .feedback-open h5{
+    left:16px;
+    right:inherit;
+  }
+  #my-jobs .feturd-compny-dtls{
+    width: calc(100% - 115px);
+  }
+  .my-job .myjob-border {
+    .arabic-min-height-140{
+      min-height: 140px;
+    }
+  }
+  .block .block-title-2 .cancel{
+    float: none;
+  }
+  .calculate-bt{
+    height: auto;
+  }
+  .my-job .tracking .track .light{
+    bottom: inherit;
+  }
+   .slid-frm .slid-container .reg-btn button{
+     float: left;
+   }
+
+   .slid-frm .slid-container .reg-btn .nxt{
+     margin-right:5px;
+   }
+   .slid-frm .slid-container .reg-btn button{
+     float: left;
+   }
+   .slid-frm .slid-container .slid-section .slid-right .reg-capcha .reg-btn-emp{
+     float: left;
+   }
+   .box-radio-v2 .half-radio-v2 .text-check-bx{
+     text-align: left;
+   }
+   .box-radio-v2 .half-radio-v2 .text-lebal{
+     text-align: right;
+   }
+   .languages-v2 li i{
+     margin-left: 10px;
+   }
+   .tag-new{
+     margin-left: 5px;
+     margin-right: 0px;
+     margin-right: inherit;
+   }
+   .job-socail{
+     .rrssb-buttons{
+       span{
+         margin-right: 2px!important;
+       }
+     }
+   }
+    .side-body{
+          margin:0px auto;
+    }
+
+    .nav-tabs>li{
+      float: right;
+    }
+  
+     // Right to left all section / this is common style for all
+    .arabic-right-left{
+        float: right!important;
+    }
+    .arabic-left-right{
+        float: left!important;
+    }
+
+    // dropdownl text
+    .autocomplete_v2 li{
+      text-align: right;
+    }
+
+    // country list
+    .intl-tel-input .country-list{
+      text-align: right;
+    }
+
+    // arabic-left-right
+    .alert{
+      text-align: right;
+    }
+
+    // pagination
+    .bloovo-pagination .page-nation{
+      float: right;
+    }
+
+    .main-tab{
+      ul{
+        li{
+          i{
+            float: right;
+            margin-left: 5px;
+          }
+        }
+      }
+    }
+
+    .package-info-v2 .pk-common .left-pk{
+      float: right;
+    }
+
+    .arabic-logo{
+      width: 130px!important;
+    }
+   
+    .mg-arabic{
+      margin-right: 5px;
+    }
+    .arabic-center-txt{
+      text-align: center!important;
+      float: none!important;
+    }
+    .arbic-text-right{
+      text-align: right!important;
+    }
+    .mg-right-arabic-10{
+      margin-right: 10px;
+    }
+    .block-arabic{
+      display: block!important;
+    }
+    .arabic-no-margin{
+      margin: 0px!important;
+    }
+    .arabic-width-100{
+      width: 100%!important;
+    }
+    .trim-arbic-text{
+        white-space: nowrap;
+        width: 65%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .arabic-width-100{
+      width: 100%!important;
+    }
+
+ }
+
+
+@media (min-width: 767px) and (max-width: 768px){
+  .arabic .commen-container{
+        padding: 0px 3px!important;
+        margin-top: 108px!important;
+    }
+    .arabic .commen-container-less{
+      margin-top: 60px!important;
+    }
+}
+
+/*---------------------------------------------------2-------------------------------------------------------*/
+@media (min-width: 768px) and (max-width: 1024px){
+
+}
+
+/*---------------------------------------------------3-------------------------------------------------------*/
+@media (max-width: 767px) {
+  .arabic{
+    .arabic-width-100-mobile{
+      width: 100%!important;
+    }
+  }
+
+}
+/*---------------------------------------------------4-------------------------------------------------------*/
+
+@media (max-width: 480px) {
+  .arabic{
+   
+  }
+}
+
+
+
+

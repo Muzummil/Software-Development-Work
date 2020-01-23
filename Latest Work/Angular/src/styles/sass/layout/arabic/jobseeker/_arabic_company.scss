@@ -1,0 +1,135 @@
+ .arabic{
+    #all-companies .align{
+      text-align: left;
+    }
+    .employers-details .cover-back{
+      left: 20px;
+      right:inherit;
+    }
+    .employers-details .employers-logo{
+      float: right;
+    }
+    .display .social-section{
+      .social-media{
+        float: right;
+      }
+    }
+    .employers-details .employers-detail{
+      padding-right: 10px !important;
+      padding-left: inherit;
+    }
+    .block .block-title-2 span{
+      display: inline-block;
+      // float: right;
+      padding-right: 0px;
+    }
+    .employers-details .employers-information .requirement .req-1{
+      float: right;
+    }
+    .block .block-title-2 button{
+      .zmdi-arrow-left{
+        display: none;
+      }
+    }
+    .my-job .tracking{
+      width: 420px;
+    }
+    .my-job .tracking .track .big-icn{
+      width: 57px;
+    }
+    .my-job .tracking .track .light{
+        width: 120px;
+        left: -29px;
+    }
+    .my-job .tracking .track .app-light{
+      left: -30px!important;
+    }
+    .job-sec button{
+      padding: 0px!important;
+      float: none;
+    }
+     .border-our-jobs a{
+      float: none!important;
+    }
+    .white-box ul li{
+      padding-right:20px;
+      padding-left:inherit;
+      background-position:right;
+    }
+
+ }
+
+
+// responsive
+
+/*---------------------------------------------------1-------------------------------------------------------*/
+@media (max-width: 1200px){
+         
+}
+
+/*---------------------------------------------------2-------------------------------------------------------*/
+@media (min-width: 768px) and (max-width: 1024px){
+    
+}
+
+/*---------------------------------------------------3-------------------------------------------------------*/
+
+@media (max-width: 767px) {
+  
+  .arabic .display .social-section{
+    float: none;
+    .social-media{
+      float: inherit!important;
+    }
+
+  }
+  .arabic{
+    .employers-details .employers-information .requirement .req-2{
+      float: right;
+      padding-left:0px;
+      padding-right:10px;
+    }
+    .employers-details .employers-tab #our-jobs .col-lg-2{
+      text-align: right;
+    }
+    #all-companies .company-following{
+      float: right;
+    }
+  }
+ 
+
+}
+/*---------------------------------------------------4-------------------------------------------------------*/
+
+@media (max-width: 480px) {
+
+  .arabic .display .social-section{
+    float: none;
+    .social-media{
+      float: inherit!important;
+    }
+  }
+  .arabic{
+    .employers-details .employers-information .requirement .req-2{
+      float: right;
+      padding-left:0px;
+      padding-right:10px;
+    }
+    .employers-details .employers-tab #our-jobs .col-lg-2{
+      text-align: right;
+    }
+  }
+   .block .block-title-2 button{
+      .zmdi-arrow-left{
+        display: block!important;
+      }
+    }
+    .application-status-t-myjob-action .tracking-status{
+      margin-top: 10px;
+    }
+    .application-status-t-myjob-action{
+      margin-top: 20px;
+      height: auto;
+    }
+
+}

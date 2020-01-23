@@ -1,0 +1,163 @@
+<form [formGroup]="workForm" [class.arabic]="accountService.isArabic()">
+
+    <div class="fal-shadow-container">
+        <!-- spinner -->
+        <!-- ================================= -->
+        <i class="spinner-prf" *ngIf="(spinnerLoader$ | async)">
+            <spinner></spinner>
+        </i>
+
+        <div *ngIf="!(spinnerLoader$ | async)">
+
+            <!-- start Work Experience delete button -->
+            <button *ngIf="jobseekerType!='coops' && jobseekerType!='summer_training'" class="btn-delete-work-experience" [class.disabled_button]="!allowDelete" (click)="getRemoveMe()"><i
+                    class="zmdi zmdi-delete"></i></button>
+            <!-- end Work Experience delete button -->
+
+            <!-- start company -->
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left form-group">
+                <label class="light-label">{{fixedTextHash['company'][currLan]}}</label>
+                <input type="text" name="formCompany_company_name"
+                    placeholder="{{fixedTextHash['add_company'][currLan]}}" formControlName="company_name" minlength="1"
+                    maxlength="50"
+                    [class.error-feild]="(!(prestineForm$ | async) && !workForm.controls['company_name'].valid ) || (workForm.controls['company_name'].touched && !workForm.controls['company_name'].valid)"    
+                >
+                <input type="hidden" name="formCompany_company_id" formControlName="company_id">
+            </div>
+            <!-- end company -->
+
+            <!-- start Job Title -->
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left form-group">
+                <label class="light-label">{{fixedTextHash['title'][currLan]}}</label>
+                <input type="text" name="company_title" name="formCompany_company_title" formControlName="company_title"
+                    placeholder="{{fixedTextHash['job_title_txt'][currLan]}}" minlength="1" maxlength="50"
+                    [class.error-feild]="(!(prestineForm$ | async) && ! workForm.controls['company_title'].valid )||( workForm.controls['company_title'].touched && ! workForm.controls['company_title'].valid)"                        
+                >
+            </div>
+            <!-- end Job Title -->
+
+            <!-- start Sector -->
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left form-group">
+                <label class="light-label">{{fixedTextHash['sector'][currLan]}}</label>
+                <input type="hidden" #workSectorInpt name="formCompany_company_sector_id"
+                    formControlName="company_sector_id">
+                <bootstrap-selectbox *ngIf="sectorList"
+                    (selectedId)="workForm.controls['company_sector_id'].setValue($event.id)"
+                    [selectedValue]="workSectorInpt.value" [placeholder]="fixedTextHash['sector'][currLan]"
+                    [selectList]="sectorList"
+                    (onEmptyText)="workSectorInpt.value=null;makeControlInvalid(workForm.controls['company_sector_id'])"
+                    [error]="(!(prestineForm$ | async) && !workForm.controls['company_sector_id'].valid )||(workForm.controls['company_sector_id'].touched && !workForm.controls['company_sector_id'].valid)"                          
+                >
+                </bootstrap-selectbox>
+            </div>
+            <!-- end Sector -->
+
+            <!-- start country and city -->
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left form-group">
+                <div class="fal-row">
+                    <div class="col-xs-6 arabic-right-left">
+                        <label class="light-label">{{fixedTextHash['country'][currLan]}}</label>
+                        <input type="hidden" #workCountryInpt name="formCompany_company_country_id"
+                            formControlName="company_country_id">
+                        <bootstrap-selectbox *ngIf="countryList" (selectedId)="setCountry($event)"
+                            [selectedValue]="workForm.controls['company_country_id'].value"
+                            [placeholder]="fixedTextHash['add_country'][currLan]" [selectList]="countryList"
+                            [error]="(!(prestineForm$ | async) && !workForm.controls['company_country_id'].valid )|| (workForm.controls['company_country_id'].touched && !workForm.controls['company_country_id'].valid)"
+                            (onEmptyText)="workCountryInpt.value=null;makeControlInvalid(workForm.controls['company_country_id'])"
+                        >
+                        </bootstrap-selectbox>
+                    </div>
+                    <div class="col-xs-6 arabic-right-left" *ngIf="workForm.controls['company_country_id'].value">
+                        <label class="light-label">{{fixedTextHash['city'][currLan]}}</label>
+                        <span *ngFor="let sel_country of countryList">
+                            <auto-comp1 *ngIf="sel_country.id == workForm.controls['company_country_id'].value"
+                                [resetOnEmpty]="true" [countryId]="sel_country.id" [current_city]="currentCityObj"
+                                [initData]="(sel_country.id == workForm.controls['company_country_id'].value) ? [currentCityObj]:[]"
+                                (changeCityId)=" onSelectCity($event)"
+                                (onEmptyText)="makeControlInvalid(workForm.controls['company_city_id'])"
+                                [error]="(!(prestineForm$ | async) && !workForm.controls['company_city_id'].valid )|| (workForm.controls['company_city_id'].touched && !workForm.controls['company_city_id'].valid)"                                                                              
+                            >
+                            </auto-comp1>
+                        </span>
+                        <input type="hidden" formControlName="company_city_id" name="formCompany_company_city_id">
+
+                    </div>
+                </div>
+            </div>
+            <!-- end country and city -->
+
+            <!-- start Start date -->
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 arabic-right-left form-group">
+                <label class="light-label">{{fixedTextHash['start_date'][currLan]}}</label>
+                <input type="hidden" placeholder="{{fixedTextHash['from'][currLan]}}"
+                    name="formCompany_company_start_date" formControlName="company_start_date">
+
+                <datePicker-block (click)="setModuleInitializer()" (emitSelDate)="setStartDate($event);setEndDate($event);"
+                    [dp_placeholder]="fixedTextHash['from'][currLan]" [sel_id]="'34'" [toYear]="toYear"
+                    [maxDate]="maxDate"
+                    (onEmptyText)="makeControlInvalid(workForm.controls['company_start_date'])"
+                    [dp_value]="workForm.controls['company_start_date'].value | date: 'MMM yyyy dd'"
+                    [error]="(!(prestineForm$ | async) && !workForm.controls['company_start_date'].valid )||
+                    (workForm.controls['company_start_date'].touched && !workForm.controls['company_start_date'].valid)"                                                                                 
+                >
+                </datePicker-block>
+            </div>
+            <!-- end Start date -->
+
+            <!-- start End date -->
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 arabic-right-left form-group" *ngIf="ShowEndDate"
+                [style.display]="workForm.controls.company_still_working.value == true?'none':'block'">
+                <label class="light-label">{{fixedTextHash['end_date'][currLan]}}</label>
+                <input type="hidden" placeholder="{{fixedTextHash['to'][currLan]}}" name="formCompany_company_end_date"
+                    formControlName="company_end_date">
+
+                <datePicker-block (emitSelDate)="getSelectEndDate($event)"
+                    [dp_placeholder]="fixedTextHash['to'][currLan]" [sel_id]="'35'" [toYear]="toYear"
+                    [maxDate]="maxDate" [minDate]="minEndDate" [dp_startDate]="minEndDate"
+                    [dp_value]="workForm.controls['company_end_date'].value | date: 'MMM yyyy dd'"
+                    [error]="companyEndDateReq" 
+                    (onEmptyText)="makeControlInvalid(workForm.controls['company_end_date'])"
+                                                                                                                   
+                ></datePicker-block>
+
+            </div>
+            <!-- end End date -->
+
+            <!-- start I Currently Work Here checkbox -->
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 arabic-right-left form-group">
+                <div class="checkbox fal-currently-work-here">
+                    <input type="checkbox" [name]="'checkboxG11_' + workExperienceIndex"
+                        [id]="'checkboxG11_' + workExperienceIndex" class="css-checkbox"
+                        formControlName="company_still_working" (click)="onToggleCurrentlyWorking()">
+
+                    <label [attr.for]="'checkboxG11_' + workExperienceIndex">
+                        {{fixedTextHash['to_date'][currLan]}}</label>
+                </div>
+            </div>
+            <!-- end I Currently Work Here checkbox -->
+
+            <div class="clearfix"></div>
+
+            <!-- start Roles and Responsibilities  -->
+            <div class="col-md-12">
+                <label class="light-label no-mandatory">{{fixedTextHash['roles_resp'][currLan]}}</label>
+                <div class="relative form-group" *ngFor="let sel_rr of rolesRes; let i= index">
+                    <input type="text" [name]="'formCompany_rr_name'+i" [value]="sel_rr" disabled="disabled">
+                    <button type="button" class="fal-btn-delete-roles" (click)="removeRole(i)"><i
+                            class="zmdi zmdi-delete"></i></button>
+                </div>
+                <div class="relative form-group" *ngIf="rolesRes?.length < 10">
+                    <input type="text" name="formCompany_new_rr" #newRole
+                        placeholder="{{fixedTextHash['roles_resp'][currLan]}}" minlength="5" maxlength="300">
+                    <button type="button" class="fal-btn-add-roles"
+                        (click)="addRole(newRole.value); newRole.value = '';"><i class="zmdi zmdi-plus"></i>
+                        {{fixedTextHash['add'][currLan]}}
+                    </button>
+                </div>
+            </div>
+            <!-- end Roles and Responsibilities  -->
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+</form>

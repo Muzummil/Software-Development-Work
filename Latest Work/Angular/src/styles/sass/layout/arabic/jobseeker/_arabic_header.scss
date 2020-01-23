@@ -1,0 +1,202 @@
+@import '../../../../../styles/sass/base/_variables.scss';
+ 
+ .arabic{
+    .bloovo-header{
+    	padding-right:0px;
+        .profile-picture{
+            margin-left: 0px;
+        }
+        .click-dropdown{
+            .dropbtn{
+                padding:0px;
+            }
+        }
+        .broadcast-bt-blink{
+            padding-right:20px;
+            padding-left:0px;
+            .blink_me{
+                left: 11px;
+                right: inherit;
+            }
+        }
+        .arabic-text{
+            left: 10px;
+            color: #fff;
+            top:59px;
+        }
+
+    }
+    .arabic-avatar{
+    	float: left;
+    	margin-left: 0px;
+    }
+    .click-dropdown .dropdown-content a{
+    	text-align: right;
+    }
+    .broadcast-bt-blink{
+        left: 70px;
+        right: inherit;
+    }
+    .logo-b{
+        float: right;
+
+    }
+
+   .navbar-nav li{
+    float: right!important;
+   }
+   .bloovo-right-new-fix{
+    float: right;
+   }
+   .new-fix-package .package-info-v2 .pk-v2 p{
+    text-align: left;
+    font-size: 13px;
+   }
+   .new-fix-package .package-info-v2 .pk-v2 button{
+    float: left;
+   }
+    .click-dropdown .dropdown-content{
+        right: -155px;
+    }
+    #remaining-credis .text-area-new-user{
+        width: calc(100% - 288px);
+    }
+    .broadcast-bt-blink{
+        padding-left:inherit;
+        padding-right:20px;
+    }
+    .broadcast-bt-blink{
+        width: 230px;
+    }
+    .bloovo-header .broadcast-bt-blink{
+        padding-right: 9px;
+    }
+    .bloovo-header .profile-name{
+        text-align: right;
+    }
+    .english-text-v5{
+           font-family: inherit!important;
+    }
+
+    [class*="hint--"]:after{
+        font-family: $arabic-primary-Fonts!important;
+    }
+    .settings strong{
+        font-family: $arabic-primary-Fonts!important;
+    }
+    .package-info-v2 .pk-v2 p strong{
+        font-family: $arabic-primary-Fonts!important;
+    }
+    .tag-new input{
+        border-bottom: 0px;
+    }
+    .package-section .package-body ul li{
+        background-position: top right;
+        padding-right: 25px;
+        padding-left: inherit;
+    }
+    .package-section .package-boxs{
+        float: right;
+    }
+    .package-section .package-body ul{
+        min-height: 350px;
+    }
+    
+ 
+
+ }
+
+
+
+// responsive
+
+/*---------------------------------------------------1-------------------------------------------------------*/
+@media (max-width: 1200px){
+         
+}
+
+/*---------------------------------------------------2-------------------------------------------------------*/
+@media (min-width: 768px) and (max-width: 1024px){
+    .side-menu-container i{
+        font-size: 18px!important;
+        margin-right: 0px!important;
+    }
+}
+
+/*---------------------------------------------------3-------------------------------------------------------*/
+
+@media (max-width: 767px) {
+   .arabic{
+        .side-body {
+            margin-left: 0px;
+            margin-right: 0px!important;
+        }
+        .credit-info-box:after{
+            display: none;
+        }
+        .broadcast-bt-blink{
+            text-align: right;
+            .blink_me{
+                right:inherit;
+                left:11px!important;
+            }
+        }
+        .side-menu .navbar-default .navbar-nav > li > a{
+            text-align: center!important;
+            text-align: inherit;
+        }
+        .side-menu-container i{
+            margin-left: 0px!important;
+        }
+        .side-menu{
+            
+        }
+        .side-menu .brand-name-wrapper a{
+            float: right!important;
+        }
+        .search-mobile-head-bar input{
+            padding-right: inherit;
+            padding-left: 55px;
+            text-align: left;
+        }
+        .search-mobile-head-bar .mobile-search-close{
+            right: inherit;
+            left: 0px;
+        }
+        .only-mob-arabic-top{
+            right: inherit!important;
+            left: 130px;
+        }
+        .search-mobile-head{
+            border-right: 1px solid #49617b;
+        }
+        .only-employer-mobile-arabic-text{
+            left: 60px!important;
+        }
+        .home-inner-header .menu a{
+          text-align: center;
+        }
+
+
+    }
+
+
+    
+}
+/*---------------------------------------------------4-------------------------------------------------------*/
+
+@media (max-width: 480px) {
+    .arabic{
+        .side-body {
+            margin-left: 0px;
+            margin-right: 0px!important;
+        }
+        .broadcast-bt-blink{
+            text-align: right;
+            .blink_me{
+                right:inherit;
+                left:11px!important;
+            }
+        }
+    }
+}

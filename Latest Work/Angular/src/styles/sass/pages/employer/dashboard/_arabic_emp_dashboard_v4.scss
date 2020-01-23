@@ -1,0 +1,135 @@
+.arabic{
+    .audience-v4 .active-view-stats-v4 .countries-v4 ul .graph-v4 span{
+        float: right;
+        margin-left: 5px;
+        margin-right: 0px;
+    }
+    .audience-v4 .active-view-stats-v4 .countries-v4{
+        float: right;
+        border-right: none;
+        border-left: 1px solid #f1f1f1;
+    }
+    .audience-v4 .active-view-stats-v4 .countries-v4 ul .graph-v4{
+        margin-left: inherit;
+        margin-right: 250px;
+    }
+    .audience-v4 .active-view-stats-v4 .countries-v4 ul .graph-v4{
+        width: 75%;
+    }
+    .audience-v4 .active-view-v4, .job-posted-v4 .keyword-v4 ul li .graph-tx-v4, .job-post-graph-v4 .raph-job-v4 .graph-v4 ul li, .filter-v4 .select-v4 ul li a{
+        float: right;
+    }
+   
+    .job-posted-v4 .keyword-v4 ul li .graph-v4, .job-posted-v4 .keyword-v4 ul li .graph-v4 strong, .job-posted-v4 .keyword-v4 ul li .graph-v4 .bar-run-v4 span{
+        float: left;
+    }
+
+    .job-posted-v4 .keyword-v4 a{
+        text-align: right;
+    }
+    .job-posted-v4 .keyword-v4 a i{
+        display: none;
+    }
+    .job-posted-v4 .equal-v4{
+        margin-right: 0px!important;
+    }
+    .arabic-struct-fit-search{
+        margin-left: -10px!important;
+        /*margin-right: -10px!important;*/
+    }
+    .job-post-graph-v4 .row .head-job-graph-v4 h2, .filter-v4 h3{
+        float: right;
+    }
+    .filter-v4 .select-v4{
+        width: 290px;
+    }
+    .filter-v4 h3{
+        width: calc(100% - 310px);
+    }
+    .funel-analatycs-v4 .funel-graphics-v4 .application-funel-v4, .funel-analatycs-v4 .funel-graphics-v4 .interview-funel-v4, .funel-analatycs-v4 .funel-graphics-v4 .shortlisted-funel-v4, .funel-analatycs-v4 .funel-graphics-v4 .success-funel-v4{
+        position: absolute;
+        top: 0px;
+        left: 178px;
+    }
+    .funel-analatycs-v4 .funel-graphics-v4 .application-funel-v4 strong, .funel-analatycs-v4 .funel-graphics-v4 .success-funel-v4 strong, .funel-analatycs-v4 .funel-graphics-v4 .interview-funel-v4 strong, .funel-analatycs-v4 .funel-graphics-v4 .shortlisted-funel-v4 strong{
+        float: left;
+    }
+    .funel-analatycs-v4 .funel-graphics-v4 .application-funel-v4 span{
+        float: right;
+    }
+    .funel-analatycs-v4 .funel-graphics-v4 .application-funel-v4 strong, .funel-analatycs-v4 .funel-graphics-v4 .success-funel-v4 strong, .funel-analatycs-v4 .funel-graphics-v4 .interview-funel-v4 strong, .funel-analatycs-v4 .funel-graphics-v4 .shortlisted-funel-v4 span, .funel-analatycs-v4 .funel-graphics-v4 .application-funel-v4 span, .funel-analatycs-v4 .funel-graphics-v4 .shortlisted-funel-v4 strong{
+        margin-top: 0px;
+    }
+    .application-funel-v4{
+        top: 81px!important;
+        left: 5px!important;
+    }
+    .shortlisted-funel-v4{
+        top: 149px!important;
+        left: 0px!important;
+    }
+    .interview-funel-v4{
+        top: 216px!important;
+        left: 0px!important;
+    }
+    .success-funel-v4{
+        top: 288px!important;
+        left: 0px!important;
+    }
+
+    .funel-analatycs-v4 .funel-graphics-v4 img{
+        float: left;
+    }
+    .most-recent-job-v4 .job-list-stas-v4 ul li{
+        float: right;
+    }
+    .most-recent-job-v4 .list-v4 h3{
+        text-align: right;
+    }
+}
+
+
+
+
+
+// ============bigScreen===========
+@media all and (max-width: 991px) {
+    
+}
+
+// ============MediumScreen========
+@media all and (max-width: 768px) {
+    .arabic .audience-v4 .active-view-stats-v4 .countries-v4 ul .graph-v4{
+        margin-right:0px;
+    }
+    .arabic .audience-v4 .active-view-stats-v4 .countries-v4 ul .graph-v4{
+        width: 100%;
+    }
+    .arabic .audience-v4 .active-view-stats-v4 .countries-v4{
+        border-left: none;
+    }
+    .arabic .job-post-graph-v4 .raph-job-v4 .graph-v4 ul{
+        float: left;
+    }
+    .arabic{
+        .funel-analatycs-v4 .funel-graphics-v4 .shortlisted-funel-v4 strong, .funel-analatycs-v4 .funel-graphics-v4 .interview-funel-v4 strong, .funel-analatycs-v4 .funel-graphics-v4 .success-funel-v4 strong, .funel-analatycs-v4 .funel-graphics-v4 .application-funel-v4 strong{
+            float: right;
+            line-height: normal;
+            width: 100%!important;
+            text-align: right;
+        }
+        .arabic .funel-analatycs-v4 .funel-graphics-v4 .application-funel-v4 span, .funel-analatycs-v4 .funel-graphics-v4 .shortlisted-funel-v4 span, .funel-analatycs-v4 .funel-graphics-v4 .interview-funel-v4 span, .funel-analatycs-v4 .funel-graphics-v4 .success-funel-v4 span{
+            float: right;
+            line-height: normal;
+            width: 100%!important;
+            text-align: right;
+        }
+    }
+}
+
+
+// ============SmallScreen=========
+@media all and (max-width: 480px) {
+    
+
+}

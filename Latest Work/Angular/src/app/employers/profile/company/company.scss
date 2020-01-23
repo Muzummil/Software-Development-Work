@@ -1,0 +1,32 @@
+@import '../../../../styles/sass/base/_variables.scss';
+
+
+input:-webkit-autofill {
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
+}
+
+h1, h2, h3, h4, h5, span, label, a, button, p{
+    font-family: $primary-Fonts;
+}
+
+.arabic{
+    h1, h2, h3, h4, h5, span, label, a, button, p, input, .cmpny-txt{
+       font-family: $arabic-primary-Fonts!important;
+    }
+}
+
+.block{
+    border:1px solid $light-border;
+    border-radius: $border-radius;
+    text-align:left;
+  }
+  
+  .block-contant{
+      padding: 10px;
+  }
+  .block-title-2,  .block-title{
+      padding: 10px;
+  }
+  
+

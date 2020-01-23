@@ -1,0 +1,116 @@
+<section class="cvFolderSystem container" [class.arabic] = "accountService.isArabic()">
+    <!-- header part -->
+    <!-- ================================================= -->
+    <div class="headerFolder">
+        <!-- header & search -->
+        <div class="searchName">
+            <folder-breadcrumb [ancestors]="ancestors" [activeClass]="'candidate'" [level]="level"></folder-breadcrumb>
+            <div class="searchFolder arabic-right-left">
+                <search-tag-folder [url]="getUrl()"></search-tag-folder>
+            </div>
+        </div>
+    </div>
+    <spinner [visible]="showSpinner"></spinner>
+    <div class="listCandiFolder">
+        <div  *ngFor="let selProfile of (jobSeekerList$ | async), let jscount = index" class="new-list">
+            <folder-tool-bar [candidateObj]="selProfile?.jobseeker" [currentFolderId]="folderId" [operation]="'move'"
+                             [jobseekerFolderId]="selProfile?.id" (updateSuccess)="getUpdateResult($event)" (updateTags)="getUpdateTags(jscount, $event)"></folder-tool-bar>
+            <div class="newlistleft arabic-right-left">
+                <a [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/candidate/'+selProfile?.jobseeker?.user_id+'/'+this.accountService.getSpaceToDash(selProfile?.jobseeker?.first_name+' '+selProfile?.jobseeker?.last_name)+'/profile']" target="_blank">
+                    <div *ngIf="!selProfile?.jobseeker?.avatar" class="newlistdp-left arabic-right-left"><i
+                            class="icon-profile"></i></div>
+                    <div *ngIf="selProfile?.jobseeker?.avatar" class="newlistdp-left arabic-right-left"><img
+                            src="{{selProfile?.jobseeker?.avatar}}"></div>
+                </a>
+                <div class="newlistdp-right arabic-right-left">
+                    <div class="applicant-name-dt">
+                        <a [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/candidate/'+selProfile?.jobseeker?.user_id+'/'+this.accountService.getSpaceToDash(selProfile?.jobseeker?.first_name+' '+selProfile?.jobseeker?.last_name)+'/profile']"
+                           target="_blank">
+                            <h2 class="arabic-right-left"><strong>{{selProfile?.jobseeker?.first_name}}
+                                {{selProfile?.jobseeker?.last_name}}</strong></h2>
+                        </a>
+                    </div>
+                    <a [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/candidate/'+selProfile?.jobseeker?.user_id+'/'+this.accountService.getSpaceToDash(selProfile?.jobseeker?.first_name+' '+selProfile?.jobseeker?.last_name)+'/profile']"
+                       target="_blank">
+                        <div class="com-pos">
+                            <h4 *ngIf="selProfile?.jobseeker?.current_position">
+                                {{selProfile?.jobseeker?.current_position}}
+                            </h4>
+                            <h4 *ngIf="!selProfile?.jobseeker?.current_position && selProfile?.jobseeker?.preferred_position">
+                                {{selProfile?.jobseeker?.preferred_position}}
+                            </h4>
+                            <h4 *ngIf="!selProfile?.jobseeker?.current_position && !selProfile?.jobseeker?.preferred_position">
+                                {{fixedTextHash['no_title'][currLan]}}
+                            </h4>
+                            <h4 *ngIf="selProfile?.jobseeker?.current_company_name">
+                                <b>
+                                    {{selProfile?.jobseeker?.current_company_name}}
+                                </b>
+                            </h4>
+                            <h4 *ngIf="!selProfile?.jobseeker?.current_company_name">
+                                <b>
+                                    {{fixedTextHash['no_comp'][currLan]}}
+                                </b>
+                            </h4>
+                            <h4 *ngIf="selProfile?.jobseeker?.city?.name && selProfile?.jobseeker?.country?.name">
+                                {{selProfile?.jobseeker?.city?.name}}{{fixedTextHash['comma'][currLan]}} {{selProfile?.jobseeker?.country?.name}}
+                            </h4>
+                            <h4 *ngIf="selProfile?.jobseeker?.sector?.name"> <span>{{selProfile?.jobseeker?.sector?.name}}</span>&nbsp;<span class="arabic-right-left sp-arabic-sm">{{fixedTextHash['sector_word_in_job_list'][currLan]}}</span></h4>
+                            <h4>{{fixedTextHash['application_date'][currLan]}}:
+                                {{accountService.getFormattedDate(selProfile?.jobseeker?.application_date, 'MMM DD, YYYY')}} </h4>
+                        </div>
+
+                    </a>
+
+                </div>
+
+                <div class="newlist-experience">
+                    <div class="exp-box jobapp-btm-10">
+                        <h5>{{fixedTextHash['years_experience'][currLan]}}</h5>
+                        <h4 *ngIf="selProfile?.jobseeker?.num_years_experience == 1">
+                            {{selProfile?.jobseeker?.num_years_experience}}
+                            {{fixedTextHash['year'][currLan]}}</h4>
+                        <h4 *ngIf="selProfile?.jobseeker?.num_years_experience > 1">
+                            {{selProfile?.jobseeker?.num_years_experience}}
+                            {{fixedTextHash['years'][currLan]}}</h4>
+                        <h4 *ngIf="selProfile?.jobseeker?.num_years_experience == 0">
+                            {{fixedTextHash['no_experience'][currLan]}}</h4>
+                    </div>
+
+                    <div class="exp-box"
+                         *ngIf="selProfile?.jobseeker?.expected_salary || selProfile?.jobseeker?.expected_salary == 0">
+                        <h5>{{fixedTextHash['salary_expectations'][currLan]}}</h5>
+                        <h4 *ngIf="selProfile?.jobseeker?.expected_salary">{{fixedTextHash[accountService.getCurrency()][currLan]}}
+                            {{selProfile?.jobseeker?.expected_salary | number}} /
+                            {{fixedTextHash['month'][currLan]}}</h4>
+                        <h4 *ngIf="!selProfile?.jobseeker?.expected_salary">
+                            {{fixedTextHash['negotiable'][currLan]}}</h4>
+                    </div>
+
+                    <div class="exp-box"
+                         *ngIf="!selProfile?.jobseeker?.expected_salary && selProfile?.jobseeker?.expected_salary != 0">
+                        <h5>{{selProfile?.jobseeker?.expected_salary | number}}</h5>
+                        <h4>{{fixedTextHash['negotiable'][currLan]}}</h4>
+                    </div>
+                </div>
+               <div class="clearfix"></div>
+            </div>
+             <!-- tags -->
+            <!-- ==================================== -->
+            <div class="cvtag" *ngIf="selProfile?.jobseeker?.hash_tags?.length > 0">
+                    <ul>
+                        <li *ngFor="let selTag of selProfile?.jobseeker?.hash_tags">
+                            <i class="hashtx">#</i>
+                            {{selTag?.name}}
+                        </li>
+                    </ul>
+                </div>
+
+            <div class="clearfix"></div>
+        </div>
+        <pagination-new  [url]="urlPath" [totalRecords]="totalRecords$"></pagination-new>
+    </div>
+
+</section>
+
+

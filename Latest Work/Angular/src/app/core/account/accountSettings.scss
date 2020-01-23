@@ -1,0 +1,172 @@
+@import '../../../styles/sass/base/_variables.scss';
+
+h1, h2, h3, h4, h5, span, label, a, button, p{
+    font-family: $primary-Fonts;
+  }
+  
+  .arabic{
+      h1, h2, h3, h4, h5, span, label, a, button, p, input{
+      font-family: $arabic-primary-Fonts!important;
+    }
+  }
+  .main-tab{
+      margin-top: 5px;
+  }
+  
+  input, select {
+    width: 100%;
+    border: solid 1px $boredr-color;
+    color: $text-normal-color !important;
+    height: $form-height!important;
+    padding: 0px 10px;
+    margin-bottom: 10px;
+    font-size: 14px !important;
+    line-height: $button-height!important;
+    border-radius: $border-radius!important;
+    background-color:$form-bg!important; 
+  }
+  @-webkit-keyframes autofill {
+      to {
+          color: $primary-font;
+          background: transparent;
+      }
+  }
+
+  input:-webkit-autofill {
+      -webkit-animation-name: autofill;
+      -webkit-animation-fill-mode: both;
+  }
+
+  h2{
+      font-size:$medium-size;
+      font-weight:$font-weight;
+      color:$primarycolor;
+      display: block;
+      padding-bottom:20px;
+      border-bottom:1px solid $boredr-color;
+  }  
+
+  span{
+    font-size:$normal-font;
+    color:$text-normal-color;
+    font-weight:$font-weight;
+  }
+
+  p{
+     font-size:$normal-font;
+    color:$text-normal-color; 
+  }
+  button{
+    width: auto;
+    padding:0px 20px;
+    background-color:$primarycolor;
+    height: $button-height!important;
+    color: $text-dark-bg;
+    border-radius:$border-radius;
+  }
+
+
+
+.settings{
+
+    .min-height{ 
+        min-height:216px
+    }
+    .min-height-165{ 
+        min-height:165px
+    }
+    .spacing-left{ 
+        margin-left:12px
+    }
+    .spacing{ 
+        padding:15px 0px
+    }
+    .align-left{ 
+        text-align:left
+    }
+    .margin-left{ 
+        margin-left:8px
+    }
+    .block-footer{ 
+        border:none; 
+        padding:0px; 
+        padding-top:10px 
+    }
+    .row{
+        margin: 0px;
+    }
+   
+    .padding-20{ 
+        padding:20px;
+    }   
+   
+    .border-left{
+        border-right:1px solid #f1f1f1;
+    }
+   
+   
+    .half{ 
+        width:97% !important
+    }
+    .left{ 
+        margin-left:8px;
+    }
+
+ .set{
+    width: 100%; 
+    margin-bottom:10px;  
+    .set-lft{ 
+        float:left; 
+        width: 48.5%
+    }
+    .set-rgt{ 
+        float:right; 
+        width: 48.5% 
+    }
+}   
+
+}
+
+.settings{
+    padding: 8% 0%;
+    float: left;
+    width: 100%;
+    margin: 5% 0%;
+}
+.spacing{
+    padding:0px 20px;
+}
+
+.block{
+    padding: 10px;
+    border: 1px solid $light-border;
+}
+
+//arabic
+.arabic{
+  .align-left{
+    text-align: right;
+  }
+}
+
+
+/* Respopnsive breakpoint */
+// ============bigScreen===========
+@media all and (max-width: 991px) {
+
+}
+
+// ============MediumScreen========
+@media all and (max-width: 768px) {
+.set-lft, .set-rgt{
+    width: 100%!important;
+}
+.mobile-padding{
+    padding: 0px!important;
+    padding-bottom: 10px!important;
+}
+
+}
+
+// ============SmallScreen=========
+@media all and (max-width: 480px) {}

@@ -1,0 +1,175 @@
+@import '../../../styles/sass/base/_variables.scss';
+
+h1, h2, h3, h4, h5, span, label, a, button, p{
+  font-family: $primary-Fonts;
+}
+
+.arabic{
+    h1, h2, h3, h4, h5, span, label, a, button, p, input{
+    font-family: $arabic-primary-Fonts!important;
+  }
+}
+
+.block{
+  border:1px solid $light-border;
+  border-radius: $border-radius;
+}
+
+.block-contant{
+    padding: 10px;
+}
+.block-title-2,  .block-title{
+    padding: 10px;
+}
+
+
+
+
+// tag-section
+.tag-secton{
+    .dropdown-menu{
+    height: 100px!important;
+   }
+    .tagss{
+        height: auto;
+        display: inline-table;
+        margin-right: 3px;
+        margin-bottom: 5px;
+        padding-bottom:5px;
+        margin-top: 7px;
+        .tag-main{
+            border:solid $boredr-color 1px;
+            padding: 8px 10px;
+            padding-left: 0px;
+            border-radius: $border-radius;
+            .hash{
+                background:$primarycolor;
+                color:$white;
+                padding: 9px 13px;
+                border-radius: $border-radius;
+            }
+            .hash1{
+                background:$white;
+                color:$primarycolor;
+                padding: 10px 13px;
+                border-right:solid 1px $boredr-color;
+            }
+            .tag-txt{
+                color: $secondarycolor;
+                padding: 0px 10px;
+                text-transform: capitalize;
+            }
+        }
+    }
+    .light{
+        color: $secondarycolor;
+        i {
+            color:$primarycolor;
+        }
+    }
+    input{
+        padding: 8px 10px!important;
+        color: $secondarycolor!important
+    }
+    div.tagsinput {
+        padding:0px 0px;
+        width:100%;
+        overflow-y: auto;
+    }
+    div.tagsinput span.tag {
+        border: 1px solid $boredr-color;
+        margin-right: 5px; margin-bottom:5px;
+        display: block;
+        float: left;
+        text-decoration:none;
+        height: $button-height;
+        background:$white;
+        color:$secondarycolor;
+        font-size:16px;
+        padding: 0px;
+        padding-right:0px;
+    }
+
+    div.tagsinput span.tag a {
+        font-weight: bold;
+        padding: 13px 15px;
+        border-left: solid 1px $boredr-color;
+        top: 0px;
+        line-height: $button-height;
+        color: $primarycolor;
+        text-decoration:none;
+        font-size: 11px
+    }
+    div.tagsinput input {
+        width:80px;
+        margin:0px;
+        font-size: 13px;
+        border:1px solid transparent;
+        padding:5px;
+        background: transparent;
+        color: #000;
+        outline:0px;
+        margin-right:5px;
+        margin-bottom:5px;
+    }
+    div.tagsinput div {
+        display:block;
+        float:left
+    }
+    .tags_clear {
+        clear: both;
+        width: 100%;
+        height: 0px
+    }
+    .not_valid {
+        background: #FBD8DB !important;
+        color: #90111A !important}
+}
+
+.tag-new{
+    display:inline-block;
+    background:$white;
+    float:left;
+    border: solid 1px $boredr-color;
+    padding:0px;
+    height: $button-height;
+    margin-right:5px;
+    position:relative;
+    margin-bottom: 5px;
+    border-radius: $border-radius;
+    input{font-size: 14px !important;}
+    span { box-shadow: none}
+    .txt{
+        border-right: solid 1px $boredr-color;
+        display:inline-block;
+        line-height:$button-height!important;
+        padding:0 15px;
+        color: $primarycolor!important;
+        padding-bottom:0px !important;
+    }
+    .close-tag{
+        display:inline-block;
+        color: $primarycolor;
+        padding:0px 8px 8px 5px;
+    }
+    .close-tag:hover{
+        color: $secondarycolor;
+    }
+}
+
+
+// ARABIC
+// ============================
+.arabic{
+   .tag-new{
+        float: right!important;
+        width: auto;
+        .txt{
+            border-right: none;
+            border-left: 1px solid $light-border;
+        }
+    }
+    .tag-main{
+        padding: 8px 0px!important;
+    }
+}

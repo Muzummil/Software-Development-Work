@@ -1,0 +1,62 @@
+
+
+@import '../../../styles/sass/base/_variables.scss';
+
+.arabic{
+    h1, h2, h3, h4, h5, h6, span, p, a, button, li {
+        margin:0px;
+        font-family: $arabic-primary-Fonts!important;
+    }
+}
+
+.bloovo-pagination{
+    .page-nation{
+        border-radius:0px;
+        float: left;
+        margin-bottom: 10px;
+        .pagination{
+            margin: 0px;
+            border-radius:0px;
+            display: block;
+        }
+        .pagination > li:first-child > a, .pagination > li:first-child > span{
+            border-radius:0px;
+        }
+        .pagination > li:last-child > a, .pagination > li:last-child > span{
+            border-radius:0px;
+        }
+        .pagination > li > a, .pagination > li > span{
+            color:$text-normal-color;
+            border: none;
+        }
+
+        .pagination > li > a:hover, .pagination > li > span:hover, .pagination > li > a:focus, .pagination > li:active, .pagination > li > span:focus{
+            color: $primarycolor;
+        }
+        .pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover{
+            background:$primarycolor!important;
+            color: $text-dark-bg!important;
+            border-radius: $border-radius;
+        }
+    }
+}
+
+.mob-pagination li {
+    display: inline-block;
+    text-align: center;
+    min-height: 40px;
+    line-height: 40px;
+    width: 40px !important;
+    border: 1px solid $light-border;
+    color: $primarycolor;
+    background-color: $bg;
+    float: left;
+}
+.mob-pagination .page-text{
+    width: calc(100% - 160px) !important;
+}
+.mob-pagination li a {
+    font-size: $normal-font;
+    color: $primarycolor;
+    display: block;
+}

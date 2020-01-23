@@ -1,0 +1,31 @@
+<!-- Candidate Package Section -->
+<section class="package-section">
+    <h1>{{fixedTextHash['price_plane'][currLan]}}</h1>
+    <P>{{fixedTextHash['search_candidates_desc'][currLan]}}</P>
+    <!-- Message contact -->
+    <div class="contact-msg">
+        <h3 [innerHtml]="fixedTextHash['call_special_offer'][currLan]"></h3>
+    </div>
+    <div class="box-container load-data-js">
+        <!--toDo: May be required to be put back.-->
+        <!--<div class="package-boxs hvr-grow" *ngFor="let packageObj of (packageList$ | async)">-->
+            <!--&lt;!&ndash; package header &ndash;&gt;-->
+            <!--<div class="top-header-package">-->
+                <!--<div class="label-package" *ngIf="packageObj.id == 4">-->
+                    <!--<img src="/assets/images/recomented.svg" [attr.alt]="(accountService.getPageAlt('payment_list','recomented.svg') | async)">-->
+                <!--</div>-->
+                <!--<i  class="{{(iconClassMapper[packageObj.id] ? iconClassMapper[packageObj.id] : 'zmdi-layers')}}"></i>-->
+                <!--<h2>{{packageObj.name}}</h2>-->
+                <!--<span>{{packageObj.description}}</span>-->
+                <!--<h3 class="{{packageObj.name}}-light">${{packageObj.price | number}}</h3>-->
+            <!--</div>-->
+            <!--&lt;!&ndash; Package Body &ndash;&gt;-->
+            <!--<div class="package-body">-->
+                <!--<div [innerHtml]="packageObj?.details"></div>-->
+                <!--<a [routerLink]="[accountService.getCurrLangUrl()+'employer/packages/'+packageObj.id+'/payment']">-->
+                    <!--<button>{{fixedTextHash['select'][currLan]}}</button>-->
+                <!--</a>-->
+            <!--</div>-->
+        <!--</div>-->
+    </div>
+</section>

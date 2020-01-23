@@ -1,0 +1,61 @@
+<ion-header class="animated fadeIn no-shadow">
+
+  <ion-navbar class="no-border" color="primary" hideBackButton="true">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Notifications
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+<div class="no-data" *ngIf="tenancyError">
+    <img src="../../assets/icon/no-data.png" alt="image">
+    <h4>you did not have any tenancy</h4>
+</div>
+<div class="no-data" *ngIf="!readCheck && !unReadCheck">
+    <img src="../../assets/icon/no-data.png" alt="image">
+    <h4>No notification found</h4>
+</div>
+<ion-list *ngIf="unReadCheck">
+    <ion-item *ngFor="let item of unReadNotifications">
+      <div (click)="viewDetails(item.id)">
+      <!-- <ion-avatar item-start>
+          <img src="assets/images/logo.jpg">
+      </ion-avatar> -->
+      <h3><b>{{item.data.title}}</b></h3>
+      <p><b>{{item.data.description}}</b></p>
+      </div>
+      <ion-fab mini right bottom>
+          <button ion-fab class="fab-btn" color="primary"><ion-icon name="arrow-dropleft"></ion-icon></button>
+          <ion-fab-list side="left">
+            <!-- <h3 *ngIf="item.sender_id!=item.recipient_id && item.sender_id!=userId">View only</h3> -->
+            <!-- <button color="primary" *ngIf="item.sender_id==item.recipient_id || item.sender_id==userId"  (click)="editReminder(item)" ion-fab><ion-icon name="ios-create"></ion-icon></button> -->
+            <button color="primary" class="fab-btn"  (click)="deleteReminder(item.id)" ion-fab><ion-icon name="ios-trash"></ion-icon></button>
+          </ion-fab-list>
+        </ion-fab>
+    </ion-item>
+  </ion-list>
+<ion-list *ngIf="readCheck">
+  <ion-item *ngFor="let item of readNotifications">
+    <div (click)="viewDetails(item.id)">
+    <!-- <ion-avatar item-start>
+        <img src="assets/images/logo.jpg">
+    </ion-avatar> -->
+    <h3>{{item.data.title}}</h3>
+    <p>{{item.data.description}}</p>
+    </div>
+    <ion-fab mini right bottom>
+        <button class="fab-btn" ion-fab color="primary"><ion-icon name="arrow-dropleft"></ion-icon></button>
+        <ion-fab-list side="left">
+          <!-- <h3 *ngIf="item.sender_id!=item.recipient_id && item.sender_id!=userId">View only</h3> -->
+          <!-- <button color="primary" *ngIf="item.sender_id==item.recipient_id || item.sender_id==userId"  (click)="editReminder(item)" ion-fab><ion-icon name="ios-create"></ion-icon></button> -->
+          <button color="primary" class="fab-btn"  (click)="deleteReminder(item.id)" ion-fab><ion-icon name="ios-trash"></ion-icon></button>
+        </ion-fab-list>
+      </ion-fab>
+  </ion-item>
+</ion-list>
+</ion-content>

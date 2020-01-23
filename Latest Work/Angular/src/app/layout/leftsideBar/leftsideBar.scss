@@ -1,0 +1,28 @@
+@import '../../../styles/sass/base/_variables.scss';
+
+h1, h2, h3, h4, h5, span, label, a, button, p{
+  font-family: $primary-Fonts;
+}
+
+.arabic{
+    h1, h2, h3, h4, h5, span, label, a, button, p, input{
+    font-family: $arabic-primary-Fonts!important;
+  }
+}
+
+.side-menu .navbar-default .navbar-nav > li > a{
+    color: $white;
+    background: $primarycolor;
+    height: 49px;
+    &:hover{
+        background-color: $hover-bt-primary;
+    }
+}
+[class*="hint--"]:after{
+    background-color: $primarycolor;
+    border-radius: $border-radius;
+}
+.empty-menu-bar{
+    background-color: $primarycolor;
+    height: 48px;
+}

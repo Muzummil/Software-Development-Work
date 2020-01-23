@@ -1,0 +1,192 @@
+@import '/../../../../styles/sass/base/_variables.scss';
+.error-feild{
+    border: 1px solid #e74c3c !important;
+}
+h1, h2, h3, h4, h5, span, label, a, button, p{
+  font-family: $primary-Fonts;
+}
+
+.arabic{
+    h1, h2, h3, h4, h5, span, label, a, button, p, input{
+    font-family: $arabic-primary-Fonts!important;
+  }
+}
+
+select{
+    padding: 0px 12px;
+}
+input[type=checkbox], input[type=radio]{
+    margin: -10px 0 0 -20px;;
+}
+// end reset
+
+
+h1{
+    text-align: center;
+    font-size: 30px;
+    padding-top: 30px;
+    padding-bottom: 10px;
+}
+
+// Error
+.error-feild{
+    border: 1px solid #e74c3c;
+}
+
+
+// start register-form-container
+.fal-register-form-container{
+    min-height: 760px;
+    max-width: 701px;
+    margin: 0px auto;
+    form{
+        display: block;
+        width: 100%;
+        float: left;
+        margin-top: 80px;
+    }
+    h4{
+        text-align: left;
+        display: block;
+        padding-bottom: 10px;
+        text-transform: capitalize;
+        font-size: 14px;
+        color: $secondarycolor;
+        margin:0px;
+        margin-top: 0px;
+        &:after{
+            content: " *";
+            color: red;
+            font-weight: bold;
+        }
+        span{
+            font-size: 12px;
+            font-weight: normal
+        }
+    }
+    .fal-add-lang{
+        .tag-new{
+            background:$white;
+            border: solid 1px $boredr-color;
+            padding:0px;
+            height: $button-height;
+            margin-right:5px;
+            position:relative;
+            margin-bottom: 5px;
+            border-radius: $border-radius;
+            width: 100%;
+            input{font-size: 14px !important;}
+            span { box-shadow: none}
+            .txt{
+                line-height:$button-height!important;
+                padding:0 15px;
+                color: $primarycolor!important;
+                padding-bottom:0px !important;
+                float: left;
+            }
+            .close-tag{
+                color: $primarycolor;
+                padding:0px 8px 0px 8px;
+                float: right;
+                border-left: solid 1px $boredr-color;
+                line-height: 40px
+            }
+            .close-tag:hover{
+                color: $secondarycolor;
+            }
+        }
+    }
+    .fal-register-btn-group{
+        margin-top: 40px;
+        float: left;
+        width: 100%;
+        border-top: 1px solid $light-border;
+        padding-top: 20px;
+
+        .fal-btn-primary{
+            float: right;
+            background: $primarycolor;
+            height: $button-height;
+            text-align: center;
+            color: $white;
+            width: 120px;
+            border:none;
+            margin-left: 5px;
+            a{
+                color: $white;
+            }
+        }
+        .fal-btn-secondary{
+            float: right;
+            background: $secondarycolor;
+            height: $button-height;
+            text-align: center;
+            color: $white;
+            width: 120px;
+            border:none;
+            margin-left: 5px;
+            a{
+                color: $white;
+            }
+        }
+    }
+}
+// end register-form-container
+
+
+
+
+
+
+
+
+
+// arbic style
+// =====================================
+.arabic{
+    .fal-register-form-container{
+        h4{
+            text-align: right;
+        }
+        .fal-register-btn-group{
+            .fal-btn-primary, .fal-btn-secondary{
+                float: left;
+                margin-right: 5px;
+                margin-left: inherit;
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+/* Respopnsive breakpoint */
+// ============bigScreen===========
+@media all and (max-width: 991px) {
+
+}
+
+// ============MediumScreen========
+@media all and (max-width: 768px) {
+    .fal-register-form-container{
+        form{
+            margin-top:20px;
+        }
+        .fal-register-btn-group{
+            .fal-btn-primary, .fal-btn-secondary{
+                width: 50%;
+                margin-left: 0px;
+            }
+        }
+    }
+}
+
+// ============SmallScreen=========
+@media all and (max-width: 480px) {
+
+}

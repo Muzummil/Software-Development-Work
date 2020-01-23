@@ -1,0 +1,64 @@
+@import '../../../styles/sass/base/_variables.scss';
+
+
+input:-webkit-autofill {
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
+}
+
+h1, h2, h3, h4, h5, span, label, a, button, p{
+    font-family: $primary-Fonts;
+}
+
+.arabic{
+    h1, h2, h3, h4, h5, span, label, a, button, p, input, .cmpny-txt{
+       font-family: $arabic-primary-Fonts!important;
+    }
+}
+
+input, select {
+	width: 100%;
+	border: solid 1px $boredr-color;
+	color: $text-normal-color !important;
+	height: $form-height!important;
+	padding: 0px 10px;
+	margin-bottom: 10px;
+	font-size: 14px !important;
+	line-height: $button-height !important;
+	border-radius: $border-radius!important;
+	background-color:$form-bg!important; 
+}
+@-webkit-keyframes autofill {
+  to {
+      color: $primary-font;
+      background: transparent;
+  }
+}
+
+input:-webkit-autofill {
+  -webkit-animation-name: autofill;
+  -webkit-animation-fill-mode: both;
+}
+
+.languages-v2{
+  li{
+      float: left;
+      padding: 10px;
+      border: 1px solid #f1f1f1;
+      margin-right: 5px;
+      margin-bottom: 5px;
+  }
+}
+
+.arabic{
+  .languages-v2{
+    li{
+        float: right;
+        padding: 10px;
+        border: 1px solid #f1f1f1;
+        margin-left: 5px;
+        margin-bottom: 5px;
+        margin-right: inherit;
+    }
+  }
+}

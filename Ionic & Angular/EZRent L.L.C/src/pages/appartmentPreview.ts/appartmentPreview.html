@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-navbar class="no-border" color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      {{buildingName}}
+    </ion-title>
+    <ion-buttons *ngIf="userRole == 3" end>
+      <button ion-button tappable (click)="presentPopover($event)">
+        <ion-icon full name="more" class="more-icon"></ion-icon>
+      </button>
+    </ion-buttons>
+    <!-- <ion-buttons end>
+      <button ion-button tappable>
+        <ion-icon name="notifications"></ion-icon>
+      </button>
+    </ion-buttons> -->
+  </ion-navbar>
+</ion-header>
+<ion-content class="common-bg appartment_preview">
+  <!-- <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar> -->
+  <div class="no-data" *ngIf="message">
+    <img src="../../assets/icon/no-data.png" alt="image">
+    <h4>Select the <ion-icon full name="more" class="more-icon"></ion-icon> button in the top right corner to add an apartment or edit this property</h4>
+  </div>
+  <ion-grid class="table_grid" *ngIf="userRole == 3">
+    <ion-row *ngFor="let buildingID of buildingsID" id="{{buildingID.apart_no}}">
+      <ion-col col-5 (click)="appartmentTenants(buildingID.id)">
+        <h5>Apartment {{ buildingID.apart_no }}</h5>
+      </ion-col>
+      <ion-col col-3>
+        <button type="button" class="btn-primary">${{ buildingID.rent_price }}</button>
+      </ion-col>
+      <ion-col col-4>
+        <button type="button" [ngClass]="{ 'btn-primary': buildingID.status == 'Paid', 'btn-danger':   buildingID.status == 'Unpaid'}">{{ buildingID.status }}</button>
+        <!-- <button type="button" class="btn-primary" (click)="addTanent(buildingID.id)">+</button> -->
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!-- <button ion-button full class="btn-fb signfb" *ngIf="userRole == 3" (click)="addAppartment(formatAppartment)">Add Apartment</button> -->
+  <!-- <button type="button" *ngIf="userRole == 3" ion-button full class="deleteDanger" (click)="delBuilding(id)"> Leave Building</button> -->
+
+
+  <ion-grid class="table_grid" *ngIf="userRole == 4">
+    <ion-row *ngFor="let buildingID of buildingsID" id="{{buildingID.apart_no}}" (click)="appartmentDetails(buildingID.id)">
+      <ion-col col-5>
+        <h5>Apartment {{ buildingID.apart_no }}</h5>
+      </ion-col>
+      <ion-col col-3>
+        <button type="button" class="btn-primary">${{ buildingID.rent_price }}</button>
+      </ion-col>
+      <ion-col col-4 (click)="appartmentDetails(buildingID.id)">
+        <button type="button" [ngClass]="{ 'btn-success': buildingID.status == 'Paid', 'btn-danger':   buildingID.status == 'Unpaid'}">{{ buildingID.status }}</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

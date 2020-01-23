@@ -1,0 +1,412 @@
+<div class="main-tab load-data-js mobile-tab-top"></div>
+
+
+<div class="tab-content job-bloovo">
+    <!--------------------------- All Jobs details ---------------------------------->
+    <div role="tabpanel" class="tab-pane active" id="jobs-details-employer">
+        <div *ngIf="!loadedData" class="empty-min2">
+            <i class="small_loading"><spinner></spinner></i>
+        </div>
+        <div *ngIf="loadedData" class="container jobs-employer margin-top-space"  [class.arabic] = "accountService.isArabic()">
+
+            <div class="common-block">
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="block border-none">
+                        <div class="refine-serch">
+                            <div class="common-block block-title-2">
+                                <div class="pull-left left-bx arabic-right-left">
+                                <h4 class="job-opening-title">{{fixedTextHash['job_opening'][currLan]}}</h4>
+                                <h2 class="font-23">{{(selJobObs | async)?.title}}</h2>
+                                </div>
+                                <div class="pull-right right-bx">
+                                <a (click)="onBack()"  class="cursor_pointer1 ">
+                                    <button>
+                                        <span class="block-arabic"><i class="zmdi zmdi-arrow-left"></i></span>
+                                        <span class="hide">{{fixedTextHash['back'][currLan]}}</span>
+                                    </button>
+                                </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="bottom-gap margin-6 job-info hidden-xs hidden-sm">
+                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6  applications">
+                            <h1>{{(selJobAnalysisObs | async)?.applications_count}}</h1>
+                            <div class="light bold"> {{fixedTextHash['applications'][currLan]}}</div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6 unreviewed">
+                            <h1>{{(selJobAnalysisObs | async)?.unreviewed_applications_count}}</h1>
+                            <div class="light bold"> {{fixedTextHash['unreviewed'][currLan]}}</div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6 reviewed">
+                            <h1>{{(selJobAnalysisObs | async)?.reviewed_applications_count}}</h1>
+                            <div class="light bold"> {{fixedTextHash['reviewed'][currLan]}}</div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6 shortlisted">
+                            <h1>{{(selJobAnalysisObs | async)?.shortlisted_applications_count}}</h1>
+                            <div class="light bold"> {{fixedTextHash['shortlisted'][currLan]}} </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6 interviewed">
+                            <h1>{{(selJobAnalysisObs | async)?.interviewed_applications_count}}</h1>
+                            <div class="light bold"> {{fixedTextHash['interviewed'][currLan]}} </div>
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6 successful">
+                            <h1>{{(selJobAnalysisObs | async)?.successful_applications_count}}</h1>
+                            <div class="light bold">{{fixedTextHash['successful'][currLan]}} </div>
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6 unsuccessful">
+                            <h1>{{(selJobAnalysisObs | async)?.unsuccessful_applications_count}}</h1>
+                            <div class="light bold"> {{fixedTextHash['unsuccessful'][currLan]}} </div>
+                        </div>
+                        <div class=" clearfix "></div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="block  bottom-gap">
+                        <!--company details-->
+                        <div class="common-block company-details"> <!--Desktop-->
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-10 job-logo arabic-right-left padding-0">
+                                <div class="compny-logo" *ngIf="(selJobObs | async)?.branch?.avatar">
+                                    <span><img  src="{{(selJobObs | async)?.branch?.avatar}}"></span>
+                                </div>
+                                <div class="compny-logo" *ngIf="!(selJobObs | async)?.branch?.avatar">
+                                    <span><img  src="/assets/images/custom-images/logo2.svg" alt="avatar"></span>
+                                </div>
+
+                                <div class="compny-details clicks arabic-right-left">
+                                    <div class="common-block">
+                                        <div class="cmpny-txt padding-0" *ngIf="(selJobObs | async)?.branch?.avatar"><span class="dark padding-0 bold">{{(selJobObs | async)?.branch?.name}}</span></div>
+                                        <div class="cmpny-txt padding-0" *ngIf="!(selJobObs | async)?.branch?.avatar"><span class="dark padding-0 bold">{{(selJobObs | async)?.company?.name}}</span></div>
+
+                                        <div class="cmpny-txt padding-0">{{(selJobObs | async)?.city?.name}}{{fixedTextHash['comma'][currLan]}}&nbsp;{{(selJobObs | async)?.country?.name}}</div>
+                                        <div class="cmpny-txt padding-0">{{fixedTextHash['posted_on'][currLan]}} {{accountService.getFormattedDate((selJobObs | async)?.created_at, 'MMM DD, YYYY')}}</div>
+                                    </div>
+
+                                    <div class="common-block block-title-2 padding-0 border-none pading-top-10 hidden-sm hidden-xs">
+                                        <div class="edit-job action-job-detail-page arabic-right-left" *ngIf="(selJobObs | async)?.id">
+                                            <button *ngIf="!(selJobObs | async)?.deleted"
+                                                    [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/jobs/'+(selJobObs | async)?.id+'/edit']" class="arabic-right-left font-14">
+                                                <i class="zmdi zmdi-edit"></i> {{fixedTextHash['edit_job'][currLan]}}
+                                            </button>
+
+                                            <div class="opn-cls2  arabic-right-left"
+                                                 *ngIf="!(selJobObs | async)?.deleted && (selJobObs | async)?.job_status?.status == 'Open' && !getIfExpired((selJobObs | async)?.end_date) ">
+                                                <span class="active-label">
+                                                    {{fixedTextHash['active'][currLan]}}
+                                                </span>
+                                            </div>
+                                            <div class="opn-cls2  arabic-right-left" *ngIf="!(selJobObs | async)?.deleted  && (selJobObs | async)?.job_status?.status == 'Draft'">
+                                                <span class="draft-label">
+                                                    {{fixedTextHash['draft'][currLan]}}
+                                                </span>
+                                            </div>
+                                            <div class="opn-cls2  arabic-right-left" *ngIf="!(selJobObs | async)?.deleted && (selJobObs | async)?.job_status?.status != 'Draft' && getIfExpired((selJobObs | async)?.end_date) ">
+                                                <span class="expired-label">{{fixedTextHash['expired'][currLan]}}</span>
+                                            </div>
+
+                                            <div class="opn-cls2  arabic-right-left" *ngIf="(selJobObs | async)?.deleted">
+                                                <span class="deleted-label" >
+                                                    {{fixedTextHash['deleted'][currLan]}}
+                                                </span>
+                                            </div>
+
+
+                                            <div class="job-socail" *ngIf="(selJobObs | async)?.id && (selJobObs | async)?.job_status?.status == 'Open' && !(selJobObs | async)?.deleted && !getIfExpired((selJobObs | async)?.end_date) ">{{fixedTextHash['share'][currLan]}}
+                                                <div class="mg-r-s">
+
+                                                    <share-social-media [url]="(joburl$ | async)"
+                                                                        [title]="'Jobs'" [description]="'Jobs'">
+
+                                                    </share-social-media>
+                                                </div>
+                                            </div>
+                                            <div class=" clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <!-- Smartscreen-oly -->
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 job-logo hidden-md hidden-lg border-top margin-top-10 smart-screen-only-resp">
+                                <div class="compny-details width-full clicks padding-0">
+                                    <div class="common-block block-title-2 padding-0 border-none pading-top-10">
+                                        <div class="edit-job action-job-detail-page arabic-right-left" *ngIf="(selJobObs | async)?.id" >
+                                            <button *ngIf="!(selJobObs | async)?.deleted" [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/jobs/'+(selJobObs | async)?.id+'/edit']"><i class="zmdi zmdi-edit"></i> Edit Job</button>
+
+                                            <div class="opn-cls2 arabic-right-left" *ngIf="!(selJobObs | async)?.deleted && (selJobObs | async)?.job_status?.status == 'Open' && !getIfExpired((selJobObs | async)?.end_date) ">
+                                                <span class="active-label">
+                                                    {{fixedTextHash['active'][currLan]}}
+                                                </span>
+                                            </div>
+                                            <div class="opn-cls2 arabic-left-right" *ngIf="!(selJobObs | async)?.deleted  && (selJobObs | async)?.job_status?.status == 'Draft'">
+                                                <span class="draft-label">
+                                                    {{fixedTextHash['draft'][currLan]}}
+                                                </span>
+                                            </div>
+                                            <div class="opn-cls2 arabic-left-right" *ngIf="!(selJobObs | async)?.deleted && (selJobObs | async)?.job_status?.status != 'Draft' && getIfExpired((selJobObs | async)?.end_date) ">
+                                                <span class="expired-label">{{fixedTextHash['expired'][currLan]}}</span>
+                                            </div>
+
+                                            <div class="opn-cls2 arabic-left-right" *ngIf="(selJobObs | async)?.deleted">
+                                                <span class="deleted-label" >
+                                                    {{fixedTextHash['deleted'][currLan]}}
+                                                </span>
+                                            </div>
+
+
+                                            <div class="job-socail" *ngIf="(selJobObs | async)?.id && (selJobObs | async)?.job_status?.status == 'Open' && !(selJobObs | async)?.deleted && !getIfExpired((selJobObs | async)?.end_date) ">Share
+                                                <div class="mg-r-s">
+                                                    <share-social-media [url]="(joburl$ | async)" [title]="'Jobs'" [description]="'Jobs'"></share-social-media>
+                                                </div>
+                                            </div>
+                                            <div class=" clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <!-- small-oly -->
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 job-logo small-screen-only-resp">
+                                <div class="compny-details width-full clicks padding-0">
+                                    <div class="common-block block-title-2 padding-0 border-none pading-top-10">
+                                        <div class="edit-job action-job-detail-page arabic-right-left" *ngIf="(selJobObs | async)?.id">
+                                            <div class="opn-cls2 arabic-right-left" *ngIf="!(selJobObs | async)?.deleted && (selJobObs | async)?.job_status?.status == 'Open' && !getIfExpired((selJobObs | async)?.end_date) ">
+                                                <span class="active-label">
+                                                    {{fixedTextHash['active'][currLan]}}
+                                                </span>
+                                            </div>
+                                            <div class="opn-cls2 arabic-right-left" *ngIf="!(selJobObs | async)?.deleted  && (selJobObs | async)?.job_status?.status == 'Draft'">
+                                                <span class="draft-label">
+                                                    {{fixedTextHash['draft'][currLan]}}
+                                                </span>
+                                            </div>
+                                            <div class="opn-cls2 arabic-right-left" *ngIf="!(selJobObs | async)?.deleted && (selJobObs | async)?.job_status?.status != 'Draft' && getIfExpired((selJobObs | async)?.end_date) ">
+                                                <span class="expired-label">{{fixedTextHash['expired'][currLan]}}</span>
+                                            </div>
+
+                                            <div class="opn-cls2 arabic-right-left" *ngIf="(selJobObs | async)?.deleted">
+                                                <span class="deleted-label" >
+                                                    {{fixedTextHash['deleted'][currLan]}}
+                                                </span>
+                                            </div>
+
+                                             <button *ngIf="!(selJobObs | async)?.deleted"
+                                                     [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/jobs/'+(selJobObs | async)?.id+'/edit']">
+                                                 <i class="zmdi zmdi-edit"></i> {{fixedTextHash['edit_job'][currLan]}}
+                                             </button>
+
+                                            <div class="job-socail"
+                                                 *ngIf="(selJobObs | async)?.id && (selJobObs | async)?.job_status?.status == 'Open' && !(selJobObs | async)?.deleted && !getIfExpired((selJobObs | async)?.end_date) ">
+                                                {{fixedTextHash['share'][currLan]}}
+                                                <div class="mg-r-s">
+                                                    <share-social-media [url]="(joburl$ | async)"
+                                                                        [title]="'Jobs'"
+                                                                        [description]="'Jobs'">
+
+                                                    </share-social-media>
+                                                </div>
+                                            </div>
+
+                                            <div class=" clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+
+                        <!--requirement-->
+                        <div class="common-block requirement">
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 ">
+                                <div class="req-1"><i class="zmdi zmdi-chart-donut"></i></div>
+                                <div class="req-2">
+                                    <div class="txt bold">{{fixedTextHash['sector'][currLan]}}</div>
+                                    <div class="req-dark">{{(selJobObs | async)?.sector?.name}}</div></div>
+                                <div class=" clearfix"></div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 ">
+                                <div class="req-1"><i class="zmdi zmdi-view-dashboard"></i></div>
+                                <div class="req-2">
+                                    <div class="txt bold">{{fixedTextHash['functional_area'][currLan]}}</div>
+                                    <div class="req-dark">{{(selJobObs | async)?.functional_area?.name}}</div></div>
+                                <div class=" clearfix"></div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 ">
+                                <div class="req-1"><i class="zmdi zmdi-case"></i></div>
+                                <div class="req-2">
+                                    <div class="txt bold">{{fixedTextHash['years_experience'][currLan]}}</div>
+                                    <div class="req-dark">{{(selJobObs | async)?.experience_from}} - {{(selJobObs | async)?.experience_to}} {{fixedTextHash['years'][currLan]}} </div></div>
+                                <div class=" clearfix"></div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 ">
+                                <div class="req-1"><i class="icon-experience"></i></div>
+                                <div class="req-2">
+                                    <div class="txt bold">{{fixedTextHash['exp_level'][currLan]}} </div>
+                                    <div class="req-dark">{{(selJobObs | async)?.job_experience_level?.name}}</div></div>
+                                <div class=" clearfix"></div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 ">
+                                <div class="req-1"><i class="zmdi zmdi-money-box"></i></div>
+                                <div class="req-2">
+                                    <div class="txt bold">{{fixedTextHash['cur_month_salary'][currLan].replace('CURRCODE',fixedTextHash[accountService.getCurrency()][currLan])}}</div>
+                                    <div class="req-dark brand" *ngIf="((selJobObs | async)?.salary_range?.salary_from || (selJobObs | async)?.salary_range?.salary_from == 0) && ((selJobObs | async)?.salary_range?.salary_from < 10000)">{{(selJobObs | async)?.salary_range?.salary_from | number}} - {{(selJobObs | async)?.salary_range?.salary_to | number}}</div></div>
+                                    <div class="req-dark brand" *ngIf="(selJobObs | async)?.salary_range?.salary_from &&  (selJobObs | async)?.salary_range?.salary_from >= 10000">10k+</div>
+                                    <div class="req-dark brand" *ngIf="!(selJobObs | async)?.salary_range?.salary_from &&  (selJobObs | async)?.salary_range?.salary_from  != 0">&nbsp;{{getEmptySalaryValidation()}}</div>
+                                <div class=" clearfix"></div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 ">
+                                <div class="req-1"><i class="zmdi zmdi-graduation-cap"></i></div>
+                                <div class="req-2">
+                                    <div class="txt bold">{{fixedTextHash['edu_req'][currLan]}}</div>
+                                    <div class="req-dark">{{(selJobObs | async)?.job_education?.name}}</div></div>
+                                <div class=" clearfix"></div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 ">
+                                <div class="req-1"><i class="icon-notice-period"></i></div>
+                                <div class="req-2">
+                                    <div class="txt bold">{{fixedTextHash['certificates'][currLan]}}</div>
+                                    <div class="req-dark">
+                                        <span *ngFor="let selCert of (selJobObs | async)?.certificates,let certIndex = index">{{selCert?.name}} <span  *ngIf="certIndex <= ((selJobObs | async)?.certificates?.length-2)">{{fixedTextHash['comma'][currLan]}}</span></span><div class="req-dark navy" *ngIf="(selJobObs | async)?.certificates && (selJobObs | async)?.certificates?.length ==0 ">N/A</div>
+                                    </div>
+                                </div>
+                                <div class=" clearfix"></div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 ">
+                                <div class="req-1"><i class="icon-language"></i></div>
+                                <div class="req-2">
+                                    <div class="txt bold">{{fixedTextHash['languages'][currLan]}}</div>
+                                    <div class="req-dark">
+                                        <span *ngFor="let selLan of (selJobObs | async)?.languages,let certIndex = index">{{selLan?.name}}<span  *ngIf="certIndex <= ((selJobObs | async)?.languages?.length-2)">,&nbsp;</span></span><div class="req-dark navy" *ngIf="(selJobObs | async)?.languages && (selJobObs | async)?.languages?.length ==0 ">&nbsp;N/A</div>
+                                <div class=" clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 ">
+                                <div class="req-1"><i class="icon-gender"></i></div>
+                                <div class="req-2">
+                                    <div class="txt bold">{{fixedTextHash['gender'][currLan]}}</div>
+                                    <div class="req-dark" *ngIf="(selJobObs | async)?.gender_type">{{fixedTextHash[(selJobObs | async)?.gender_type][currLan]}}</div>
+                                </div>
+                                <div class="req-dark navy"  *ngIf="!(selJobObs | async)?.gender_type">&nbsp;
+                                    {{fixedTextHash['any'][currLan]}}
+                                </div>
+                                <div class=" clearfix"></div>
+                         </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 ">
+                            <div class="req-1"><i class="icon-current-Job font-12"></i></div>
+                            <div class="req-2">
+                                <div class="txt bold">{{fixedTextHash['job_type'][currLan]}}</div>
+                                <div class="req-dark">{{(selJobObs | async)?.job_type?.name}}</div></div>
+                            <div class=" clearfix"></div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 ">
+                            <div class="req-1"><i class="zmdi zmdi-calendar-alt"></i></div>
+                            <div class="req-2">
+                                <div class="txt bold">{{fixedTextHash['joining_date'][currLan]}}</div>
+                                <div class="req-dark" *ngIf="(selJobObs | async)?.join_date">{{(selJobObs | async)?.join_date == null?"Immediately": accountService.getFormattedDate((selJobObs | async)?.join_date , 'MMM DD, YYYY') }}</div>
+                                <div class="req-dark" *ngIf="!(selJobObs | async)?.join_date">&nbsp;{{fixedTextHash['immediately'][currLan]}}</div></div>
+                            <div class=" clearfix"></div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 ">
+                            <div class="req-1"><i class="icon-License"></i></div>
+                            <div class="req-2">
+                                <div class="txt bold">{{fixedTextHash['driving_license'][currLan]}} </div>
+                                <div class="req-dark">{{(selJobObs | async)?.license_required ? fixedTextHash['required'][currLan] : fixedTextHash['not_required'][currLan] }}</div></div>
+                            <div class=" clearfix"></div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  arabic-right-left">
+                            <div class="req-1"><i class="zmdi zmdi-accounts-outline"></i></div>
+                            <div class="req-2">
+                                <div class="txt"><h5>{{fixedTextHash['age_group'][currLan]}}</h5></div>
+                                <div class="req-dark" *ngIf="(selJobObs | async)?.ageRange">{{(selJobObs | async)?.ageRange}}</div>
+                            </div>
+                            <div class=" clearfix"></div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  arabic-right-left">
+                            <div class="req-1"><i class="zmdi zmdi-flag"></i></div>
+                            <div class="req-2">
+                                <div class="txt"><h5>{{fixedTextHash['nationality'][currLan]}}</h5></div>
+                                <div class="req-dark" *ngIf="(selJobObs | async)?.nationality">{{(selJobObs | async)?.nationality}}</div>
+                            </div>
+                            <div class=" clearfix"></div>
+                        </div>
+
+                    </div>
+
+            </div>
+
+            <!--Job Description-->
+
+            <div class="common-block job-detail-description">
+                <div class="block bottom-gap">
+                    <div class="block-title"><h2>{{fixedTextHash['job_desc'][currLan]}}</h2></div>
+                    <div class="block-contant">
+                        <div class="bullet text-justify" [innerHTML]="(selJobObs | async)?.description">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Job Requirements -->
+            <div class="common-block job-detail-description">
+                <div class="block bottom-gap">
+                    <div class="block-title"><h2>{{fixedTextHash['job_req'][currLan]}}</h2></div>
+                    <div class="block-contant">
+                        <div class="bullet text-justify"  [innerHTML]="(selJobObs | async)?.requirements">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Job Skills -->
+            <div class="common-block job-detail-description" *ngIf="(selJobObs | async)?.skills?.length >0">
+                <div class="block bottom-gap">
+                    <div class="block-title"><h2>{{fixedTextHash['skills_req'][currLan]}}</h2></div>
+                    <div class="block-contant">
+                        <ul class="skills-j-b-v">
+                            <li *ngFor="let selSkills of (selJobObs | async)?.skills" >{{selSkills.name}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Job Benefits -->
+            <div class="common-block benefits" *ngIf="(selJobObs | async)?.benefits?.length >0">
+                <div class="common-block">
+                    <div class="block">
+                        <div class="block-title"><h2>{{fixedTextHash['benefits'][currLan]}}</h2></div>
+                        <div class="common-block margin-top-10">
+                            <div class="benafit-box block" *ngFor="let selBenefit of (selJobObs | async)?.benefits">
+                                <div class="ben-icn"><i class="{{selBenefit.icon}}"></i> </div>
+                                <p>{{selBenefit.name}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+    </div>
+</div>

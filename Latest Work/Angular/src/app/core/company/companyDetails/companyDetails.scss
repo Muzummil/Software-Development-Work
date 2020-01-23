@@ -1,0 +1,381 @@
+@import '../../../../styles/sass/base/_variables.scss';
+
+
+input:-webkit-autofill {
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
+}
+
+h1, h2, h3, h4, h5, span, label, a, button, p{
+    font-family: $primary-Fonts;
+}
+
+.arabic{
+    h1, h2, h3, h4, h5, span, label, a, button, p, input, .cmpny-txt{
+       font-family: $arabic-primary-Fonts!important;
+    }
+}
+
+.block{
+    border:1px solid $light-border;
+    border-radius: $border-radius;
+    float: left;
+    width: 100%;
+  }
+  
+  .block-contant{
+      padding: 10px;
+  }
+  .block-title-2,  .block-title{
+      padding: 10px;
+  }
+  
+.employers-info{
+    border:1px solid $light-border;
+    border-top: none;
+    border-radius: $border-radius;
+    border-right: none;
+}
+.cover-photo{
+    border-radius: $border-radius;
+}
+
+.requirement{
+    .col-lg-4{
+        border: solid $light-border 1px;
+        border-left:none;
+        border-bottom:none;
+        min-height: 61px;
+        padding: 10px
+    }
+    .req-1{
+        float:left;
+        width:30px;
+        padding-left:10px;
+        font-size:$normal-font;
+        padding-top:0px;
+        color:$primarycolor
+    }
+    .req-2{ float:left;
+        width: calc(100% - 30px);
+        padding-left:5px;
+         .req-dark{
+            color:$primarycolor
+        }
+        .txt{
+            color: $secondarycolor;
+        }
+    }
+        .col-lg-3{
+            border: solid $light-border 1px;
+            padding: 10px;
+            min-height:61px;
+            border-top:1px solid #f1f1f1;
+            margin: 20px 0px;
+        }
+}
+
+.navy{
+    i{
+        color: $primarycolor;
+    }
+}
+
+// Copy Style
+// ==========================
+
+
+.emplyer-edit{
+    .social-section{
+        margin-bottom:0px;
+    }
+    .employers-detail{
+        width:60%;
+        h4{ margin-bottom: 5px;
+        }
+    }
+    .display{
+        .soc{
+            float: left;
+            width:100%;
+             }
+        input{
+            color:$secondarycolor
+        }
+    }
+    .employers-information{
+        .ab-box{
+            width:95.5%;
+            float: right;
+            position:relative;
+            margin-bottom:5px;
+
+        b{
+            position:absolute;
+            top:10px;
+            font-weight: normal;
+            left: -23px;
+            color:$primarycolor;
+        }
+            input{
+                color:$secondarycolor ;
+                margin-bottom:0px;
+            }
+        }
+        .block-contant{
+            min-height:224px;
+        }
+    }
+    .half-box{
+        width: 49.5%;
+    }
+    .box-25{
+        width:24.5%;
+        float: left;
+        margin-right:1%
+    }
+    .box-74{
+        width:100%;
+        float: left}
+    .light{
+        padding-bottom: 5px;
+    }
+
+    .req-2{
+        .txt{
+            margin-bottom:5px;
+            color: $primarycolor!important;
+        }
+    }
+    textarea{
+        padding:10px!important;
+    }
+    .our-team{
+        .social-media{
+            margin-top:6px;
+        }
+        .display .social-section .social-media .s-media{
+            width:35px;
+            height:35px;
+            line-height:35px;
+        }
+        .col-lg-6{
+            border-right: solid 1px #f1f1f1;
+            padding: 15px 10px !important;
+            border-bottom:1px solid $light-border;
+
+        }
+        .team-details{
+            float: left;
+            margin-left:10px;
+        }
+        .team-defult{
+            width: 90px;
+            height:90px;
+            float: left;
+            line-height:90px;
+            background:$bg-default;
+            color:$primarycolor;
+            text-align: center;
+            font-size:$font-30;
+        }
+        .team-photo-rel{
+            position: relative
+        }
+        .team-photo{
+            float: left;
+            width:60px;
+            height:35px;
+            overflow: hidden;
+            img{ width:100%;
+                height: auto;
+            }
+        }
+        .team-photo-editer{
+            float: left;
+            width:90px;
+            height:90px;
+            text-align: center;
+            color:$white;
+            position: absolute;
+            top:0px;
+            left:0px;
+            background: url("../../../../assets/images/opacity.png" ) repeat;
+                i{ font-size:$font-20; padding-top:25px;}
+        }
+        .block-title-2 button{
+            margin-bottom:0px;
+        }
+        .col-lg-5{
+            text-align: right;
+        }
+    }
+    .member{
+        .member-field{
+            float: right;
+            width: calc(100% - 90px);
+            padding-left: 10px;
+            .full-box{
+                margin-bottom:5px
+            }
+        }
+        .member-box{
+            float: left;
+            width:90px;
+            height:90px;
+            background:$bg-default;
+            color:$primarycolor;
+            text-align: center;
+            i{ font-size:$font-20;
+                padding-top:25px;}
+             img{
+                width:100%;
+                height:100%;
+                overflow: hidden
+            }
+        }
+        .member-upload-rel{
+            position:absolute
+        }
+        .member-editer{
+            float: left;
+            width:90px;
+            height:90px;
+            text-align: center;
+            color:$white; position:
+            absolute;
+            top:0px;
+            left:0px;
+            background: url("../../../../assets/images/opacity.png") repeat;
+                i{ font-size:$font-20;
+                padding-top:25px;}
+        }
+        .ab-box{
+              span{
+                display: inline-block;
+                top:3px;
+                color:$white;
+                width:35px;
+                height:35px;
+                line-height:35px;
+                text-align: center;
+                border-radius:50%;     }
+              input{
+                display: inline-block;
+                color:$secondarycolor ;
+                margin-bottom:5px;
+                width: calc(100% - 40px);
+            }
+              .facebook{
+                  background: #37579a;
+                  color:$white;
+              }
+              .twitter{
+                  background: #0ab8e3 ;
+                  color:$white;
+              }
+              .linkdin{
+                  background: #1576b9 ;
+                  color:$white;
+              }
+              .google-plus{
+                  background: #df4a32 ;
+                  color:$white;
+              }
+        }
+
+    }
+    .culture{
+        .col-lg-6{
+         border-right:solid 1px $light-border;
+         padding:15px 10px!important;
+         border-bottom:1px solid $light-border;
+        }
+    }
+    .scroll{
+        max-height:330px;
+        overflow:scroll;
+        overflow-x: hidden;
+        .row{
+            margin-bottom:20px;
+        }
+
+        .team-photo{
+            margin-bottom:10px;
+        }
+        .team-details{
+            width: calc(100% - 90px);
+             margin-left:0px;
+             padding-left:10px;
+        }
+
+        .our-team{
+            .col-lg-5{
+                margin-top:30px;
+            }
+        }
+    }
+    .browse-box{
+        margin-top:15px;
+    }
+    .edit-team{
+        .col-lg-12{
+            padding:20px 10px 5px!important
+        }
+    }
+}
+
+
+.employers-details .employers-tab .mobile-job-application .nav-tabs > li{
+    background-color:$bg;
+    border-bottom:1px solid #f1f1f1;
+    a{
+        &:hover{
+            background-color: $primarycolor;
+            color: $bg!important;
+            h3{
+                color: $bg!important;
+            }
+        }
+    }
+   
+    h3{
+        display: block;
+        text-align: center;
+        color: $primarycolor;
+    }
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+    background-color: $primarycolor!important;
+    color: $bg!important;
+    h3{
+        color: $bg!important;
+    }
+}
+.nav-tabs>li>a{
+    margin-right: 0px;
+}
+
+
+
+
+/* Respopnsive breakpoint */
+// ============bigScreen===========
+@media all and (max-width: 991px) {
+
+}
+
+// ============MediumScreen========
+@media all and (max-width: 768px) {
+    .requirement .col-lg-3{
+        margin: 0px;
+    }
+}
+
+// ============SmallScreen=========
+@media all and (max-width: 480px) {
+
+}
+
+

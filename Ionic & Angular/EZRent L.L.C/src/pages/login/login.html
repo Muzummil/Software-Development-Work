@@ -1,0 +1,64 @@
+<!-- -->
+<ion-content padding class="animated fadeIn login auth-page">
+  <div class="login-content"> 
+
+    <!-- Logo -->
+    <div padding-horizontal text-center class="animated fadeInDown">
+      <div class="logo">
+        <img src="../assets/img/logo.png" width="100%" height="auto">
+      </div>
+    </div>
+
+    <!-- Login form -->
+    <form #myForm="ngForm" [formGroup]="onLoginForm" (ngSubmit)="onLogin()" class="list-form login_form" margin-top>
+      <ion-item>
+        <ion-label fixed class="login-label">
+          <ion-icon name="md-person" item-start class="text-white"></ion-icon>
+          Email Address:
+        </ion-label>
+        <ion-input type="email" formControlName="email"></ion-input>
+      </ion-item>
+      <p ion-text color="danger" class="has-error" *ngIf="onLoginForm.get('email').hasError('required') && myForm.submitted">This field is required</p>
+
+      <ion-item>
+        <ion-label class="login-label" fixed>
+          <ion-icon name="lock" item-start class="text-white"></ion-icon>
+          Password:
+        </ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+      </ion-item>
+      <p ion-text color="danger" class="has-error" *ngIf="onLoginForm.get('password').hasError('required') && myForm.submitted">This field is required</p>
+
+      <!-- <ion-item class="item-nomargin">
+        <ion-label fixed class="forgot_pass" (click)="forgot()">
+          Forgot Password
+        </ion-label>
+      </ion-item> -->
+
+      <button class="signin" type="submit" ion-button icon-start block tappable>
+        SIGN IN
+      </button>
+    </form>
+
+    <!-- <p text-right ion-text color="light" tappable (click)="forgotPass()"><strong>Forgot Password?</strong></p> -->
+
+    <div>
+
+
+      <ion-grid class="btn-group">
+        <ion-row>
+          <button ion-button icon-only block class="btn-fb col col-4 signfb" (click)="loginWithFB()">
+            <ion-icon name="logo-facebook"></ion-icon>
+            Login with facebook
+          </button>
+        </ion-row>
+      </ion-grid>
+
+      <button class="signup" ion-button icon-start block color="dark" tappable (click)="register()">
+        Create New Account
+      </button>
+
+    </div>
+
+  </div>
+</ion-content>

@@ -1,0 +1,28 @@
+<h2 class="arabic-right-left" [class.arabic] = "accountService.isArabic()">
+<!--    home-->
+    <a [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath() + '/folders']" >
+        {{fixedTextHash['home'][currLan]}}</a>
+    <i class="zmdi zmdi-chevron-right"></i>
+
+<!--    ancestors-->
+    <ng-container *ngFor="let selBreadCrumb of ancestors; let last = last">
+        <ng-container *ngIf="!last">
+            <a [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath() + '/folders/' + accountService.getSpaceToDashLowerCase(selBreadCrumb?.name) + '-' + selBreadCrumb?.id]">
+                {{selBreadCrumb?.name}}
+            </a>
+            <i class="zmdi zmdi-chevron-right"></i>
+        </ng-container>
+        <ng-container *ngIf="last">
+                <span>{{selBreadCrumb?.name}}</span>
+        </ng-container>
+    </ng-container>
+</h2>
+
+<div *ngIf="level < 3" class="subCandiSwitch" [class.arabic] = "accountService.isArabic()">
+    <button [class.active]="activeClass == 'folder'" [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath() + '/folders/'
+    + accountService.getSpaceToDashLowerCase(ancestors[ancestors.length -1]?.name)
+    + '-' + ancestors[ancestors.length -1]?.id]">{{fixedTextHash['sub_folders'][currLan]}}</button>
+    <button [class.active]="activeClass == 'candidate'" [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()
+    + '/folders/' + accountService.getSpaceToDashLowerCase(ancestors[ancestors.length -1]?.name)
+    + '-' + ancestors[ancestors.length -1]?.id] + '/candidates'"> {{fixedTextHash['candidates'][currLan]}}</button>
+</div>

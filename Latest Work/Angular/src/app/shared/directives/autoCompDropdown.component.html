@@ -1,0 +1,22 @@
+<form [formGroup]="formAuto">
+<input type="text"
+       formControlName="search_string" minlength="1" maxlength="50"
+       #autocomp
+       autocomplete="off"
+       [(ngModel)] ="clearBox"
+       (keydown.enter)="selected({id:null,text:autocomp.value});
+       selValue=''"
+       [attr.placeholder]="placeholder"
+       [class.error-feild]="error">
+</form>
+
+
+<ul class="autocomplete_v2"  [class.hide]="hideList">
+    <li *ngFor="let selItem of (items$ | async)"
+        [class.active-auto-v2]="(items$ | async)?.length == 0"
+        [class.active-auto-v2]="autocomp.value == selItem?.text"
+        (click)="autocomp.value=selItem.text;selected(selItem);">
+        {{selItem?.text}}
+    </li>
+</ul>
+

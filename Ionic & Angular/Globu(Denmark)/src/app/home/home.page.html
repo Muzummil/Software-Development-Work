@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Hjem
+    </ion-title>
+    <div class="avatar__toolbar" (click)="presentToast()"><img src="{{ userProfile?.photoURL }}"></div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-searchbar showCancelButton cancelButtonText="Afbryd" mode="ios" placeholder="Søg efter en begivenhed"></ion-searchbar>
+    <ion-slides #mySlider (ionSlidesDidLoad)="slidesDidLoad()"  [options]="slideOpts" >
+        <ion-slide *ngFor="let item of begivenhed">
+
+          <ion-card routerLink="/detail/{{item.id}}">
+            <div>
+              <div class="begivenhed__picture_overlay">
+              <img src="{{ item.Billede }}" style="Height:340 px;  width:226 px;"/>
+              
+              </div>
+              <div class="begivenhed__titel"> {{ item.titel }} </div>
+              <div class="begivenhed__subtitel"> {{ item.subtitel }} </div>
+          
+            <ion-card-content text-wrap>
+              {{item.Beskrivelse}}
+              <br>
+              <br><ion-icon name="ios-pin"></ion-icon>{{ item.By}}
+            </ion-card-content>
+          </div>
+          </ion-card>
+          </ion-slide>
+      </ion-slides>
+
+      <div>
+        {{ userProfile?.email }} + {{ userProfile?.uid }}
+      
+      </div>
+
+
+</ion-content>

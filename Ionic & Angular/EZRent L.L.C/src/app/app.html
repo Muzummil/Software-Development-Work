@@ -1,0 +1,65 @@
+<!--<ion-menu [content]="content">
+
+  <ion-content class="menu-left navBorder">
+    <div padding-top padding-bottom class="primary-bg menu-left ">
+      <a menuClose>
+      </a>
+      
+      <h4 style="color:black" *ngIf="user">{{ user.name }}</h4>
+    </div>
+
+    <ion-list class="list-full-border">
+      <button ion-item menuClose *ngFor="let page of pages" (click)="openPage(page)">
+        <ion-icon item-left name="{{ page.icon }}"></ion-icon>
+        {{ page.title }}
+        <ion-badge color="danger" item-right *ngIf="page.count">{{ page.count }}</ion-badge>
+      </button>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>-->
+
+<ion-split-pane when="lg">
+
+  <ion-menu side="left" id="authenticated" [content]="content">
+    <ion-header>
+      <div class="header_img">
+        <img src="../assets/img/side_img.jpg" alt="background image">
+      </div>
+      <!-- <ion-icon item-left name="person" (click)="editProfile()" class="text-white"> Edit Profile</ion-icon> -->
+
+    </ion-header>
+    <ion-content color="primary" class="app" *ngIf="user">
+      <ion-list class="user-list list_bg" *ngIf="userID == 2">
+        <button ion-item menuClose class="text-1x" *ngFor="let page of tenantPages" (click)="openPage(page)">
+          <ion-icon item-left name="{{ page.icon }}" class="text-white"></ion-icon>
+          <span ion-text class="text-white">{{ page.title }}<ion-badge *ngIf="page.title=='Notifications' && badgeNumber>0" color="red" id="badge">{{badgeNumber}}</ion-badge></span>
+        </button>
+
+      </ion-list>
+
+      <ion-list class="user-list list_bg" *ngIf="userID == 3">
+        <button ion-item menuClose class="text-1x" *ngFor="let page of pages" (click)="openPage(page)">
+          <ion-icon item-left name="{{ page.icon }}" class="text-white"></ion-icon>
+          <span ion-text class="text-white">{{ page.title }}<ion-badge *ngIf="page.title=='Notifications' && badgeNumber>0" color="red" id="badge">{{badgeNumber}}</ion-badge></span>
+        </button>
+
+      </ion-list>
+
+
+      <ion-list class="user-list list_bg" *ngIf="userID == 4">
+        <button ion-item menuClose class="text-1x" *ngFor="let page of tenantPages" (click)="openPage(page)">
+          <ion-icon item-left name="{{ page.icon }}" class="text-white"></ion-icon>
+          <span ion-text class="text-white">{{ page.title }}<ion-badge *ngIf="page.title=='Notifications' && badgeNumber>0" id="badge">{{badgeNumber}}</ion-badge></span>
+        </button>
+
+      </ion-list>
+    </ion-content>
+
+  </ion-menu>
+
+  <ion-nav [root]="rootPage" main #content swipeBackEnabled="false"></ion-nav>
+
+</ion-split-pane>

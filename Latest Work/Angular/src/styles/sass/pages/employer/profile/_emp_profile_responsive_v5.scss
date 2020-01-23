@@ -1,0 +1,193 @@
+// Desktop
+@media (max-width: 1200px){
+    
+}
+/*---------------------------------------------------i-------------------------------------------------------*/
+@media (min-width: 900px) and (max-width: 1024px){
+	
+}
+
+/*---------------------------------------------------i-------------------------------------------------------*/
+// Tablet
+@media (min-width: 768px) and (max-width: 1024px){
+	.company_contact_detail_v2 .contact_map_v2, .company_contact_detail_v2 .contact_details_v2{
+		width: 100%!important;
+	}
+	.comapny-profile-bannerv2 .profile-c-v2{
+		width: 330px;
+	}
+	.comapny-profile-bannerv2 .banner-c-v2{
+		width: calc(100% - 330px)!important;
+	}
+	.left-arrow-v2{
+        top:-255px;
+    }
+    .right-arrow-v2{
+        top:0px;
+	}
+	.socialmedia-v2 .social-frame-v2 .iframe-box iframe{
+		width: 92%;
+	}
+	.culture-v2 .video-v2{
+		height: auto;
+	}
+	.video-v2 video{
+		float: left!important;
+		width: 100%;
+		height: 400px;
+		object-fit: cover;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 999px){
+	.comapny-profile-bannerv2 .profile-c-v2{
+		width: 100%;
+		height: auto;
+		min-height: auto;
+		padding-bottom: 25px;
+	}
+	.comapny-profile-bannerv2{
+		height: auto;
+	}
+	.comapny-profile-bannerv2 .banner-c-v2{
+		width: 100%!important;
+		height: auto;
+		min-height: auto;
+	}
+	.premium{
+		margin-left: 10px;
+		margin-right: 10px;
+		width: 100%;
+		margin: 0px auto;
+		margin-bottom: 15px;
+	} 
+}
+/*---------------------------------------------------i-------------------------------------------------------*/
+// Smartphone
+@media (max-width: 767px) {
+   .comapny-profile-bannerv2{
+    .profile-c-v2{
+        width: 100%;
+    }
+    .banner-c-v2{
+        width: 100%;
+    }
+}
+.company_adtional_detail_v2 .col-lg-3{
+    margin-top: 5px;
+}
+.company_contact_detail_v2 .contact_details_v2{
+	width: 100%;
+}
+.comapny-profile-bannerv2{
+	height:auto;
+}
+.comapny-profile-bannerv2 .banner-c-v2{
+	min-height:auto;
+	height: auto;
+}
+.company_contact_detail_v2{
+	height:auto;
+}
+.comapny-profile-bannerv2 .banner-c-v2 .content{
+	bottom:0px;
+}
+.company_contact_detail_v2 .contact_map_v2{
+	width: 100%!important;
+	float:none;
+}
+.comapny-profile-bannerv2 .profile-c-v2{
+	min-height:auto;
+	padding-bottom:20px;
+}
+.new-hire-v2 .new-hire-graph-v2{
+	width:100%;
+}
+.new-hire-v2 .active-job-v2{
+	width:100%;
+}
+.new-hire-v2 .new-hire-graph-v2 .col-lg-1 span strong{
+	font-size:10px;
+}
+.new-hire-v2 .active-job-v2 h3{
+	margin-top:25px;
+}
+.new-hire-v2 .active-job-v2{
+	height:160px;
+}
+.overoll-rating-v2 .rating-box-row-2 .rating-box-v2{
+	width:100%;
+	border:1px solid #f1f1f1;
+}
+.overoll-rating-v2{
+	height:auto;
+}
+.culture-v2 .video-v2{
+	height:230px;																													
+}
+.upload-v2{
+	min-height:auto;
+	i{
+		margin-top: 0px;
+	}
+}
+.our-active-jobs .list-active-job-v2{
+	min-height:auto!important;
+	float:left;
+	min-height:80px;
+	width: 100%;
+}
+.our-active-jobs .stats-side-v2{
+	width:100%!important;
+	ul{
+		margin-top: 15px;
+		li{
+			height: auto;
+			padding:10px;
+		}
+	}
+}
+.our-active-jobs .title-area-v2{
+	width:100%!important;
+}
+.new-hire-v2 .new-hire-graph-v2{
+	width:100%;
+}  
+.premium{
+	margin-left: 10px;
+	margin-right: 10px;
+	width: 97.5%;
+	margin-bottom: 15px;
+}  
+.left-arrow-v2, .right-arrow-v2{
+	display: none;
+}
+.left-arrow-v2, .right-arrow-v2{
+		display: none;
+	}
+	.comapny-profile-bannerv2 .profile-c-v2 .company-profile-pic{
+		margin:0px auto;
+	}
+	.comapny-profile-bannerv2 .profile-c-v2 .company-detailsv2 .normal-detail-sec-v2 h2{
+		text-align: center;
+	}
+	.comapny-profile-bannerv2 .profile-c-v2 .company-detailsv2 .normal-detail-sec-v2 span{
+		text-align: center;
+	}
+	.comapny-profile-bannerv2 .social-m-v2{
+		text-align: center;
+	}
+}
+/*---------------------------------------------------i-------------------------------------------------------*/
+// Mobile
+@media (max-width: 480px) {
+	.left-arrow-v2, .right-arrow-v2{
+		display: none;
+	}
+	.premium{
+		margin-left: 10px;
+		margin-right: 10px;
+		width: 95%;
+		margin-bottom: 15px;
+	}  
+}

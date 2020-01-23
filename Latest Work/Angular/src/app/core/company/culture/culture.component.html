@@ -1,0 +1,17 @@
+<!-- New office Image -->
+<div class="block-contant padding-10" *ngIf="(culturesObs | async)?.length">
+    <div class="row" *ngIf="(culturesObs | async)">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 thumbnail-office" *ngFor="let selpic of (culturesObs |async),let pindex = index">
+            <div class="space-offce">
+                <div class="office-iamge-title"><h2>{{selpic.name}}</h2></div>
+                <img *ngIf="selpic.image_thumb_url" src="{{selpic.image_thumb_url}}">
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+
+
+
+

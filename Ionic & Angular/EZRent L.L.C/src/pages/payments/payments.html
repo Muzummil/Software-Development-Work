@@ -1,0 +1,91 @@
+<ion-header class="animated fadeIn no-shadow">
+
+  <ion-navbar class="no-border" color="primary" hideBackButton="true">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Payment Methods
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="common-bg payments">
+  <div *ngIf="!hasAccount">
+    <h5 class="card-heading">Bank Acoounts</h5>
+    <ion-card>
+      <ion-card-header>
+        No bank account has been setup
+      </ion-card-header>
+    
+      <ion-list>
+        <button class="add-btn" ion-item (click)="skip()">
+          Link Bank Account
+        </button>
+    
+      </ion-list>
+    </ion-card>
+    <h5 class="card-heading">Cards</h5>
+    <ion-card>
+      <ion-card-header>
+        <ion-icon name="cash" item-start></ion-icon>
+        No bank card has been setup
+      </ion-card-header>
+    
+      <ion-list>
+        <button class="add-btn" ion-item (click)="skip()">
+          Add Debit or Credit card
+        </button>
+    
+      </ion-list>
+    </ion-card>
+    <p class="below-card-text">A standard 3% fee applies when sending money
+      using credit and debit card and <b>$2.50</b> for bank accounts.</p>
+    <!-- <div class="btn-margin">
+      <button ion-button full class="btn-fb signfb" (click)="skip()">Add Payment Accounts</button>
+    </div> -->
+  </div>
+
+      <div *ngIf="hasAccount" class="common-bg animated user_details">
+          <ion-grid *ngFor="let bank of accountDetails" class="table_grid">
+            <ion-row>
+              <ion-col col-6>
+                <h5>First Name</h5>
+              </ion-col>
+              <ion-col col-6>
+                <h5>{{bank.first_name}}</h5>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-6>
+                <h5>Last Name</h5>
+              </ion-col>
+              <ion-col col-6>
+                <h5>{{bank.last_name}}</h5>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-6>
+                <h5>Email</h5>
+              </ion-col>
+              <ion-col col-6>
+                <h5>{{bank.email}}</h5>
+              </ion-col>
+            </ion-row>
+            </ion-grid>
+            <div class="btn-margin">
+              <button ion-button full class="btn-fb signfb" (click)="updateAccount()">Update Payment Accounts</button>
+            </div>
+        </div>
+    <!-- <div *ngFor="let bank of accountDetails">
+      <ion-row>
+        <ion-col col-12>{{bank.first_name}}</ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col col-12>{{bank.last_name}}</ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-12>{{bank.email}}</ion-col>
+          </ion-row>
+    </div>-->
+</ion-content>

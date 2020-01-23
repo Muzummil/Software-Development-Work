@@ -1,0 +1,126 @@
+/*---------------------------------------------------1-------------------------------------------------------*/
+
+@media (max-width: 1200px){
+
+#my-profile{
+	.new-fit-profile{
+		.dp-rgt{
+			width: calc(100% - 300px)!important;
+		}
+	}
+}
+
+
+}
+
+/*---------------------------------------------------2-------------------------------------------------------*/
+
+@media (min-width: 768px) and (max-width: 1024px){
+.new-contact-fit{
+	min-height: auto;
+	float:left;
+}
+.new-fit-location{
+	padding-left:0px;
+	border:none;
+}
+
+#my-profile {
+	.dp-rgt{
+		width: calc(100% - 300px) !important;
+	}
+	
+}
+
+}
+
+
+/*---------------------------------------------------3-------------------------------------------------------*/
+
+@media (max-width: 767px) {
+
+.communication-new-impliment .communication-status-v21{
+    width: 100%;
+}
+.communication-new-impliment .communication-comments-v21{
+    width: 100%; 
+}
+.communication-new-impliment .communi-interviewd label{
+    margin-bottom: 10px;
+}
+.new-contact-fit{
+	min-height: auto;
+	float:left;
+}
+.new-fit-location{
+	padding-left:0px;
+	border:none;
+}
+#my-profile{
+	.new-fit-profile{
+		.dp-rgt{
+			width: 100%!important;
+		}
+		.display{
+			.cancel{
+				button{
+					width: 50%!important;
+				}
+			}
+		}
+		.cv-new-fit{
+			width: 50%!important;
+			margin-top: 10px;
+			margin-left: 0px;
+		}
+	}
+}
+	.new-fit-personal{
+		float:left;
+	}
+	.new-fit-box-both{
+		float:left!important;
+	}
+	.full-fix-b{
+		.col-lg-9{
+			margin-bottom: 5px;
+			padding:0px!important;
+		}
+		.col-lg-3{
+			margin-bottom: 5px;
+			padding:0px!important;
+		}
+	}
+
+   
+}
+
+/*---------------------------------------------------4-------------------------------------------------------*/
+
+@media (max-width: 480px) {
+    #communication-applicant .tab-application .nav-tabs{
+        width: 100%;
+    }
+    #communication-applicant .tab-application .tab-content{
+        width: 100%;
+    }
+    .new-fit-box-both{
+		float:left!important;
+		min-height:auto;
+	}
+	.new-fit-personal{
+		float:left;
+		min-height:auto;
+	}
+	.full-fix-b{
+		.col-lg-9{
+			margin-bottom: 5px;
+			padding:0px!important;
+		}
+		.col-lg-3{
+			margin-bottom: 5px;
+			padding:0px!important;
+		}
+	}
+
+}

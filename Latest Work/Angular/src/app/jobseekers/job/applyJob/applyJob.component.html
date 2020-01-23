@@ -1,0 +1,73 @@
+<div class="tab-content job-bloovo">
+    <div role="tabpanel" class="tab-pane active load-data-js" id="apply-job">
+    <div id="my-profile">
+        <div>
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                <div class="block bottom-gap min-full">
+                    <div class="block-title-2">
+                        <div class="left-apply-box">
+                            <h2 class="padding-top-10">Apply Job  <span class="light">{{jobTitle}}</span></h2>
+                        </div>
+                        <div class="right-apply-box">
+                            <a (click)="onClickBack()" class="cursor_pointer1"> <button> Back </button></a></div>
+                        <div class="clearfix"></div>
+                    </div>
+
+            <div class="clearfix"></div>
+            <div class="block-footer footer-fix-applay">
+                <button [disabled]="(successFlag$ |async) == true" (click)="onApplyJob()">
+                    Apply for the Job
+                </button>
+                <span class="cancel padding-0">
+                    <button (click)="onClickBack()">  Cancel </button>
+                </span>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 information">
+        <div class="block bottom-gap">
+
+            <div class="profile-status">
+
+                <div class="profile-status-header">
+                    <h3>{{(profileHeader$ | async)?.first_name}}</h3>
+                    <h4>Your Profile is Not Complete</h4>
+                </div>
+
+                <div class="block-contant">
+                    <div class="profile-percentage">
+                        <div class="prg-cercle">
+                            <div class=" c100 p92 green">
+                                <span>{{matchingPercent | number:'1.0-1'}}%</span>
+                                <div class="slice">
+                                    <div class="bar"></div>
+                                    <div class="fill"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="block-title-2 border-none">
+                        <button [routerLink]="accountService.getCurrLangUrl()+accountService.getPath()+'/profile'">Update Profile</button>
+                    </div>
+                    <div class="dark">Get Noticed!</div>
+                    <p class="big-18">
+                        <span class="light">A Complete Profile Gives You a </span><span class="dark">Better
+                        Employer Reach</span><span class="light"> & </span> <span class="dark"> a Higher Chance of</span>
+                        <span class="light">Getting the</span> <span class="dark"> Perfect Job Match.</span>
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    </div>
+</div>
+</div>

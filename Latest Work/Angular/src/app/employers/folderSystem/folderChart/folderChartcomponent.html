@@ -1,0 +1,223 @@
+<!--Folder Listing-->
+<div class="listingFolder" [class.arabic] = "accountService.isArabic()">
+    <spinner [visible]="showSpinner"></spinner>
+
+    <!-- ========================================================= -->
+    <ul class="listFoldereach">
+
+        <!-- step1 -->
+        <!-- =================================== -->
+        <li *ngFor="let selFolderLevel1 of (folderList$  | async)" class="folderStep1"
+            [class.modal-step]="specialOperation != 'none'"
+            [class.noSubfolder1]="selFolderLevel1?.sub_folders?.length == 0">
+            <!-- NAME AND ICON -->
+            <div class="list-one-one">
+                <div class="nameLabelFolder arabic-right-left">
+                    <button (click)="getToggleSub(selFolderLevel1)">
+                        {{(selFolderLevel1['show_sub']) ? '-' : '+'}}
+                    </button>
+                    <div class="cursor_pointer1" *ngIf="specialOperation  == 'none'"
+                         [routerLink]="[getUrl(selFolderLevel1)]">
+                        <i class="iconlistfolder">
+                            <b class="tip-top"></b><b class="baseline"></b></i>
+                        <span>{{selFolderLevel1?.name}}</span>
+
+                    </div>
+                    <div *ngIf="specialOperation  != 'none'">
+                        <i class="iconlistfolder" >
+                            <b class="tip-top"></b><b class="baseline"></b></i>
+                        <span>{{selFolderLevel1?.name}}</span>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div *ngIf="specialOperation  !== 'none'" class="actionlist arabic-right-left">
+                    <div class="moveTo" (click)="getAddMoveTo(selFolderLevel1)">
+                        {{(specialOperation == 'move')?fixedTextHash['move_to'][currLan] : fixedTextHash['add'][currLan]}}
+                    </div>
+                </div>
+                <div *ngIf="specialOperation === 'none'" class="actionlist arabic-right-left">
+                    <ul class="action-buttons">
+                        <!-- <li class="hint--right" [attr.aria-label]="fixedTextHash['download'][currLan]">
+                            <i class="zmdi zmdi-download"></i>
+                        </li> -->
+                        <li [attr.aria-label]="fixedTextHash['edit'][currLan]" data-toggle="modal"
+                            [attr.data-target]="'#editFolder-'+ selFolderLevel1?.id">
+                            <i class="zmdi zmdi-edit"></i>
+                        </li>
+                        <li class="hint--right" [attr.aria-label]="fixedTextHash['delete'][currLan]" data-toggle="modal"
+                            [attr.data-target]="'#deleteFolder-'+ selFolderLevel1?.id">
+                            <i class="zmdi zmdi-delete"></i>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+
+            <!-- step2 -->
+            <!-- =================================== -->
+            <ng-container *ngIf="selFolderLevel1?.show_sub">
+                <ul *ngIf="selFolderLevel1?.sub_folders?.length > 0" class="listFoldereach">
+                    <li class="folderStep2" *ngFor="let selFolderLevel2 of selFolderLevel1?.sub_folders"
+                        [class.noSubfolder2]="selFolderLevel2?.sub_folders?.length == 0">
+                        <!-- NAME AND ICON -->
+                        <div class="list-one-one">
+                            <div class="nameLabelFolder arabic-right-left">
+                                <button (click)="getToggleSub(selFolderLevel2)">
+                                    {{(selFolderLevel2['show_sub']) ? '-' : '+'}}
+                                </button>
+                                <div class=" cursor_pointer1" *ngIf="specialOperation  == 'none'"
+                                     [routerLink]="[getUrl(selFolderLevel2)]">
+                                    <i class="iconlistfolder">
+                                        <b class="tip-top"></b><b class="baseline"></b>
+                                    </i>
+                                    <span>{{selFolderLevel2?.name}}</span>
+                                </div>
+                                <div *ngIf="specialOperation  != 'none'">
+                                    <i class="iconlistfolder">
+                                        <b class="tip-top"></b><b class="baseline"></b>
+                                    </i>
+                                    <span>{{selFolderLevel2?.name}}</span>
+                                </div>
+                            </div>
+
+                            <!-- Actions -->
+
+                            <div *ngIf="specialOperation  !== 'none'" class="actionlist arabic-right-left">
+                                <div class="moveTo" (click)="getAddMoveTo(selFolderLevel2)">
+                                    {{(specialOperation == 'move')?fixedTextHash['move_to'][currLan] : fixedTextHash['add_to'][currLan]}}
+                                </div>
+                            </div>
+                            <div *ngIf="specialOperation === 'none'" class="actionlist arabic-right-left">
+                                <ul class="action-buttons">
+                                    <!-- <li class="hint--right" [attr.aria-label]="fixedTextHash['download'][currLan]">
+                                        <i class="zmdi zmdi-download"></i>
+                                    </li> -->
+                                    <li [attr.aria-label]="fixedTextHash['edit'][currLan]" data-toggle="modal"
+                                        [attr.data-target]="'#editFolder-'+ selFolderLevel2?.id">
+                                        <i class="zmdi zmdi-edit"></i>
+                                    </li>
+                                    <li class="hint--right" [attr.aria-label]="fixedTextHash['delete'][currLan]"
+                                        data-toggle="modal"
+                                        [attr.data-target]="'#deleteFolder-'+ selFolderLevel2?.id">
+                                        <i class="zmdi zmdi-delete"></i>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- step3 -->
+                        <!-- =================================== -->
+                        <ng-container *ngIf="selFolderLevel2?.show_sub">
+                            <ul class="listFoldereach noSubfolder3" *ngIf="selFolderLevel2?.sub_folders?.length > 0">
+                                <li class="folderStep3" *ngFor="let selFolderLevel3 of selFolderLevel2?.sub_folders">
+                                    <!-- NAME AND ICON -->
+                                    <div class="list-one-one">
+                                        <div class="nameLabelFolder arabic-right-left">
+                                            <button (click)="getToggleSub(selFolderLevel3)">
+                                                {{(selFolderLevel3['show_sub']) ? '-' : '+'}}
+                                            </button>
+                                            <div class="cursor_pointer1" *ngIf="specialOperation  == 'none'"
+                                                 [routerLink]="[getUrl(selFolderLevel3)]">
+                                                <i class="iconlistfolder">
+                                                    <b class="tip-top"></b><b class="baseline"></b>
+                                                </i>
+                                                <span>{{selFolderLevel3?.name}}</span>
+                                            </div>
+                                            <div  *ngIf="specialOperation  != 'none'">
+                                                <i class="iconlistfolder">
+                                                    <b class="tip-top"></b><b class="baseline"></b>
+                                                </i>
+                                                <span>{{selFolderLevel3?.name}}</span>
+                                            </div>
+                                        </div>
+                                        <!-- Actions -->
+                                        <div *ngIf="specialOperation !== 'none'" class=" arabic-right-left">
+                                            <div class="moveTo" (click)="getAddMoveTo(selFolderLevel3)">
+                                                {{(specialOperation == 'move')?fixedTextHash['move_to'][currLan] : fixedTextHash['add'][currLan]}}
+                                            </div>
+                                        </div>
+                                        <div *ngIf="specialOperation === 'none'" class="actionlist arabic-right-left">
+                                            <ul class="action-buttons">
+                                                <!-- <li class="hint--right" [attr.aria-label]="fixedTextHash['download'][currLan]">
+                                                    <i class="zmdi zmdi-download"></i>
+                                                </li> -->
+                                                <li [attr.aria-label]="fixedTextHash['edit'][currLan]"
+                                                    data-toggle="modal"
+                                                    [attr.data-target]="'#editFolder-'+ selFolderLevel3?.id">
+                                                    <i class="zmdi zmdi-edit"></i>
+                                                </li>
+                                                <li class="hint--right"
+                                                    [attr.aria-label]="fixedTextHash['delete'][currLan]"
+                                                    data-toggle="modal"
+                                                    [attr.data-target]="'#deleteFolder-'+ selFolderLevel3?.id">
+                                                    <i class="zmdi zmdi-delete"></i>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <ng-container *ngIf="selFolderLevel2?.has_more">
+                                    <li *ngIf="specialOperation == 'none'"  class="cursor_pointer1" [routerLink]="[getUrl(selFolderLevel2)]">
+                                        <span class="see-more-folder"><i class="zmdi zmdi-plus"></i>{{fixedTextHash['see_more'][currLan]}}</span>
+                                    </li>
+                                    <li *ngIf="specialOperation != 'none'"  class="cursor_pointer1" (click)="getSeeMore(+selFolderLevel2.id)">
+                                        <span class="see-more-folder"><i class="zmdi zmdi-plus"></i>{{fixedTextHash['see_more'][currLan]}}</span>
+                                    </li>
+                                </ng-container>
+
+                            </ul>
+                        </ng-container>
+                    </li>
+                    <ng-container *ngIf="selFolderLevel1?.has_more">
+                        <li *ngIf="specialOperation == 'none'"  class="cursor_pointer1" [routerLink]="[getUrl(selFolderLevel1)]">
+                            <span class="see-more-folder"><i class="zmdi zmdi-plus"></i>{{fixedTextHash['see_more'][currLan]}}</span>
+                        </li>
+                        <li *ngIf="specialOperation != 'none'"  class="cursor_pointer1" (click)="getSeeMore(selFolderLevel1.id)">
+                            <span class="see-more-folder"><i class="zmdi zmdi-plus"></i>{{fixedTextHash['see_more'][currLan]}}</span>
+                        </li>
+                    </ng-container>
+                </ul>
+            </ng-container>
+        </li>
+    </ul>
+
+</div>
+
+<!--Do not load modal if its special operation like move-->
+<ng-container *ngIf="specialOperation === 'none'">
+    <!-- Modals -->
+    <!-- ========================================================== -->
+    <!-- Add New Folder -->
+    <folder-create-edit-modal [parentId]="parentId"
+                              (folderCreated)="($event)? getAddFolderInCache($event): getErrorMessage()"></folder-create-edit-modal>
+
+
+    <!-- Edit / Delete Folders Level 1-->
+
+    <ng-container *ngFor="let selFolderLevel1 of (folderList$  | async)">
+        <folder-delete-modal
+                (folderDeleted)="($event == true)? getDeleteFolderInCache(selFolderLevel1.id): getErrorMessage()"
+                [folderObject]="selFolderLevel1"></folder-delete-modal>
+        <folder-create-edit-modal (folderEdited)="($event)? getEditFolderInCache($event): getErrorMessage()"
+                                  [folderObject]="selFolderLevel1"></folder-create-edit-modal>
+        <!-- Delete Folder Level 2-->
+        <ng-container *ngFor="let selFolderLevel2 of selFolderLevel1?.sub_folders">
+            <folder-delete-modal [folderObject]="selFolderLevel2"
+                                 (folderDeleted)="($event == true)? getDeleteFolderInCache(selFolderLevel2.id): getErrorMessage()"></folder-delete-modal>
+            <folder-create-edit-modal (folderEdited)="($event)? getEditFolderInCache($event): getErrorMessage()"
+                                      [folderObject]="selFolderLevel2"></folder-create-edit-modal>
+
+            <!-- Delete Folder Level 3-->
+            <ng-container *ngFor="let selFolderLevel3 of selFolderLevel2?.sub_folders">
+                <folder-delete-modal [folderObject]="selFolderLevel3"
+                                     (folderDeleted)="($event == true)? getDeleteFolderInCache(selFolderLevel3.id) :getErrorMessage()"></folder-delete-modal>
+                <folder-create-edit-modal (folderEdited)="($event)? getEditFolderInCache($event): getErrorMessage()"
+                                          [folderObject]="selFolderLevel3"></folder-create-edit-modal>
+
+            </ng-container>
+        </ng-container>
+    </ng-container>
+</ng-container>
+
+

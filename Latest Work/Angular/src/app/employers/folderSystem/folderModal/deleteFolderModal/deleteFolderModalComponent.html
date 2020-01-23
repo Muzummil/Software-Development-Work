@@ -1,0 +1,23 @@
+<div class="modal fade delete-folder" id="deleteFolder-{{folderObject?.id}}" tabindex="-1" role="dialog" aria-labelledby="deleteFolder" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <!-- modal body -->
+            <div class="modal-body deleteFolderModel">
+                <spinner [visible]="showSpinner"></spinner>
+                <div *ngIf="errorflag" class="alert alert-danger alert-dismissible" role="alert">
+                    {{fixedTextHash['delete_folder_error'][currLan]}}
+                </div>
+                <h2>{{fixedTextHash['sure_delete'][currLan]}}</h2>
+                <i class="iconlistfolder"><b class="tip-top"></b><b class="baseline"></b></i>
+                <h3>{{folderObject?.name}}</h3>
+            </div>
+            <div class="modal-footer">
+                <div class="btGroup">
+                    <button type="button" class="btn btn-primary" (click)="getFolderDelete(folderObject?.id)">{{fixedTextHash['yes'][currLan]}}</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{fixedTextHash['no'][currLan]}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,290 @@
+<div class="skill" [class.arabic] = "accountService.isArabic()">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="block bottom-gap">
+            <div *ngIf="(errorflag$ | async)" class="alert alert-danger alert-dismissible" role="alert">
+                {{fixedTextHash['error_skill'][currLan]}}
+            </div>
+
+            <div class="saved" *ngIf="skills_status == 'read'"> <!-- save -->
+                <!--<div *ngIf="!cancelmode">-->
+                <div class="block-title" *ngIf="screenwidth >mobileScreen">
+
+                    <div class="left arabic-right-left"><h4>{{fixedTextHash['skills'][currLan]}}</h4></div>
+
+                    <div class="right" *ngIf="(skills$ | async)?.length > 0">
+                        <span class="beg"> <i class="icon-round"></i> {{fixedTextHash['beginner'][currLan]}} </span>
+
+                        <span class="int"> <i class="icon-round"></i> {{fixedTextHash['intermediate'][currLan]}} </span>
+
+                        <span class="exp"> <i class="icon-round"></i> {{fixedTextHash['expert'][currLan]}} </span>
+
+                        <a (click)="onEdit()">
+                            <span class="light">
+                                <i class="zmdi zmdi-edit"></i>&nbsp;{{fixedTextHash['edit'][currLan]}}
+                            </span>
+                        </a>
+                    </div>
+
+                    <div class="clearfix"></div>
+                </div>
+
+                <div  *ngIf="screenwidth <=mobileScreen">
+                    <div class="block-title">
+                        <div class="left arabic-right-left"><h4>{{fixedTextHash['skills'][currLan]}}</h4></div>
+                        <div class="right" *ngIf="(skills$ | async)?.length > 0">
+                            <a (click)="onEdit()">
+                                <span class="light">
+                                    <i class="zmdi zmdi-edit"></i>&nbsp;{{fixedTextHash['edit'][currLan]}}
+                                </span>
+                            </a>
+                        </div>
+                        <div class=" clearfix"></div>
+                    </div>
+
+                    <div class="right-skill" *ngIf="(skills$ | async)?.length > 0">
+                        <span class="beg"> <i class="icon-round"></i> {{fixedTextHash['beginner'][currLan]}} </span>
+                        <span class="int"> <i class="icon-round"></i> {{fixedTextHash['intermediate'][currLan]}} </span>
+                        <span class="exp"> <i class="icon-round"></i> {{fixedTextHash['expert'][currLan]}} </span>
+                    </div>
+                </div>
+
+                <!--</div>-->
+
+                <div class="empty-min1" *ngIf="(savingmode$ | async)">
+                    <i class="empty-min1-spinner2"> <spinner [visible]="(savingmode$ | async)"></spinner> </i>
+                </div>
+
+
+                <div  [style.display]="!(savingmode$ | async) ?'block':'none'"  class="block-contant" *ngIf="(skills$ | async)?.length == 0">
+
+                    <div class="empty-prf empty-min1 cursor_pointer1" (click)="onEdit()">
+                        <i class="icon-empty-skill"></i>
+                        <h5> {{fixedTextHash['add_skill'][currLan]}}</h5>
+                    </div>
+                </div>
+
+
+                <div  [style.display]="!(savingmode$ | async)?'block':'none'" class="block-contant padding-10 " *ngIf="(skills$ | async)?.length > 0">
+                    <div>
+                        <div *ngFor="let skill of (skills$ | async)" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left">
+                            <div>
+                                <div class="skill-txt">
+                                    <div class="pull-left arabic-right-left">
+                                        <div class="light">{{skill.name}}</div>
+                                    </div>
+                                    <div class="pull-right arabic-left-right">
+                                        <div class="light bold navy">
+                                            {{skill.level == 1 ? fixedTextHash['beginner'][currLan]:skill.level == 2 ? fixedTextHash['intermediate'][currLan] :fixedTextHash['expert'][currLan]}}
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+
+                                <div class="skill-category">
+                                    <div class="skill-box">
+                                        <div *ngIf="skill.level >= 1" class="beginner"></div>
+                                        <div *ngIf="skill.level >= 2" class="intermediate"></div>
+                                        <div *ngIf="skill.level >= 3" class="expert"></div>
+                                        <div class="clearfix"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="clearfix"></div>
+
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+            <div class="edit"   *ngIf="skills_status == 'edit'"> <!-- Edit -->
+                <div class="block-title-2">
+                    <div class="left"><h4>{{fixedTextHash['skill'][currLan]}}</h4></div>
+                    <div class="right">
+                        <button (click)="onSave()" class="left-mobole-only arabic-right-left"><i class="zmdi zmdi-floppy"></i> {{fixedTextHash['save'][currLan]}}</button>
+                        <!--<button (click)="onAdd()"><i class="zmdi zmdi-floppy"></i> Add</button>-->
+                        <span class="cancel padding-0"><button (click)="onCancel()"><i class="zmdi zmdi-close"></i> {{fixedTextHash['cancel'][currLan]}}</button></span>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+
+                <div class="right-skill padding-10 hidden-lg hidden-md" *ngIf="(skills$ | async)?.length > 0">
+                    <span class="beg"> <i class="icon-round"></i> {{fixedTextHash['beginner'][currLan]}} </span>
+                    <span class="int"> <i class="icon-round"></i> {{fixedTextHash['intermediate'][currLan]}} </span>
+                    <span class="exp"> <i class="icon-round"></i> {{fixedTextHash['expert'][currLan]}} </span>
+                </div>
+
+                <div  [style.display]="!(savingmode$ | async) ?'block':'none'" class="block-contant padding-skill-edit ">
+                    <div class="alert alert-danger martop5" *ngIf="(skills$ | async)?.length == 0">
+                        {{fixedTextHash['empty_skills'][currLan]}}
+                    </div>
+
+
+                    <div *ngFor="let skill of (skills$ | async),let skill_index=index" class="col-lg-6">
+
+                        <div class="skill-category-radio">
+
+                            <div class="full-box relative">
+                                <input type="text" [(ngModel)]="skill.name" readonly>
+                                <div class="absulute-btn block-title-2 padding-0 border-none">
+                                    <button (click)="onDel(skill_index)"><i
+                                            class="zmdi zmdi-delete"></i><span class="arabic-left-right">{{fixedTextHash['delete'][currLan]}}</span>
+                                    </button>
+                                </div>
+                            </div>
+
+
+                            <div class="skill-radio clicks">
+                                <div class="sk-radio">
+                                    <div class="radio radio-primary">
+                                        <input type="radio" (change)="skill.level =1"
+                                               [checked]="skill.level ==1" name="radiodesk{{skill.checkboxkey}}"
+                                               [id]="'radio1'+skill_index" value="1">
+                                        <label [attr.for]="'radio1'+skill_index">
+                                            <span>{{fixedTextHash['beginner'][currLan]}}</span>
+                                        </label>
+                                    </div>
+
+                                </div>
+                                <div class="sk-radio">
+                                    <div class="radio radio-primary">
+                                        <input type="radio" (change)="skill.level =2"
+                                               [checked]="skill.level ==2" name="radiodesk{{skill.checkboxkey}}"
+                                               [id]="'radio2'+skill_index" value="2">
+                                        <label [attr.for]="'radio2'+skill_index">
+                                            <span>{{fixedTextHash['intermediate'][currLan]}}</span>
+                                        </label>
+                                    </div>
+
+                                </div>
+                                <div class="sk-radio">
+                                    <div class="radio radio-primary ">
+                                        <input type="radio" (change)="skill.level =3"
+                                               [checked]="skill.level ==3" name="radiodesk{{skill.checkboxkey}}"
+                                               [id]="'radio3'+skill_index" value="3">
+                                        <label [attr.for]="'radio3'+skill_index">
+                                            <span>{{fixedTextHash['expert'][currLan]}}</span>
+                                        </label>
+                                    </div>
+
+                                </div>
+                                <div class=" clearfix"></div>
+                            </div>
+
+                            <div class="skill-category">
+                                <div class="skill-box">
+                                    <div [class.beginner] = "skill.level >=1" ></div>
+                                    <div [class.intermediate] = "skill.level >=2" ></div>
+                                    <div [class.expert] = "skill.level >=3" ></div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class=" clearfix"></div>
+                </div>
+
+                <div class="block-contant padding-10  padding-top-0 addskill">
+                    <div class="col-lg-12"> <h4>{{fixedTextHash['add_skill'][currLan]}}</h4></div>
+
+                    <div class="right-skill hidden-lg hidden-md" *ngIf="(skills$ | async)?.length > 0">
+                        <span class="beg"> <i class="icon-round"></i> {{fixedTextHash['beginner'][currLan]}} </span>
+                        <span class="int"> <i class="icon-round"></i> {{fixedTextHash['intermediate'][currLan]}} </span>
+                        <span class="exp"> <i class="icon-round"></i> {{fixedTextHash['expert'][currLan]}} </span>
+                    </div>
+                    <br>
+
+                    <div class="col-lg-6  arabic-right-left">
+                        <div class="full-box">
+                            <div *ngIf="newSkill?.name?.length >validSkillLength"
+                                 class="alert alert-danger martop5">
+                                {{fixedTextHash['valid_skill'][currLan]}}
+                            </div>
+                            <auto-complete [recordType]="'Skill'"  [returnEmpty]="true"
+                                           [selectOnType]="true"
+                                           [resetOnSelect]="false"
+                                           [selectOneEnter]="true"
+                                           [clearFlag]="clearSkillFlag"
+                                           (clearRecords)="addNewSkillName($event)"
+                                           [placeholder]="fixedTextHash['add_skill'][currLan]"
+                                           (changeRecords)="addNewSkillName($event)">
+                            </auto-complete>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 skill-pad">
+
+                        <div class="skill-80">
+                            <div class="skill-category-radio">
+                                <div class="skill-radio clicks">
+                                    <div class="sk-radio">
+                                        <div class="radio radio-primary">
+                                            <input type="radio"  value="1" [id]="'radio_add1'"
+                                                   [checked]="(newSkill.level == 1)?true:false"
+                                                   (click)="addNewSkillLevel(1)"
+                                                   name="radio_add">
+                                            <label [attr.for]="'radio_add1'">
+                                                <span>{{fixedTextHash['beginner'][currLan]}}</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="sk-radio">
+                                        <div class="radio radio-primary">
+                                            <input type="radio"   value="2" [id]="'radio_add2'"
+                                                   (click)="addNewSkillLevel(2)"
+                                                   [checked]="(newSkill.level == 2)?true:false"
+                                                   name="radio_add">
+                                            <label [attr.for]="'radio_add2'">
+                                                <span>{{fixedTextHash['intermediate'][currLan]}}</span>
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                    <div class="sk-radio">
+                                        <div class="radio radio-primary ">
+                                            <input type="radio"   value="3" [id]="'radio_add3'"
+                                                   (click)="addNewSkillLevel(3)"
+                                                   [checked]="(newSkill.level == 3)?true:false"
+                                                   name="radio_add">
+                                            <label [attr.for]="'radio_add3'">
+                                                <span>{{fixedTextHash['expert'][currLan]}}</span>
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                    <div class=" clearfix"></div>
+                                </div>
+
+                                <div class="skill-category">
+                                    <div class="skill-box">
+                                        <div [class.beginner] = "newSkill.level >=1" ></div>
+                                        <div [class.intermediate] = "newSkill.level >=2" ></div>
+                                        <div [class.expert] = "newSkill.level >=3" ></div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-20">
+                            <button (click)="onAdd()">
+                                <i class="zmdi zmdi-floppy"></i>
+                                <span class="hidden-xs" >{{fixedTextHash['add'][currLan]}} </span>
+                            </button>
+                        </div>
+                        <div class=" clearfix"></div>
+                    </div>
+                    <div class=" clearfix"></div>
+                </div>
+                <div class=" clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <div class=" clearfix"></div>
+</div>

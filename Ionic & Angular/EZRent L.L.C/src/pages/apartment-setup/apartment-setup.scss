@@ -1,0 +1,164 @@
+page-apartment-setup,
+.apartment_setup {
+    .common-bg .list-form .select-text{
+        padding-left: 0;
+    }
+    .select-md .select-icon{
+        width: 50%
+    }
+    .common-bg .list-form ion-select {
+        border-bottom: 2px #e3e4e8 solid;
+    }
+    input[type="number"] {
+        width: 100%;
+        display: table;
+      }
+    .item-md, .item-ios{padding-left: 5px;}
+    .button-md, [ion-button][disabled]{
+        background: #0092d0;
+        opacity: 1 !important;
+        padding: 2.0rem;
+    }
+    .common-bg .text-input-ios {
+        margin: 10px 8px 10px 0;
+    }
+    .text-input-md {
+        margin: 12px 8px;
+    }
+    .content-md .btn-margin {
+        padding: 0 5px;
+        margin-top: -10px;
+        margin-bottom: 10px;
+    }
+    .p-l-1x.datetime-ios .datetime-placeholder, .p-l-1x.datetime-md .datetime-placeholder{padding-left: 0px !important;}
+    .p-l-1x.datetime-ios .datetime-text, .p-l-1x.datetime-md .datetime-text{padding-left: 0px !important;}
+    ion-icon.icon.icon-ios.ion-ios-add-circle-outline {
+        margin: 10px;
+    }
+    .label-md{
+        margin: 6px 0;
+    }
+    .label-ios{
+        margin: 6px 0;
+        padding: 4px 10px !important;
+    }
+    ion-label{
+        text-align: center;
+    }
+    .toolbar-md-primary .toolbar-background-md {
+        background: #00a3e8;
+    }
+    .login-heading{
+        font-size: 40px;
+    }
+    .auth-page .scroll-content .login-content .logo{
+        margin: 70px auto 0;
+    }
+    .p-l-1x.datetime.datetime-ios {
+        margin-left: -9px;
+        background: #fff;
+        border-bottom: 2px #e3e4e8 solid;
+        width: 100%;
+    }
+    .datetime.datetime-md {
+        margin-left: -9px;
+        background: #fff;
+        border-bottom: 2px #e3e4e8 solid;
+        width: 100%;
+    }
+    .datetime-ios {
+        padding: 14px 8px 14px 8px;
+    }
+    //version2
+    .fields_dark ion-label[fixed]{
+        //min-width: 115px;
+        color: white !important;
+        min-width: 140px;
+        padding: 6px 10px;
+        border-radius: 5px 0 0 5px;
+        background:#636363;
+        border-bottom: 2px #636363 solid;
+        text-align: right;
+        font-size: 11px;
+        white-space: normal;
+        height: 45px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+    }
+    .item-input ion-input, .item-input ion-textarea{
+        border: 1px solid #fff;
+        margin-left: -9px;
+        border-radius: 0 5px 5px 0;
+        background: #fff;
+        border-bottom: 2px #e3e4e8 solid;
+        padding-top: 1px;
+        padding-bottom: 1px;
+    }
+    .item-ios.item-block .item-inner{
+        border-bottom: 0;
+    }
+    .item-md.item-block .item-inner{
+        border-bottom: 0;
+    }
+
+    .list-form ion-select{
+        max-width: 100%;
+        width: 100%;
+        box-shadow: none;
+        background: #fff;
+    }
+    .list-form .select-md .select-icon .select-icon-inner{
+        background: url(../../assets/icon/drop-icon.png) no-repeat center;
+        left: -5px;
+        top: 50%;
+        margin-top: -9px;
+        position: relative;
+        width: 20px;
+        height: 20px;
+        border-top: 0;
+        border-right:0;
+        border-left: 0;
+    }
+    .list-form .select-md .select-icon .select-icon-inner{
+        background: url(../../assets/icon/drop-icon.png) no-repeat center;
+        left: -5px;
+        top: 50%;
+        margin-top: -9px;
+        position: relative;
+        width: 20px;
+        height: 20px;
+        border-top: 0;
+        border-right:0;
+        border-left: 0;
+    }
+    .datetime-ios .datetime-placeholder{    padding-left: 10px;
+        font-size: 15px;
+        color: #aaa;}
+        .datetime-text{padding-left: 10px;
+            font-size: 15px;
+            color: #aaa;}
+     .label-ios {
+        margin: 6px 0;
+        padding: 4px 10px !important;
+     }
+    
+    .list-form .ion_labelicon{position: absolute; width: 100px;}
+    .list-form .card{box-shadow: none; border-bottom: 2px #e3e4e8 solid; margin-bottom: 10px;}
+    .list-form ion-card img{width: 30px; display: inline-block;}
+    .list-form .select-text{padding-left: 90px;font-size: 15px; color: #aaa; }
+    .list-form .input-wrapper{border-radius: 5px;min-height: 58px; background: #fff; margin-bottom: 5px}
+
+
+    .signfb{
+        background: #1079c4 !important;
+    }
+    .signfb.button-ios{margin: 5px 0;}
+    .signfb.button-md{
+        padding: 24px 2.3rem 15px 2.3rem !important;
+        border-radius: 0 !important;
+        font-weight: bold;
+        margin: 5px 0;
+        height: 45px !important;
+    }
+}

@@ -1,0 +1,170 @@
+<div class="container basic-height" [class.arabic]="accountService.isArabic()">
+
+    <!-- Start Three Step indication header -->
+    <!--========================================================================-->
+    <complete-profile-progress-bar [step]="2"></complete-profile-progress-bar>
+    <!-- End Three Step indication header -->
+    <!--========================================================================-->
+
+
+    <!--========================================================================-->
+    <!-- Start Step Two -->
+    <div class="fal-register-form-container">
+        <spinner *ngIf="!loadedFlag" [visible]="true"></spinner>
+        <ng-container *ngIf="loadedFlag">
+            <!--========================================================================-->
+            <!-- Start Step Two (Do you have prior work experience? If NO)-->
+            <div class="fal-register-form-container">
+                <form [formGroup]="completeSecondForm">
+                    <!-- start Do you have prior work experience -->
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 arabic-right-left margin-btm-15">
+                        <h4>{{fixedTextHash['you_have_work_experience'][currLan]}}</h4>
+                        <div class="clicks">
+                            <div class="radio radio-primary radio-inline">
+                                <input id="fal_work_experience_yes" type="radio" [checked]="havePriorWorkExp"
+                                    (click)="setPriorWorkExp(true)">
+                                <label for="fal_work_experience_yes">
+                                    <span>{{fixedTextHash['yes'][currLan]}}</span>
+                                </label>
+                            </div>
+                            <div class="radio radio-primary radio-inline">
+                                <input id="fal_work_experience_no" type="radio" [checked]="!havePriorWorkExp"
+                                    (click)="setPriorWorkExp(false)">
+                                <label for="fal_work_experience_no">
+                                    <span>{{fixedTextHash['no'][currLan]}}</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- end Do you have prior work experience -->
+
+                    <!--========================================================================-->
+                    <!-- show only work experience checked YES-->
+                    <div *ngIf="havePriorWorkExp"
+                        class=" col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left margin-btm-15 hide">
+                        <h4>{{fixedTextHash['are_current_employed'][currLan]}}</h4>
+                        <div class="radio-inline">
+                            <input type="radio" name="fal_currently_employed" [checked]="isCurrentlyEmp"
+                                (click)="setCurrentlyEmp(true)">{{fixedTextHash['yes'][currLan]}}
+                        </div>
+                        <div class="radio-inline">
+                            <input type="radio" name="fal_currently_employed" [checked]="!isCurrentlyEmp"
+                                (click)="setCurrentlyEmp(false)">{{fixedTextHash['no'][currLan]}}
+                        </div>
+                    </div>
+                    <!-- show only work experience checked YES-->
+                    <!--========================================================================-->
+
+                    <div class="clearfix"></div>
+                    <!-- Add/Edit Work-->
+                    <!-- =============================================-->
+                    <ng-container *ngIf="havePriorWorkExp">
+                        <ng-container *ngFor="let selWorkExp of workExperienceList, let i =index">
+                            <add-work-experience-step-two
+                                *ngIf="selWorkExp && !selWorkExp['_destroy'] || selWorkExp['_destroy'] == 0"
+                                [allowDelete]="getValidateDelete(workExperienceList)" [workExperienceIndex]="i"
+                                [prestineForm$]="workPrestine" [workExp]="selWorkExp" (removeMe)="removeWork(i)"
+                                (changeWorkExp)="changeWorkExp($event, i, selWorkExp)"></add-work-experience-step-two>
+                        </ng-container>
+                        <!-- start add more button -->
+                        <div *ngIf="(jobseekerType!='coops' && jobseekerType!='summer_training')" class="fal-addmore">
+                            <span class="help-txt">{{fixedTextHash['fill_previous_and_add_more'][currLan]}}</span>
+                            <button *ngIf="getValidateWork()" class="btn-addmore"
+                                (click)="addWork()">{{fixedTextHash['add_work_exp'][currLan]}}</button>
+                            <button *ngIf="!getValidateWork()"
+                                class="btn-addmore disabled_button">{{fixedTextHash['add_work_exp'][currLan]}}</button>
+                        </div>
+                        <!-- end add more button -->
+                    </ng-container>
+                </form>
+            </div>
+            <!-- End Step Two -->
+            <!--========================================================================-->
+        </ng-container>
+
+    </div>
+    <!-- End Step Two -->
+    <!--========================================================================-->
+
+    <!--========================================================================-->
+    <!-- Start Step Three -->
+    <div class="fal-register-form-container highest_education">
+        <spinner *ngIf="!loadedFlag" [visible]="true"></spinner>
+        <ng-container *ngIf="loadedFlag">
+            <form [formGroup]="completeThirdForm">
+
+                <!-- start Highest Education -->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 arabic-right-left margin-btm-5">
+                    <h4>{{fixedTextHash['high_edu'][currLan]}}</h4>
+                    <input type="hidden" #heduInpt name="generalInfo_form_highest_edu_name"
+                        formControlName="highest_edu_name_id">
+                    <bootstrap-selectbox *ngIf="educationList"
+                        (selectedId)="completeThirdForm.controls['highest_edu_name_id'].setValue($event.id)"
+                        [selectedValue]="heduInpt.value" [placeholder]="fixedTextHash['add_high_edu'][currLan]"
+                        [error]="(!(pristineFlag$ | async) || completeThirdForm.controls['highest_edu_name_id'].touched) && !completeThirdForm.controls['highest_edu_name_id'].valid"
+                        (onEmptyText)="heduInpt.value=null;makeControlInvalid(completeThirdForm.controls['highest_edu_name_id'])"
+                        [selectList]="educationList">
+                    </bootstrap-selectbox>
+                </div>
+                <!-- end Highest Education -->
+
+                <!-- start divider -->
+                <div class="clearfix"></div>
+                <div class="fal-divider"></div>
+                <!-- end divider -->
+
+                <!--========================================================================-->
+                <!-- start Add education information -->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 arabic-right-left">
+                    <h4>{{fixedTextHash['new_school'][currLan]}}</h4>
+
+
+                    <!-- start University or School component -->
+                    <ng-container *ngFor="let selEdu of eduDetailsList, let i =index">
+                        <add-education *ngIf="selEdu && !selEdu['_destroy'] || selEdu['_destroy'] == 0"
+                            [prestineForm$]="eduDetailsPrestine" [eduDetails]="selEdu"
+                            [allowDelete]="getValidateDelete(eduDetailsList)" (removeMe)="removeEdu(i)"
+                            (changeEduDetails)="changeEdu($event, i, selEdu)">
+
+                        </add-education>
+                    </ng-container>
+                    <!-- end University or School component -->
+
+                    <div class="clearfix"></div>
+
+                    <!-- end shadow container -->
+
+                    <!-- start add more button -->
+                    <div class="fal-addmore">
+                        <div class="help-txt">{{fixedTextHash['fill_previous_and_add_more'][currLan]}}</div>
+                        <button *ngIf="getValidateEdu()" (click)="addEdu()"
+                            class="btn-addmore">{{fixedTextHash['add_more'][currLan]}}</button>
+                        <button *ngIf="!getValidateEdu()"
+                            class="btn-addmore disabled_button">{{fixedTextHash['add_more'][currLan]}}</button>
+                    </div>
+                    <!-- end add more button -->
+
+                </div>
+                <!-- end Add education information -->
+                <!--========================================================================-->
+
+                <!-- start button group -->
+                <div class="fal-register-btn-group">
+                    <button *ngIf="!postInProcess" class="fal-btn-primary" type="button"
+                        (click)="getSubmit()">{{fixedTextHash['next'][currLan]}}</button>
+                    <button *ngIf="postInProcess" class="fal-btn-primary disabled_button"
+                        type="button">{{fixedTextHash['next'][currLan]}}</button>
+                    <button class="fal-btn-secondary" type="button"
+                        (click)="onBack()">{{fixedTextHash['back'][currLan]}}</button>
+                </div>
+                <!-- end button group -->
+
+            </form>
+        </ng-container>
+    </div>
+    <!-- end Step Three -->
+    <!--========================================================================-->
+
+</div>

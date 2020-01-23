@@ -1,0 +1,130 @@
+@import '../../../../styles/sass/base/_variables.scss';
+
+#communication-applicant{
+    padding: 10px;
+    border:1px solid $light-border;
+    border-radius: $border-radius;
+    float: left;
+    width: 100%;
+    box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.05);
+    h3{
+        color: $primarycolor;
+        display: block;
+        padding-bottom: 10px;
+        border-bottom:1px solid #f1f1f1;
+    }
+}
+.block .block-footer button{
+    border-radius: $border-radius;
+}
+#communication-applicant .application .comments .light{
+    color: $secondarycolor!important;
+}
+.interview-feild{
+    width: 100%;
+    margin-top: 5px!important;
+    input{
+        margin-bottom: 0px!important;
+    }
+}
+.full-box .bootstrap-select .btn{
+    height: $button-height!important;
+}
+.communication-new-impliment .communi-interviewd label{
+    color: $secondarycolor;
+}
+.full-box{
+    float: left;
+}
+textarea{
+    height:100px!important;
+}
+.barats{
+    border-radius: 160px;
+    background: $bg-default;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: $primarycolor;
+    margin: 0px auto;
+}
+#communication-applicant .tab-application .tab-content{
+    min-height: auto!important;
+}
+.arabic{
+    #communication-applicant .tab-application .nav-tabs > li i{
+        float: right;
+        padding-left: 5px;
+        padding-right: 0px;
+    }
+    #communication-applicant .tab-application .nav-tabs > li > a{
+        text-align: right!important;
+    }
+}
+
+.bg-communication{
+    background: $more-light-bg;
+}
+.box-notif{
+    width: 100%;
+    float: left;
+    margin-bottom: 10px;
+}
+input{
+    margin-bottom: 0px!important;
+}
+.blovo-channel{
+    label{
+        width: 100%;
+        border-bottom:1px solid $light-border;
+        input{
+            height: 30px!important;
+        }
+    }
+}
+.full-bt-inside{
+    button{
+        width: 100%;
+    }
+}
+
+.active{
+	a{
+		i{
+			color: $white;
+		}
+	}
+}
+
+.dummy_tab{
+    background-color: #f9f9f9!important;
+    cursor:not-allowed;
+    a{
+      color: #999;
+      cursor:not-allowed;
+      i{
+        color: #999!important;
+      }
+      &:hover{
+        background: #f9f9f9!important;
+      }
+    }
+    &:hover{
+      background-color: #f9f9f9!important;
+    }
+  }
+
+
+  .arabic{
+    .absulute-btn-i{
+        position: absolute;
+        top: 0px!important;
+        left: 9px!important;
+        right: inherit!important;
+        line-height: 35px;
+    }
+  }
+
+
+ 

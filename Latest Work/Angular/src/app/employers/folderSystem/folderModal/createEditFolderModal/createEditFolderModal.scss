@@ -1,0 +1,221 @@
+@import '../../../../../styles/sass/base/_variables.scss';
+
+h1, h2, h3, h4, h5, h6, span, p, a{
+	margin:0px;
+	font-family: $primary-Fonts;
+}
+
+.arabic{
+	h1, h2, h3, h4, h5, h6, span, p, a, button, .req-dark, .applicants-txt {
+		margin:0px;
+		font-family: $arabic-primary-Fonts!important;
+	}
+}
+
+
+// Modal
+// ===============================================
+.modal{
+    h5{
+        color: $primarycolor;
+        font-size: $big-font;
+        line-height: 50px;
+        i{
+            display: inline-block;
+            width: 50px;
+            height: 40px;
+            border-radius: 3px;
+            background-color: $tertiarycolor;
+            position: relative;
+            float: left;
+            margin-right: 15px;
+            .tip-top{
+                display: block;
+                position: absolute;
+                width: 20px;
+                height: 10px;
+                background: $secondarycolor;
+                top: -4px;
+                left: 0px;
+                border-radius: 3px;
+            }
+            .baseline{
+                display: block;
+                position: absolute;
+                width: 100%;
+                height: 9px;
+                background: $secondarycolor;
+                top: 0px;
+                left: 0px;
+            }
+        }
+    }
+    .modal-header, .modal-footer{
+        border:none;
+    }
+    .modal-content{
+        padding: 30px;
+    }
+    .modal-footer{
+        button{
+            height: $button-height;
+            color: $white;
+            background-color: $primarycolor;
+            border:none;
+            width: 120px;
+            font-size: $normal-font;
+            &:hover{
+                background-color: $secondarycolor;
+            }
+        }
+        .btn-secondary{
+            background-color: $secondarycolor;
+            &:hover{
+                background-color: $primarycolor;
+            }
+        }
+    }
+    h6{
+        color: $primarycolor;
+        font-size: $normal-font;
+        display: block;
+        padding: 20px 0px;
+    }
+    ul{
+        margin:0px;
+        li{
+            display: block;
+            border-radius: $border-radius;
+            padding: 10px;
+            background-color: $bg-default;
+            border:1px solid $border-brand;
+            margin-bottom: 10px;
+            p{
+                display: block;
+                padding-left: 30px;
+                color: $secondarycolor;
+            }
+        }
+    }
+
+    // selectUserSection
+    .selectUserSection{
+        padding: 20px 0px;
+        select{
+            height: 180px!important;
+            padding: 8px;
+            option{
+                padding: 5px;
+                color: $secondarycolor;
+                border-radius: $border-radius;
+                margin-bottom: 3px;
+            }
+            &:focus{
+                background-color: $primarycolor;
+                color: $white;
+            }
+        }
+        span{
+            color:$secondarycolor;
+            font-size: $small-font;
+            display: block;
+            padding-bottom: 5px;
+        }
+        .to{
+            width: 30px;
+            float: left;
+            font-size:$normal-font;
+            color: $primarycolor;
+            line-height: $button-height;
+        }
+        .selectUser{
+            width: calc(100% - 30px);
+            float: left;
+        }
+    }
+   
+}
+
+// Checkbox
+.radio {
+    display: block;
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+    font-size: $small-font;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-weight: 500;
+    margin-bottom:0px; 
+ }
+ 
+ /* Hide the browser's default radio button */
+ .radio input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+ }
+ 
+ /* Create a custom radio button */
+ .checkround {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #fff ;
+    border-color:$primarycolor;
+    border-style:solid;
+    border-width:2px;
+    border-radius: 50%;
+ }
+ 
+ 
+ /* When the radio button is checked, add a blue background */
+ .radio input:checked ~ .checkround {
+    background-color: #fff;
+ }
+ 
+ /* Create the indicator (the dot/circle - hidden when not checked) */
+ .checkround:after {
+    content: "";
+    position: absolute;
+    display: none;
+ }
+ 
+ /* Show the indicator (dot/circle) when checked */
+ .radio input:checked ~ .checkround:after {
+    display: block;
+ }
+ 
+ /* Style the indicator (dot/circle) */
+ .radio .checkround:after {
+    left: 2px;
+    top: 2px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background:$primarycolor;
+ }
+
+ .arabic{
+    h5 i{
+        float: right!important;
+        margin-left: 15px;
+        margin-right: 0px;
+    }
+    .checkround{
+        right: 0px;
+        left: inherit;
+    }
+    .radio{
+        padding-left: 0px;
+        padding-right: 30px;
+    }
+    .modal-footer{
+        text-align: left;
+    }
+   
+ }

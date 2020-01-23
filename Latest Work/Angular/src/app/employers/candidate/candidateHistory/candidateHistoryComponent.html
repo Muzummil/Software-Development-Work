@@ -1,0 +1,138 @@
+<div class="container margin-top-space min-history" [class.arabic] = "accountService.isArabic()">
+    <!-- border -->
+    <spinner *ngIf="loadingFlag" [visible]="true"></spinner>
+    <div *ngIf="!loadingFlag" class="broutline">
+        <div class="common-block headHistory">
+            <div class="col-lg-11 col-md-11 col-sm-10 col-xs-12 arabic-right-left">
+                <span>{{fixedTextHash['last_five_years_history'][currLan]}}</span>
+                <h2>{{historyObj?.job_applications[0]?.jobseeker?.name}}</h2>
+            </div>
+            <div (click)="goBack()"  class="col-lg-1 col-md-1 col-sm-2 col-xs-12 arabic-right-left">
+                <button>{{fixedTextHash['back'][currLan]}}</button>
+            </div>
+        </div>
+
+        <div class="areaHistoryTimeline">
+            <div class="lineHistory"></div>
+
+            <!-- History List Loop Start Here 1-->
+            <!-- ====================================================== -->
+            <div *ngFor="let selHistory of historyObj?.job_applications, let historyIndex = index" class="listOfHistory">
+                <div [class.activehistory]="historyIndex == 0" [class.oldhistory]="historyIndex != 0"></div>
+
+                <!-- details of Job -->
+                <!-- -------------------------------------------- -->
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 arabic-right-left">
+                    <ul>
+                        <li><h3>{{selHistory?.job?.title}}</h3></li>
+                        <li><strong>{{selHistory?.job?.company?.name}}</strong></li>
+                        <li>{{selHistory?.job?.city?.name}}{{fixedTextHash['comma'][currLan]}} {{selHistory?.job?.country?.name}}</li>
+                        <li>{{fixedTextHash['applied_on'][currLan]}} <span>{{accountService.getFormattedDate(selHistory?.applied_date, 'MMM DD,YYYY - hh:mm a')}}</span></li>
+                    </ul>
+                </div>
+
+                <!-- actions -->
+                <!-- -------------------------------------------- -->
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 arabic-right-left">
+                    <span *ngIf="selHistory?.job_application_status_changes?.length == 0" class="statusHistory">{{fixedTextHash['applied'][currLan]}}</span>
+                    <span *ngIf="selHistory?.job_application_status_changes[selHistory?.job_application_status_changes?.length -1]?.job_application_status?.id == 1" class="statusHistory">{{fixedTextHash['reviewed'][currLan]}}</span>
+                    <span *ngIf="selHistory?.job_application_status_changes[selHistory?.job_application_status_changes?.length -1]?.job_application_status?.id == 2" class="statusHistory">{{fixedTextHash['shortlisted'][currLan]}}</span>
+                    <span *ngIf="selHistory?.job_application_status_changes[selHistory?.job_application_status_changes?.length -1]?.job_application_status?.id == 3" class="statusHistory">{{fixedTextHash['interviewed'][currLan]}}</span>
+                    <span *ngIf="selHistory?.job_application_status_changes[selHistory?.job_application_status_changes?.length -1]?.job_application_status?.id == 4" class="statusHistory successfulLabel">{{fixedTextHash['successful'][currLan]}}</span>
+                    <span *ngIf="selHistory?.job_application_status_changes[selHistory?.job_application_status_changes?.length -1]?.job_application_status?.id == 5" class="statusHistory unsuccessfulLabel">{{fixedTextHash['unsuccessful'][currLan]}}</span>
+                    <button data-toggle="collapse" [attr.data-target]="'#demo-' + selHistory?.id">{{fixedTextHash['details'][currLan]}}</button>
+                </div>
+
+                <!-- Collapse details of candidates -->
+                <!-- -------------------------------------------- -->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 collapse"  [attr.id]="'demo-' + selHistory?.id">
+                    <div class="communicationLogs">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 arabic-right-left">
+                        <h4>
+                            {{fixedTextHash['communication_logs'][currLan]}}
+                            <span class="arabic-left-right" data-toggle="collapse" [attr.data-target]="'#demo-' + selHistory?.id">{{fixedTextHash['close'][currLan]}}</span>
+                        </h4>
+                        </div>
+                        <!-- Status change of candidate  -->
+                        <!-- -------------------------------------------- -->
+                        <div [ngClass]="{'col-lg-6': getValidateLength(selHistory?.notes), 'col-md-6': getValidateLength(selHistory?.notes), 'col-lg-12': !getValidateLength(selHistory?.notes), 'col-md-12': !getValidateLength(selHistory?.notes)}" class="col-xs-12 arabic-right-left">
+                            <div *ngIf="selHistory?.job_application_status_changes?.length == 0" class="no-hitory" >{{fixedTextHash['no_logs_available'][currLan]}}</div>
+                            <div *ngIf="selHistory?.job_application_status_changes?.length > 0" class="statusCommentsHistory">
+                                <h2>{{fixedTextHash['status'][currLan]}}</h2>
+                                
+                                <ul>
+                                    <!-- Loop starts here-->
+                                    <!-- ------------------------------------------------------------- -->
+                                    <li *ngFor="let selAppStatus of selHistory?.job_application_status_changes">
+                                        <i>{{accountService.getFormattedDate(selAppStatus?.created_at, 'MMM DD,YYYY - hh:mm a')}}</i>
+
+                                        <!-- Reviewed Feedback-->
+                                        <ng-container *ngIf="selAppStatus?.job_application_status?.en_status == 'Reviewed'">
+                                            <span [innerHTML]="fixedTextHash['reviewed_feedback_history'][currLan].replace('EMPNAME', selAppStatus?.employer_name )"></span>
+
+                                        </ng-container>
+
+                                        <!-- Shortlisted Feedback-->
+                                        <ng-container *ngIf="selAppStatus?.job_application_status?.en_status == 'Shortlisted'">
+                                            <span *ngIf="selAppStatus?.comment" [innerHTML]="fixedTextHash['shortlisted_feedback_history_with_comment'][currLan].replace('EMPNAME', selAppStatus?.employer_name)"></span>
+                                            <span *ngIf="!selAppStatus?.comment" [innerHTML]="fixedTextHash['shortlisted_feedback_history'][currLan].replace('EMPNAME', selAppStatus?.employer_name)"></span>
+                                        </ng-container>
+
+                                        <!-- Interview Feedback-->
+                                        <ng-container *ngIf="selAppStatus?.job_application_status?.en_status == 'Interview'">
+                                            <span *ngIf="selAppStatus?.comment" [innerHTML]="fixedTextHash['interview_feedback_history_with_comment'][currLan].replace('EMPNAME', selAppStatus?.employer_name).replace('EMPNAME2', (selAppStatus?.interview?.interviewee) ? selAppStatus?.interview?.interviewee : selAppStatus?.employer_name)
+                                            .replace('INTVDATE', accountService.getFormattedDate(selAppStatus?.interview?.appointment, 'MMM DD,YYYY - hh:mm a')).replace('INTVTYPE', (selAppStatus?.interview?.channel == 'Physical')? fixedTextHash['physical'][currLan] : fixedTextHash['video'][currLan])">
+                                            </span>
+                                            <span *ngIf="!selAppStatus?.comment" [innerHTML]="fixedTextHash['interview_feedback_history'][currLan].replace('EMPNAME', selAppStatus?.employer_name).replace('EMPNAME2', (selAppStatus?.interview?.interviewee) ? selAppStatus?.interview?.interviewee : selAppStatus?.employer_name)
+                                            .replace('INTVDATE', accountService.getFormattedDate(selAppStatus?.interview?.appointment, 'MMM DD,YYYY - hh:mm a')).replace('INTVTYPE', (selAppStatus?.interview?.channel == 'Physical')? fixedTextHash['physical'][currLan] : fixedTextHash['video'][currLan])"></span>
+                                        </ng-container>
+
+
+                                        <!-- Successful Feedback-->
+                                        <ng-container *ngIf="selAppStatus?.job_application_status?.en_status == 'Successful'">
+                                            <span *ngIf="selAppStatus?.comment" [innerHTML]="fixedTextHash['successful_feedback_history_with_comment'][currLan].replace('EMPNAME', selAppStatus?.employer_name)"></span>
+                                            <span *ngIf="!selAppStatus?.comment" [innerHTML]="fixedTextHash['successful_feedback_history'][currLan].replace('EMPNAME', selAppStatus?.employer_name)"></span>
+                                        </ng-container>
+
+                                        <!-- Unsuccessful Feedback-->
+                                        <ng-container *ngIf="selAppStatus?.job_application_status?.en_status == 'Unsuccessful'">
+                                            <span *ngIf="selAppStatus?.comment" [innerHTML]="fixedTextHash['unsuccessful_feedback_history_with_comment'][currLan].replace('EMPNAME', selAppStatus?.employer_name)"></span>
+                                            <span *ngIf="!selAppStatus?.comment" [innerHTML]="fixedTextHash['unsuccessful_feedback_history'][currLan].replace('EMPNAME', selAppStatus?.employer_name)"></span>
+                                        </ng-container>
+
+                                        <p *ngIf="selAppStatus?.comment">{{selAppStatus?.comment}}.</p>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                        <!-- Internal Notes of candidate  -->
+                        <!-- -------------------------------------------- -->
+                        <div *ngIf="getValidateLength(selHistory?.notes)" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 arabic-right-left">
+                            <div class="notesHistory">
+                                <h2>{{fixedTextHash['internal_notes'][currLan]}}</h2>
+
+                                <ul>
+                                    <li *ngFor="let selNote of selHistory?.notes">
+                                        <i>{{accountService.getFormattedDate(selNote?.created_at, 'MMM DD,YYYY - hh:mm a')}}</i>
+                                        <span>{{selNote?.author_name}}</span>
+                                        <p>{{selNote?.note}}</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <pagination-new  [url]="urlPath" [totalRecords]="totalRecords$"></pagination-new>
+
+    </div> <!-- end border -->
+
+</div>

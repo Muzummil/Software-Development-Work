@@ -1,0 +1,106 @@
+@import '../../../../styles/sass/base/_variables.scss';
+.filter-box{
+    h2{
+        font-size: $normal-font;
+        color: $heading-text;
+        display: block;
+        padding: 15px 0px;
+    }
+    .filter-details{
+        width: 100%;
+        height: auto;;
+    }
+   
+}
+
+.panel-group{
+    float: left;
+}
+.block-title{
+    margin-bottom: 10px;
+}
+
+// checkbox
+.clicks input[type=checkbox].css-checkbox + label.css-label{
+    color: $text-normal-color;
+    height: 15px;
+}
+.footer-action-filter {
+    border-top: 1px solid $light-border;
+    border-bottom: 1px solid $light-border;
+}
+
+.bt-reset-filter{
+    margin: 0px 5px;
+    height: $mob-button-height;
+    width: 150px;
+    display: block;
+    background: $button-primary;
+    color: $text-dark-bg;
+    border: none;
+    border-radius: $border-radius;
+    float: left;
+    font-size: $button-font;
+    font-weight: $font-weight;
+    
+}
+.bt-group-ats{
+    width: 325px;
+    margin:20px auto;
+}
+.bt-cancel-ats{
+    background-color: $button-secondary!important;
+}
+
+.panel{
+    border: none;
+}
+
+.panel-default>.panel-heading{
+    background-color:$bg-default;
+}
+
+.col-lg-3{
+    height: 330px;
+    margin-bottom: 20px;
+    .panel-body{
+        height: 300px;
+        border:1px solid $light-border;
+        .fltr-check-box{
+            height: 210px;
+            padding-bottom: 20px;
+        }
+    }
+}
+
+.reset-full{
+    margin:0px auto;
+    border-radius: $border-radius;
+    display: inline-block;
+}
+
+
+
+// Responsive
+// =======================================================
+@media all and (max-width: 1200px) {
+
+    
+}
+// =======================================================
+@media (max-width: 768px) {
+
+    .col-lg-3 .panel-body{
+        height: auto;
+    }
+    .col-lg-3 .panel-body .fltr-check-box{
+        height: auto;
+    }
+    .col-lg-3{
+        height: auto;
+    }
+}
+// =======================================================
+@media (max-width: 480px) {
+   
+}

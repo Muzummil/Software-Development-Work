@@ -1,0 +1,94 @@
+<div class="main-tab load-data-js mobile-tab-top"></div>
+<emp-profile-topmenu [activeFlag]="'mostViewProfiles'"></emp-profile-topmenu>
+<div class="tab-content job-bloovo">
+    <!---------------------------  Companies edit details ---------------------------------->
+    <div role="tabpanel" class="tab-pane active" id="most-profile">
+        <div class="container margin-top-space">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 invite">
+
+                <div class="common-block empty-min2 white" *ngIf="(topViewedProfiles$ | async)?.jobseekers?.length ==0 || (showSpinner$ | async)" >
+
+                    <div  class="common-block empty-min2">
+
+                        <div class="empty-prf" *ngIf="(showSpinner$ | async)"><spinner [visible]="(showSpinner$ | async)"></spinner></div>
+                        <div class="empty-prf " *ngIf="(topViewedProfiles$ | async)?.jobseekers?.length ==0">
+                            <i class="icon-empty-candidates"></i>
+                            <h5>{{fixedTextHash['no_profiles'][currLan]}}</h5>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="block bottom-gap jobapplicant" *ngIf="!(showSpinner$ | async) && (topViewedProfiles$ | async)?.jobseekers?.length >0">
+                    <div class="block-title-2">
+                        <h1>{{fixedTextHash['most_profiles'][currLan]}}</h1>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="filter-jobs">
+                        <div class="common-block company" *ngFor="let selProfile of (topViewedProfiles$ | async)?.jobseekers,let selIndex = index">
+
+
+
+                            <!-- Desktop -->
+                                <div class="new-list">
+                                  <div class="newlistleft">
+                                    <a target="_blank" class="cursor_pointer1" [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/profile/candidate_details']" [queryParams]="{id:selProfile?.user_id}">
+                                      <div *ngIf="!selProfile?.avatar"  class="newlistdp-left"><i class="icon-profile"></i> </div>
+                                      <div class="newlistdp-left" *ngIf="selProfile?.avatar">
+                                        <img  src="{{selProfile?.avatar}}">
+                                      </div>
+                                    </a>
+                                    <div class="newlistdp-right">
+                                      <div class="applicant-name-dt">
+                                        <a target="_blank" class="cursor_pointer1" [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/profile/candidate_details']" [queryParams]="{id:selProfile?.user_id}">
+                                          <h2><strong>{{selProfile?.first_name}} {{selProfile?.last_name}}</strong></h2>
+                                        </a>
+                                        <ul>
+                                          <li *ngIf="selProfile?.default_resume"><a href="{{selProfile?.default_resume}}" target="_blank"><i class="zmdi zmdi-attachment-alt"></i></a></li>
+                                          <li *ngIf="selProfile?.video"><a href="{{selProfile?.video}}" target="_blank"><i class="zmdi zmdi-videocam"></i></a></li>
+                                        </ul>
+                                      </div>
+                                      <a target="_blank" class="cursor_pointer1" [routerLink]="['/'+accountService.getPath()+'/profile/candidate_details']" [queryParams]="{id:selProfile?.user_id}">
+                                        <div class="com-pos">
+                                          <h4 class="cmpny-txt" *ngIf="selProfile?.current_position"><div class="inline-block">{{selProfile?.current_position}}</div>
+                                          </h4><h4 class="cmpny-txt" *ngIf="!selProfile?.current_position">No Title Available</h4><h4 *ngIf="selProfile?.current_company_name">
+                                            <b>{{selProfile?.current_company_name}}</b></h4>
+                                          <h4 *ngIf="!selProfile?.current_company_name"><b>{{fixedTextHash['no_comp'][currLan]}}</b></h4><h4 *ngIf="selProfile?.city?.name && selProfile?.country?.name"><div class="inline-block">{{selProfile?.city?.name}}</div>, <div class="inline-block">{{selProfile?.country?.name}}</div></h4>
+                                          <h4 *ngIf="selProfile?.city?.name && !selProfile?.country?.name"><div class="inline-block">{{selProfile?.city?.name}}</div>
+                                          </h4>
+                                        </div>
+
+                                      </a>
+
+                                    </div>
+
+                                    <div class="newlist-experience">
+                                      <div *ngIf="selProfile?.num_years_experience > 0" class="exp-box jobapp-btm-10">
+                                       <h5>{{fixedTextHash['years_experience'][currLan]}}</h5>
+                                       <h4>{{selProfile?.num_years_experience | number}}</h4>
+                                      </div>
+                                      <div *ngIf="selProfile?.num_years_experience == 0" class="exp-box jobapp-btm-10">
+                                        <h5>{{fixedTextHash['no_experience'][currLan]}}</h5>
+                                      </div>
+                                    <div class="exp-box">
+                                          <h5>{{fixedTextHash['views'][currLan]}}</h5>
+                                          <h4>{{selProfile?.number_of_viewers | number}}</h4>
+                                    </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                  </div>
+                                  <div class="clearfix"></div>
+                                </div>
+                        <div class=" clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+</div>

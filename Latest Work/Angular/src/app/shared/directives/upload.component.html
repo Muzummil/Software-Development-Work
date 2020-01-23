@@ -1,0 +1,173 @@
+<div class="popup" [class.arabic] = "accountService.isArabic()">
+    <div class="upload-pop">
+
+        <div class="file_upload_popup_close modal {{file.classMap}}" tabindex="-1" role="dialog"
+             aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+
+
+                    <div *ngIf="(successFlag$| async) == false  &&  (errorFlag$| async) == false"
+                         class="modal-body upload-dp">
+                        <button class="close" aria-hidden="true" data-dismiss="modal" type="button"
+                                (click)="resetUpload()">×
+                        </button>
+
+
+                        <div *ngIf="mode == 'imageCrop'">
+
+
+                            <h2>{{file.name}}</h2>
+
+                            <h4 [innerHTML]="fixedTextHash['upload_message'][currLan]
+                           .replace('{file_types}', file.file_type_names)
+                           .replace('{file_size_with_units}', file.file_size+' '+file.file_size_unit)
+                            .replace('{file_extraDesc}', file.extraDesc)"></h4>
+                            <div *ngIf="(errorFileString$| async) != null" class="alert alert-danger alert-dismissible"
+                                 role="alert">
+                                {{errorFileString$ | async }}
+                            </div>
+
+
+                            <div *ngFor="let selInput of this.file.formParams,let selIndex = index"
+                                 class="text-feild-emp">
+                                <input [attr.placeholder]="selInput.placeholder"
+                                       (keyup)="getValue(title);customErrorFlag = false" #title type="text"
+                                       [attr.name]="selInput.title"
+                                       placeholder="{{fixedTextHash[selInput.placeholder]
+                                       ? fixedTextHash[selInput.placeholder][currLan] :
+                                       fixedTextHash['title'][currLan]}}"
+                                       [ngModel]="selInput.value">
+                                <div *ngIf="customErrorFlag" class="alert alert-danger alert-dismissible martop5"
+                                     role="alert">
+                                    {{fixedTextHash['please_enter_title'][currLan]}}
+                                </div>
+                            </div>
+                            <img-cropper *ngIf="fileuploadFlag && (tagetFile!=null && !(errorFile$ | async))" #cropper
+                                         [image]="data" [settings]="cropperSettings"></img-cropper>
+
+
+                            <div class="fancy-file">
+                                <div class="fancy-file-name">
+                                    {{(tagetFile?.name) ? tagetFile?.name : fixedTextHash['select_file'][currLan]}}
+                                </div>
+                                <button class="fancy-file-button cursor_pointer1">{{fixedTextHash['browser'][currLan]}}</button>
+                                <div class="input-container">
+                                    <input class="cursor_pointer1" id="custom-input" type="file"
+                                           (change)="fileChangeListener($event)">
+                                </div>
+                            </div>
+
+
+                            <div class="progress" style="">
+                                <div class="progress-bar progress-bar-striped" role="progressbar"
+                                     [style.width.%]="(progress$ | async)"></div>
+                            </div>
+
+                            <div class="pop-button">
+                                <button *ngIf="tagetFile!=null && !(errorFile$ | async) || (file.file_optional == true)"
+                                        name="" (click)="uploadImage()" type="button"
+                                        class="btn postive"> {{fixedTextHash['save'][currLan]}}
+                                </button>
+                                <button *ngIf="(tagetFile==null || (errorFile$ | async)) && (file.file_optional == false)"
+                                        name="" type="button" class="btn postive disabled_button">
+                                    {{fixedTextHash['save'][currLan]}}
+                                </button>
+                                <button type="button" class="btn negative" data-dismiss="modal" aria-hidden="true"
+                                        (click)="resetUpload()">{{fixedTextHash['cancel'][currLan]}}</button>
+
+
+                                <div class="clr"></div>
+                            </div>
+                        </div>
+
+                        <!-- Add New Culture -->
+                        <div *ngIf="mode != 'imageCrop'">
+
+                            <h2>{{file.name}}</h2>
+
+                            <h4 [innerHTML]="fixedTextHash['upload_message'][currLan]
+                           .replace('{file_types}', file.file_type_names)
+                           .replace('{file_size_with_units}', file.file_size+' '+file.file_size_unit)
+                            .replace('{file_extraDesc}', file.extraDesc)"></h4>
+
+                            <div *ngIf="(errorFileString$| async) != null" class="alert alert-danger alert-dismissible"
+                                 role="alert">
+                                {{errorFileString$ | async }}
+                            </div>
+                            <div *ngIf=" uploader.queue[0] && file.file_format_list.indexOf(uploader.queue[0]['file']['type']) == -1"
+                                 class="alert alert-danger alert-dismissible" role="alert">
+                                {{fixedTextHash['invalid_file_format'][currLan]}}
+                            </div>
+                            <div *ngIf=" uploader.queue[0] && (file.file_size*1048576)  < uploader.queue[0]['file']['size']"
+                                 class="alert alert-danger alert-dismissible" role="alert">
+                                {{fixedTextHash['file_size_large'][currLan]}}
+                            </div>
+
+                            <div>
+                                <input *ngFor="let selInput of this.file.formParams,let selIndex = index"
+                                       (keyup)="getValue(title)" #title type="text" [attr.name]="selInput.title"
+                                       placeholder="{{fixedTextHash[selInput.placeholder] ?
+                                       fixedTextHash[selInput.placeholder][currLan] : fixedTextHash['title'][currLan]}}"
+                                       [ngModel]="selInput.value">
+                            </div>
+
+                            <div class="fancy-file">
+                                <div class="fancy-file-name">
+
+                                    {{(uploader.queue[0]?.file?.name) ? uploader.queue[0]?.file?.name : fixedTextHash['select_file'][currLan]}}
+                                </div>
+                                <button class="fancy-file-button cursor_pointer1">{{fixedTextHash['browser'][currLan]}}</button>
+                                <div class="input-container">
+                                    <input class="cursor_pointer1" id="uploading" (change)="onSelectFile()"
+                                           name="jobseeker_education[document]" type="file" ng2FileSelect
+                                           [uploader]="uploader"/>
+                                </div>
+                            </div>
+
+
+                            <div>
+                                <div class="progress" style="">
+                                    <div class="progress-bar progress-bar-striped" role="progressbar"
+                                         [style.width.%]="(progress$ | async)"></div>
+                                </div>
+
+
+                                <div class="pop-button">
+                                    <button name="jobseeker_education[document]" (click)="uploadAll()"
+                                            [disabled]="(successFlag$ | async) == true || ( uploader.queue[0] && file.file_format_list.indexOf(uploader.queue[0]['file']['type']) == -1) || (uploader.queue[0] && (file.file_size*1048576)  < uploader.queue[0]['file']['size']) "
+                                            type="button"
+                                            class="btn postive">{{fixedTextHash['upload'][currLan]}}</button>
+                                    <button type="button" class="btn negative" data-dismiss="modal" aria-hidden="true"
+                                            (click)="resetUpload()">{{fixedTextHash['cancel'][currLan]}}</button>
+                                    <div class="clr"></div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div *ngIf="(successFlag$| async)" class="sucessnfail">
+                    <button class="close" aria-hidden="true" data-dismiss="modal" type="button">×
+                    </button>
+                    <div class="ticksuccesful"><i class="zmdi zmdi-check-circle"></i></div>
+                    <div class="light">
+                        <h6>{{fixedTextHash['upload_successful'][currLan]}}</h6>
+                        <P>{{fixedTextHash['file_upload_successful'][currLan]}}</P>
+                    </div>
+                </div>
+                <div *ngIf="(errorFlag$| async)" class="sucessnfail">
+                    <button class="close" aria-hidden="true" data-dismiss="modal" type="button">×
+                    </button>
+                    <div class="tickunsuccesful"><i class="zmdi zmdi-close-circle"></i></div>
+                    <div class="light">
+                        <h6>{{fixedTextHash['upload_unsuccessful'][currLan]}}</h6>
+                        <P>{{fixedTextHash['file_upload_unsuccessful'][currLan]}}</P>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

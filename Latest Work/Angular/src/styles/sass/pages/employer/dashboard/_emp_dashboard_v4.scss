@@ -1,0 +1,1172 @@
+.audience-v4{
+    // width: 100%;
+    height: auto;
+    background-color: $bg;
+    border:1px solid $light-border;
+    margin:0px 5px;
+    padding:10px;
+    border-radius: $border-radius;
+    .row{
+        margin:0px!important;
+    }
+    h2{
+        font-size: 20px;
+        color: $primarycolor;
+        display: block;
+        text-align: center;
+        padding:10px 0px;
+        border-bottom:1px solid $light-border;
+        margin-bottom: 15px!important;
+        font-weight: bold;
+    }
+
+    .active-view-stats-v4{
+        width: 70%;
+        // background-color:#f1f1f1;
+        float: left;
+        height: auto;
+        padding-left:20px;
+        h3{
+            font-size: 16px;
+            display: block;
+            width: 100%;
+            padding-bottom:10px;
+            border-bottom:1px solid $light-border;
+            margin-top: 0px;
+            color: $primarycolor;
+        }
+        .graph-views-v4{
+            width: 100%;
+            float: left;
+            // background-color:#000;
+            height: 200px;
+            position: relative;
+        }
+        .countries-v4{
+            width: 250px;
+            float: left;
+            border-right:1px solid $light-border;
+            .loading{
+                line-height: 140px;
+            }
+            ul{
+                margin-bottom: 10px;
+                min-height: 165px;
+                li{
+                    display: block;
+                    width: 100%;
+                    color: $secondarycolor;
+                    padding:5px 0px;
+                }
+                .graph-v4{
+                    display: block;
+                    background-color: $light-border;
+                    height: 20px;
+                    // position: absolute;
+                    width: 100%;
+                    margin-left: 250px;
+                    margin-top: -24px;
+                    margin-bottom:10px;
+                    position:relative;
+                    span{
+                        display: block;
+                        height: 20px;
+                        // position:absolute;
+                        background-color:$secondarycolor;
+                        float: left;
+                        margin-right:5px;
+                    }
+                    i{
+                        position: absolute;
+                    }
+                }
+            }
+        }
+        .countries-graphs-v4{
+            width: calc(100% - 200px);
+            float: left;
+        }
+
+    }
+    .active-view-v4{
+        float: left;
+        width: calc(100% - 75%);
+        // background-color:#d1d1d1;
+        height: auto;
+        margin-right: 10px;
+        .blue-box{
+            width: 100%;
+            height: 210px;
+            background-color:$secondarycolor;
+            border-radius:4px;
+            -webkit-border-radius:4px;
+            -moz-border-radius:4px;
+            text-align: center;
+            color: $bg;
+            margin-bottom: 10px;
+            h1{
+                font-size:50px;
+                display: block;
+                padding-top:70px;
+                margin:0px;
+                font-weight: 600;
+            }
+        }
+    }
+    .map-v4{
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+        position:relative;
+        margin-top: 30px;
+        img{
+            max-height: 100%;
+            max-width: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+    }
+}
+
+// job-posted-v4
+// =========================================
+.job-posted-v4{
+    width: 100%;
+    float: left;
+    margin:0px 5px;
+    margin-top: 10px;
+    .equal-v4{
+        margin-left: -10px!important;
+        margin-right: -10px!important;
+    }
+    .row{
+        margin:0px;
+    }
+    // whitebox-v4
+    .whitebox-v4{
+        width: 100%;
+        height: 240px;
+        border:1px solid $light-border;
+        background-color:$bg;
+        text-align: center;
+        margin-bottom: 10px;
+        border-radius: $border-radius;
+        h2{
+            font-size: 35px;
+            color: $primarycolor;
+            font-weight: 600;
+            padding-top:89px;
+        }
+        span{
+            font-size: 16px;
+            color: $secondarycolor;
+        }
+        .loading{
+            line-height: 240px!important;
+        }
+    }
+    // equal-box
+    .equal-box{
+        width: 100%;
+        height: 73px;
+        background-color:$bg;
+        border:1px solid $light-border;
+        padding:15px;
+        text-align: center;
+        border-radius: $border-radius;
+        h2{
+            font-size: 20px;
+        }
+        span{
+            font-size: 14px;
+            color: $secondarycolor;
+        }
+    }
+    .mg-v4-10{
+        margin:10px 0px;
+    }
+    .live-v4{
+        position:relative;
+        h2{
+            color: #5ED5B4;
+        }
+        strong{
+            display: block;
+            width: 30px;
+            height: 30px;
+            position:absolute;
+            left:45%;
+            top: -10px;
+            background-image:url(/assets/images/dashboard-v4/live-job.png);
+            background-postion:center;
+            background-repeat:no-repeat;
+        }
+    }
+
+    .blink_me-v4 {
+      animation: blinker 1s linear infinite;
+    }
+
+    @keyframes blinker {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    // keyword-v4
+    .keyword-v4{
+        width: 100%;
+        height: 240px;
+        border:1px solid $light-border;
+        background-color:$bg;
+        margin-bottom: 10px;
+        padding:10px;
+        float: left;
+        border-radius: $border-radius;
+        h3{
+            font-size: 16px;
+            color: $primarycolor;
+            padding-bottom:10px;
+            border-bottom:1px solid $light-border;
+            font-weight: bold;
+        }
+        ul{
+            border-bottom:1px solid $light-border;
+            float: left;
+            width: 100%;
+            li{
+                display: block;
+                width: 100%;
+                height: auto;
+                float: left;
+                margin-bottom: 7px;
+                .graph-tx-v4{
+                    float: left;
+                    max-width: 185px;
+                    text-transform: capitalize;
+                    color: $secondarycolor;
+                    height: 1.5em;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap; 
+                }
+                .graph-v4{
+                    width: calc(100% - 185px);
+                    float: right;
+                    text-align: right;
+
+                    .bar-run-v4{
+                        width: calc(100% - 45px);
+                        float: left;
+                        span{
+                            display: block;
+                            float: right;
+                            height: 15px;
+                            background-color:$secondarycolor;
+                            margin-right:5px;
+                            width: auto;
+                        }
+                    }
+                    strong{
+                        float: right;
+                        display: block;
+                        width: 45px;
+                        color: $secondarycolor;
+                    }
+                }
+            }
+        }
+        a{
+            display: block;
+            text-align: left;
+            font-size: 14px;
+            color: $secondarycolor;
+            font-weight: 600;
+            float: left;
+            width: 100%;
+            i{
+                transition: all 0.5s ease;
+            }
+        }
+        a:hover i{
+            padding-left:20px;
+        }
+
+    }
+}
+.arabic{
+    .keyword-v4{
+       
+        ul{
+            li{
+                .graph-v4{
+                    .bar-run-v4{
+                        width: calc(100% - 55px);
+                    }
+                    strong{
+                        width: 45px;
+                        margin-right: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.header-v4{
+    background-color:$bg;
+    min-height: 40px;
+    float: left;
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: center;
+    line-height: 40px;
+    h3{
+        font-size: 16px;
+        margin:0px;
+        line-height: 40px;
+        width: 100%;
+        display: block;
+        border:1px solid $light-border;
+        font-weight: normal;
+        &:hover{
+            background-color:$primarycolor;
+            color: #fff;
+            cursor: pointer;
+        }
+    }
+    .active{
+        background-color:$primarycolor;
+        color: #fff;
+    }
+}
+
+// team-count-v4
+// =============================================
+.job-count-v4{
+    .row{
+        margin:0px!important;
+    }
+    .job-count-box-v4{
+        width: 100%;
+        height: 135px;
+        border:1px solid $light-border;
+        background-color:$bg;
+        text-align: center;
+        margin-bottom: 10px;
+        border-radius: $border-radius;
+        h2{
+            padding-top:50px;
+            display: block;
+            text-align: center;
+            font-size: 14px;
+            color: $secondarycolor;
+            padding-bottom:5px;
+            font-weight: normal;
+        }
+        span{
+
+            font-size: 22px;
+            font-weight: 600;
+            text-align: center;
+            display: block;
+            color: $primarycolor;
+
+        }
+
+    }
+    .dark-v4{
+        background-color:$secondarycolor;
+        h2{
+
+            color: rgba(255, 255, 255, 0.81);
+        }
+        span{
+            color: $bg;
+        }
+    }
+    .view-post-v4{
+        height:62px;
+        margin-bottom: 10px;
+        h2{
+            padding-top:10px;
+            padding-bottom:0px;
+        }
+    }
+}
+
+// team-count-v4
+// ============================================
+.team-count-v4{
+    float: left;
+    width: 100%;
+    background:$bg;
+    padding:10px;
+    .row{
+        margin:0px!important;
+    }
+    .team-count-box-v4{
+        width: 100%;
+        height: 105px;
+        border:1px solid $light-border;
+        background-color:$bg;
+        text-align: center;
+        margin-bottom: 10px;
+        h2{
+            padding-top:15px;
+            display: block;
+            text-align: center;
+            font-size: 14px;
+            color: $secondarycolor;
+            padding-bottom:5px;
+            font-weight: normal;
+            height: auto;
+        }
+        span{
+
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            display: block;
+            color: $primarycolor;
+
+        }
+        button{
+            border:none;
+            background-color: $primarycolor;
+            text-align: center;
+            color: #fff;
+            width: 80px;
+            height: 25px;
+            border-radius:$border-radius;
+            margin-top: 10px;
+
+        }
+        strong{
+            font-size: 22px;
+            font-weight: 600;
+            text-align: center;
+            display: block;
+            color: $primarycolor;
+        }
+        input{
+            width: 50%;
+        }
+
+    }
+    .dark-v4{
+        background-color:$secondarycolor;
+        h2{
+
+            color: rgba(255, 255, 255, 0.81);
+        }
+        span{
+            color: $bg;
+        }
+    }
+    .view-post-v4{
+        height:62px;
+        margin-bottom: 10px;
+        h2{
+            padding-top:10px;
+            padding-bottom:0px;
+        }
+    }
+}
+// gradient-grapg stats all
+// =============================================
+
+.shade-1{ background-color:$shade1!important;}
+.shade-2{ background-color:$shade2!important;}
+.shade-3{ background-color:$shade1!important;}
+.shade-4{ background-color:$shade1!important;}
+.shade-5{ background-color:$shade1!important;}
+.shade-6{ background-color:$shade1!important;}
+.shade-7{ background-color:$shade1!important;}
+.shade-8{ background-color:$shade1!important;}
+.shade-9{ background-color:$shade1!important;}
+.shade-10{ background-color:$shade1!important;}
+.shade-11{ background-color:$shade1!important;}
+.shade-12{ background-color:$shade1!important;}
+
+
+.tunpver-v4{
+    width: 50%;
+    margin:0px auto;
+    height: 20px;
+    background-color:$light-border;
+    margin-top:5px;
+    border-radius:3px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    span{
+        width: auto;
+        height: 20px;
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#00bc9b+0,91ddff+100 */
+    background: #00bc9b; /* Old browsers */
+    background: -moz-linear-gradient(left, #00bc9b 0%, #91ddff 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, #00bc9b 0%,#91ddff 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, #00bc9b 0%,#91ddff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00bc9b', endColorstr='#91ddff',GradientType=1 ); /* IE6-9 */
+
+    }
+}
+
+// job-post-graph-v4
+// =======================================================
+.job-post-graph-v4{
+    .row{
+        margin:0px!important;
+        .head-job-graph-v4{
+            h2{
+                display: block;
+                width: 50%;
+                float: left;
+                border:1px solid $light-border;
+                background-color:$bg;
+                text-align: center;
+                line-height: 40px;
+                font-size: 16px;
+                font-weight: 600;
+                color: $primarycolor;
+                border-radius: $border-radius;
+                &:hover{
+                    background-color:$primarycolor;
+                    color: $bg;
+                }
+            }
+            .active{
+                background-color:$primarycolor;
+                color: $bg;
+            }
+
+        }
+    }
+    .avarage-job-post-v4{
+        padding:20px;
+        h4{
+            font-size: 16px;
+            color: $primarycolor;
+            display: block;
+            text-align: center;
+            margin-bottom: 10px;
+            border-bottom:1px solid $light-border;
+            padding-bottom:10px;
+            margin-top:0px;
+        }
+        h5{
+            font-size: 16px;
+            color: $primarycolor;
+            display: block;
+            text-align: left;
+            margin-bottom: 20px;
+            padding-bottom:10px;
+            margin-top:0px;
+        }
+        span{
+            display: block;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            color: $secondarycolor;
+            padding-top:5px;
+        }
+        p{
+            display: block;
+            padding:10px;
+            border:1px solid #a7e4ff;
+            background-color:#def5ff;
+            border-radius:$border-radius;
+           
+            strong{
+               color: $primarycolor;
+               font-family: $primary-Fonts;
+               font-weight: bold!important;
+            }
+        }
+        .box-small-v4{
+            width: 100%;
+            height: auto;
+            border-bottom:1px solid $light-border;
+            margin-bottom: 10px;
+            float: left;
+            span{
+                display: block;
+                text-align: center;
+                font-size: 16px;
+                color: $primarycolor;
+                width: 100px;
+                height: 35px;
+                line-height: 25px;
+                border:1px solid $boredr-color;
+                font-weight: 600;
+                border-radius:$border-radius;
+                margin:0px auto;
+                margin-bottom: 10px;
+            }
+            strong{
+                text-align: center;
+                display: block;
+                font-size: 14px;
+                color: $primarycolor;
+                font-family: $primary-Fonts;
+                width: 100%;
+                margin-bottom: 5px;
+            }
+        }
+        ul{
+            li{
+
+                margin-bottom: 25px;
+                height: 15px;
+                position:relative;
+                span{
+                    display: block;
+                    position:absolute;
+                    text-align: left;
+                    margin-top:-28px;
+                }
+                .bar-v4{
+                    width: calc(100% - 65px);
+                    float: left;
+                    height: 15px;
+                    margin-right:5px;
+                    background-color:$light-border;
+                    .bar-progress-v4{
+                        width: auto;
+                        background-color:$secondarycolor;
+                        float: left;
+                        height: 15px;
+                    }
+                    .copany-v4{
+                        background-color:rgba(255, 193, 110, 0.54);
+                    }
+                }
+                strong{
+                    display: block;
+                    text-align: right;
+                    width: 60px;
+                    float: left;
+                    font-family: $primary-Fonts;
+                    font-weight: bold!important;
+                    margin-top: -3px;
+                }
+            }
+        }
+    }
+    .raph-job-v4{
+        width:100%;
+        min-height: 446px;
+        background-color:$bg;
+        border:1px solid $light-border;
+        margin-top:5px;
+        margin-bottom: 10px;
+        border-radius: $border-radius;
+        h3{
+            display: block;
+            text-align: center;
+            font-size: 16px;
+            padding-bottom:30px;
+            padding-top:10px;
+            color: $primarycolor;
+        }
+        .graph-v4{
+            width: 100%;
+            float: left;
+            margin:0px auto;
+            padding-bottom:10px;
+            ul{
+                width: 100%;
+                margin:0px auto;
+                display: block;
+                border-bottom:1px solid $light-border;
+                height: 300px;
+                li{
+                    display: block;
+                    float: left;
+                    background-color:$light-border;
+                    width: 5%;
+                    height: 300px;
+                    margin:0 1.66%;
+                    position:relative;
+                    span{
+                        display: block;
+                        width: auto;
+                        position:absolute;
+                        bottom:-25px;
+                        font-size: 12px;
+                        text-align: center;
+                        width: 100%;
+                        color: $primarycolor;
+
+                    }
+                    strong{
+                        position:absolute;
+                        bottom:0px;
+                        width: 100%;
+                        background-color:$primarycolor;
+                        text-align: center;
+                        color: $bg;
+                        font-size:14px;
+                        font-family: $primary-Fonts;
+                        .count{
+                            margin-top: -20px;
+                            color: $primarycolor;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+.mg-bt-0-v4{
+    margin-bottom: 0px!important;
+}
+
+
+// all-bar-stats-v4
+.all-bar-stats-v4{
+    .row{
+        margin:0px;
+    }
+    .box-bra-graph-v4{
+        width: 100%;
+        min-height: 360px;
+        background-color:$bg;
+        border:1px solid $light-border;
+        padding:15px;
+        margin-bottom: 10px;
+        .empty-prf{
+            padding-top: 20%;
+        }
+        h2{
+            font-size: 16px;
+            font-weight: bold;
+            display: block;
+            text-align: center;
+            color: $primarycolor;
+            padding:20px 0px;
+        }
+        .progress{
+            margin-bottom: 5px;
+            height: 10px!important;
+        }
+
+        a{
+            display: block;
+            text-align: left;
+            font-size: 14px;
+            color: $primarycolor;
+            font-weight: 600;
+            padding-top:10px;
+
+            i{
+                transition: all 0.5s ease;
+            }
+        }
+        a:hover i{
+            padding-left:20px;
+        }
+    }
+}
+
+.prograss-section{
+    .male-stats-v4{
+        width: 100%;
+        height: 100px;
+        border:1px solid $light-border;
+        padding:20px;
+        margin: 20px 0px;
+        border-radius: $border-radius;
+        .icon-male-follows-v4{
+            width: 60px;
+            height: auto;
+            float: left;
+            img{
+                width: 50px;
+            }
+        }
+        .follows-percentage-v4{
+            width: 100px;
+            float: left;
+            h3{
+                margin: 0px;
+                margin-top:10px;
+                color: $primarycolor;
+            }
+            span{
+                color: $secondarycolor;
+            }
+        }
+        .follows-prograss-v4{
+            width: calc(100% - 160px);
+            float: left;
+            margin-top: 25px;
+            .progress-bar{
+                background-color:$primarycolor;
+            }
+        }
+        .femail-v4{
+            .progress-bar{
+                background-color:$secondarycolor!important;
+            }
+        }
+    }
+}
+
+.most-recent-job-v4{
+    display: block;
+    float: left;
+    width: 100%;
+    margin-bottom: 20px;
+    h2{
+        display: block;
+        background-color:$bg;
+        color: $primarycolor;
+        text-align: center;
+        font-size: 16px;
+        height: 40px;
+        padding-top:10px;
+        font-weight: 600;
+        margin-bottom: -5px!important;
+    }
+    .list-v4{
+        background-color:$bg;
+        border:1px solid $light-border;
+        margin-top: 10px;
+        float: left;
+        width: 100%;
+        h3{
+            font-size: 14px;
+            text-align:left;
+            display: block;
+            border-bottom:1px solid #f1f1f1;
+            padding-bottom:10px;
+            padding-top:10px;
+            margin-top: 0px;
+            font-weight: 600;
+            color: $primarycolor;
+            padding: 10px;
+        }
+    }
+    .job-list-stas-v4{
+        width: 100%;
+        float: left;
+        background-color:#fff;
+        padding:10px 0px;
+        span{
+            font-size: 14px;
+            color: $secondarycolor;
+            display: block;
+            text-align: center;
+        }
+        h2{
+            font-size: 22px;
+            color: $primarycolor;
+            display: block;
+            text-align: center;
+            padding-top:5px;
+        }
+        h3{
+            font-size: 14px;
+            color: $secondarycolor;
+            display: block;
+            text-align: center;
+            margin:0px;
+            padding-bottom:5px;
+            border-bottom:0px;
+            padding-top:0px;
+        }
+        .sttus-hired{
+            width: 20px;
+            height: 20px;
+            background-image:url(/assets/images/dashboard-v4/status-check.png);
+            background-size:20px;
+            margin:0px auto!important;
+            display: block;
+        }
+        .sttus-nothired{
+            width: 20px;
+            height: 20px;
+            background-image:url(/assets/images/dashboard-v4/status-wrong.png);
+            background-size:20px;
+            margin:0px auto!important;
+            display: block;
+        }
+        b{
+            display: block;
+            text-align: center;
+            font-family: $primary-Fonts;
+            color: $primarycolor;
+        }
+        .line-v4{
+            border-right:1px solid $light-border;
+        }
+        ul{
+            display: block;
+            width: 90%;
+            margin:0px auto;
+
+            li{
+                display: block;
+                float: left;
+                width: 33.33%;
+                background-color:$light-border;
+                test-align:center;
+                height: 25px;
+                position:relative;
+                span{
+                    text-align: center;
+                    display: block;
+                    margin-bottom: 0;
+                    position: absolute;
+                    bottom: -20px;
+                    width: 100%;
+                    strong{
+                        color: $primarycolor;
+                        font-family: $primary-Fonts;
+                    }
+                }
+                h5{
+                    text-align: center;
+                    color: $white;
+                    margin:0px;
+                    padding-top:5px;
+
+                }
+            }
+        }
+    }
+
+}
+
+
+// funel-analatycs-v4
+// ========================================
+.funel-analatycs-v4{
+    float: left;
+    width: 100%;
+    margin-bottom: 10px;
+    h2{
+        display: block;
+        background-color:#fff;
+        color: $primarycolor;
+        text-align: center;
+        font-size: 16px;
+        height: 40px;
+        padding-top:10px;
+        font-weight: 600;
+    }
+    .funle-stats-v4{
+        padding:10px;
+        border:1px solid $light-border;
+        background:$white;
+        float: left;
+        width: 100%;
+        ul{
+            li{
+                display: block;
+                width: 100%;
+                border:1px solid $light-border;
+                margin:5px 0px;
+                height:auto;
+                text-align: center;
+                padding:15px;
+                background:$secondarycolor;
+                border-radius: $border-radius;
+                span{
+                    font-size: 14px;
+                    color: $white;
+                    display: block;
+                }
+                h2{
+                    background:none;
+                    color: $white;
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+    .funel-graphics-v4{
+        width: 100%;
+        height: 400px;
+        position:relative;
+        img{
+            height: 350px;
+            width: auto;
+            margin:20px;
+        }
+        .application-funel-v4, .interview-funel-v4, .shortlisted-funel-v4, .success-funel-v4{
+            position:absolute;
+            top: 0px;
+        }
+        .application-funel-v4{
+            span, strong{
+                display: inline-block;
+            }
+            strong{
+                margin-left: 188px;
+                font-family: $primary-Fonts;
+                font-size: 22px;
+                color: $secondary-ats;
+                margin-top: 80px;
+                left: 100px;
+                font-weight: 600!important;
+            }
+            span{
+                margin-left: 198px;
+                margin-top: -20px;
+                font-weight: 600;
+                color: $primarycolor;
+            }
+        }
+
+        .shortlisted-funel-v4{
+            span, strong{
+                display: inline-block;
+            }
+            strong{
+                margin-left: 195px;
+                font-family: $primary-Fonts;
+                font-size: 22px;
+                color: $white;
+                margin-top: 149px;
+                left: 100px;
+                font-weight: 600!important;
+            }
+            span{
+                margin-left: 160px;
+                margin-top: -20px;
+                font-weight: 600;
+                color: $primarycolor;
+            }
+        }
+
+        .interview-funel-v4{
+            span, strong{
+                display: inline-block;
+            }
+            strong{
+                margin-left: 195px;
+                font-family: $primary-Fonts;
+                font-size: 22px;
+                color: $white;
+                margin-top: 216px;
+                left: 100px;
+                font-weight: 600!important;
+            }
+            span{
+                margin-left: 128px;
+                margin-top: -20px;
+                font-weight: 600;
+                color: $primarycolor;
+            }
+        }
+
+        .success-funel-v4{
+            span, strong{
+                display: inline-block;
+            }
+            strong{
+                margin-left: 195px;
+                font-family: $primary-Fonts;
+                font-size: 22px;
+                color: $white;
+                margin-top: 280px;
+                left: 100px;
+                font-weight: 600!important;
+            }
+            span{
+                margin-left: 97px;
+                margin-top: -20px;
+                font-weight: 600;
+                color: $primarycolor;
+            }
+        }
+    }
+}
+
+.success-ratio{
+    background-color: #fff!important;
+    padding:20px;
+    canvas{
+        height: 99px !important;
+        width: auto!important;
+        margin: 0px auto;
+        display: block;
+    }
+    .circle{
+        position:relative;
+        strong{
+            top: -60px;
+            margin-top: 0px;
+            font-size: 22px;
+        }
+    }
+    span{
+        color: $primarycolor!important;
+    }
+}
+
+.full-height{
+    .loading{
+        line-height: 300px!important;
+        height: 450px;
+    }
+    height: auto!important;
+    .graph-tx-v4{
+        width: 50%!important;
+    }
+    .graph-v4{
+        width: calc(100% - 50%)!important;
+    }
+    ul{
+        li{
+            min-height: 25px!important;
+            border-bottom:1px solid #f1f1f1;
+            padding-bottom:5px;
+        }
+    }
+}
+
+.keyword-row{
+     .loading{
+            line-height: 140px!important;
+        }
+}
+.quarterly{
+    width: 33%!important;
+    float: none!important;
+    li{
+        width: 21%!important;
+    }
+}
+.map-v4-s{
+   .loading{
+            line-height: 240px!important;
+        } 
+}
+.prograss-txt{
+    color: $secondarycolor;
+}
+    
+
+
+// ============bigScreen===========
+@media all and (max-width: 991px) {
+    .active-view-v4{
+        .blue-box{
+            h1{
+                padding-top:10px !important;
+            }
+        }
+    }
+}

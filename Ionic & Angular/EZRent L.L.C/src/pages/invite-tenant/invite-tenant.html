@@ -1,0 +1,37 @@
+<ion-header class="animated fadeIn no-shadow">
+
+  <ion-navbar class="no-border" color="primary" hideBackButton="true">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Invite Tenants to TheRentApp
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="common-bg animated invite_tenant">
+  <div class="login-content fadeIn">
+    <!-- Logo -->
+    <div padding-horizontal text-center class="animated fadeInDown">
+      <div class="logo-for">
+        <img src="../assets/img/logo.png" width="100%" height="auto">
+      </div>
+    </div>
+  </div>
+
+  <h5>If your Tenants has not already downloaded and registered with The Rent App, invite them to join the The Rent App community:</h5>
+  <form #myForm="ngForm" [formGroup]="onInviteTenantForm" (ngSubmit)="inviteTenent()" class="list-form" margin-top>
+    <ion-item>
+      <ion-label fixed>
+        <img src="../assets/icon/signup_4.png" width="30">
+      </ion-label>
+      <ion-input type="text" formControlName="Number" placeholder="Enter Phone Number"></ion-input>
+    </ion-item>
+    <p ion-text color="danger" class="has-error" *ngIf="myForm.submitted && onInviteTenantForm.get('Number').hasError('required')">{{ message }}</p>
+    <p ion-text color="danger" class="has-error" *ngIf="numberError">{{ numberError }}</p>    
+    <button ion-button full type="submit">Invite to TheRentApp</button>
+
+    <button ion-button full (click)="back()" class="btn-fb signfb">Skip</button>
+  </form>
+</ion-content>

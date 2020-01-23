@@ -1,0 +1,102 @@
+<ion-header class="animated fadeIn no-shadow">
+
+  <ion-navbar class="no-border" color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title *ngIf="tenantProperty">
+      {{ tenantProperty.tenant }}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="common-bg animated user_details">
+  <ion-grid class="table_grid">
+    <ion-row>
+      <ion-col col-6>
+        <h5>Landloard</h5>
+      </ion-col>
+      <ion-col col-6>
+        <h5 *ngIf="tenantProperty">{{ tenantProperty.landlord }}</h5>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        <h5>Address</h5>
+      </ion-col>
+      <ion-col col-6>
+        <h5 *ngIf="tenantProperty">{{ tenantProperty.building_name + tenantProperty.building_address }}</h5>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        <h5>Appartment Number</h5>
+      </ion-col>
+      <ion-col col-6 *ngIf="tenantProperty">
+        <h5>{{ tenantProperty.apartment_Number }}</h5>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        <h5>Appartment bathrooms</h5>
+      </ion-col>
+      <ion-col col-6 *ngIf="tenantProperty">
+        <h5>{{ tenantProperty.bathrooms }}</h5>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        <h5>Appartment bedrooms</h5>
+      </ion-col>
+      <ion-col col-6 *ngIf="tenantProperty">
+        <h5>{{ tenantProperty.bedrooms }}</h5>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        <h5>Rent Amount</h5>
+      </ion-col>
+      <ion-col col-6 *ngIf="tenantProperty">
+        <h5>{{ tenantProperty.rent }}</h5>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        <h5>Payment Status</h5>
+      </ion-col>
+      <ion-col col-6>
+        <h5>
+          <button type="button" [ngClass]="{'btn-success': tenantProperty.status == 'Paid', 'btn-danger': tenantProperty.status == 'Unpaid'}"
+            *ngIf="tenantProperty">{{ tenantProperty.status }}</button>
+        </h5>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        <h5>Payment Due Date</h5>
+      </ion-col>
+      <ion-col col-6>
+        <h5 *ngIf="tenantProperty">{{ tenantProperty.due_date }}</h5>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        <h5>No of Grace Days</h5>
+      </ion-col>
+      <ion-col col-6>
+        <h5 *ngIf="tenantProperty">{{ tenantProperty.grace_period }} </h5>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div *ngIf="tenantProperty">
+    <h5 *ngIf="tenantProperty.status == 'Paid'">{{ tenantProperty.tenant }} has paid his rent of $500 this month on (date) Paid at (time paid)</h5>
+  </div>
+  <div *ngIf="tenantProperty">
+    <h5 *ngIf="tenantProperty.status == 'Unpaid'">{{ tenantProperty.tenant }} has Not paid his rent of "Price" this month, a late fee will be applied after {{ tenantProperty.due_date}}
+    </h5>
+    <button *ngIf="tenantProperty.status == 'Unpaid'" type="button" full ion-button class="btn-green" (click)="payRent(tenantProperty.rent)">Pay Rent</button>
+  </div>
+    <button class="btn-remove" ion-button full (click)="presentConfirm(tenantProperty.apartment_id)">Leave Appartment</button>
+ 
+
+</ion-content>

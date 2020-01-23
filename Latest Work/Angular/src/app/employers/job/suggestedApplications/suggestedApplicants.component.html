@@ -1,0 +1,471 @@
+<div class="main-tab load-data-js mobile-tab-top"></div>
+<div class="tab-content job-bloovo">
+    <!--------------------------- All Jobs ---------------------------------->
+
+    <div class="container margin-top-space" [class.arabic] = "accountService.isArabic()">
+
+        <div class="common-block suggest-invt">
+
+          
+
+            <!--BODY-AREA-->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 arabic-right-left" *ngIf="!showFilter">
+
+                <div class="block bottom-gap">
+                    <div class="common-block block-title-2">
+                        <div class="pull-left left-bx arabic-right-left arabic-some ">
+                            <h2 class="smalltxt two-line">
+                              <span>{{fixedTextHash['suggested_candidates_for'][currLan]}}</span>
+                              {{jobTitle}}
+                            </h2>
+                        </div>
+                        <div class="pull-right right-bx arabic-left-right">
+                            <a (click)="onBack()" class="cursor_pointer1"> <button> {{fixedTextHash['back'][currLan]}} </button> </a>
+                            <button class="advance-filter arabic-right-left" data-toggle="collapse" data-target="#demo">{{fixedTextHash['refine_search'][currLan]}}</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- filter -->
+                <!-- ======================================================================== -->
+                <div id="demo" class="collapse advancefilter">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 refine-serch filter-hide arabic-right-left" *ngIf="!showFilter">
+                        <div class="block bottom-gap">
+                            <div class="common-block block-title">
+                                <h2>{{fixedTextHash['filter_search_results_by'][currLan]}}</h2>
+                                <span data-toggle="collapse" data-target="#demo">{{fixedTextHash['close'][currLan]}}</span>
+                            </div>
+                            <!--FILTER-->
+                            <filter-applied-candidate *ngIf="jobId != null" [page]="accountService.getCurrLangUrl()+accountService.getPath()+'/jobs/'+jobId+'/'+this.accountService.getSpaceToDashLowerCase(this.jobTitle)+'/suggest-candidates'"></filter-applied-candidate>
+                        </div>
+                    </div>
+                    </div>
+                    <!-- ======================================================================== -->
+
+                <!--listing-->
+                <div class="common-block block filter-jobs bottom-gap app-datail ">
+                    <div class="common-block base-padding bottom-gap">
+                        <div class="col-lg-6 col-sm-6 col-xs-12 arabic-right-left">
+                            <h2 class="smalltxt">
+                              <span>{{(totalRecords$ | async) | number }}</span> 
+                              {{fixedTextHash['suggested_candidates_for'][currLan]}}
+                            </h2>
+                        </div>
+                        <div class="col-lg-6 col-sm-6 arabic-right-left  col-xs-12 drop-jobs hidden-xs">
+                            <div class="sort-drop" >
+                                <div class="click-dropdown-sort">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <div class="btn-group btn-input clearfix">
+                                                <button type="button" class="btn btn-default dropdown-toggle form-control" data-toggle="dropdown">
+                                                    <span data-bind="label">{{fixedTextHash['matching_percentage'][currLan]}}</span>&nbsp;<span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <div class="arow-dropdown zmdi zmdi-caret-up"></div>
+                                                    <li><a (click)="sortBy('matching_percentage',fixedTextHash['matching_percentage'][currLan])">{{fixedTextHash['matching_percentage'][currLan]}}</a></li>
+                                                    <li><a (click)="sortBy('years_of_experience',fixedTextHash['years_experience'][currLan])">{{fixedTextHash['years_experience'][currLan]}}</a></li>
+                                                    <li><a (click)="sortBy('current_salary',fixedTextHash['current_salary'][currLan])">{{fixedTextHash['current_salary'][currLan]}}</a></li>
+                                                    <li><a (click)="sortBy('expected_salary',fixedTextHash['expected_salary'][currLan])">{{fixedTextHash['expected_salary'][currLan]}}</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="srt-feture">{{fixedTextHash["sort"][currLan]}}:</span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+
+                    <!--ALL LISTING-->
+                    <div *ngIf="!loadedData" class="empty-min2">
+                        <i class="small_loading"><spinner></spinner></i>
+                    </div>
+
+                    <div *ngIf="loadedData && (jobSeekers$ | async)?.length == 0"  class="empty-min2 white">
+                        <div class="empty-prf">
+                            <i class="icon-empty-user"></i>
+                            <h5>{{fixedTextHash['no_suggested_candidates_message'][currLan]}}</h5>
+                        </div>
+                    </div>
+
+
+                    <div *ngIf="loadedData" class="common-block invite">
+                        <div class="common-block" *ngFor="let selProfile of (jobSeekers$ | async)">
+
+                          <!-- TODO: Add Arabic Translate -->
+                          <!-- New Design Candidate Search result -->
+
+                          <div class="block newlistpad jobapp-btm-10  bg-none jobapplicant candidate-result-new">
+
+                            <!-- Desktop -->
+                            <div class="new-list" *ngIf="screenwidth > maxWindowSizetablet">
+                              <div class="newlistleft arabic-right-left">
+                                <a  target="_blank" [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/candidate/'+selProfile?.user_id+'/profile']">
+                                  <div *ngIf="!selProfile?.avatar"  class="newlistdp-left arabic-right-left"><i class="icon-profile"></i> </div>
+                                  <div class="newlistdp-left arabic-right-left" *ngIf="selProfile?.avatar">
+                                    <img  src="{{selProfile?.avatar}}">
+                                  </div>
+                                </a>
+                                <div class="newlistdp-right arabic-right-left">
+                                  <div class="applicant-name-dt">
+                                    <a  target="_blank" [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/candidate/'+selProfile?.user_id+'/profile']">
+                                      <h2><strong>{{selProfile?.first_name}} {{selProfile?.last_name}}</strong></h2>
+                                    </a>
+                                    <ul>
+                                      <li *ngIf="selProfile?.default_resume"><a href="{{selProfile?.default_resume}}" target="_blank"><i class="zmdi zmdi-attachment-alt"></i></a></li>
+                                      <li *ngIf="selProfile?.video"><a href="{{selProfile?.video}}" target="_blank"><i class="zmdi zmdi-videocam"></i></a></li>
+                                    </ul>
+                                  </div>
+                                  <a  target="_blank" [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/candidate/'+selProfile?.user_id+'/profile']">
+                                    
+
+
+                                    <div class="com-pos">
+                                        <h4 *ngIf="selProfile?.current_position">
+                                            {{selProfile?.current_position}}</h4>
+                                        <h4 *ngIf="!selProfile?.current_position">{{fixedTextHash['no_title'][currLan]}}</h4>
+                                        <h4 *ngIf="selProfile?.current_company_name"><b>{{selProfile?.current_company_name}}</b>
+                                        </h4>
+                                        <h4 *ngIf="!selProfile?.current_company_name"><b>{{fixedTextHash['no_comp'][currLan]}}</b></h4>
+                                        <h4 *ngIf="selProfile?.city?.name && selProfile?.country?.name">{{selProfile?.city?.name}}{{fixedTextHash['comma'][currLan]}}
+                                            {{selProfile?.country?.name}}</h4>
+                                        <h4 *ngIf="selProfile?.city?.name && !selProfile?.country?.name">{{selProfile?.city?.name}}
+                                        </h4>
+                                    </div>
+                                    <div class="loc-sec" *ngIf="selProfile?.sector?.name">
+                                        <h4>{{selProfile?.sector?.name}}</h4>
+                                    </div>
+
+                                    
+                                      
+
+                                  </a>
+
+                                </div>
+
+                                <div class="newlist-experience">
+                                  <div class="exp-box jobapp-btm-10">
+                                    <h5>{{fixedTextHash['year_exp_minified'][currLan]}}</h5>
+                                    <h4 *ngIf="selProfile?.num_years_experience == 1">{{selProfile?.num_years_experience}} {{fixedTextHash['years'][currLan]}}</h4>
+                                    <h4 *ngIf="selProfile?.num_years_experience > 1">{{selProfile?.num_years_experience}} {{fixedTextHash['year'][currLan]}}</h4>
+                                    <h4 *ngIf="selProfile?.num_years_experience == 0">{{fixedTextHash['no_experience'][currLan]}}</h4>
+                                  </div>
+
+                                  <div class="exp-box">
+                                    <h5>{{fixedTextHash['salary_expectations'][currLan]}}</h5>
+                                    <h4>{{fixedTextHash[accountService.getCurrency()][currLan]}} {{selProfile?.expected_salary | number}} / {{fixedTextHash['month'][currLan]}}</h4>
+                                  </div>
+                                </div>
+
+                                <div class="clearfix"></div>
+                              </div>
+
+
+                              <div class="newlistright">
+                              <div class="newlist-percentage">
+                                <div class="per-cercle-mob" >
+                                  <div class="matching-new-application">
+                                    <donut-animate [val]="selProfile?.matching_percentage"></donut-animate>
+
+                                    <div class="new-succes hide-inout" *ngIf="!selProfile?.is_applied && !selProfile?.is_invited" (click)="openInvitationModal(selProfile)">
+                                      <button class="inv-to-apply">{{fixedTextHash['inivite_to_apply'][currLan]}}</button>
+                                    </div>
+
+                                    <div class="new-unsucces hide-inout" *ngIf="!selProfile?.is_applied && selProfile?.is_invited">
+                                      <button class="already-inv">{{fixedTextHash['already_invited'][currLan]}}</button>
+                                    </div>
+
+                                    <div class="new-reviewed hide-inout" *ngIf="selProfile?.is_applied && !selProfile?.is_invited">
+                                      <button class="already-app">{{fixedTextHash['already_applied'][currLan]}}</button>
+                                    </div>
+
+
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="clearfix"></div>
+                            </div>
+
+                              <div class="clearfix"></div>
+                            </div>
+
+
+
+                            <!-- Tablet -->
+                            <div *ngIf="screenwidth > maxWindowSizeMobile && screenwidth <= maxWindowSizetablet" class="new-list tabue">
+                              <div class="new-list">
+                                <div class="newlistleft arabic-right-left">
+                                  <a  target="_blank" [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/candidate/'+selProfile?.user_id+'/profile']">
+                                    <div *ngIf="!selProfile?.avatar"  class="newlistdp-left arabic-right-left"><i class="icon-profile"></i> </div>
+                                    <div class="newlistdp-left arabic-right-left" *ngIf="selProfile?.avatar">
+                                      <img  src="{{selProfile?.avatar}}">
+                                    </div>
+                                  <div class="newlistright">
+                                  <div class="newlist-percentage">
+                                    <div class="per-cercle-mob" >
+                                      <div class="matching-new-application">
+                                        <donut-animate [val]="selProfile?.matching_percentage"></donut-animate>
+                                         <div class="new-succes hide-inout" *ngIf="!selProfile?.is_applied && !selProfile?.is_invited" (click)="openInvitationModal(selProfile)">
+                                          <button class="inv-to-apply">{{fixedTextHash['invite_to_apply'][currLan]}}</button>
+                                        </div>
+
+                                        <div class="new-unsucces hide-inout" *ngIf="!selProfile?.is_applied && selProfile?.is_invited">
+                                          <button class="already-inv">{{fixedTextHash['already_invited'][currLan]}}</button>
+                                        </div>
+
+                                        <div class="new-reviewed hide-inout" *ngIf="selProfile?.is_applied && !selProfile?.is_invited">
+                                          <button class="already-app">{{fixedTextHash['already_applied'][currLan]}}</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <div class="clearfix"></div>
+                                </div>
+                                  </a>
+
+                                  <div class="newlistdp-right">
+                                    <div class="applicant-name-dt">
+                                      <a  target="_blank" [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/candidate/'+selProfile?.user_id+'/profile']">
+                                        <h2><strong>{{selProfile?.first_name}} {{selProfile?.last_name}}</strong></h2>
+                                      </a>
+                                      <ul>
+                                        <li *ngIf="selProfile?.default_resume"><a href="{{selProfile?.default_resume}}" target="_blank"><i class="zmdi zmdi-attachment-alt"></i></a></li>
+                                        <li *ngIf="selProfile?.video"><a href="{{selProfile?.video}}" target="_blank"><i class="zmdi zmdi-videocam"></i></a></li>
+                                      </ul>
+                                    </div>
+                                    <a  target="_blank" [routerLink]="['/'+accountService.getPath()+'/candidate/'+selProfile?.user_id+'/profile']">
+
+                                      <div class="com-pos">
+                                        <h4 *ngIf="selProfile?.current_position"><i class="zmdi zmdi-account"></i>
+                                          {{selProfile?.current_position}}
+                                        </h4>
+                                        <h4 *ngIf="!selProfile?.current_position"><i class="zmdi zmdi-account"></i> {{fixedTextHash['no_title'][currLan]}}</h4>
+                                        <h4 class="half-fix2-v4" *ngIf="selProfile?.current_company_name"><i class="zmdi zmdi-city-alt"></i>
+                                          <b>{{selProfile?.current_company_name}}</b></h4>
+                                        <h4 class="half-fix2-v4" *ngIf="!selProfile?.current_company_name"><i class="zmdi zmdi-city-alt"></i> <b>{{fixedTextHash['no_comp'][currLan]}}</b></h4>
+                                        <h4 class="half-fix-v4" *ngIf="selProfile?.city?.name && selProfile?.country?.name"><i class="zmdi zmdi-pin"></i>
+                                          {{selProfile?.city?.name}}{{fixedTextHash['comma'][currLan]}} {{selProfile?.country?.name}}
+                                        </h4>
+                                        <h4 class="half-fix-v4" *ngIf="selProfile?.city?.name && !selProfile?.country?.name"><i class="zmdi zmdi-pin"></i>
+                                          {{selProfile?.city?.name}}
+                                        </h4>
+                                      </div>
+                                      <div class="loc-sec" *ngIf="selProfile?.sector?.name">
+                                        <h4><i class="zmdi zmdi-chart-donut"></i>{{selProfile?.sector?.name}}</h4>
+                                      </div>
+                                      <div class="oth-sec" *ngIf="selProfile?.last_active">
+                                        <h4><i class="zmdi zmdi-calendar"></i>{{fixedTextHash['last_seen'][currLan]}} :  {{accountService.getFormattedDate(selProfile?.last_active, 'MMM DD, YYYY')}}</h4>
+                                      </div>
+
+                                    </a>
+
+                                  </div>
+
+                                  <a  target="_blank" [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/candidate/'+selProfile?.user_id+'/profile']">
+                                    <div class="newlist-experience">
+                                      <div class="exp-box jobapp-btm-10">
+                                        <h5>{{fixedTextHash['year_exp_minified'][currLan]}}</h5>
+                                        <h4 *ngIf="selProfile?.num_years_experience == 1">{{selProfile?.num_years_experience}} {{fixedTextHash['years'][currLan]}}</h4>
+                                        <h4 *ngIf="selProfile?.num_years_experience == 1">{{selProfile?.num_years_experience}} {{fixedTextHash['year'][currLan]}}</h4>
+                                        <h4 *ngIf="selProfile?.num_years_experience == 0">{{fixedTextHash['no_experience'][currLan]}}</h4>
+                                      </div>
+
+                                      <div class="exp-box">
+                                        <h5>{{fixedTextHash['salary_expectations'][currLan]}}</h5>
+                                        <h4>{{fixedTextHash[accountService.getCurrency()][currLan]}} {{selProfile?.expected_salary | number}} / {{fixedTextHash['month'][currLan]}}</h4>
+                                      </div>
+
+                                    </div>
+                                  </a>
+
+
+                                  <div class="clearfix"></div>
+                                </div>
+                                <div class="clearfix"></div>
+                              </div>
+                            </div>
+
+
+                            <!-- Mobile -->
+                            <div *ngIf="screenwidth <= maxWindowSizeMobile" class=" block newlistpad jobapp-btm-10  bg-none">
+
+                              <div class="new-list mobiles">
+                                <div class="newlistleft arabic-right-left">
+                                  <a  target="_blank" [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/candidate/'+selProfile?.user_id+'/profile']">
+                                    <div *ngIf="!selProfile?.avatar"  class="newlistdp-left arabic-right-left"><i class="icon-profile"></i> </div>
+                                    <div class="newlistdp-left arabic-right-left" *ngIf="selProfile?.avatar">
+                                      <img  src="{{selProfile?.avatar}}">
+                                    </div>
+                                  </a>
+
+                                  <!-- Matching Percentage -->
+                                <div class="newlistright">
+                                  <div class="newlist-percentage">
+                                    <div class="per-cercle-mob" >
+                                      <div class="matching-new-application">
+                                        <donut-animate [val]="selProfile?.matching_percentage"></donut-animate>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <div class="clearfix"></div>
+                                </div>
+
+
+                                  <div class="newlistdp-right">
+                                    <div class="applicant-name-dt">
+                                      <a  target="_blank" [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/candidate/'+selProfile?.user_id+'/profile']">
+                                        <h2><strong>{{selProfile?.first_name}} {{selProfile?.last_name}}</strong></h2>
+                                      </a>
+                                      <ul>
+                                        <li *ngIf="selProfile?.default_resume"><a href="{{selProfile?.default_resume}}" target="_blank"><i class="zmdi zmdi-attachment-alt"></i></a></li>
+                                        <li *ngIf="selProfile?.video"><a href="{{selProfile?.video}}" target="_blank"><i class="zmdi zmdi-videocam"></i></a></li>
+                                      </ul>
+                                    </div>
+                                    <a  target="_blank" [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/candidate/'+selProfile?.user_id+'/profile']">
+
+                                      <div class="com-pos">
+                                        <h4 *ngIf="selProfile?.current_position"><i class="zmdi zmdi-account"></i>
+                                          {{selProfile?.current_position}}
+                                        </h4>
+                                        <h4 *ngIf="!selProfile?.current_position"><i class="zmdi zmdi-account"></i> {{fixedTextHash['no_title'][currLan]}}</h4>
+                                        <h4 *ngIf="selProfile?.current_company_name"><i class="zmdi zmdi-city-alt"></i>
+                                          <b>{{selProfile?.current_company_name}}</b>
+                                        </h4>
+                                        <h4   *ngIf="selProfile?.city?.name && selProfile?.country?.name"><i class="zmdi zmdi-city-alt"></i> <b>{{fixedTextHash['no_comp'][currLan]}}</b></h4>
+
+                                        <h4  *ngIf="selProfile?.city?.name && selProfile?.country?.name"><i class="zmdi zmdi-pin"></i>
+                                          {{selProfile?.city?.name}}{{fixedTextHash['comma'][currLan]}} {{selProfile?.country?.name}}
+                                        </h4>
+                                        <h4 *ngIf="selProfile?.city?.name && !selProfile?.country?.name"><i class="zmdi zmdi-pin"></i>
+                                          {{selProfile?.city?.name}}
+                                        </h4>
+                                      </div>
+                                      <div class="loc-sec" *ngIf="selProfile?.sector?.name"><h4><i class="zmdi zmdi-chart-donut"></i>{{selProfile?.sector?.name}}</h4>
+                                      </div>
+                                      <div class="oth-sec" *ngIf="selProfile?.last_active">
+                                        <h4><i class="zmdi zmdi-calendar"></i>{{fixedTextHash['last_seen'][currLan]}} : {{accountService.getFormattedDate(selProfile?.last_active, 'MMM DD, YYYY')}}</h4>
+                                      </div>
+
+                                      <div class="new-succes hide-inout" *ngIf="!selProfile?.is_applied && !selProfile?.is_invited" (click)="openInvitationModal(selProfile)">
+                                          <button class="inv-to-apply">{{fixedTextHash['inivite_to_apply'][currLan]}}</button>
+                                        </div>
+
+                                        <div class="new-unsucces hide-inout" *ngIf="!selProfile?.is_applied && selProfile?.is_invited">
+                                          <button class="already-inv">{{fixedTextHash['already_invited'][currLan]}}</button>
+                                        </div>
+
+                                        <div class="new-reviewed hide-inout" *ngIf="selProfile?.is_applied && !selProfile?.is_invited">
+                                          <button class="already-app">{{fixedTextHash['already_applied'][currLan]}}</button>
+                                        </div>
+
+                                    </a>
+                                  </div>
+                                  <a  target="_blank" [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/candidate/'+selProfile?.user_id+'/profile']">
+
+                                    <div class="newlist-experience">
+                                      <div class="exp-box jobapp-btm-10">
+                                        <h5>{{fixedTextHash['year_exp_minified'][currLan]}}</h5>
+                                        <h4 *ngIf="selProfile?.num_years_experience == 1">{{selProfile?.num_years_experience}} {{fixedTextHash['year'][currLan]}}</h4>
+                                        <h4 *ngIf="selProfile?.num_years_experience > 1">{{selProfile?.num_years_experience}} {{fixedTextHash['years'][currLan]}}</h4>
+                                        <h4 *ngIf="selProfile?.num_years_experience == 0">{{fixedTextHash['no_experience'][currLan]}}</h4>
+                                      </div>
+
+                                      <div class="exp-box">
+                                        <h5>{{fixedTextHash['salary_expectations'][currLan]}}</h5>
+                                        <h4>{{fixedTextHash[accountService.getCurrency()][currLan]}} {{selProfile?.expected_salary | number}} / {{fixedTextHash['month'][currLan]}}</h4>
+                                      </div>
+
+                                    </div>
+                                  </a>
+
+                                  <div class="clearfix"></div>
+                                </div>
+
+
+                                <div class="clearfix"></div>
+
+                              </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="(totalRecords$ | async) > 0">
+                    <pagination-new [url]="accountService.getCurrLangUrl()+accountService.getPath()+'/jobs/'+jobId+'/'+this.accountService.getSpaceToDashLowerCase(this.jobTitle)+'/suggest-candidates'" [totalRecords]="totalRecords$"></pagination-new>
+                </div>
+            </div>
+
+            <!--Mobile Only-->
+            <div *ngIf="showFilter" class="col-lg-12 refine-serch">
+                <div class="block bottom-gap">
+                    <div class="common-block block-title-2">
+                        <h2 class="padding-top-10">{{fixedTextHash['search_by'][currLan]}}</h2>
+                        <a >
+                            <button (click)="showFilter = false"><span><i class="zmdi zmdi-arrow-left"></i></span><span class="hide">{{fixedTextHash['back'][currLan]}}</span></button>
+                        </a>
+                    </div>
+
+                    <filter-applied-candidate *ngIf="jobId != null" [page]="accountService.getCurrLangUrl()+accountService.getPath()+'/jobs/'+jobId+'/'+this.accountService.getSpaceToDashLowerCase(this.jobTitle)+'/suggest-candidates'"></filter-applied-candidate>
+                </div>
+            </div>
+            <!-- Filter -->
+            <div class="common-block" id="filter">
+                <div class="filter-mobile">
+                    <a >
+                        <button *ngIf="!showFilter" (click)="showFilter = true">{{fixedTextHash['filter'][currLan]}}</button>
+                        <button *ngIf="showFilter" (click)="showFilter = false">{{fixedTextHash['apply'][currLan]}}</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="popup">
+    <div class="logout-pop">
+        <div class="modal invite-all" id="invite-apply-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+                        <button class="close following" aria-hidden="true" data-dismiss="modal" type="button">×</button>
+                        <h2>{{fixedTextHash["invite"][currLan]}} {{(targetApplicant$ | async)?.first_name}} {{(targetApplicant$ | async)?.last_name}} {{fixedTextHash['to_apply'][currLan]}}</h2>
+                        <br>
+
+                        <div class="pop-txtarea invite-suggsted-candi">
+
+                            <div class="common-block" *ngIf="(failAlert$ | async)">
+                                <div class="alert alert-danger alert-dismissible" role="alert">
+                                   {{fixedTextHash['invitation_error_message'][currLan]}}
+                                </div>
+                            </div>
+
+                            <div class="common-block" *ngIf="(successAlert$ | async)">
+                                <div class="alert comen-alert alert-dismissible" role="alert">
+                                  {{fixedTextHash['invitation_success_message'][currLan]}}
+                                </div>
+                            </div>
+
+                            <textarea rows="10" cols="50" name="#" wrap="hard" [(ngModel)]='msg_content'>
+                            </textarea>
+
+                        </div>
+
+                        <div class="pop-button">
+                            <button type="button" class="btn postive" (click)="sendApplyInvitation()"> {{fixedTextHash['invite'][currLan]}}</button>
+                            <button type="button" class="btn negative" data-dismiss="modal"> {{fixedTextHash['cancel'][currLan]}}</button>
+                            <div class="clr"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,8 @@
+<div class="main-tab load-data-js mobile-tab-top"></div>
+<div class="tab-content" [class.arabic] = "accountService.isArabic()">
+    <div role="tabpanel" class="tab-pane active" id="my-profile">
+        <div class="container" id="followers">
+            <candidate-employer [candidateId]="candidateId" [jobId]="jobId" [appliedFlag]="true" ></candidate-employer>
+        </div>
+    </div>
+</div>

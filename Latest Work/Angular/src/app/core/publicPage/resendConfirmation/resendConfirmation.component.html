@@ -1,0 +1,50 @@
+<div class="sign-page back-bg">
+    <div class="confirmemailats">
+
+        <!-- Header Section -->
+        <div class="row new-user-sign-form">
+            <h1>{{fixedTextHash['send_activation_link'][currLan]}}</h1>
+            <p class="margin-top-10" [innerHtml]="fixedTextHash['received_activation_url'][currLan]"></p>
+        </div>
+        <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 sign-in">
+            <div class="row new-user-sign-form">
+                <!-- alert Message -->
+                <!-- alert success-->
+                <div class="alert comen-alert" *ngIf="successMessage">
+                    <i class="zmdi zmdi-check-circle"></i>
+                    {{successMessage}}
+                </div>
+                <!-- alert worng-->
+                <div class="alert alert-danger" *ngIf="errorMessage">
+                    <i class="zmdi zmdi-close-circle"></i>
+                    {{errorMessage}}<a class="red-error"
+                                       href='{{accountService.getCurrLangUrl()}}signup-jobseeker'> {{fixedTextHash['sign_up_here'][currLan]}}</a>.
+                </div>
+                <!-- form of the resend confirmation -->
+                <form [formGroup]="confirmForm">
+                    <div>
+                        <input type="text" placeholder="{{fixedTextHash['email'][currLan]}}" formControlName="email"
+                               (keyup)="setTrim()"
+                               [class.error-feild]="(confirmForm.controls['email'].touched || !(pristineFlag$ | async)) && confirmForm.controls['email'].errors">
+                        <!-- Alert -->
+                        <div *ngIf="(confirmForm.controls['email'].touched || !(pristineFlag$ | async)) && confirmForm.controls['email'].errors"
+                             class="alert alert-danger alert-dismissible martop5" role="alert">
+                            {{fixedTextHash['empty_email'][currLan]}}
+                        </div>
+                    </div>
+                    <div class="margin-top-10">
+                        <button *ngIf="!postDoneFlag" (click)="submitEmail()">
+                            <a>{{fixedTextHash['submit'][currLan]}}</a>
+                        </button>
+                        <button *ngIf="postDoneFlag" class="disabled_button">
+                            <a>{{fixedTextHash['submit'][currLan]}}</a>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <span class="cancel-signin cursor_pointer1" [routerLink]="accountService.getCurrLangUrl()">{{fixedTextHash['cancel'][currLan]}}</span>
+        </div>
+    </div>
+</div>
+
+

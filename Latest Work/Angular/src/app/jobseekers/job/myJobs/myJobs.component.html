@@ -1,0 +1,653 @@
+<job-menu [activeFlag]="'myjobs'"></job-menu>
+<div class="tab-content job-bloovo" [class.arabic] = "accountService.isArabic()">
+    <div role="tabpanel" class="tab-pane active load-data-js" id="my-jobs">
+        <div class="container">
+            <!--My Jobs-->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 my-job">
+
+                <div class="block filter-jobs bottom-gap">
+                    <div class="row block-title-2 padding-10 border-none">
+                        <div class="col-lg-6 col-sm-6 col-xs-12 arabic-right-left">
+                            <h2>{{fixedTextHash['my_jobs'][currLan]}}</h2></div>
+
+                    </div>
+                    <div class="row">
+                        <div class=" total-applications mobile-sp-remove">
+                            <div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 arabic-right-left">
+                                    <div class="cercle blue-light" *ngIf="(stats$ | async)?.total == 1">
+                                        <h3>{{(stats$ | async)?.total | number}}</h3>
+                                        <h6>{{fixedTextHash['application'][currLan]}}</h6>
+                                    </div>
+                                    <div class="cercle blue-light" *ngIf="(stats$ | async)?.total != 1">
+                                        <h3>{{(stats$ | async)?.total | number}}</h3>
+                                        <h6>{{fixedTextHash['applications'][currLan]}}</h6>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 arabic-right-left">
+                                    <div class="cercle blue">
+                                        <h3>{{(stats$ | async)?.in_progress | number}}</h3>
+                                        <h6>{{fixedTextHash['in_progress'][currLan]}}</h6>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 arabic-right-left">
+                                    <div class="cercle green">
+                                        <h3>{{(stats$ | async)?.successful | number}}</h3>
+                                        <h6>{{fixedTextHash['successful'][currLan]}}</h6>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 arabic-right-left">
+                                    <div class="cercle red">
+                                        <h3>{{(stats$ | async)?.unsuccessful | number}}</h3>
+                                        <h6>{{fixedTextHash['unsuccessful'][currLan]}}</h6>
+                                    </div>
+                                </div>
+                                <div class=" clr"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Application Tracking-->
+
+                    <div class="row margin-top-20">
+                        <div *ngIf="(jobs$ | async)?.length > 0" class="row tracking-title hidden-sm hidden-xs">
+                            <div class="application-detail-t-myjob arabic-right-left"><span
+                                    class="navy-dark">{{fixedTextHash['application_details'][currLan]}}</span>
+                            </div>
+                            <div class="application-tracking-t-myjob arabic-right-left"><span
+                                    class="navy-dark">{{fixedTextHash['application_tracking'][currLan]}}</span>
+                            </div>
+                            <div class="application-status-t-myjob arabic-right-left"><span
+                                    class="navy-dark">{{fixedTextHash['status'][currLan]}}</span></div>
+                        </div>
+
+
+                        <div class="row empty-min2">
+                            <div class="spinner-look" *ngIf="(displaySpinner$ | async)">
+                                <spinner [visible]="(displaySpinner$ | async)"></spinner>
+                            </div>
+
+                            <div *ngIf="(jobs$ | async)?.length ==0" class="row empty-min2">
+
+                                <div class="empty-prf ">
+                                    <i class="icon-empty-saved-serch"></i>
+                                    <h5>{{fixedTextHash['no_applied_jobs_msg'][currLan]}}</h5>
+                                </div>
+
+                            </div>
+                            <div *ngFor="let selJob of (jobs$ | async),let jobcount = index" class="row myjob-border">
+                                <div class="row arabic-min-height-140">
+
+                                    <!-- desktop-listing -->
+                                    <div class="application-detail-t-myjob-list featured-box mob-bdr1 hidden-xs arabic-right-left">
+
+                                       
+
+                                        <div class="feturd-compny-dtls">
+                                            <div class="txt-white">
+                                                <a class="cursor_pointer1"
+                                                   [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/'+accountService.getSpaceToDashLowerCase(selJob.countryCountry)+'/jobs/'
+                                         +accountService.getSpaceToDashLowerCase(selJob.city)+'/'+accountService.getSpaceToDashLowerCase(selJob.sector)+'/'+accountService.getSpaceToDashLowerCase(selJob.title)+'-'+selJob.id]"
+                                                >{{selJob.title}}</a>
+                                            </div>
+                                            <div class="cmpny-txt bold">
+                                              <strong *ngIf="selJob?.branch?.name" class="navy-dark">{{selJob?.branch?.name}}</strong>
+                                              <strong *ngIf="!selJob?.branch?.name" class="navy-dark">{{selJob.companyObj.name}}</strong>
+                                            </div>
+                                            <div class="cmpny-txt">{{selJob.city}}{{fixedTextHash['comma'][currLan]}} {{selJob.countryCountry}}
+                                            </div>
+                                            <div class="cmpny-txt" *ngIf= "currLan == 'en'">{{selJob.sector}}&nbsp;{{fixedTextHash['sector_word_in_job_list'][currLan]}}</div>
+                                            <div class="cmpny-txt" *ngIf= "currLan == 'ar'">{{fixedTextHash['sector_word_in_job_list'][currLan]}}&nbsp;{{selJob.sector}}</div>
+
+                                            <div class="cmpny-txt">{{ accountService.getFormattedDate(selJob.appliedDate, 'MMM DD, YYYY') }}
+                                            </div>
+                                        </div>
+
+                                        <div class=" clearfix"></div>
+                                    </div>
+
+
+                                    <!-- mobile-lisiting -->
+                                    <div class="hidden-lg hidden-md hidden-sm">
+                                        <div class="job_mobile">
+                                            <!-- company logo -->
+                                            <div class="company_logo">
+                                          
+                                            </div>
+
+                                            <!-- Job title and company name -->
+                                            <div class="job_details">
+                                                <a class="cursor_pointer1"
+                                                   [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/'+accountService.getSpaceToDashLowerCase(selJob.countryCountry)+'/jobs/'
+                                         +accountService.getSpaceToDashLowerCase(selJob.city)+'/'+accountService.getSpaceToDashLowerCase(selJob.sector)+'/'+accountService.getSpaceToDashLowerCase(selJob.title)+'-'+selJob.id]"
+                                                >
+                                                    <div class="txt-white">{{selJob.title}}</div>
+                                                    <div class="cmpny-txt bold">{{selJob.companyObj.name}}</div>
+                                                </a>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-12">
+                                            <a class="cursor_pointer1"
+                                               [routerLink]="[accountService.getCurrLangUrl()+accountService.getPath()+'/'+accountService.getSpaceToDashLowerCase(selJob.countryCountry)+'/jobs/'
+                                         +accountService.getSpaceToDashLowerCase(selJob.city)+'/'+accountService.getSpaceToDashLowerCase(selJob.sector)+'/'+accountService.getSpaceToDashLowerCase(selJob.title)+'-'+selJob.id]"
+
+                                            >
+                                                <div class="row job_mobile-bottom my-job-mobile">
+                                                    <div class="row">
+                                                        <div class="feturd-compny-dtls">
+                                                            <div class="cmpny-txt"><span>{{selJob.city}}{{fixedTextHash['comma'][currLan]}}  {{selJob.countryCountry}}</span>
+                                                            </div>
+                                                            <div class="cmpny-txt"><span>{{selJob.sector}}</span>
+                                                            </div>
+                                                            <div class="cmpny-txt"><span>{{accountService.getFormattedDate(selJob.appliedDate, 'MMM DD, YYYY')}}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!-- ***** -->
+
+
+                                    <div class="application-tracking-t-myjob-icons arabic-right-left">
+                                        <div class="tracking">
+                                            <div class="success">
+                                                <div class="track">
+                                                    <div class="sml-icn"><i class="zmdi zmdi-check-circle"></i></div>
+                                                    <div class="big-icn"><i class="icon-applied"></i></div>
+                                                    <div class="light app-light"
+                                                         style="left:-3px;">{{fixedTextHash['applied'][currLan]}}</div>
+                                                </div>
+                                            </div>
+
+
+                                            <div *ngIf="selJob.trackingId >= 1" class="success">
+                                                <div class="track">
+                                                    <div class="line"></div>
+                                                </div>
+                                                <div class="track">
+                                                    <div class="sml-icn"><i class="zmdi zmdi-check-circle"></i></div>
+                                                    <div class="big-icn"><i class="icon-reviewed"></i></div>
+                                                    <div class="light"> {{fixedTextHash['reviewed'][currLan]}}</div>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="selJob.trackingId < 1" class="un-success">
+                                                <div class="track">
+                                                    <div class="line"></div>
+                                                </div>
+                                                <div class="track">
+                                                    <div class="big-icn"><i class="icon-reviewed"></i></div>
+                                                    <div class="light ">{{fixedTextHash['reviewed'][currLan]}}</div>
+                                                </div>
+                                            </div>
+
+
+                                            <div *ngIf="selJob.trackingId >= 2" class="success">
+                                                <div class="track">
+                                                    <div class="line"></div>
+                                                </div>
+                                                <div class="track">
+                                                    <div class="sml-icn"><i class="zmdi zmdi-check-circle"></i></div>
+                                                    <div class="big-icn"><i class="icon-short"></i></div>
+                                                    <div class="light">{{fixedTextHash['shortlisted'][currLan]}}</div>
+                                                </div>
+                                            </div>
+
+                                            <div *ngIf="selJob.trackingId < 2" class="un-success">
+                                                <div class="track">
+                                                    <div class="line"></div>
+                                                </div>
+                                                <div class="track">
+                                                    <div class="big-icn"><i class="icon-short"></i></div>
+                                                    <div class="light">{{fixedTextHash['shortlisted'][currLan]}}</div>
+                                                </div>
+                                            </div>
+
+
+                                            <div *ngIf="selJob.trackingId >= 3" class="success">
+                                                <div class="track">
+                                                    <div class="line"></div>
+                                                </div>
+                                                <div class="track">
+                                                    <div class="sml-icn"><i class="zmdi zmdi-check-circle"></i></div>
+                                                    <div class="big-icn"><i class="icon-interview "></i></div>
+                                                    <div class="light app-interview">{{fixedTextHash['interview'][currLan]}}</div>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="selJob.trackingId < 3" class="un-success">
+                                                <div class="track">
+                                                    <div class="line"></div>
+                                                </div>
+                                                <div class="track">
+                                                    <div class="big-icn"><i class="icon-interview "></i></div>
+                                                    <div class="light app-interview">{{fixedTextHash['interview'][currLan]}}</div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                    <div class="application-status-t-myjob-action arabic-right-left">
+                                        <div *ngIf="selJob.statusId == 0" class="tracking-status">
+                                            <i class="zmdi zmdi-trending-up"></i>&nbsp;{{fixedTextHash['in_progress'][currLan]}}
+                                        </div>
+                                        <div *ngIf="selJob.statusId == 1" class="tracking-status">
+                                            <i class="zmdi zmdi-trending-up"></i>&nbsp;{{fixedTextHash['reviewed'][currLan]}}
+                                        </div>
+                                        <div *ngIf="selJob.statusId == 2" class="tracking-status">
+                                            <i class="zmdi zmdi-trending-up"></i>&nbsp;{{fixedTextHash['shortlisted'][currLan]}}
+                                        </div>
+                                        <div *ngIf="selJob.statusId == 3" class="tracking-status-interview">
+                                            <i class="zmdi zmdi-trending-up"></i>&nbsp;{{fixedTextHash['interview'][currLan]}}
+                                        </div>
+                                        <div *ngIf="selJob.statusId == 5" class="tracking-status un-successful">
+                                            <i class="zmdi zmdi-close-circle"></i>&nbsp;{{fixedTextHash['unsuccessful'][currLan]}}
+                                        </div>
+
+                                        <div *ngIf="selJob.statusId == 4" class="successful">
+                                            <i class="zmdi zmdi-check-circle"></i>&nbsp;{{fixedTextHash['successful'][currLan]}}
+                                            <a *ngIf="selJob.offerLetter" target="_blank" href="{{selJob.offerLetter}}">
+                                            <span class="attach hide-feedback">
+                                                <i class="zmdi zmdi-attachment-alt"></i>
+                                            </span>
+                                            </a>
+                                        </div>
+
+                                        <div *ngIf="selJob.interviewDate || selJob.employersFeedbackList.length >0"
+                                             class="feedback-btn"
+                                             id="feedback-applied-click" (click)="showFeedback(jobcount)">
+                                            {{fixedTextHash['employers_feedback'][currLan]}}
+                                            <span class="hide-    feedback"><i
+                                                    class="zmdi zmdi-chevron-down"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+<!--                                Feedback For Non Interview View-->
+
+                                <div *ngIf="selJob.statusId < 3 || selJob.statusId == 4 || selJob.statusId == 5"
+                                     class="row block-contant feedback-open"
+                                     [style.display]="selJob.showFeedbackFlag?'block':'none'">
+                                    <div class="row">
+                                        <div class="pull-right" id="feedback-applied-close"
+                                             (click)="hideFeedback(jobcount)">
+                                            <h5 class="zmdi zmdi-close-circle"></h5>
+                                        </div>
+                                        <div class="feed-b">
+                                            <h4>{{fixedTextHash['employer_feedback'][currLan]}}</h4>
+                                            <div *ngIf="selJob.employersFeedbackList.length >0" class="feedback-scroll">
+                                                <div *ngFor="let selFeedBack of selJob.employersFeedbackList,let feebackIndex = index"
+                                                     class="row feedback-box">
+
+
+                                                    <!--Reviewed-->
+                                                    <div *ngIf="selFeedBack?.comment && selFeedBack?.job_application_status?.id == 1"
+                                                         [innerHtml]="fixedTextHash['review_message'][currLan].
+                                                 replace('JTITLE',selJob.title).
+                                                 replace('RDATE', accountService.getFormattedDate(selFeedBack?.created_at, 'MMM DD, YYYY')).
+                                                 replace('CNAME',selJob.companyObj.name).replace('FEEDBACK',selFeedBack?.comment)">
+                                                    </div>
+
+                                                    <!--Reviewed No Comment-->
+                                                    <div *ngIf="!selFeedBack?.comment &&  selFeedBack?.job_application_status?.id == 1"
+                                                         [innerHtml]="fixedTextHash['review_message_no_comment'][currLan].
+                                                 replace('JTITLE',selJob.title).
+                                                 replace('RDATE', accountService.getFormattedDate(selFeedBack?.created_at, 'MMM DD, YYYY')).
+                                                 replace('CNAME',selJob.companyObj.name)">
+                                                    </div>
+
+
+                                                    <!--Shortlisted with Comment-->
+                                                    <div *ngIf="selFeedBack?.job_application_status?.id == 2 && selFeedBack?.comment"
+                                                         [innerHtml]="fixedTextHash['shortlist_message'][currLan].
+                                                 replace('JTITLE',selJob.title).
+                                                 replace('SDATE', accountService.getFormattedDate(selFeedBack?.created_at, 'MMM DD, YYYY')).
+                                                 replace('CNAME',selJob.companyObj.name).replace('FEEDBACK',selFeedBack?.comment)">
+                                                    </div>
+
+                                                    <!--Shortlisted with No Comments-->
+                                                    <div *ngIf="selFeedBack?.job_application_status?.id == 2 && !selFeedBack?.comment"
+                                                         [innerHtml]="fixedTextHash['shortlist_message_no_comment'][currLan].
+                                                 replace('JTITLE',selJob.title).
+                                                 replace('SDATE', accountService.getFormattedDate(selFeedBack?.created_at, 'MMM DD, YYYY')).
+                                                 replace('CNAME',selJob.companyObj.name).replace('FEEDBACK',selFeedBack?.comment)">
+                                                    </div>
+
+                                                    <!--Interview Accepted or Rejected -->
+                                                    <div *ngIf="selFeedBack?.job_application_status?.id == 3">
+                                                        <p *ngIf="selFeedBack?.interview_status == 'accept'"
+                                                        [innerHtml]="fixedTextHash['accepted_interview'][currLan]
+                                                        .replace('COMMENT', selFeedBack?.jobseeker_reply)">
+                                                        </p>
+                                                        <p *ngIf="selFeedBack?.interview_status == 'reject'"
+                                                           [innerHtml]="fixedTextHash['reject_interview'][currLan]
+                                                        .replace('COMMENT', selFeedBack?.jobseeker_reply)">
+                                                        </p>
+                                                    </div>
+                                                    <!--Successful Comment-->
+                                                    <div *ngIf="selFeedBack?.job_application_status?.id == 4"
+                                                         [innerHtml]="fixedTextHash['success_message'][currLan].
+                                                          replace('COMNAME',selJob?.companyObj?.name).
+                                                          replace('SDATE',  accountService.getFormattedDate(selFeedBack?.created_at, 'MMM DD, YYYY')).
+                                                          replace('FEEDBACK',selFeedBack?.comment)">
+                                                    </div>
+                                                    <!--UnSuccessful Comment-->
+                                                    <div *ngIf="selFeedBack?.job_application_status?.id == 4"
+                                                         [innerHtml]="fixedTextHash['success_message_no_comment'][currLan].
+                                                          replace('COMNAME',selJob?.companyObj?.name).
+                                                          replace('SDATE',  accountService.getFormattedDate(selFeedBack?.created_at, 'MMM DD, YYYY')).
+                                                          replace('FEEDBACK',selFeedBack?.comment)">
+                                                    </div>
+                                                    <div *ngIf="selFeedBack?.job_application_status?.id == 4 && selJob?.employersFeedbackOfferLetter?.document" class="row featured-box margin-10-0 margin-top-10 arabic-right-left">
+                                                        <div class="offer-icon-small arabic-right-left"><i
+                                                                class="zmdi zmdi-file-text"></i></div>
+                                                        <div class="feturd-compny-dtls">
+                                                            <div class="navy-dark">{{fixedTextHash['offer_letter'][currLan]}}</div>
+                                                            <div class="block-title-2 padding-0">
+                                                                <a target="_blank"
+                                                                   href="{{selJob?.employersFeedbackOfferLetter?.document}}"
+                                                                   download>
+                                                                    <button class="interview-download-bt"> {{fixedTextHash['download'][currLan]}} </button>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class=" clearfix"></div>
+                                                    </div>
+
+
+                                                    <!--UnSuccessful Comment-->
+                                                    <div *ngIf="selFeedBack?.job_application_status?.id == 5 && selFeedBack?.comment"
+                                                         [innerHtml]="fixedTextHash['success_message'][currLan].
+                                                          replace('COMNAME',selJob.companyObj.name).
+                                                          replace('RDATE',accountService.getFormattedDate(selFeedBack?.created_at, 'MMM DD, YYYY')).
+                                                          replace('FEEDBACK',selFeedBack?.comment)">
+                                                    </div>
+
+                                                    <!--UnSuccessful No Comment-->
+                                                    <div *ngIf="selFeedBack?.job_application_status?.id == 5 && !selFeedBack?.comment"
+                                                         [innerHtml]="fixedTextHash['success_message_no_comment'][currLan].
+                                                          replace('COMNAME',selJob.companyObj.name).
+                                                          replace('RDATE',accountService.getFormattedDate(selFeedBack?.created_at, 'MMM DD, YYYY')).
+                                                          replace('FEEDBACK',selFeedBack?.comment)">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+<!--                                Feedback For Interview View-->
+                                <div *ngIf="selJob.statusId == 3" class="row block-contant feedback-open"
+                                     [style.display]="selJob.showFeedbackFlag?'block':'none'">
+                                    <div class="row">
+
+                                        <div *ngIf="successPost" class="comen-alert alert-dismissible" role="alert">
+                                            {{fixedTextHash['interview_response_success'][currLan]}}
+                                        </div>
+                                        <div *ngIf="failedPost" class="alert alert-danger alert-dismissible"
+                                             role="alert">
+                                            {{fixedTextHash['interview_response_error'][currLan]}}
+                                        </div>
+
+                                        <div class="pull-left arabic-right-left">
+                                            <h4>{{fixedTextHash['interview_call'][currLan]}}</h4></div>
+                                        <div class="pull-right" id="feedback-interview-close"
+                                             (click)="hideFeedback(jobcount)">
+                                            <h5 class="zmdi zmdi-close-circle"></h5>
+                                        </div>
+                                        <div class=" clearfix"></div>
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6">
+                                                <div class="interview">
+                                                    <span class="navy"><i class="zmdi zmdi-calendar-alt"></i></span>
+                                                    <span class="light">{{fixedTextHash['interview_date'][currLan]}}</span>
+                                                    <span class="navy">:&nbsp;{{ accountService.getFormattedDate(timeCorrection(selJob.employersFeedbackInterview?.appointment, selJob.employersFeedbackInterview?.time_zone), 'MMM DD, YYYY')}}</span>
+
+                                                </div>
+
+                                                <div class="interview">
+                                                    <span class="navy"><i class="zmdi zmdi-time"></i></span>
+                                                    <span class="light">{{fixedTextHash['interview_time'][currLan]}}</span>
+                                                    <div class="arabic-interview-time">
+                                                    {{interviewTimeList[jobcount]}}
+                                                    ({{selJob.employersFeedbackInterview?.time_zone}}) -
+                                                    {{timeCorrection(selJob.employersFeedbackInterview?.appointment, selJob.employersFeedbackInterview?.time_zone) | date:'h:mm a'}}
+                                                    ({{browserTimeZone}})
+                                                    </div>
+<!--                                                       <span class="navy arabic-phoneno"-->
+<!--                                                             *ngIf="currLan == 'en'">:{{interviewTimeList[jobcount]}}-->
+<!--                                                           ({{selJob.employersFeedbackInterview?.time_zone}})</span>-->
+<!--                                                        <span class="navy arabic-phoneno"-->
+<!--                                                              *ngIf="currLan == 'ar'">  {{selJob.employersFeedbackInterview?.time_zone}} {{interviewTimeList[jobcount]}}</span>-->
+<!--                                                        <span class="navy arabic-phoneno"-->
+<!--                                                              *ngIf="currLan == 'en'">: {{timeCorrection(selJob.employersFeedbackInterview?.appointment, selJob.employersFeedbackInterview?.time_zone) | date:'h:mm a'}}-->
+<!--                                                            ({{browserTimeZone}})</span>-->
+<!--                                                        <span class="navy arabic-phoneno"-->
+<!--                                                              *ngIf="currLan == 'ar'">: {{timeCorrection(selJob.employersFeedbackInterview?.appointment, selJob.employersFeedbackInterview?.time_zone) | date:'h:mm a'}}-->
+<!--                                                            ({{browserTimeZone}})</span>-->
+
+
+
+                                                </div>
+                                                <div class="interview">
+                                                    <span class="navy"><i class="zmdi zmdi-phone"></i></span>
+                                                    <span class="light">{{fixedTextHash['interview_venue'][currLan]}}</span>
+                                                    <span class="navy"
+                                                          *ngIf="selJob.employersFeedbackInterview?.channel == 'Call'">:&nbsp;{{fixedTextHash['online_interview'][currLan]}}</span>
+                                                    <span class="navy"
+                                                          *ngIf="selJob.employersFeedbackInterview?.channel == 'Physical'">:&nbsp;{{ selJob.employersFeedbackInterview?.comment}}</span>
+                                                </div>
+
+
+                                                <div class="navy margin-top-5 bold">{{fixedTextHash['employer_comment'][currLan]}}</div>
+                                                <div class="interview feed-back margin-6">
+                                                    <span>{{selJob.employersFeedbackList[selJob.employersFeedbackList.length - 1]?.comment}}</span>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-lg-6 col-md-6">
+                                                <div class="jobseeker_feedback_box">
+                                                    <h4>{{fixedTextHash['employer_comment'][currLan]}}</h4>
+                                                    <div class="interviw-scroll interview-sec-height">
+                                                        <ng-container
+                                                                *ngFor="let selFeedBack of selJob.employersFeedbackList,let feebackIndex = index">
+
+                                                            <!--Reviewed-->
+                                                            <div class="row feedback-box"
+                                                                 *ngIf="selFeedBack?.job_application_status?.id == 1"
+                                                                 [innerHtml]="fixedTextHash['review_message'][currLan].
+                                                          replace('JTITLE', selJob.title).
+                                                          replace('RDATE',  accountService.getFormattedDate(selFeedBack?.created_at, 'MMM DD, YYYY')).
+                                                          replace('CNAME', selJob.companyObj.name).replace('FEEDBACK',selFeedBack?.comment)">
+                                                            </div>
+
+                                                            <!--Reviewed No Comment-->
+                                                            <div class="row feedback-box"
+                                                                 *ngIf="selFeedBack?.job_application_status?.id == 1"
+                                                                 [innerHtml]="fixedTextHash['review_message_no_comment'][currLan].
+                                                          replace('JTITLE', selJob.title).
+                                                          replace('RDATE',  accountService.getFormattedDate(selFeedBack?.created_at, 'MMM DD, YYYY')).
+                                                          replace('CNAME', selJob.companyObj.name).replace('FEEDBACK',selFeedBack?.comment)">
+                                                            </div>
+
+
+                                                            <!--Shortlisted-->
+                                                            <div class="row feedback-box"
+                                                                 *ngIf="selFeedBack?.job_application_status?.id == 2 && selFeedBack?.comment"
+                                                                 [innerHtml]="fixedTextHash['shortlist_message'][currLan].
+                                                          replace('JTITLE',selJob.title).
+                                                          replace('SDATE',accountService.getFormattedDate(selFeedBack?.created_at, 'MMM DD, YYYY')).
+                                                          replace('CNAME',selJob.companyObj.name).replace('FEEDBACK',selFeedBack?.comment)">
+                                                            </div>
+
+                                                            <!--Shortlisted No Comments-->
+                                                            <div class="row feedback-box"
+                                                                 *ngIf="selFeedBack?.job_application_status?.id == 2 && !selFeedBack?.comment"
+                                                                 [innerHtml]="fixedTextHash['shortlist_message_no_comment'][currLan].
+                                                          replace('JTITLE',selJob.title).
+                                                          replace('SDATE',accountService.getFormattedDate(selFeedBack?.created_at, 'MMM DD, YYYY')).
+                                                          replace('CNAME',selJob.companyObj.name)">
+                                                            </div>
+
+
+                                                            <!--Interviewed-->
+                                                            <div class="row feedback-box"
+                                                                 *ngIf="selFeedBack?.job_application_status?.id == 3">
+
+                                                            <p *ngIf="selFeedBack?.channel == 'Physical'"
+                                                               [innerHtml]="fixedTextHash['interview_message_physical'][currLan]
+                                                               .replace('TIMEZONE',  browserTimeZone)
+                                                               .replace('CREATDATE', accountService.getFormattedDate(selFeedBack?.created_at, 'MMM DD, YYYY', currLan))
+                                                               .replace('INTVIEWEE', selFeedBack?.interviewee)
+                                                               .replace('DTTIME', accountService.getFormattedDate(timeCorrection(selFeedBack?.appointment, selFeedBack?.time_zone), 'MMM DD, YYYY h:mm a', currLan))
+                                                               .replace('LOCATION', selFeedBack?.interview_comment)
+                                                               .replace('COMPNAME', selJob.companyObj.name)">
+
+                                                            </p>
+
+                                                            <p *ngIf="selFeedBack?.channel == 'Call'"
+                                                               [innerHtml]="fixedTextHash['interview_message_online'][currLan]
+                                                               .replace('TIMEZONE', browserTimeZone)
+                                                               .replace('CREATDATE', accountService.getFormattedDate(selFeedBack?.created_at, 'MMM DD, YYYY', currLan))
+                                                               .replace('INTVIEWEE', selFeedBack?.interviewee)
+                                                               .replace('DTTIME', accountService.getFormattedDate(timeCorrection(selFeedBack?.appointment, selFeedBack?.time_zone), 'MMM DD, YYYY h:mm a', currLan))
+                                                               .replace('COMPNAME', selJob.companyObj.name)">
+                                                            </p>
+
+                                                            </div>
+
+                                                            <!--Accepted interview-->
+                                                            <div *ngIf="selFeedBack?.interview_status == 'accept'"
+                                                                 class="row feedback-box success-feed">
+                                                                <p>{{fixedTextHash['you_accept_interview'][currLan]}}
+                                                                    <ng-container *ngIf="selFeedBack?.jobseeker_reply">
+                                                                        {{fixedTextHash['with_comment'][currLan]}} "{{selFeedBack?.jobseeker_reply}}
+                                                                        "
+                                                                    </ng-container>
+                                                                </p>
+                                                            </div>
+                                                            <!--Rejected interview-->
+                                                            <div *ngIf="selFeedBack?.interview_status == 'reject'"
+                                                                 class="row feedback-box reject-feed">
+                                                                <p [innerHtml]="fixedTextHash['reject_interview'][currLan].replace('COMMENT', selFeedBack?.jobseeker_reply)">
+                                                                </p>
+                                                            </div>
+
+                                                        </ng-container>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div [class.hidden]="postDone"
+                                             [class.hidden]="selJob.employersInterviewComment?.status != 'invite'"
+                                             class="row block-title-2 padding-0 margin-top-5">
+                                            <a [class.hidden]="!activateButton" data-toggle="modal"
+                                               [attr.data-target]="'.acceptInterview'+selJob.id">
+                                                <button>{{fixedTextHash['accept_interview_call'][currLan]}}
+                                                </button>
+                                            </a>
+                                            <button [class.hidden]="activateButton">{{fixedTextHash['accept_interview_call'][currLan]}}
+                                            </button>
+                                            <span class="cancel padding-0">
+                                       <a data-toggle="modal" [attr.data-target]="'.rejectInterview'+selJob.id"> <button><div [innerHtml]="fixedTextHash['reject_interview_call'][currLan]"></div></button></a>
+                                        </span>
+                                        </div>
+
+                                        <div [class.hidden]="!postDone"
+                                             [class.hidden]="selJob.employersInterviewComment?.status == 'invite'"
+                                             class="row block-title-2 padding-0 margin-top-10">
+
+                                            <button class="disabled_button"><i
+                                                    class="zmdi zmdi-phone"></i>&nbsp;{{fixedTextHash['accept_interview_call'][currLan]}}
+                                            </button>
+
+                                            <span class="padding-0">
+                                     <button class="disabled_button"><div [innerHtml]="fixedTextHash['reject_interview_call'][currLan]"></div></button>
+                                        </span>
+                                        </div>
+
+                                        <div class="popup">
+                                            <div class="logout-pop">
+                                                <div class="modal close_popup acceptInterview{{selJob.id}}"
+                                                     tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                                                    <div class="modal-dialog modal-md">
+                                                        <div class="modal-content">
+                                                            <div class="modal-body">
+                                                                <button class="close following" aria-hidden="true"
+                                                                        data-dismiss="modal" type="button"
+                                                                        (click)="formReply.reset()">×
+                                                                </button>
+                                                                <h2>{{fixedTextHash['accept_call'][currLan]}}</h2>
+                                                                <h4><span
+                                                                        class="navy"> {{fixedTextHash['accept_interview_msg'][currLan]}}</span>
+                                                                </h4>
+                                                                <div class="pop-button">
+                                                                    <button type="button" class="btn postive"
+                                                                            (click)="acceptInterview(selJob.jobAppId,selJob.employersFeedbackInterview.id,selJob.employersFeedbackInterview.channel)">{{fixedTextHash['yes'][currLan]}}</button>
+                                                                    <button type="button" class="btn negative"
+                                                                            data-dismiss="modal"
+                                                                            (click)="formReply.reset()">{{fixedTextHash['no'][currLan]}}</button>
+                                                                    <div class="clr"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="popup">
+                                            <div class="logout-pop">
+                                                <div class="modal close_popup rejectInterview{{selJob.id}}"
+                                                     tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                                                    <div class="modal-dialog modal-md">
+                                                        <div class="modal-content">
+                                                            <div class="modal-body">
+                                                                <button class="close following" aria-hidden="true"
+                                                                        data-dismiss="modal" type="button">×
+                                                                </button>
+                                                                <h2>{{fixedTextHash['reject_call'][currLan]}}</h2>
+                                                                <h4><span
+                                                                        class="navy"> {{fixedTextHash['reject_interview_msg'][currLan]}}</span>
+                                                                </h4>
+                                                                <form [formGroup]="formReply">
+                                                          <textarea formControlName="reply"
+                                                                    [attr.placeholder]="fixedTextHash['reason_reject_interview'][currLan]"
+                                                                    [class.alert-danger]="(formReply.controls['reply'].touched  )&& !formReply.controls['reply'].valid"
+                                                                    class="interview-comment-area reason-reject"></textarea>
+                                                                </form>
+                                                                <div class="pop-button">
+                                                                    <button type="button" class="btn postive"
+                                                                            (click)="rejectInterview(selJob.jobAppId,selJob.employersFeedbackInterview.id)">{{fixedTextHash['yes'][currLan]}}</button>
+                                                                    <button type="button" class="btn negative"
+                                                                            data-dismiss="modal"
+                                                                            (click)="formReply.reset()">{{fixedTextHash['no'][currLan]}}</button>
+                                                                    <div class="clr"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="margin-top-10">
+                        <pagination-new [url]="'/'+accountService.getPath()+'/jobs/my-jobs'"
+                                        [totalRecords]="totalRecords$">
+                        </pagination-new>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

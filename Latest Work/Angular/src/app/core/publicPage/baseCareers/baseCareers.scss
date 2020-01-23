@@ -1,0 +1,622 @@
+@import '../../../../styles/sass/base/_variables.scss';
+
+h1, h2, h3, h4, h5, span, label, a, button, p{
+  font-family: $primary-Fonts;
+}
+
+.arabic{
+    h1, h2, h3, h4, h5, span, label, a, button, p, input{
+    font-family: $arabic-primary-Fonts!important;
+  }
+}
+
+button:focus {
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+li:focus {
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+
+
+// ats-alnding-header
+// <!-- ================================= -->
+.banner-content-ats{
+    width: 100%;
+    height: 663px;
+    background: $secondarycolor;
+    position: relative;
+}
+
+
+.banner-content-ats{
+    width: 100%;
+    height: 666px;
+    background-image: url(../../../../assets/images/custom-images/ATS/Banner.jpg);
+    background-size: cover;
+    h1{
+        font-size: 45px;
+        color: #000;
+        display: block;
+        text-align: center;
+        padding-top: 150px;
+    }
+    p{
+        font-size: 16px;
+        display: block;
+        padding-top: 35px;
+        text-align: center;
+        color: $secondarycolor;
+        width: 70%;
+        margin:0px auto;
+    }
+    button{
+        margin:30px auto;
+        height: 50px;
+        border:none;
+        display: block;
+        background: $primarycolor;
+        color: $white;
+        width: 235px;
+        font-size: 16px;
+        font-weight: 600;
+        &:hover{
+            background: $secondarycolor;
+        }
+    }
+}
+
+
+
+// valuats
+// <!-- ================================= -->
+.valuats{
+    display: block;
+    width: 100%;
+    position: relative;
+    margin-top: -65px;
+    .value{
+        width: 50%;
+        float: left;
+        height: 220px;
+        background-color: $primarycolor;
+        padding: 30px;
+        color: $white;
+        h2{
+            font-size: 25px;
+            display: block;
+        }
+        p{
+            font-size: 16px;
+            line-height: 24px;
+            display: block;
+            width: 100%;
+            padding-top: 30px;
+        }
+        a{
+            display: block;
+            color: $white;
+            font-size: 18px;
+            padding-top: 20px;
+        }
+    }
+    .hr{
+        float: left;
+        width: 50%;
+        height: 220px;
+        background-color: #00724B;
+        padding: 30px;
+        color: $white;
+        h2{
+            font-size: 25px;
+            display: block;
+        }
+        p{
+            font-size: 16px;
+            line-height: 24px;
+            display: block;
+            width: 100%;
+            padding-top: 30px;
+        }
+        a{
+            display: block;
+            color: $white;
+            font-size: 18px;
+            padding-top: 20px;
+        }
+
+    }
+}
+
+// slider-ats
+// <!-- ================================= -->
+.slider-ats{
+    width: 100%;
+    height: auto;
+    float: left;
+    padding: 50px 0px;
+    h2{
+        font-size: 30px;
+        display: block;
+        padding-bottom: 50px;
+        text-align: center;
+        color: $secondarycolor;
+    }
+
+.MultiCarousel { float: left; overflow: hidden; padding: 15px; width: 100%; position:relative; }
+.MultiCarousel .MultiCarousel-inner { transition: 1s ease all; float: left; }
+.MultiCarousel .MultiCarousel-inner .item { float: left; margin: 0px 5px;
+    width: 179px!important;
+    height: 100px;
+    background: #fff;
+    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.16);
+    i{
+        display: block;
+        padding: 10px;
+        img{
+            width: 100%;
+            height: 80px;
+            object-fit: contain;
+        }
+    }
+}
+.MultiCarousel .MultiCarousel-inner .item > div {}
+.MultiCarousel .leftLst, .MultiCarousel .rightLst { position:absolute; border-radius:160px;top:calc(50% - 20px);    width: 35px;
+    height: 35px; }
+.MultiCarousel .leftLst { left:0; }
+.MultiCarousel .rightLst { right:0; }
+.MultiCarousel .leftLst.over, .MultiCarousel .rightLst.over { pointer-events: none; background:#ccc; }
+
+.btn-primary{
+    background: $primarycolor!important;
+    border:none;
+}
+}
+
+
+// alljobsAts
+// <!-- ================================= -->
+.inline{
+    display: inline-block;
+}
+.alljobsAts{
+    width: 100%;
+    height: auto;
+    background: #F4F6FB;
+    padding: 50px 0px;
+    float: left;
+    .atsCompany{
+        width: 100px;
+        height: 100px;
+        float: left;
+        background: $white;
+        margin-right: 10px;
+        border:1px solid $light-border;
+        img{
+            width: 100%!important;
+            height: 100px!important;
+            object-fit: contain;
+        }
+    }
+    h2{
+        font-size: 30px;
+        display: block;
+        padding-bottom: 50px;
+        text-align: center;
+    }
+    .listjobpostats{
+        width: 100%!important;
+        height: auto;
+        background: $white;
+        width: 1088px;
+        box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.08);
+        padding: 10px 5px;
+        float: left;
+        margin-bottom: 10px;
+        h3{
+            margin-top: 0px!important;
+            margin-bottom: 0px!important;
+            color: $primarycolor;
+            display: block;
+            padding-bottom: 5px;
+            font-size: 18px;
+            width: calc(100% - 110px);
+            float: left;
+        }
+        ul{
+            width: calc(100% - 110px);
+            float: left;
+            display: block;
+            margin:0;
+            li{
+                display: block;
+                font-size: 14px;
+                color: $secondarycolor;
+                span{
+                    color: $primarycolor;
+                }
+            }
+        }
+        button{
+            width: 160px;
+            height: $button-height;
+            background: $primarycolor;
+            color: $white;
+            text-align: center;
+            margin-top: 10px;
+            display: inline-block;
+            border:none;
+            font-weight: 600;
+            &:hover{
+                cursor: pointer;
+                opacity: 0.8;
+            }
+        }
+        .reverse-bt-ats{
+            background: $white;
+            color: $primarycolor;
+            border:1px solid $primarycolor;
+        }
+        .bx-ats-half{
+            padding: 20px;
+            width: 50%;
+            height: 120px;
+            float: left;
+            border-right: 1px solid $light-border;
+            text-align: center;
+            &:hover{
+                cursor: pointer;
+            }
+            i{
+                display: block;
+                width: 100px;
+                height: 100px;
+                background: $white;
+                border:5px solid #E1E1E1;
+                border-radius: 160px;
+                margin:0px auto;
+                line-height: 100px;
+                font-size: 30px;
+                color: $secondarycolor;
+
+            }
+            span{
+                color: $primarycolor;
+                display: block;
+                text-align: center;
+                font-size: 14px;
+                padding-top: 10px;
+                
+            }
+        }
+    }
+    a{
+        font-size: 20px;
+        color: $secondarycolor;
+        border:1px solid #e1e1e1;
+        padding: 15px 0px;
+        display: block;
+        text-align: center;
+        width: 200px;
+        margin:15px auto;
+    }
+}
+
+// videobgats
+// <!-- ================================= -->
+.videobgats{
+    width: 100%;
+    height: auto;
+    background: $white;
+    .colo-lg-6{
+        height: 520px;
+        background: $white;
+        overflow: hidden; 
+    }
+    .image{
+        background-image: url(../../../../assets/images/custom-images/ATS/video-bg.jpg);
+        background-size: cover;
+        height: 520px;
+    }
+    .text-video-ats{
+        padding: 30px 30px 30px 150px;
+        h2{
+            font-size: 25px;
+            color: $secondarycolor;
+            font-weight: 400;
+            padding-top: 50px;
+            padding-bottom: 30px;
+        }
+        h3{
+            font-size: 45px;
+            font-weight: 700;
+            padding-bottom: 40px;
+            display: block;
+        }
+        button{
+            background: none;
+            font-size: 22px;
+            color: $secondarycolor;
+            border:none;
+            line-height: 60px;
+            i{
+                display: inline-block;
+                width: 60px;
+                height: 60px;
+                border-radius: 160px;
+                border:2px solid #333;
+                text-align: center;
+                float: left;
+                margin-right: 10px;
+                color: $primarycolor;
+                line-height: 60px;
+                font-size: 35px;
+            }
+            &:hover{
+                cursor: pointer;
+                opacity: 0.8;
+            }
+        }
+    }
+}
+
+// hiringprocessats
+// <!-- ================================= -->
+.hiringprocessats{
+    width: 100%;
+    height: auto;
+    background: $white;
+    padding: 50px 0px;
+    float: left;
+    h2{
+        font-size: 30px;
+        display: block;
+        padding-bottom: 50px;
+        text-align: center;
+    }
+    .box-pro-ats{
+        width: 215px;
+        height: 215px;
+        background: $secondarycolor;
+        padding: 20px;
+        margin: 0px auto;
+        position: relative;
+        margin-bottom: 50px;
+        h3{
+            display: block;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 70px;
+            height: 70px;
+            text-align: center;
+            color: $white;
+            font-size: 50px;
+            font-weight: 200;
+        }
+        i{
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+        span{
+            display: block;
+            font-size: 20px;
+            text-align: center;
+            padding-top: 25px;
+            color: $white;
+        }
+    }
+}
+
+
+// questions
+// <!-- ================================= -->
+.questions{
+    text-align: center;
+    padding: 50px 0px 50px 0px;
+    float: left;
+    width: 100%;
+    border-top: 1px solid #f1f1f1;
+    h2, i, p {
+        display: block;
+        text-align: center;
+    }
+    h2{
+        color: $primarycolor;
+        padding: 20px 0px;
+        font-size: 30px;
+    }
+    a{
+        color: $secondarycolor!important;
+        span{
+            display: block;
+            color: $primarycolor;
+        }
+        p{
+            font-size: 16px;
+        }
+    }
+    
+}
+
+// arabic
+// ===========================================
+.arabic{
+   .engli-logo{
+       display: none;
+   }
+   .arab-logo{
+        display: block; 
+    }
+    .ats-alnding-header  .ats-lan-action{
+        ul{
+            float: left;
+        }
+        li{
+            float: left;
+            border-right: 1px solid #000;
+            border-left: none;
+        }
+        
+    }
+    .searchats{
+        float: left!important;
+        i{
+            left: 0;
+            right: inherit!important;
+        }
+    }
+    .sub-hed-ats{
+        ul{
+            float: left;
+            li{
+                width: 100%;
+            }
+        }
+    }
+    .bx-ats-half{
+        border-right: none!important;
+        border-left: 1px solid $light-border;
+    }
+
+    .listjobpostats{
+        ul{
+            li{
+                span{
+                    text-align: right;
+                    float: left;
+                    display: inline-block;
+                    width: calc(100% - 25%);
+                }
+            }
+        }
+    }
+    .videobgats .text-video-ats button i{
+        float: right;
+        margin-right: 0px;
+        margin-left: 10px;
+    }
+    .atsCompany{
+        float: right;
+        margin-right: 0px;
+        margin-left: 10px;
+    }
+    .listjobpostats ul li span{
+        float: inherit;
+    }
+    .hiringprocessats .box-pro-ats h3{
+        right: 0px;
+        left: inherit;
+        top: -17px;
+    }
+}
+
+
+
+
+/* Respopnsive breakpoint */
+// ============bigScreen===========
+@media all and (max-width: 991px) {
+    .ats-alnding-header{
+        height: 103px;
+    }
+    .sub-hed-ats ul li a{
+        padding: 0px 4px;
+    }
+
+    
+    .valuats{
+        .value{
+            width: 100%;
+        }
+        .hr{
+            width: 100%;
+        }
+    }
+    .alljobsAts .listjobpostats .bx-ats-half{
+        height: auto;
+        margin-top: 15px;
+        border-top: 1px solid $light-border!important;
+    }
+}
+
+// ============MediumScreen========
+@media all and (max-width: 768px) {
+    .ats-alnding-header{
+        height: 103px;
+    }
+    .searchats{
+        width: 100%!important;
+    }
+    .sub-hed-ats ul li a{
+        padding: 0px 6px;
+    }
+    .sub-hed-ats{
+        height: auto;
+        ul{
+            float: left;
+            li{
+                display: block;
+                width: 100%;
+                a{
+                    width: 100%;
+                }
+            }
+        }
+    }
+    .banner-content-ats{
+        height: auto;
+        padding: 60px 0px;
+        h1{
+            padding-top: 0px;
+        }
+        p{
+            width: 90%;
+        }
+    }
+    .alljobsAts .listjobpostats .bx-ats-half{
+        height: auto;
+        margin-top: 15px;
+        border-top: 1px solid $light-border!important;
+    }
+    .videobgats .text-video-ats{
+        padding: 30px!important;
+    }
+    .videobgats .image{
+        height: 200px;
+    }
+    .valuats{
+        .value{
+            width: 100%;
+            height: auto;
+        }
+        .hr{
+            height: auto;
+        }
+    }
+}
+
+// ============SmallScreen=========
+@media all and (max-width: 480px) {
+    .ats-alnding-header{
+        height: auto;
+    }
+    .ats-lan-logo{
+        width: 100%!important;
+        height: auto!important;
+        position: static!important;
+    }
+    .ats-lan-action{
+        width: 100%!important;
+        height: auto!important;
+        padding-bottom: 10px;
+    }
+    .searchats{
+        width: 100%!important;
+    }
+}

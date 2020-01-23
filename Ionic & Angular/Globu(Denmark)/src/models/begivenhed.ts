@@ -1,0 +1,21 @@
+export interface Begivenhed {
+    key?: string,
+    titel?: string,
+    billedeAfbegivenhed?: string,
+    adresse?: string,
+    postnummer?: string,
+    by?: string,
+    kontaktPerson?: string,
+    kontaktTelefon?: string,
+    kontaktEmail?: string,
+    kategori?: string,
+    startDato?: string,
+    startTid?: string,
+    slutDato?: string,
+    slutTid?: string,
+    begivenhedGratis?: string,
+    pris?: number,
+    antalDeltagere?: number,
+    beskrivelse?: string,
+    flereBilleder?: string []
+}

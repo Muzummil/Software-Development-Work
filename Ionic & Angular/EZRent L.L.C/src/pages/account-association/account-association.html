@@ -1,0 +1,73 @@
+<ion-header class="animated fadeIn no-shadow">
+
+  <ion-navbar class="no-border" color="primary">
+    <ion-title>Account Association</ion-title>
+  </ion-navbar>
+  
+</ion-header>
+
+
+<ion-content padding>
+    <form #myForm="ngForm" *ngIf="associationPortion" [formGroup]="onAccountAssociationForm" (ngSubmit)="AccountAssociation()" class="list-form fields_dark">
+        <ion-item>
+            <ion-label fixed>
+              Account Title/Name?
+            </ion-label>
+            <ion-input col-12 type="text" formControlName="AccountName" placeholder="Jane Merchant"></ion-input>
+        </ion-item>
+          <p ion-text color="danger" class="has-error" *ngIf="onAccountAssociationForm.get('AccountName').hasError('required') && myForm.submitted">{{ appartmentMessage }}</p>    
+        <ion-item>
+          <ion-label fixed>
+            Account Number?
+          </ion-label>
+          <ion-input col-12 type="text" formControlName="AccountNumber" placeholder="123456789"></ion-input>
+        </ion-item>
+        <p ion-text color="danger" class="has-error" *ngIf="onAccountAssociationForm.get('AccountNumber').hasError('required') && myForm.submitted">{{ appartmentMessage }}</p>
+    
+        <ion-item>
+          <ion-label fixed>
+            Routing Number
+          </ion-label>
+          <ion-input col-12 type="number" formControlName="RoutingNumber" placeholder="22225255225"></ion-input>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label fixed>
+            Account Type
+          </ion-label>
+          <ion-select formControlName="AccountType"  placeholder="Account Type" col-5 multiple="false" cancelText="Cancel" okText="OK">
+            <ion-option value="checking">Checking</ion-option>
+            <ion-option value="savings">Savings</ion-option>
+          </ion-select>
+        </ion-item>
+        <button ion-button full type="submit">Associate</button>
+      </form>
+
+      <!-- <button ion-button full  (click)="skip()">Skip</button> -->
+      <button ion-button full *ngIf="finalRes" (click)="backToAssociation()">Back To Association</button>
+      <!-- <button ion-button full *ngIf="finalRes" (click)="skip()">Add Bank</button> -->
+      <button ion-button full color="primary" id="start" *ngIf="addBank && finalRes" (click)="script()">Add Bank</button>
+      <div *ngIf="addBank && finalRes" id="iavContainer"></div>
+
+      <!-- <script src="https://cdn.dwolla.com/1/dwolla.js"></script>
+      
+      <script type="text/javascript">
+        $('#start').click(function() {
+          var iavToken = 'vgpexUlMECjVuIQThYJ3AlJH20hXJXSURiQVDr2aEBpggxXXse';
+          dwolla.configure('sandbox');
+          dwolla.iav.start(iavToken, {
+          container: 'iavContainer',
+          stylesheets: [
+            'http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext',
+            'http://myapp.com/iav/someStylesheet.css'
+          ],
+          microDeposits: false,
+          fallbackToMicroDeposits: false
+        }, function(err, res) {
+          console.log('Error: ' + JSON.stringify(err) + ' -- Response: ' + JSON.stringify(res));
+        });
+        });
+        </script> -->
+        
+
+</ion-content>

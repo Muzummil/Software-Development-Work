@@ -1,0 +1,665 @@
+<div [class.arabic] = "accountService.isArabic()">
+<div class="main-tab load-data-js mobile-tab-top"></div>
+<!-- <emp-profile-topmenu [activeFlag]="'stats'"></emp-profile-topmenu> -->
+<div class="tab-content job-bloovo">
+  <!---------------------------  Companies edit details ---------------------------------->
+  <div role="tabpanel" class="tab-pane active">
+    <div  class="container margin-top-space basic-height">
+
+      <!-- Show More Key words -->
+      <!-- ================================================================== -->
+
+      <div *ngIf="showMoreKeywords" class="audience-v4">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="job-posted-v4">
+              <h2 class="border-none">{{fixedTextHash['top_keyboard_search_run'][currLan]}}</h2>
+              <div class="keyword-v4 full-height">
+                <spinner *ngIf=isLoadingAlgolia></spinner>
+                <ul *ngIf="!isLoadingAlgolia && !algoliaError">
+                  <ng-container *ngFor="let sel_search of candidateSearchList, let i = index">
+                    <li>
+                      <div class="graph-tx-v4">{{sel_search['name']}}</div>
+                      <div class="graph-v4">
+                        <strong>{{sel_search['percent'] | number:'1.0-1'}}%</strong>
+                        <div class="bar-run-v4">
+                          <span [style.width.%]="sel_search['percent'] | number:'1.0-1'" class="shade-{{(i+1 > 5 ? 5 : i+1)}}"></span>
+                        </div>
+                      </div>
+                    </li>
+                  </ng-container>
+                </ul>
+                <a *ngIf="!isLoadingAlgolia && !algoliaError" (click)="getCadidateSearchStats(5);showMoreKeywords=false;">{{fixedTextHash['less'][currLan]}}&nbsp;<i class="zmdi zmdi-chevron-right"></i></a>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Your Audience -->
+      <!-- ================================================================== -->
+      <div [style.display]="!showMoreKeywords? 'block' : 'none'"  class="audience-v4">
+        <div class="row">
+          <div class="col-xs-12">
+            <h2>{{fixedTextHash['applicants_geographical_analysis'][currLan]}}</h2>
+          </div>
+
+          <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12 arabic-right-left">
+            <div class="active-view-v4">
+              <div class="blue-box">
+                <h1>{{totalJobApplication | number:'1.0'}}</h1>
+                <span>{{fixedTextHash['applications'][currLan]}}</span>
+              </div>
+            </div>
+            <!-- Sessions by country -->
+            <div class="active-view-stats-v4">
+              <h3>{{fixedTextHash['applications_by_country'][currLan]}}</h3>
+              <div class="graph-views-v4">
+                <div class="countries-v4">
+                  <spinner [visible]="isLoadingC"></spinner>
+                  <span *ngIf="!isLoadingC &&
+                  (jobsStats$ | async)?.job_applications?.job_applications_by_country?.length == 0">
+                    <i class="icon-empty-nodata"></i>  <h5>No Data Available</h5>
+                  </span>
+                  <ul *ngIf="!isLoadingC">
+                    <ng-container *ngFor="let selVal of (jobsStats$ | async)?.job_applications?.job_applications_by_country,let selIndex =index">
+                      <li *ngIf="selIndex < 5">
+                      <div>
+                        {{selVal.name}}
+                        <div class="graph-v4">
+                          <span [style.width.%]="selVal.percentage"  class="shade-{{selIndex+1}}"></span>
+                          <i>{{selVal.percentage | number:'1.0-1'}}%</i>
+                        </div>
+                      </div>
+                      </li>
+                    </ng-container>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="visible-lg col-lg-5 col-md-5 col-sm-12 col-xs-12 map-v4-s arabic-right-left">
+            <spinner [visible]="isLoadingC"></spinner>
+            <div class="map-v4">
+              <div id="map_container" style="position: relative; width: 300px; margin: 0px auto; height: 200px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Job Posted -->
+      <!-- ================================================================== -->
+      <div *ngIf="!showMoreKeywords"  class="job-posted-v4">
+        <div class="row">
+          <div class="cols-xs-12 col-sm-12 col-md-8 col-lg-8 arabic-right-left">
+            <div class="row equal-v4">
+              <div class="col-lg-4 col-sm-12 col-xs-12 col-md-4 arabic-right-left">
+                <!-- Job Posted -->
+                <div class="whitebox-v4">
+                  <h2>{{(companyStats$ | async)?.jobs_graph?.counter_jobs_details?.total_jobs | number}}</h2>
+                  <span *ngIf="(companyStats$ | async)?.jobs_graph?.counter_jobs_details?.total_jobs == 1">{{fixedTextHash['job_posted'][currLan]}}</span>
+                  <span *ngIf="(companyStats$ | async)?.jobs_graph?.counter_jobs_details?.total_jobs != 1">{{fixedTextHash['jobs_posted'][currLan]}}</span>
+
+                </div>
+              </div>
+              <div class="col-lg-4 col-sm-12 col-xs-12 col-md-4 arabic-right-left">
+                <div class="equal-box live-v4">
+                  <h2>{{(companyStats$ | async)?.jobs_graph?.counter_jobs_details?.active_jobs | number}}</h2>
+                  <span *ngIf="(companyStats$ | async)?.jobs_graph?.counter_jobs_details?.active_jobs == 1">{{fixedTextHash['live_job'][currLan]}}</span>
+                  <span *ngIf="(companyStats$ | async)?.jobs_graph?.counter_jobs_details?.active_jobs != 1">{{fixedTextHash['live_jobs'][currLan]}}</span>
+                </div>
+                <div class="equal-box mg-v4-10 expired-v4">
+                  <h2>{{(companyStats$ | async)?.jobs_graph?.counter_jobs_details?.closed_jobs | number}}</h2>
+                  <span *ngIf="(companyStats$ | async)?.jobs_graph?.counter_jobs_details?.closed_jobs == 1">{{fixedTextHash['expired_job'][currLan]}}</span>
+                  <span *ngIf="(companyStats$ | async)?.jobs_graph?.counter_jobs_details?.closed_jobs != 1">{{fixedTextHash['expired_jobs'][currLan]}}</span>
+                </div>
+                <div class="equal-box delete-v4">
+                  <h2>{{(companyStats$ | async)?.jobs_graph?.counter_jobs_details?.deleted_jobs | number}}</h2>
+                  <span *ngIf="(companyStats$ | async)?.jobs_graph?.counter_jobs_details?.deleted_jobs == 1">{{fixedTextHash['deleted_job'][currLan]}}</span>
+                  <span *ngIf="(companyStats$ | async)?.jobs_graph?.counter_jobs_details?.deleted_jobs != 1">{{fixedTextHash['deleted_jobs'][currLan]}}</span>
+                </div>
+              </div>
+
+              <!-- Candidate Search Run -->
+              <div class="col-lg-4 col-sm-12 col-xs-12 col-md-4 arabic-right-left">
+                <div  class="whitebox-v4 candidate-search-v4">
+                  <spinner *ngIf=isLoadingAlgolia></spinner>
+                  <h2 *ngIf="!isLoadingAlgolia && !algoliaError" >{{ candidateSearchCount | number }}</h2>
+                  <h2 *ngIf="!isLoadingAlgolia && algoliaError" >NA</h2>
+                  <span>{{fixedTextHash['candidate_search_run'][currLan]}}</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Top Keyword searches Run -->
+          <div class="cols-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <div class="row keyword-row arabic-struct-fit-search">
+              <div class="col-lg-12 col-sm-12 col-xs-12">
+                <div class="keyword-v4">
+                  <!-- Keyword Search title -->
+                  <h3>{{fixedTextHash['top_keyboard_search_run'][currLan]}}</h3>
+                  <spinner *ngIf=isLoadingAlgolia></spinner>
+                  <ul *ngIf="!isLoadingAlgolia && !algoliaError">
+                    <ng-container *ngFor="let sel_search of candidateSearchList, let i = index">
+                      <li *ngIf="i < 5 && sel_search['name'] != ''" >
+                        <div class="graph-tx-v4">{{sel_search['name']}}</div>
+                        <div class="graph-v4">
+                          <strong>{{sel_search['percent'] | number:'1.0-1'}}%</strong>
+                          <div class="bar-run-v4">
+                            <span [style.width.%]="sel_search['percent'] | number:'1.0-1'" class="shade-{{i+1}}"></span>
+                          </div>
+                        </div>
+                      </li>
+                    </ng-container>
+                  </ul>
+                  <a *ngIf="!isLoadingAlgolia && !algoliaError && candidateSearchList?.length > 5" (click)="getCadidateSearchStats(20);showMoreKeywords=true">{{fixedTextHash['more'][currLan]}}&nbsp;<i class="zmdi zmdi-chevron-right"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- Number of Jobs Postings / Number ofJobs Applications -->
+      <!-- ================================================================== -->
+
+      <div *ngIf="!showMoreKeywords"  class="job-post-graph-v4">
+        <div class="row">
+          <div class="col-lg-12 ol-md-12 col-sm-12 col-xs-12 head-job-graph-v4">
+            <h2 (click)="jobChartType = 'monthly'; jobApplicationChartType='none'" [class.active]="jobChartType != 'none'">{{fixedTextHash['jobs_postings'][currLan]}}</h2>
+            <h2 (click)="jobApplicationChartType = 'monthly'; jobChartType='none'" [class.active]="jobApplicationChartType != 'none'">{{fixedTextHash['jobs_applications'][currLan]}}</h2>
+          </div>
+
+          <!-- Jobs Postings * this section i just hide you can remove the class hide then show when you click on the job posting tab-->
+          <div class="job-sec-graph-v4">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 arabic-right-left" *ngIf="jobChartType != 'none'">
+              <div *ngIf="isLoadingBars" class="min-bar-277 raph-job-v4" >
+                <i><spinner [visible]="isLoadingBars"></spinner></i>
+              </div>
+              <div  *ngIf="!isLoadingBars" class="raph-job-v4">
+                <div class="filter-v4">
+                  <h3>{{fixedTextHash['number_job_postings'][currLan]}}</h3>
+                  <div class="select-v4">
+                    <ul>
+                      <li>
+                        <a (click)="jobChartType = 'monthly'" [class.active]="jobChartType == 'monthly'">{{fixedTextHash['monthly'][currLan]}}</a>
+                      </li>
+                      <li>
+                        <a (click)="jobChartType = 'quarterly'" [class.active]="jobChartType == 'quarterly'">{{fixedTextHash['quarterly'][currLan]}}</a>
+                      </li>
+                      <li>
+                        <a (click)="jobChartType = 'yearly'" [class.active]="jobChartType == 'yearly'">{{fixedTextHash['yearly'][currLan]}}</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="graph-v4" *ngIf="jobChartType == 'monthly'">
+                  <ul>
+                    <li *ngFor="let selStat of jobStatsByMonth[1], let i =index">
+                      <strong [style.height.%]="selStat*75/maxCountJobsMonthly" class="shade-{{ 12 - selStat*10/maxCountJobsMonthly | number:'1.0-1'}}">
+                        <div class="count">{{(selStat) ? selStat : ''}}</div>
+                      </strong>
+                      <span>{{jobStatsByMonth[0][i]}}</span>
+
+                    </li>
+                  </ul>
+                </div>
+                <div class="graph-v4 quarterly" *ngIf="jobChartType == 'quarterly'">
+                  <ul>
+                    <li *ngFor="let selStat of jobStatsByQuarter[1], let i =index">
+                      <strong [style.height.%]="selStat*75/maxCountJobsQuarterly" class="shade-{{ 12 - selStat*10/maxCountJobsQuarterly | number:'1.0-1'}}">
+                        <div class="count">{{(selStat) ? selStat : ''}}</div>
+                      </strong>
+                      <span>Q{{jobStatsByQuarter[0][i]}}</span>
+
+                    </li>
+                  </ul>
+                </div>
+                <div class="graph-v4" *ngIf="jobChartType == 'yearly'">
+                  <ul>
+                    <li *ngFor="let selStat of jobStatsByYear[1], let i =index">
+                      <strong [style.height.%]="selStat*75/maxCountJobsYearly" class="shade-{{ 12 - selStat*10/maxCountJobsYearly | number:'1.0-1'}}">
+                        <div class="count">{{(selStat) ? selStat : ''}}</div>
+                      </strong>
+                      <span>{{jobStatsByYear[0][i]}}</span>
+
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" *ngIf="jobApplicationChartType != 'none'">
+
+              <!-- sort -->              
+              <div *ngIf="isLoadingBars" class="min-bar-277" >
+                <i><spinner [visible]="isLoadingBars"></spinner></i>
+              </div>
+              <div *ngIf="!isLoadingBars"  class="raph-job-v4 ">
+                <div class="filter-v4">
+                  <h3>{{fixedTextHash['number_job_postings'][currLan]}}</h3>
+                  <div class="select-v4">
+                    <ul>
+                      <li>
+                        <a (click)="jobApplicationChartType = 'monthly'" [class.active]="jobApplicationChartType == 'monthly'">{{fixedTextHash['monthly'][currLan]}}</a>
+                      </li>
+                      <li>
+                        <a (click)="jobApplicationChartType = 'quarterly'" [class.active]="jobApplicationChartType == 'quarterly'">{{fixedTextHash['quarterly'][currLan]}}</a>
+                      </li>
+                      <li>
+                        <a (click)="jobApplicationChartType = 'yearly'" [class.active]="jobApplicationChartType == 'yearly'">{{fixedTextHash['yearly'][currLan]}}</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                
+                <div class="graph-v4" *ngIf="jobApplicationChartType == 'monthly'">
+                  <ul>
+                    <li *ngFor="let selStat of jobApplicantStatsByMonth[1], let i =index">
+                      <strong [style.height.%]="selStat*75/maxCountJobApplicantsMonthly" class="shade-{{ 12 - selStat*10/maxCountJobApplicantsMonthly | number:'1.0-1'}}">
+                        <div  class="count">{{(selStat) ? selStat : ''}}</div>
+                      </strong>
+                      <span>{{jobApplicantStatsByMonth[0][i]}}</span>
+
+                    </li>
+                  </ul>
+                </div>
+                <div class="graph-v4 quarterly" *ngIf="jobApplicationChartType == 'quarterly'">
+                  <ul>
+                    <li *ngFor="let selStat of jobApplicantStatsByQuarter[1], let i =index">
+                      <strong [style.height.%]="selStat*75/maxCountJobApplicantsQuarterly" class="shade-{{ 12 - selStat*10/maxCountJobApplicantsQuarterly | number:'1.0-1'}}">
+                        <div class="count">{{(selStat) ? selStat : ''}}</div>
+                      </strong>
+                      <span>Q{{jobApplicantStatsByQuarter[0][i]}}</span>
+
+                    </li>
+                  </ul>
+                </div>
+                <div class="graph-v4" *ngIf="jobApplicationChartType == 'yearly'">
+                  <ul>
+                    <li *ngFor="let selStat of jobApplicantStatsByYear[1], let i =index">
+                      <strong [style.height.%]="selStat*75/maxCountJobApplicantsYearly" class="shade-{{ 12 - selStat*10/maxCountJobApplicantsYearly | number:'1.0-1'}}">
+                        <div class="count">{{(selStat) ? selStat : ''}}</div>
+                      </strong>
+                      <span>{{jobApplicantStatsByYear[0][i]}}</span>
+
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- Total Number of Job Views -->
+      <!-- ================================================================== -->
+      <div *ngIf="!showMoreKeywords"  class="job-count-v4">
+        <div class="row">
+          <div class="col-lg-3 col-sm-6 col-xs-6 col-md-3 arabic-right-left">
+            <div class="job-count-box-v4">
+              <h2>{{fixedTextHash['total_jobs_views'][currLan]}}</h2>
+              <span>{{totalJobViews | number:'1.0-1'}}</span>
+            </div>
+          </div>
+          <div class="col-lg-3 col-sm-6 col-xs-6 col-md-3 arabic-right-left">
+            <div class="job-count-box-v4">
+              <h2>{{fixedTextHash['total_number_jobs_applications'][currLan]}}</h2>
+              <span>{{totalJobApplication | number:'1.0'}}</span>
+            </div>
+          </div>
+          <div class="col-lg-3 col-sm-6 col-xs-12 col-md-3 arabic-right-left">
+            <div class="job-count-box-v4 dark-v4">
+              <h2>{{fixedTextHash['job_application_ratio'][currLan]}}</h2>
+              <span>{{(totalJobApplication*100)/totalJobViews | number:'1.0-1'}}%</span>
+            </div>
+          </div>
+          <div class="col-lg-3 col-sm-6 col-xs-12 col-md-3 arabic-right-left">
+            <div class="job-count-box-v4 dark-v4 view-post-v4">
+              <h2>{{fixedTextHash['avg_application_job'][currLan]}}</h2>
+              <span>{{totalJobApplication/(companyStats$ | async)?.jobs_graph?.counter_jobs_details?.total_jobs | number:'1.0-0'}}</span>
+            </div>
+            <div class="job-count-box-v4 dark-v4 view-post-v4 arabic-right-left">
+              <h2>{{fixedTextHash['avg_views_job'][currLan]}}</h2>
+              <span>{{totalJobViews/(companyStats$ | async)?.jobs_graph?.counter_jobs_details?.total_jobs | number:'1.0-0'}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- Application Received By Country and Sector -->
+      <!-- ================================================================== -->
+
+      <div *ngIf="!showMoreKeywords"  class="all-bar-stats-v4">
+        <div class="row">
+
+          <!-- Application Received By Country -->
+          <!-- =========================================================== -->
+
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left">
+            <div class="box-bra-graph-v4">
+              <h2>{{fixedTextHash['application_by_country'][currLan]}}</h2>
+              <div class="empty-prf " *ngIf="(jobsStats$ | async)?.job_applications?.job_applications_by_country?.length ==0 || isLoadingC">
+
+                <span *ngIf="!isLoadingC">  <i class="icon-empty-nodata"></i>  <h5>{{fixedTextHash['no_data_available'][currLan]}}</h5></span>
+                <spinner [visible]="isLoadingC"></spinner>
+
+              </div>
+              <div class="prograss-section">
+                <span *ngFor="let selVal of (jobsStats$ | async)?.job_applications?.job_applications_by_country,let selIndex =index">
+                    <div class="progress-bloovo" *ngIf="selIndex <= 5">
+                        <div class="prograss-title">
+                            <div class="prograss-txt pull-left arabic-right-left">{{selVal.name}}</div>
+                            <div class="prograss-txt pull-right arabic-left-right arabic-left-right percentage-color">{{selVal.percentage | number:'1.1-1'}}%</div>
+                            <div class=" clr"></div>
+                        </div>
+                        <div class="progress">
+                            <div aria-valuemax="100" aria-valuemin="0" class="progress-bar progress-bar-success shade-{{selIndex+1}}" data-percentage="0%" role="progressbar" [style.width.%]="selVal.percentage" ></div>
+                        </div>
+                    </div>
+                </span>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Application Received By Sector -->
+          <!-- =========================================================== -->
+
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left">
+            <div class="box-bra-graph-v4">
+              <h2>{{fixedTextHash['application_by_sector'][currLan]}}</h2>
+              <div class="empty-prf" *ngIf="(jobsStats$ | async)?.job_applications?.job_applications_by_sector?.length ==0 || isLoadingS">
+                                    <span *ngIf="!isLoadingS">  <i class="icon-empty-nodatasector"></i>
+                                        <h5>{{fixedTextHash['no_data_available'][currLan]}}</h5>
+                                    </span>
+                <spinner [visible]="isLoadingS"></spinner>
+              </div>
+              <div class="prograss-section">
+                <span *ngFor="let selVal of (jobsStats$ | async)?.job_applications?.job_applications_by_sector,let selSectorIndex = index ">
+                    <div class="progress-bloovo" *ngIf="selSectorIndex <= 5" >
+                        <div class="prograss-title">
+                            <div class="prograss-txt pull-left arabic-right-left">{{selVal?.name}}</div>
+                            <div class="prograss-txt pull-right arabic-left-right arabic-left-right percentage-color">{{selVal?.percentage | number:'1.1-1'}}%</div>
+                            <div class=" clr"></div>
+                        </div>
+                        <div class="progress" *ngIf="selSectorIndex <= 5" >
+                            <div aria-valuemax="100" aria-valuemin="0" class="progress-bar progress-bar-success shade-{{selSectorIndex+1}}" data-percentage="0%" role="progressbar" [style.width.%]="selVal.percentage" ></div>
+                        </div>
+                    </div>
+                </span>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Application Received By Nationality -->
+          <!-- =========================================================== -->
+
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left">
+            <div class="box-bra-graph-v4">
+              <h2>{{fixedTextHash['application_by_nationality'][currLan]}}</h2>
+              <div class="empty-prf" *ngIf="(jobsStats$ | async)?.job_applications?.job_applications_by_nationality?.length ==0 || isLoadingN">
+                <span *ngIf="!isLoadingN">  <i class="icon-empty-nodatasector"></i>
+                    <h5>{{fixedTextHash['no_data_available'][currLan]}}</h5>
+                </span>
+                <spinner [visible]="isLoadingN"></spinner>
+              </div>
+              <div class="prograss-section">
+                <span *ngFor="let selVal of (jobsStats$ | async)?.job_applications?.job_applications_by_nationality,let selIndex = index ">
+                  <div class="progress-bloovo" *ngIf="selIndex <= 5" >
+                      <div class="prograss-title">
+                          <div class="prograss-txt pull-left arabic-right-left">{{selVal?.name}}</div>
+                          <div class="prograss-txt pull-right arabic-left-right arabic-left-right percentage-color">{{selVal?.percentage | number:'1.1-1'}}%</div>
+                          <div class=" clr"></div>
+                      </div>
+                      <div class="progress" *ngIf="selIndex <= 5" >
+                          <div aria-valuemax="100" aria-valuemin="0" class="progress-bar progress-bar-success shade-{{selIndex+1}}" data-percentage="0%" role="progressbar" [style.width.%]="selVal.percentage" ></div>
+                      </div>
+                  </div>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Application Received By Age Group -->
+          <!-- =========================================================== -->
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left">
+            <div class="box-bra-graph-v4">
+              <h2>{{fixedTextHash['application_by_age_group'][currLan]}}</h2>
+              <div class="empty-prf" *ngIf="(jobsStats$ | async)?.job_applications?.job_applications_by_age_group?.length ==0 || isLoadingA">
+                <span *ngIf="!isLoadingA">  <i class="icon-empty-nodatasector"></i>
+                    <h5>{{fixedTextHash['no_data_available'][currLan]}}</h5>
+                </span>
+                <spinner [visible]="isLoadingA"></spinner>
+              </div>
+              <div class="prograss-section">
+                <span *ngFor="let selVal of (jobsStats$ | async)?.job_applications?.job_applications_by_age_group,let selIndex = index ">
+                  <div class="progress-bloovo" *ngIf="selIndex <= 5" >
+                      <div class="prograss-title">
+                          <div class="prograss-txt pull-left arabic-right-left">{{selVal?.name}}</div>
+                          <div class="prograss-txt pull-right arabic-left-right arabic-left-right percentage-color">{{selVal?.percentage | number:'1.1-1'}}%</div>
+                          <div class=" clr"></div>
+                      </div>
+                      <div class="progress" *ngIf="selIndex <= 5" >
+                          <div aria-valuemax="100" aria-valuemin="0" class="progress-bar progress-bar-success shade-{{selIndex+1}}" data-percentage="0%" role="progressbar" [style.width.%]="selVal.percentage" ></div>
+                      </div>
+                  </div>
+                </span>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Application Received Education -->
+          <!-- =========================================================== -->
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left">
+            <div class="box-bra-graph-v4">
+              <h2>{{fixedTextHash['application_by_education'][currLan]}}</h2>
+              <div class="empty-prf" *ngIf="(jobsStats$ | async)?.job_applications?.job_applications_by_education?.length ==0 || isLoadingE">
+                <span *ngIf="!isLoadingE">  <i class="icon-empty-nodatasector"></i>
+                    <h5>{{fixedTextHash['no_data_available'][currLan]}}</h5>
+                </span>
+                <spinner [visible]="isLoadingE"></spinner>
+              </div>
+              <div class="prograss-section">
+                <span *ngFor="let selVal of (jobsStats$ | async)?.job_applications?.job_applications_by_education,let selIndex = index ">
+                  <div class="progress-bloovo" *ngIf="selIndex <= 5" >
+                      <div class="prograss-title">
+                          <div class="prograss-txt pull-left arabic-right-left">{{selVal?.name}}</div>
+                          <div class="prograss-txt pull-right arabic-left-right arabic-left-right percentage-color">{{selVal?.percentage | number:'1.1-1'}}%</div>
+                          <div class=" clr"></div>
+                      </div>
+                      <div class="progress" *ngIf="selIndex <= 5" >
+                          <div aria-valuemax="100" aria-valuemin="0" class="progress-bar progress-bar-success shade-{{selIndex+1}}" data-percentage="0%" role="progressbar" [style.width.%]="selVal.percentage" ></div>
+                      </div>
+                  </div>
+                </span>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Application Received Gender -->
+          <!-- =========================================================== -->
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left">
+            <div class="box-bra-graph-v4">
+              <h2>{{fixedTextHash['application_by_gender'][currLan]}}</h2>
+              <div class="prograss-section">
+                <div class="male-stats-v4">
+                  <div class="icon-male-follows-v4  arabic-right-left">
+                    <i><img src="/assets/images/mail.svg"></i>
+                  </div>
+                  <div class="follows-percentage-v4 arabic-right-left">
+                    <h3>{{ malePercent | number:'1.0-1' }}%</h3>
+                    <span>{{fixedTextHash['male'][currLan]}}</span>
+                  </div>
+                  <div class="follows-prograss-v4 arabic-right-left">
+                    <div class="progress">
+                      <div aria-valuemax="100" aria-valuemin="0" class="progress-bar progress-bar-success" data-percentage="0%" role="progressbar" [style.width.%]="malePercent" ></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="male-stats-v4">
+                  <div class="icon-male-follows-v4 arabic-right-left">
+                    <i><img src="/assets/images/femail.svg"></i>
+                  </div>
+                  <div class="follows-percentage-v4 arabic-right-left">
+                    <h3>{{ femalePercent | number:'1.0-1' }}%</h3>
+                    <span>{{fixedTextHash['female'][currLan]}}</span>
+                  </div>
+                  <div class="follows-prograss-v4 femail-v4 arabic-right-left">
+                    <div class="progress">
+                      <div aria-valuemax="100" aria-valuemin="0" class="progress-bar progress-bar-success" data-percentage="0%" role="progressbar" [style.width.%]="femalePercent"></div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Funnel Analytics -->
+          <!-- ================================================================== -->
+          <div class="funel-analatycs-v4">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <h2>{{fixedTextHash['funnel_analytics'][currLan]}}</h2>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+              <div class="funle-stats-v4">
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 arabic-right-left">
+                  <div class="funel-graphics-v4">
+                    <img src="assets/images/dashboard-v4/funel.png">
+                    <!-- stats -->
+                    <div class="application-funel-v4">
+                      <strong>{{totalJobApplication | number: '1.0'}}</strong>
+                      <span class="">{{fixedTextHash['number_of_application'][currLan]}}</span>
+                    </div>
+                    <div class="shortlisted-funel-v4">
+                      <strong>{{totalJobShortlisted | number: '1.0-1'}}</strong>
+                      <span class="">{{fixedTextHash['shortlisted'][currLan]}}  ({{(100*totalJobShortlisted)/totalJobApplication | number: '1.1-1'}}%)</span>
+                    </div>
+                    <div class="interview-funel-v4">
+                      <strong>{{totalJobInterviews | number: '1.0-1'}}</strong>
+                      <span class="">{{fixedTextHash['interviewed'][currLan]}} ({{(100*totalJobInterviews)/totalJobApplication | number: '1.1-1'}}%)</span>
+                    </div>
+                    <div class="success-funel-v4">
+                      <strong>{{totalJobSuccessful | number: '1.0-1'}}</strong>
+                      <span class="">{{fixedTextHash['successful'][currLan]}} ({{(100*totalJobSuccessful)/totalJobApplication | number: '1.1-1'}}%)</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 arabic-left-right">
+                  <ul>
+                    <li class="success-ratio" *ngIf="totalJobApplication > 0  && (100*totalJobSuccessful)/totalJobApplication">
+                      <animate-cicle *ngIf="(100*totalJobSuccessful)/totalJobApplication" [textVal]="fixedTextHash['success_ratio'][currLan]"  [val]="(100*totalJobSuccessful)/totalJobApplication"></animate-cicle>
+                    </li>
+                    <li>
+                      <span>{{fixedTextHash['average_cost_hire'][currLan]}}</span>
+                      <h2 *ngIf="currLan == 'en'">{{fixedTextHash[accountService.getCurrency()][currLan]}} {{total_cost_to_hire/(companyStats$ | async)?.jobs_graph?.counter_jobs_details?.total_jobs | number: '1.0-0'}}</h2>
+                      <h2 *ngIf="currLan == 'ar'">{{total_cost_to_hire/(companyStats$ | async)?.jobs_graph?.counter_jobs_details?.total_jobs | number: '1.0-0'}} {{fixedTextHash[accountService.getCurrency()][currLan]}}</h2>
+                    </li>
+                    <li>
+                      <span>{{fixedTextHash['days_to_hire'][currLan]}}</span>
+                      <h2>{{total_days_to_hire/(companyStats$ | async)?.jobs_graph?.counter_jobs_details?.total_jobs | number: '1.0-0'}} {{fixedTextHash['days'][currLan]}}</h2>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Most Recent Postion Posted -->
+      <!-- ================================================================== -->
+      <div *ngIf="!showMoreKeywords"  class="most-recent-job-v4">
+        <div class="col-lg-12 col-md-12 col-xs-12">
+          <h2>{{fixedTextHash['most_recent_post'][currLan]}}</h2>
+        </div>
+
+        <!-- listing -->
+        <div  *ngFor="let sel_job of (companyStats$ | async)?.jobs_graph?.most_recent_jobs"  class="col-lg-12 col-md-12 col-xs-12">
+          <div class="list-v4">
+            <h3>{{sel_job['title']}}</h3>
+            <div class="job-list-stas-v4">
+              <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6 line-v4 arabic-right-left">
+                <span>{{fixedTextHash['count_views'][currLan]}}</span>
+                <h2>{{sel_job['views_count'] || 0 | number: '1.0-1'}}</h2>
+              </div>
+              <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6 line-v4 arabic-right-left">
+                <span>{{fixedTextHash['count_applications'][currLan]}}</span>
+                <h2>{{sel_job['applicant_count'] | number: '1.0-1'}}</h2>
+              </div>
+              <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12 line-v4 arabic-right-left">
+                <span>{{fixedTextHash['application_ratio'][currLan]}}</span>
+                <h2>{{sel_job['applicant_count']*100 / sel_job['views_count'] || 0 | number: '1.0-1'}}%</h2>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 line-v4 chart-bar-v4 arabic-right-left">
+                <h3>{{fixedTextHash['relevancy_brackets'][currLan]}}</h3>
+                <ul>
+                  <li class="shade-3">
+                    <h5>0 - 50%</h5>
+                    <span>{{sel_job['count_applicants_grouped_by_matching_percentage_range']['[0, 50]'] | number: '1.0-1'}}
+                      <strong>({{sel_job['applicant_count'] == 0 ? '0' :sel_job['count_applicants_grouped_by_matching_percentage_range']['[0, 50]']*100 / sel_job['applicant_count'] | number: '1.0-1'}}%)</strong>
+                    </span>
+                  </li>
+                  <li class="shade-2">
+                    <h5>50 - 70%</h5>
+                    <span>{{sel_job['count_applicants_grouped_by_matching_percentage_range']['[50, 70]'] | number: '1.0-1'}}
+                       <strong>({{sel_job['applicant_count'] == 0 ? '0' :sel_job['count_applicants_grouped_by_matching_percentage_range']['[50, 70]']*100 / sel_job['applicant_count'] | number: '1.0-1'}}%)</strong>
+                    </span>
+                  </li>
+                  <li class="shade-1">
+                    <h5>> 70%</h5>
+                    <span>{{sel_job['count_applicants_grouped_by_matching_percentage_range']['[70, 100]'] | number: '1.0-1'}}
+                      <strong>({{sel_job['applicant_count'] == 0 ? '0' :sel_job['count_applicants_grouped_by_matching_percentage_range']['[70, 100]']*100 / sel_job['applicant_count'] | number: '1.0-1'}}%)</strong>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+              <div *ngIf="sel_job['hired']" class="col-lg-2 col-md-2 col-sm-12 col-xs-12 arabic-right-left">
+                <span>{{fixedTextHash['status'][currLan]}}</span>
+                <h2 class="sttus-hired"></h2>
+                <b>{{fixedTextHash['hired'][currLan]}}</b>
+              </div>
+              <div *ngIf="!sel_job['hired']" class="col-lg-2 col-md-2 col-sm-12 col-xs-12 arabic-right-left">
+                <span>{{fixedTextHash['status'][currLan]}}</span>
+                <h2 class="sttus-nothired"></h2>
+                <b>{{fixedTextHash['not_hired'][currLan]}}</b>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+</div>
+</div>

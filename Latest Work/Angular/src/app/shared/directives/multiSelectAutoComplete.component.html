@@ -1,0 +1,30 @@
+<div class="new-drop-down">
+    <form [formGroup]="formAuto">
+        <input type="text" formControlName="search_string" #autocomp autocomplete="off" minlength="1" maxlength="50"
+            (click)="activateSearch()" (keydown)="inputEvent($event)" (keyup)="inputEvent($event, true)"
+            (selected)="selected($event)" [attr.placeholder]="placeholder" [class.error-feild]="error">
+    </form>
+
+    <ul class="autocomplete_v2" [class.hide]="hideList">
+        <li *ngFor="let selItem of (items$ | async),let selIndex = index"
+            [class.active-auto-v2]="(items$ | async)?.length == 0"
+            [class.active-auto-v2]="autocomp.value == selItem?.text" class="option-{{selIndex}}"
+            (click)="autocomp.value=selItem.text;selected(selItem)">
+            {{selItem?.text}} ({{selItem?.jobs_count}})
+        </li>
+    </ul>
+
+    <ul *ngIf="(selectedItems$ | async)?.length > 0" class="list_sbar">
+        <li *ngFor="let selItem of (selectedItems$ | async),let selIndex = index">
+            {{selItem?.name}}
+            <a _ngcontent-nxf-5="" class="close" style="margin-left: 5px; padding: 0;"
+                (click)="removed(selItem?.name)">×</a>
+        </li>
+    </ul>
+
+    <div class="empty-min4 " *ngIf="showSpinner">
+        <div class="empty-prf">
+            <spinner></spinner>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+<ion-header class="animated fadeIn no-shadow">
+
+  <ion-navbar class="no-border" color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Apartments
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="common-bg all-apertment">
+
+  <!-- <h4 *ngIf="message">{{ message }}</h4> -->
+  <ion-grid class="table_grid " *ngIf="apartmentsData">
+    <div class="no-data" *ngIf="apartmentsData.message_alert">
+      <img src="../../assets/icon/no-data.png" alt="image">
+      <h4>{{apartmentsData.message_alert}}</h4>
+    </div>
+    <div *ngIf="apartments" >
+    <ion-row *ngFor="let apartment of apartments">
+      <ion-col col-5 (click)="appartmentTenants(apartment.id)">
+        <h5>Apartment No.{{apartment.apart_no}}</h5>
+        <span>{{ apartment.building_address }}</span>
+        <span>{{ apartment.building_name}}</span>
+      </ion-col>
+      <ion-col col-3>
+        <button type="button" class="btn-primary">${{ apartment.rent_price }}</button>
+      </ion-col>
+      <ion-col col-3>
+        <button type="button" [ngClass]="{'btn-success': apartment.status == 'Paid', 'btn-danger': apartment.status == 'Unpaid'}">{{ apartment.status }}</button>
+      </ion-col>
+    </ion-row>
+    </div>
+  </ion-grid>
+
+</ion-content>

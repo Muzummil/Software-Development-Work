@@ -1,0 +1,43 @@
+@import '../../../styles/sass/base/_variables.scss';
+
+h1, h2, h3, h4, h5, span, label, a, button, p{
+  font-family: $primary-Fonts;
+}
+
+.arabic{
+    h1, h2, h3, h4, h5, span, label, a, button, p, input{
+    font-family: $arabic-primary-Fonts!important;
+  }
+}
+
+input, select {
+    width: 100%;
+    border: solid 1px $boredr-color;
+    color: $text-normal-color !important;
+    height: $form-height!important;
+    padding: 0px 10px;
+    margin-bottom: 10px;
+    font-size: 14px !important;
+    line-height: $button-height !important;
+    border-radius: $border-radius!important;
+    background-color:$form-bg!important; 
+  }
+  @-webkit-keyframes autofill {
+      to {
+          color: $primary-font;
+          background: transparent;
+      }
+  }
+
+  input:-webkit-autofill {
+      -webkit-animation-name: autofill;
+      -webkit-animation-fill-mode: both;
+  }
+
+  .pika-table th{
+    color: $primarycolor!important;
+  }
+
+.error-feild{
+    border:1px solid $unsuccessful!important;
+}

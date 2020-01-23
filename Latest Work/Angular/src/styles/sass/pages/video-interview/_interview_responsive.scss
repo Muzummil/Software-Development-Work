@@ -1,0 +1,66 @@
+/*---------------------------------------------------1-------------------------------------------------------*/
+@media (max-width: 1200px){}
+/*---------------------------------------------------1-------------------------------------------------------*/
+@media(max-width: 1435px) and (min-width: 990px){}
+/*---------------------------------------------------2-------------------------------------------------------*/
+@media (min-width: 768px) and (max-width: 1024px){
+
+
+}
+// -----------------------------------------
+@media (min-width: 768px) and (max-width: 990px){
+	.interview-user-detail ul li span{
+		width: auto;
+	}
+
+}
+/*---------------------------------------------------3-------------------------------------------------------*/
+@media (max-width: 767px) {
+	.interview-user-detail{
+		width: 100%;
+		margin-top: 20px;
+	}
+	.interview-user-detail ul li span{
+		width: auto;
+	}
+
+	.interview-home{
+		min-height: auto;
+		float: left;
+	}
+
+	.interview-video-screen{
+		display: grid;
+		padding: 1em!important;
+		font-family: $primary-Fonts;
+		grid-template-columns: 100%;
+		grid-template-rows: 400px auto;
+		grid-template-areas:
+		"interview-screen"
+		"chat-screen"
+		;
+	}
+	.chat-screen{
+		margin-top: 30px;
+	}
+
+  //interview-listing emplpyer
+  #interview-list-all{
+    background-color: #fff;
+    padding: 10px;
+    border:1px solid #f1f1f1;
+    display: grid;
+    grid-template-columns:100%;
+    grid-template-rows:auto auto auto auto ;
+    grid-template-areas: "candi-detail" "interview-detail" "type-interview" "physical-address";
+    grid-gap:0.5em;
+
+  }
+  #interview-list-all .int-candi-detail,.int-detail, .int-type{
+  border-bottom: 1px solid #f1f1f1;
+}
+
+}
+/*---------------------------------------------------4-------------------------------------------------------*/
+
+@media (max-width: 480px) {}

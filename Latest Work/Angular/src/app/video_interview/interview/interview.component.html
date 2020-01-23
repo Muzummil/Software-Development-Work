@@ -1,0 +1,223 @@
+<section class="video-interview-block" [class.arabic] = "accountService.isArabic()">
+  <div [class.container]="!isShowVideo">
+    <!--errors Message block for video section-->
+    <div [class.hide]="!isShowVideo || isInterviewCompleted" *ngIf="hasError" class="error-pop-conta">
+      <div class="error-pop-interview">
+        <i class="zmdi zmdi-alert-triangle"></i>
+        {{errorMessage}}
+        <button (click)="unsetError()">
+          {{fixedTextHash['close'][currLan]}}
+        </button>
+      </div>
+
+    </div>
+
+    <div [class.interview-video-screen]="isShowVideo" class="interview-home" [class.full-screen-video]="!isChatOpened">
+
+
+
+      <!-- video screen -->
+      <div class="interview-screen" [class.hide]="!isShowVideo || isInterviewCompleted">
+        <div class="title-bar-video">
+          <div class="name-user">{{videoHeaderName}}</div>
+          <div  class="action-video">
+            <i class="{{(isChatOpened)?'zmdi zmdi-window-maximize':'zmdi zmdi-window-minimize'}}" (click)="toggleChat()"></i>
+
+
+          </div>
+        </div>
+        <div class="video-area-interview">
+          <spinner  [visible]="isLoading"></spinner>
+          <div id="renderer"></div>
+        </div>
+
+        <div *ngIf="isConnected" class="video-controller">
+          <div class="no-area"></div>
+          <div class="bt-sec-interview">
+            <button class="btn btn-default btn-control" (click)="toggleCamera()">
+              <i *ngIf="!muteCamera" class="zmdi zmdi-videocam"></i>
+              <i *ngIf="muteCamera" class="zmdi zmdi-videocam-off"></i>
+            </button>
+            <button class="btn btn-default btn-control" (click)="toggleMic()">
+              <i *ngIf="!muteMic" class="zmdi zmdi-volume-up"></i>
+              <i *ngIf="muteMic" class="zmdi zmdi-volume-off"></i>
+            </button>
+
+            <a data-toggle="modal" data-toggle="modal" [attr.data-target] = "'.end-interview'">
+              <button *ngIf="!pausedInterview && isConnected" class="btn btn-default btn-control bt-play-stop" >
+                <i class="zmdi zmdi-phone"></i>
+              </button>
+            </a>
+
+
+
+          </div>
+          <div class="no-area2"></div>
+
+
+        </div>
+      </div>
+
+      <!-- chat screen -->
+      <div *ngIf="isShowVideo && isChatOpened && !isInterviewCompleted" class="chat-screen">
+
+
+        <!-- chat head -->
+        <div class="header-chat-araea">
+          <div class="chat-user-pic">
+            <img *ngIf="interviewDetails?.interview?.jobseeker?.avatar && accountService.getCheckEmployer()"  src="{{interviewDetails?.interview?.jobseeker?.avatar}}">
+            <img *ngIf="interviewDetails?.interview?.company?.avatar && !accountService.getCheckEmployer()"  src="{{interviewDetails?.interview?.company?.avatar}}">
+            <span *ngIf="(!interviewDetails?.interview?.jobseeker?.avatar && accountService.getCheckEmployer() ) || ( !interviewDetails?.interview?.company?.avatar  && !accountService.getCheckEmployer())" class="icon-profile"></span>
+          </div>
+          <div class="chat-user-detail">
+            <span class="availabilty-user" *ngIf="getCheckPartnerOnline()"><i class="online-interview"></i>{{fixedTextHash['online'][currLan]}}</span>
+            <span class="availabilty-user" *ngIf="!getCheckPartnerOnline()"><i class="offline-interview"></i>{{fixedTextHash['offline'][currLan]}}</span>
+            <ng-container *ngIf="!accountService.getCheckEmployer()">
+              <h2>{{interviewDetails?.interview?.company?.name}}</h2>
+              <span>{{interviewDetails?.interview?.company.sector?.name}}</span>
+              <span>{{interviewDetails?.interview?.employer?.city?.name}}{{fixedTextHash['comma'][currLan]}}&nbsp;{{interviewDetails?.interview?.employer?.country?.name}}</span>
+            </ng-container>
+            <ng-container *ngIf="accountService.getCheckEmployer()">
+              <h2>{{interviewDetails?.interview?.jobseeker?.first_name+' '+interviewDetails?.interview?.jobseeker?.last_name}}</h2>
+              <span>{{interviewDetails?.interview?.current_jobseeker_company?.position}}</span>
+              <span *ngIf="interviewDetails?.interview?.current_jobseeker_company?.company_name" >{{interviewDetails?.interview?.current_jobseeker_company?.company_name}}</span>
+            </ng-container>
+          </div>
+        </div>
+
+
+        <div  #messageBox class="chat-body-log">
+          <ul>
+            <ng-container  *ngFor="let message of messages">
+              <li [class.normal-user-chat]="message.id == currentUserId" [class.oposite-user-chat]="message.id != currentUserId">
+                <!-- user profiel -->
+                <i>{{message.name[0].toUpperCase()}}</i>
+                <article>
+                  <span><strong>{{message.name}}</strong><br>{{accountService.getFormattedDate(message.date,'MMM DD, YYYY h:mm a')}}</span>
+                  <p>{{message.content}}</p>
+                </article>
+              </li>
+            </ng-container>
+
+
+          </ul>
+        </div>
+
+        <!-- chat-message-type -->
+        <form [formGroup]="chatForm" class="chat-msg-type">
+          <input formControlName="message_string"  type="text" placeholder="{{fixedTextHash['type_message_here'][currLan]}}">
+          <button (click)="sendChatMessage()" [class.disabled_button]="!isConnected || !getCheckPartnerOnline()"><i class="zmdi zmdi-mail-send"></i></button>
+        </form>
+      </div>
+
+      <!--start screen-->
+      <ng-container *ngIf="!isShowVideo && !isInterviewCompleted" >
+
+        <!-- header -->
+        <div class="interview-head">
+          <a href="{{accountService.getCurrLangUrl()}}"><img src="assets/images/custom-images/logo2.svg"></a>
+          <h1>{{fixedTextHash['bloovo_interview'][currLan]}}</h1>
+          <p>{{fixedTextHash['start_interview'][currLan]}}</p>
+        </div>
+        <div *ngIf="!isCallNear && !hasError && browserSupportFlag" class="info-interview-msg">{{infoMessage}}</div>
+        <div *ngIf="hasError && browserSupportFlag" class="haserror">{{errorMessage}}</div>
+        <div *ngIf="!browserSupportFlag" class="haserror">{{fixedTextHash['wrong_browser'][currLan]}}</div>
+        <!-- body -->
+        <div class="interview-body">
+          <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 arabic-right-left">
+            <!-- interview-userpic -->
+            <div class="interview-user arabic-right-left">
+              <i *ngIf="(!interviewDetails?.interview?.jobseeker?.avatar && accountService.getCheckEmployer() ) ||( !interviewDetails?.interview?.company.avatar  && !accountService.getCheckEmployer())" class="icon-profile"></i>
+              <img *ngIf="interviewDetails?.interview?.jobseeker?.avatar && accountService.getCheckEmployer()"  src="{{interviewDetails?.interview?.jobseeker?.avatar}}">
+              <img *ngIf="interviewDetails?.interview?.company?.avatar && !accountService.getCheckEmployer()"  src="{{interviewDetails?.interview?.company?.avatar}}">
+            </div>
+            <!-- User dtails -->
+            <div *ngIf="interviewDetails?.interview" class="interview-user-detail">
+
+              <ul *ngIf="!accountService.getCheckEmployer()">
+                <li><strong>{{interviewDetails?.interview?.company?.name}}</strong></li>
+                <li><span>{{fixedTextHash['location'][currLan]}}</span>&nbsp;:&nbsp;{{interviewDetails?.interview?.employer?.city?.name}}{{fixedTextHash['comma'][currLan]}}&nbsp;{{interviewDetails?.interview?.employer?.country?.name}}</li>
+                <li><span>{{fixedTextHash['date'][currLan]}}</span>&nbsp;:&nbsp;{{accountService.getFormattedDate(interviewDetails?.interview?.appointment, 'MMM DD, YYYY')}}</li>
+                <li *ngIf="appointTimeCorrectZone"><span>{{fixedTextHash['time'][currLan]}}</span>&nbsp;:&nbsp;{{appointTimeCorrectZone | date:'h:mm a'}} - ({{fixedTextHash['local_time'][currLan]}}) &nbsp;{{browserTimeZone}}</li>
+                <li><span>{{fixedTextHash['duration'][currLan]}}</span>&nbsp;:&nbsp;{{interviewDetails?.interview?.duration}} {{fixedTextHash['minutes'][currLan]}}</li>
+                <li><span>{{fixedTextHash['interviewer'][currLan]}}</span>&nbsp;:&nbsp;{{interviewDetails?.interview?.employer?.first_name+' '+interviewDetails?.interview?.employer?.last_name}}</li>
+                <li><button (click)="reloadPage()" class="refersh-ats">{{fixedTextHash['refersh'][currLan]}}</button></li>
+              </ul>
+
+              <ul *ngIf="accountService.getCheckEmployer()">
+                <li><strong>{{interviewDetails?.interview?.jobseeker?.first_name+' '+interviewDetails?.interview?.jobseeker?.last_name}}</strong></li>
+                <li *ngIf="interviewDetails?.interview?.current_jobseeker_company?.position"><span>Designation</span>&nbsp;:&nbsp;{{interviewDetails?.interview?.current_jobseeker_company?.position}}</li>
+                <li *ngIf="interviewDetails?.interview?.current_jobseeker_company?.company_name"><span>Company</span>&nbsp;:&nbsp;{{interviewDetails?.interview?.current_jobseeker_company?.company_name}}</li>
+                <li><span>{{fixedTextHash['date'][currLan]}}</span>&nbsp;:&nbsp;{{accountService.getFormattedDate(interviewDetails?.interview?.appointment, 'MMM DD, YYYY')}}</li>
+                <li *ngIf="appointTimeCorrectZone"><span>Time</span>&nbsp;:&nbsp;{{appointTimeCorrectZone | date:'h:mm a'}} - ({{fixedTextHash['local_time'][currLan]}}) &nbsp;{{browserTimeZone}}</li>
+                <li><span>{{fixedTextHash['duration'][currLan]}}</span>&nbsp;:&nbsp;{{interviewDetails?.interview?.duration}} {{fixedTextHash['minutes'][currLan]}}</li>
+                <li><button (click)="reloadPage()" class="refersh-ats">{{fixedTextHash['refersh'][currLan]}}</button></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="interview-footer" *ngIf="!hasError">
+          <button (click)="joinInterview()" [class.disabled_button]="!browserSupportFlag || !vcDetailsSet || !isCallNear">
+            <a *ngIf="!isLoading">{{(accountService.getCheckEmployer())? fixedTextHash['start_interview'][currLan]:fixedTextHash['join_interview'][currLan]}}</a>
+            <spinner  [visible]="isLoading"></spinner>
+          </button>
+
+        </div>
+      </ng-container>
+
+      <!--end screen-->
+      <ng-container *ngIf="isInterviewCompleted">
+
+        <!-- header -->
+        <div class="interview-head">
+          <img src="assets/images/custom-images/logo2.svg">
+          <h1>{{fixedTextHash['completed_interview'][currLan]}}</h1>
+        </div>
+
+        <!-- body -->
+        <div class="interview-body">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <p *ngIf="remoteTerminate">{{fixedTextHash['terminated_interview'][currLan]}}</p>
+            <p *ngIf="accountService.getCheckEmployer()">{{fixedTextHash['left_interview_wrong'][currLan]}}  <a (click)="reloadPage()">{{fixedTextHash['click_rejoin'][currLan]}}</a>.</p>
+            <p *ngIf="!accountService.getCheckEmployer()">{{fixedTextHash['if_interview_terminated'][currLan]}} <a (click)="reloadPage()">{{fixedTextHash['click_rejoin'][currLan]}}</a>.</p>
+          </div>
+        </div>
+
+        <div class="interview-footer">
+          <a  *ngIf="accountService.getCheckEmployer()" href="{{'/employer/candidate/'+interviewDetails?.interview?.jobseeker?.id+'/'+interviewDetails?.interview?.jobseeker?.first_name+'-'+interviewDetails?.interview?.jobseeker?.last_name+'/profile?job_id='+interviewDetails?.interview?.job?.id}}">
+            <button>{{fixedTextHash['finish'][currLan]}}</button>
+          </a>
+          <a  *ngIf="!accountService.getCheckEmployer()" href="{{'/job-seeker/jobs/my-jobs'}}">
+            <button>{{fixedTextHash['finish'][currLan]}}</button>
+          </a>
+        </div>
+
+      </ng-container>
+
+    </div>
+
+
+  </div>
+</section>
+<!--End Interview Pop up-->
+<div class="popup">
+  <div class="logout-pop">
+    <div class="modal end-interview" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-body">
+            <button class="close following" (click)="closeBox()" aria-hidden="true" data-dismiss="modal" type="button">×</button>
+            <h2> {{accountService.getCheckEmployer() ? fixedTextHash['end_online_interview'][currLan] : fixedTextHash['leave_interview'][currLan]}} </h2>
+            <h4><span class="navy"> {{accountService.getCheckEmployer()? fixedTextHash['sure_end_interview'][currLan]: fixedTextHash['sure_leave_interview'][currLan]}}</span> </h4>
+            <div class="pop-button">
+              <button (click)="endInterview();closeBox()" type="button" class="btn postive">{{fixedTextHash['yes'][currLan]}}</button>
+              <button (click)="closeBox()" type="button" class="btn negative" data-dismiss="modal">{{fixedTextHash['no'][currLan]}}</button>
+              <div class="clr"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

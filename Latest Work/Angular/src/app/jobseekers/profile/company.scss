@@ -1,0 +1,155 @@
+@import '../../../styles/sass/base/_variables.scss';
+
+h1, h2, h3, h4, h5, span, label, a, button, p{
+  font-family: $primary-Fonts;
+}
+
+.arabic{
+    h1, h2, h3, h4, h5, span, label, a, button, p, input, .text-bx{
+    font-family: $arabic-primary-Fonts!important;
+  }
+}
+
+.block{
+  border:1px solid $light-border;
+  border-radius: $border-radius;
+  .cancel{
+    button{
+      border-radius: $border-radius;
+      height: $button-height;
+    }
+  }
+  .block-footer{
+    button{
+      border-radius: $border-radius;
+      height: $button-height;
+      &:hover{
+        background: $secondarycolor!important;
+      }
+    }
+  }
+}
+
+.block-contant{
+    padding: 10px;
+}
+.block-title-2,  .block-title{
+    padding: 10px;
+}
+
+.work-lg-defalt{
+  width: 30px;
+  height: 30px;
+  background:$primarycolor;
+  color: $bg;
+  border-radius:50%;
+  text-align: center;
+  line-height: 30px;
+  font-size:$normal-font;
+}
+
+// Work Experience
+.work-experience{
+  .add{
+      botton{
+          background: #000!important
+      }
+  }
+  .block-contant{
+      border-bottom:solid 1px $light-border;
+  }
+  .dark{
+      padding-bottom:0px;
+      margin-top:0px;
+      color: $primarycolor;
+  }
+  .work-logo{
+      width: 30px;
+      height:4%;
+      float:left;
+      margin-top: 0px;
+
+      .work-lg{
+          width:50px;
+          height:50px;
+         img{
+          width:100%;
+          height: 100%;
+          border-radius:50%
+         }
+      }
+ 
+
+  }
+  .margin-top-30{
+      margin-top: 36px
+  }
+  .margin-top-40{
+      margin-top: 45px
+  }
+  .work-exp-details{
+      float:left;
+      width: calc(100% - 30px);
+      input{
+          margin-bottom: 0px!important;
+      }
+      .dark{
+          margin-top: 5px;
+      }
+      .margin-bootom-5{
+          margin-bottom: 5px!important;
+      }
+  }
+  .work-light{
+      color:$secondarycolor;
+      padding-top:0px;
+      i{
+          color:$primarycolor;
+      }
+      button{
+         height: 25px!important;
+         font-size: $x-small-font;
+         line-height: 25px;
+         padding:0px 15px;
+      }
+  }
+
+  .full-box{
+      margin-bottom: 0px;
+  }
+  .bullet{
+      .full-box{
+          margin-bottom: 0px
+      }
+  }
+  .block-title-2{
+    button{
+      i{
+          width: auto;
+          padding-left:0px;
+      }
+    }
+  }
+}
+
+.light{
+  color: $secondarycolor;
+  i {
+      color:$primarycolor;
+  }
+}
+
+input, select{
+  height: $form-height!important;
+  border-radius: $border-radius!important;
+  color: $secondarycolor!important;
+}
+
+.arabic{
+  .work-exp-details{
+      float: right!important;
+  }
+  .work-logo{
+    float: right!important;
+  }
+}

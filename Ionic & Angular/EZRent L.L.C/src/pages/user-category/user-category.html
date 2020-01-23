@@ -1,0 +1,153 @@
+<ion-header *ngIf="userType == 'User'">
+    <ion-navbar color="primary" hideBackButton="true">
+        <ion-title>
+            <span ion-text>Setup</span>
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="common-bg user_category" *ngIf="userType == 'User'">
+
+    <div class="setup_cont">
+        <h4>Are you using The Rent App as a Tenant or Landlord?</h4>
+    </div>
+
+    <div class="setup_thumbnail">
+        <div class="setup_text" (click)="landlord('Tenant')">Tenant</div>
+    </div>
+    <div class="setup_thumbnail1">
+        <div class="setup_text" (click)="landlord('Landlord')">Landlord</div>
+    </div>
+
+</ion-content>
+
+
+<ion-header *ngIf="userType == 'Landlord' || userType == 'Tenant'" class="animated fadeIn no-shadow">
+
+    <ion-navbar class="no-border" color="primary" hideBackButton="true">
+        <ion-title>
+            {{userType}} Information
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+
+<ion-content class="common-bg" *ngIf="userType == 'Landlord' || userType == 'Tenant'">
+    <form #myForm="ngForm" [formGroup]="onLandlordForm" (ngSubmit)="propertSetup()" class="list-form m-t-5x" margin-top>
+        <ion-item class="m-b-1x">
+            <ion-label fixed class="md-padding">
+                <img src="../assets/icon/signup_1.png" width="30">
+            </ion-label>
+            <ion-input type="text" formControlName="fullName" placeholder="Full Name"></ion-input>
+        </ion-item>
+        <p ion-text color="danger" class="text-1x has-error" *ngIf="myForm.submitted && onLandlordForm.get('fullName').hasError('required')">This field is required</p>
+
+        
+        <!-- <ion-item class="m-b-1x">
+            <ion-label fixed class="md-padding">
+                <img src="../assets/icon/signup_1.png" width="30">
+            </ion-label>
+            <ion-input type="text" formControlName="lastName" placeholder="Last Name"></ion-input>
+        </ion-item>
+        <p ion-text color="danger" class="text-1x has-error" *ngIf="myForm.submitted && onLandlordForm.get('lastName').hasError('required')">This field is required</p> -->
+
+
+        <ion-card no-margin margin-bottom class="full-width">
+            <ion-item>
+                <ion-label class="ion_labelicon" ion-text>
+                    <img src="../../assets/icon/date-birth.png" width="30">
+                </ion-label>
+                <ion-datetime displayFormat="MMM DD YYYY" formControlName="date" placeholder="Date of Birth"></ion-datetime>
+            </ion-item>
+        </ion-card>
+        <p ion-text color="danger" class="text-1x has-error" *ngIf="myForm.submitted && onLandlordForm.get('date').hasError('required')">This field is required</p>
+
+        <ion-card no-margin margin-bottom class="full-width">
+            <ion-item>
+                <ion-label class="ion_labelicon" ion-text>
+                    <img src="../../assets/icon/gender-icon.png" width="30">
+                </ion-label>
+                <ion-select formControlName="gender" placeholder="Gender" multiple="false" cancelText="Cancel" okText="OK">
+                    <!-- <ion-option value="Gender" selected="true">Gender</ion-option> -->
+                    <ion-option value="Male">Male</ion-option>
+                    <ion-option value="Female">Female</ion-option>
+                    <ion-option value="Other">Other</ion-option>
+                    <ion-option value="NotDisclosed">I wish not to disclose</ion-option>
+                </ion-select>
+            </ion-item>
+        </ion-card>
+
+        <ion-card no-margin margin-bottom class="full-width">
+            <ion-item>
+                <ion-label class="ion_labelicon" ion-text>
+                    <img src="../../assets/icon/race_icon.png" width="30">
+                </ion-label>
+                <ion-select formControlName="ethnicity" placeholder="Race / Ethnicity" multiple="false" cancelText="Cancel" okText="OK">
+                    <ion-option value="Asia">Asia</ion-option>
+                    <ion-option value="black">Black/African</ion-option>
+                    <ion-option value="Caucasian">Caucasian</ion-option>
+                    <ion-option value="Latino">Hispanic/Latino</ion-option>
+                    <ion-option value="Native American">Native American</ion-option>
+                    <ion-option value="Pacific Islander">Pacific Islander</ion-option>
+                    <ion-option value="Mixed Race">Mixed Race</ion-option>
+                    <ion-option value="Other">Other</ion-option>
+                    <ion-option value="NotDisclosed">I wish not to disclose</ion-option>
+                </ion-select>
+            </ion-item>
+        </ion-card>
+
+        <ion-card no-margin margin-bottom class="full-width">
+            <ion-item>
+                <ion-label class="ion_labelicon" ion-text>
+                    <img src="../../assets/icon/education_icon.png" width="30">
+                </ion-label>
+                <ion-select formControlName="education" placeholder="Education" multiple="false" cancelText="Cancel" okText="OK">
+                    <ion-option value="Some high school">Some high school</ion-option>
+                    <ion-option value="High school">High school</ion-option>
+                    <ion-option value="Some college">Some college</ion-option>
+                    <ion-option value="Two yr/Associate's Degree">Two yr/Associate's Degree</ion-option>
+                    <ion-option value="Four yr/Bechlor's Degree">Four yr/Bechlor's Degree</ion-option>
+                    <ion-option value="Master's Degree Or Higher">Master's Degree Or Higher</ion-option>
+                    <ion-option value="NotDisclosed">I wish not to disclose</ion-option>
+                </ion-select>
+            </ion-item>
+        </ion-card>
+
+        <ion-card no-margin margin-bottom class="full-width">
+            <ion-item>
+                <ion-label class="ion_labelicon" ion-text>
+                    <img src="../../assets/icon/marital-status.png" width="30">
+                </ion-label>
+                <ion-select formControlName="maritalStatus" placeholder="Marital Status" multiple="false" cancelText="Cancel" okText="OK">
+                    <ion-option value="Single">Single</ion-option>
+                    <ion-option value="Married">Married</ion-option>
+                    <ion-option value="Divorced">Divorced</ion-option>
+                    <ion-option value="Widowed">Widowed</ion-option>
+                    <ion-option value="NotDisclosed">I wish not to disclose</ion-option>
+                </ion-select>
+            </ion-item>
+        </ion-card>
+
+        <ion-card no-margin margin-bottom class="full-width">
+            <ion-item>
+                <ion-label class="ion_labelicon" ion-text>
+                    <img src="../../assets/icon/income_icon.png" width="30">
+                </ion-label>
+                <ion-select formControlName="yearlyIncome" placeholder="Yearly Income" multiple="false" cancelText="Cancel" okText="OK">
+                    <ion-option value="$0-$30,000">$0-$30,000</ion-option>
+                    <ion-option value="$30,001-$100,000">$30,001-$100,000</ion-option>
+                    <ion-option value="$100,001-$200,000">$100,001-$200,000</ion-option>
+                    <ion-option value="$200,001-$500,">$200,001-$500,000</ion-option>
+                    <ion-option value="$500,001+">$500,001+</ion-option>
+                    <ion-option value="NotDisclosed">I wish not to disclose</ion-option>
+                </ion-select>
+            </ion-item>
+        </ion-card>
+
+        <ion-toolbar position="bottom">
+            <button ion-button full type="submit">Next</button>
+        </ion-toolbar>
+
+    </form>
+</ion-content>

@@ -1,0 +1,120 @@
+@import '../../../styles/sass/base/_variables.scss';
+
+h1, h2, h3, h4, h5, span, label, a, button, p{
+  font-family: $primary-Fonts;
+}
+
+.arabic{
+    h1, h2, h3, h4, h5, span, label, a, button, p, input{
+    font-family: $arabic-primary-Fonts!important;
+  }
+}
+
+
+.filter-v4{
+    background-color:$bg;
+    height: auto;
+    padding: 10px;
+    float: left;
+    width: 100%;
+    h3{
+        margin:0px;
+        display: block;
+        padding:10px;
+        width: calc(100% - 230px);
+        float: left;
+        font-size: 16px;
+        color: $primarycolor;
+        text-align: left;
+    }
+    .select-v4{
+        width: 210px;
+        float: right;
+        margin: 5px 10px;
+        ul{
+            li{
+                a{
+                    display: block;
+                    width: 33.3%;
+                    float: left;
+                    text-align: center;
+                    line-height: 30px;
+                    border-right:1px solid $light-border;
+                    color: $primarycolor;
+                    font-size: 14px;
+                    border-radius:$border-radius;
+                    font-size: 12px;
+
+                    &:hover{
+                        background-color:$primarycolor;
+                        color: $bg;
+                    }
+
+                }
+                .active{
+                    color: $bg;
+                    background-color:$primarycolor;
+                }
+            }
+        }
+        h2{
+            color: $primarycolor;
+        }
+    }
+}
+
+// arabic
+// =========================
+.arabic{
+    .filter-v4{
+        float: right;
+        h3{
+            float: right;
+            text-align: right;
+        }
+        .select-v4{
+            float: left;
+            ul{
+                li{
+                    a{
+                        float: right;
+                        text-align: center;
+                        line-height: 30px;
+                        border-left:1px solid $light-border;
+                        border-right:none;
+                    }
+                }
+            }
+        }
+    }
+    .arabic-switch-line{
+        display: inline;
+    }
+}
+
+
+
+/* Respopnsive breakpoint */
+// ============bigScreen===========
+@media all and (max-width: 991px) {
+
+}
+
+// ============MediumScreen========
+@media all and (max-width: 768px) {
+    .filter-v4{
+        h3{
+            float: none;
+            text-align: center;
+        }
+        .select-v4{
+            float: none;
+            margin: 0px auto;
+        }
+    }
+}
+
+// ============SmallScreen=========
+@media all and (max-width: 480px) {
+
+}

@@ -1,0 +1,68 @@
+@import '../../../styles/sass/base/_variables.scss';
+
+.rrssb-buttons{
+	margin-left: 10px;
+	span{
+		padding-left:0px!important;
+		padding-right:0px!important;
+	}
+	a{
+		width: 40px;
+		margin-right: 5px;
+		display: block;
+		float: left;
+		height: $button-height;
+		line-height: $button-height;
+		text-align: center;
+		color: $bg;
+		border-radius:$border-radius;
+		span{
+			padding-left:0px!important;
+			padding-right:0px!important;
+		}
+	}
+
+	button{
+        height: auto!important;
+        background: none;
+        width: auto!important;
+    }
+    .sb-button{
+        background: none!important;
+    }
+    .soc-rounds{
+        color: #fff;
+        display:inline-block;
+        line-height: 23px;
+        border-radius:3px;
+        width:24px;
+        height:24px;
+        text-align: center;
+        i{
+            font-size:$x-small-font
+        }
+        span{
+            padding:0px!important;
+        }
+    }
+    .soc-rounds:hover{
+        opacity: 0.86
+    }
+    .fb{
+        background:#37579a
+    }
+    .twitter{
+        background:#0ab8e3
+    }
+    .linkedin{
+        background:#1576b9
+    }
+    .google{
+        background:#df4a32
+    }
+    .whatsap{
+        background:#25d366;
+    }
+   
+}
+

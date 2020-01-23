@@ -1,0 +1,35 @@
+<ion-header class="animated fadeIn no-shadow">
+  <ion-navbar class="no-border" color="primary">
+    <ion-title>Notification Detils</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+<ion-item *ngIf="data">
+  <ion-row>
+    <ion-col col-6>Title</ion-col>
+    <ion-col col-6>{{data.data.title}}</ion-col>
+  </ion-row>
+  <ion-row>
+      <ion-col col-6>Description</ion-col>
+      <ion-col col-6>{{data.data.description}}</ion-col>
+  </ion-row>
+  <ion-row>
+      <ion-col col-6>Sent By</ion-col>
+      <ion-col col-6>{{data.data.sender}}</ion-col>
+  </ion-row>
+  <ion-row>
+        <ion-col col-6>Sender Contact</ion-col>
+        <ion-col col-6>{{data.data.sender_phone}}</ion-col>
+  </ion-row>
+  <ion-row *ngIf="data.data.date">
+        <ion-col col-6>Notification Date,Time</ion-col>
+        <ion-col col-6>{{data.data.date.date | date:'medium'}}</ion-col>
+  </ion-row>
+  <ion-row *ngIf="!data.data.date && data.created_at">
+        <ion-col col-6>Notification Date,Time</ion-col>
+        <ion-col col-6>{{data.created_at | date:'medium'}}</ion-col>
+  </ion-row>
+  </ion-item>
+</ion-content>

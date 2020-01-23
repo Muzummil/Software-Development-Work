@@ -1,0 +1,412 @@
+<div class="container basic-height" [class.arabic] = "accountService.isArabic()">
+
+    <!-- Start Three Step indication header -->
+    <!--========================================================================-->
+    <complete-profile-progress-bar [step]="1"></complete-profile-progress-bar>
+    <!-- End Three Step indication header -->
+    <!--========================================================================-->
+
+    
+    <!--========================================================================-->
+    <!-- Start Step One -->
+    <div class="fal-register-form-container">
+        <spinner *ngIf="!loadedFlag" [visible]="true"></spinner>
+        <ng-container *ngIf="loadedFlag">
+            <form [formGroup]="completeFirstForm">
+
+                <!--start first name -->
+                <!--============================================================================================-->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left margin-btm-15">
+                    <h4>{{fixedTextHash['first_name'][currLan]}}</h4>
+                    <input type="text" [class.error-feild]="(!(pristineFlag$ | async) || completeFirstForm.controls['first_name'].touched) && !completeFirstForm.controls['first_name'].valid" formControlName="first_name" placeholder="{{fixedTextHash['first_name'][currLan]}}" value="">
+                </div>
+                <!--end first name -->
+
+
+
+                <!--start last name -->
+                <!-- ================================================================================================-->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left margin-btm-15">
+                    <h4>{{fixedTextHash['last_name'][currLan]}}</h4>
+                    <input type="text" [class.error-feild]="(!(pristineFlag$ | async) || completeFirstForm.controls['last_name'].touched) && !completeFirstForm.controls['last_name'].valid" formControlName="last_name" placeholder="{{fixedTextHash['last_name'][currLan]}}" value="Doe">
+                </div>
+                <!--end last name -->
+
+
+
+                <!--start email -->
+                <!-- ================================================================================================-->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left margin-btm-15">
+                    <h4>{{fixedTextHash['email_word'][currLan]}}</h4>
+                    <input type="text" formControlName="email" placeholder="{{fixedTextHash['email'][currLan]}}" value="johndoe@gmail.com" disabled>
+                </div>
+                <!--end email-->
+
+
+
+                <!--start mobile number -->
+                <!-- ================================================================================================-->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left margin-btm-15">
+                    <h4>{{fixedTextHash['mobile'][currLan]}}</h4>
+                    <jquery-tel [placeholder]="fixedTextHash['mobile'][currLan]"
+                                (getProcessedPhoneNo)="completeFirstForm.controls['mobile_phone'].setValue($event.phone_no)"
+                                [match]="'phone_no'"
+                                [isArabic]="accountService.isArabic()"
+                                [errorFlag]="(!(pristineFlag$ | async) || completeFirstForm.controls['mobile_phone'].touched) && !completeFirstForm.controls['mobile_phone'].valid"
+                                [phone_no]="completeFirstForm.controls['mobile_phone'].value" >
+
+                    </jquery-tel>
+                    <input type="hidden" formControlName="mobile_phone">
+                </div>
+                <!--end mobile number -->
+
+
+
+
+                <!--start date of birth -->
+                <!-- ================================================================================================-->
+                <!--Desktop-->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 arabic-right-left margin-btm-5" *ngIf="screenwidth > windowSizeDivider">
+                    <h4>{{fixedTextHash['date_birth'][currLan]}}</h4>
+                    <input type="hidden" [ngModel]="birthDate"   formControlName="birth_date">
+                    <datePicker-block (emitSelDate)="setDate($event)"
+                                      [setDefaultDate]="defaultBirthDate"
+                                      [sel_id]="'1'"
+                                      [dp_value]="birthDate"
+                                      [toYear]="toYearDob"
+                                      (onEmptyText)="makeControlInvalid(completeFirstForm.controls['birth_date'])"
+                                      [error]="(!(pristineFlag$ | async) ||
+                                       completeFirstForm.controls['birth_date'].touched)
+                                       && !completeFirstForm.controls['birth_date'].valid"
+                                      [maxDate]="maxDateDob"
+                                      [dp_placeholder]="fixedTextHash['date_birth'][currLan]">
+
+                    </datePicker-block>
+                </div>
+                <!-- Mobile-->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 arabic-right-left margin-btm-15" *ngIf="screenwidth <= windowSizeDivider">
+
+                    <!-- Date of Birth -->
+                    <div class="each-area-input">
+                        <span class="single-text">{{fixedTextHash['date_birth'][currLan]}}</span>
+                    </div>
+
+                    <div class="each-area-input">
+
+                        <div class="f-box-new-form">
+                            <div class="select-new-mobile">
+                                <select (change)="createDob()" formControlName="dob_year"  #selYear
+                                        [class.error-feild]="(completeFirstForm.controls['dob_year'].touched || !(pristineFlag$ | async)) && completeFirstForm.controls['dob_year'].errors">
+                                    <option value="null" selected disabled>{{fixedTextHash['year'][currLan]}}</option>
+                                    <option value= "{{selYear}}" *ngFor="let selYear of yearRange,let ycount = index">
+                                        {{selYear}}</option>
+                                </select>
+                                <div class="select__arrow"></div>
+                            </div>
+                        </div>
+                        <div class="f-box-new-form both-sp">
+                            <div class="select-new-mobile select-border">
+                                <select (change)="createDob()" formControlName="dob_month"  #selMonth [class.error-feild]="(completeFirstForm.controls['dob_month'].touched || !(pristineFlag$ | async)) && completeFirstForm.controls['dob_month'].errors">
+                                    <option value="null" selected disabled>{{fixedTextHash['month'][currLan]}}</option>
+                                    <option value= "{{selMonth?.id}}"  *ngFor="let selMonth of monthRange">{{selMonth?.name}}</option>
+                                </select>
+                                <div class="select__arrow"></div>
+                            </div>
+                        </div>
+                        <div class="f-box-new-form">
+                            <div class="select-new-mobile">
+                                <select (change)="createDob()" #selDate  formControlName="dob_date" [class.error-feild]="(completeFirstForm.controls['dob_date'].touched || !(pristineFlag$ | async)) && completeFirstForm.controls['dob_date'].errors">
+                                    <option value="null" selected disabled>{{fixedTextHash['day'][currLan]}}</option>
+                                    <option value= "{{selDate}}" *ngFor="let selDate of dateRange,let ycount = index">{{selDate}}</option>
+                                </select>
+                                <div class="select__arrow"></div>
+                            </div>
+                        </div>
+
+                        <input type="hidden" formControlName="birth_date">
+                    </div>
+
+                </div>
+                <!-- end date of birth -->
+
+
+
+
+                <!--start gender -->
+                <!-- ================================================================================================-->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 arabic-right-left margin-btm-5">
+                    <h4>{{fixedTextHash['gender'][currLan]}}</h4>
+                    <input  type="hidden" name="gender"   formControlName="gender">
+                    <bootstrap-selectbox
+                            (selectedId)="completeFirstForm.controls['gender'].setValue($event.id)"
+                            [selectedValue]="completeFirstForm.controls['gender'].value"
+                            [placeholder]="fixedTextHash['gender'][currLan]"
+                            [selectOneEnter]="true"
+                            (onEmptyText)="makeControlInvalid(completeFirstForm.controls['gender'])"
+                            [selectList]="[{id:'male',name:fixedTextHash['male'][currLan]},{id:'female',name:fixedTextHash['female'][currLan]}]"
+                            [error]="(!(pristineFlag$ | async) || completeFirstForm.controls['gender'].touched) && !completeFirstForm.controls['gender'].valid" >
+                    </bootstrap-selectbox>
+
+                </div>
+                <!-- end gender -->
+
+
+
+                <!--start marital status -->
+                <!-- ================================================================================================-->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 arabic-right-left margin-btm-5">
+                    <h4>{{fixedTextHash['marital_status'][currLan]}} </h4>
+                    <bootstrap-selectbox *ngIf="(maritalList$ | async)"
+                                         (selectedId)="completeFirstForm.controls['marital_status'].setValue($event.id)"
+                                         [selectedValue]="completeFirstForm.controls['marital_status'].value"
+                                         [placeholder]="fixedTextHash['marital_status'][currLan]"
+                                         [selectOneEnter]="true"
+                                         (onEmptyText)="makeControlInvalid(completeFirstForm.controls['marital_status'])"
+                                         [error]="(!(pristineFlag$ | async) || completeFirstForm.controls['marital_status'].touched) && !completeFirstForm.controls['marital_status'].valid"
+                                         [selectList]="(maritalList$ | async)">
+                    </bootstrap-selectbox>
+
+                    <!-- just hide this section we no need this -->
+                    <input type="hidden" name="marital_status"  formControlName="marital_status">
+
+                </div>
+                <!-- end marital status -->
+
+
+
+                <!-- start current country of residence -->
+                <!-- ================================================================================================-->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left margin-btm-5">
+                    <h4>{{fixedTextHash['current_country_of_residence'][currLan]}}</h4>
+                    <bootstrap-selectbox *ngIf="countryList"
+                                         (selectedId)="onSelectCountry($event)"
+                                         [selectedValue]="completeFirstForm.controls['country_id'].value"
+                                         [selectOnEmpty]="true"
+                                         [expandNewList]="false"
+                                         (onEmptyText)="makeControlInvalid(completeFirstForm.controls['country_id'])"
+                                         [error]="(!(pristineFlag$ | async) || completeFirstForm.controls['country_id'].touched) && !completeFirstForm.controls['country_id'].valid"
+                                         [placeholder]="fixedTextHash['country'][currLan]"
+                                         [selectList]="countryList">
+                    </bootstrap-selectbox>
+                    <input type="text" *ngIf="!countryList"  [placeholder]="fixedTextHash['country'][currLan]" >
+                    <!-- just hide the section its no needed in design  -->
+                    <input  type="hidden" name="country_id" formControlName="country_id">
+                </div>
+                <!-- end current country of residence -->
+
+
+
+                <!-- start current city of residence -->
+                <!-- ================================================================================================-->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left margin-btm-5">
+                    <h4>{{fixedTextHash['current_city_of_residence'][currLan]}}</h4>
+                    <!-- Cites For selected  Countries -->
+                    <div *ngFor="let sel_country of countryList">
+                        <auto-comp1 *ngIf="sel_country.id == countryId"
+                                    [resetOnEmpty]="true"
+                                    [countryId]="sel_country.id"
+                                    [current_city]="cityObj"
+                                    (onEmptyText)="makeControlInvalid(completeFirstForm.controls['city_id'])"
+                                    [error]="(!(pristineFlag$ | async) || completeFirstForm.controls['city_id'].touched) && !completeFirstForm.controls['city_id'].valid"
+                                    [initData]="sel_country.id == cityObj.country_id ?[cityObj]:[]"
+                                    (changeCityId)="onSelectCity($event)">
+                        </auto-comp1>
+                    </div>
+                    <!-- Empty city if no country selected -->
+                    <input type="text" [placeholder]="fixedTextHash['city'][currLan]" *ngIf="!countryId">
+                    <!-- City If input box -->
+                    <input  type="hidden" name="city_id"  formControlName="city_id" >
+                </div>
+                <!-- end current city of residence -->
+
+                <div class="clearfix"></div>
+
+
+                <!-- Start Nationality -->
+                <!-- ================================================================================================-->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left margin-btm-5">
+                    <h4>{{fixedTextHash['nationality'][currLan]}}</h4>
+                    <!-- Nationality Auto complete -->
+                    <bootstrap-selectbox *ngIf="countryList"
+                                         (selectedId)="completeFirstForm.controls['nationality_id'].setValue($event.id);onChangeNationality($event.id)"
+                                         [selectOnEmpty]="true"
+                                         [expandNewList]="false"
+                                         [selectedValue]="completeFirstForm.controls['nationality_id'].value"
+                                         [placeholder]="fixedTextHash['nationality'][currLan]"
+                                         [selectList]="countryList"
+                                         (onEmptyText)="makeControlInvalid(completeFirstForm.controls['nationality_id'])"
+                                         [error]="(!(pristineFlag$ | async) || completeFirstForm.controls['nationality_id'].touched) && !completeFirstForm.controls['nationality_id'].valid"
+                    >
+                    </bootstrap-selectbox>
+                    <!-- Nationality temporary input box till auto complete loads -->
+                    <input type="text" *ngIf="!countryList"  [placeholder]="fixedTextHash['nationality'][currLan]" >
+
+                    <!-- Nationality id attached to form -->
+                    <input  type="hidden" name="nationality_id"  formControlName="nationality_id">
+                </div>
+                <!-- End Nationality -->
+
+
+
+
+                <!-- Start Visa -->
+                <!-- ================================================================================================-->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left margin-btm-5">
+                    <h4>{{fixedTextHash['iqama_status'][currLan]}}</h4>
+                    
+                    <input *ngIf="isSaudi" type="text" readonly="readonly"
+                    [value]="saudiArabiaObj.visa_name">
+                    <bootstrap-selectbox *ngIf="filteredVisaList && !isSaudi"
+                                         (selectedId)="completeFirstForm.controls['visa_status_id'].setValue($event.id)"
+                                         [selectedValue]="completeFirstForm.controls['visa_status_id'].value"
+                                         [placeholder]="fixedTextHash['iqama_status'][currLan]"
+                                         [selectOneEnter]="true"
+                                         (onEmptyText)="makeControlInvalid(completeFirstForm.controls['visa_status_id'])"
+                                         [error]="(!(pristineFlag$ | async) || completeFirstForm.controls['visa_status_id'].touched) && !completeFirstForm.controls['visa_status_id'].valid"
+                                         [selectList]="(filteredVisaList)">
+                    </bootstrap-selectbox>
+
+                    <!-- just hide this section we no need this -->
+                    <input type="hidden" name="visa_status_id"   formControlName="visa_status_id">
+                </div>
+                <!-- End Visa -->
+
+
+
+                <!-- start add languages -->
+                <!-- ================================================================================================-->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 arabic-right-left margin-btm-15">
+                    <div class="language-tag">
+                        <h4 [class.red-error]="(!(pristineFlag$ | async) || languageTouched) && completeFirstForm.controls['language_ids'].value?.length == 0">{{fixedTextHash['languages'][currLan]}}&nbsp;<span>({{fixedTextHash['limit_lang'][currLan]}})</span></h4>
+                        <lang-tag (onLanChange)="onChangeLan($event)" [languageList]="languagesList" [maxCount]="maxLangCount"></lang-tag>
+                    </div>
+                </div>
+                <!-- end languages -->
+
+                <!--start National ID Number -->
+                <!--============================================================================================-->
+                <div *ngIf="(isNationalitySaudi$ | async) || (isLocationSaudi$ | async)"
+                    class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left margin-btm-15">
+                    <h4 *ngIf="!(isNationalitySaudi$ | async) && (isLocationSaudi$ | async)">
+                        {{fixedTextHash['iqama_number'][currLan]}}</h4>
+                    <h4 *ngIf="(isNationalitySaudi$ | async)">{{fixedTextHash['national_id'][currLan]}}</h4>
+ 
+                    <input type="text" [class.error-feild]="(!(pristineFlag$ | async) || completeFirstForm.controls['visa_code'].touched) && 
+                        !completeFirstForm.controls['visa_code'].valid" formControlName="visa_code" value=""
+                        [placeholder]="(isNationalitySaudi$ | async) ? fixedTextHash['enter_national_id'][currLan] : fixedTextHash['enter_iqama_id'][currLan]">
+                    <div *ngIf="(visaCodeTaken$ | async)"
+                        class="alert alert-danger alert-dismissible martop5" role="alert">
+                        <span *ngIf="!(isNationalitySaudi$ | async) && (isLocationSaudi$ | async)">{{fixedTextHash['iqama_taken'][currLan]}}</span>
+                        <span *ngIf="(isNationalitySaudi$ | async)">{{fixedTextHash['national_id_taken'][currLan]}}</span>
+                    </div>
+                    
+                    <!-- change to be done -->
+                </div>
+                <!--end National ID Number -->
+ 
+                <!-- start upload National ID Number -->
+                <div *ngIf="(isNationalitySaudi$ | async) || (isLocationSaudi$ | async)"
+                    class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left margin-btm-15">
+                    <h4 *ngIf="(isNationalitySaudi$ | async)">{{fixedTextHash['upload_national_id'][currLan]}}</h4>
+                    <h4 *ngIf="!(isNationalitySaudi$ | async) && (isLocationSaudi$ | async)">
+                        {{fixedTextHash['upload_iqama_number'][currLan]}}</h4>
+                    <div class="new-upload">
+ 
+                        <div class="input-group">
+                            <div class="link-text" *ngIf="gotDoc || (getValidateHasResume() && !notShowAttachment)">
+                                <a href="{{resumeList[0]['document']}}"
+                                    target="_blank">{{fixedTextHash['attach_document'][currLan]}}</a>
+                                <span class="btn-delete"><i class="zmdi zmdi-delete cv_delete cursor_pointer1"
+                                        (click)="removeResume()"></i></span>
+                            </div>
+                            <input type="hidden" formControlName="cv_document">
+                            <ng-container *ngIf="!gotDoc || (!getValidateHasResume() || notShowAttachment)">
+                                <label id="browsebutton" class="btn btn-default input-group-addon bt-up-ats"
+                                    for="file-upload2">
+                                    <input id="file-upload2" type="file" (change)="selectFile($event,'cv_document')"
+                                        style="display:none;">
+                                    {{fixedTextHash['browse'][currLan]}}...
+                                </label>
+                                <input type="text" class="form-control js_cv_document" readonly="">
+                            </ng-container>
+                        </div>
+                        <span class="help-block"></span>
+                    </div>
+                    <!--info message-->
+                    <ng-container *ngIf="!getValidateHasResume() || notShowAttachment">
+                        <div class="font-12"
+                            [innerHTML]="fixedTextHash['upload_message'][currLan]
+                        .replace('{file_types}','PDF, DOC').replace('{file_types}','PDF, DOC')
+                        .replace('{file_types}','PDF, DOC').replace('{file_size_with_units}', this.documentFileSizeInMB + ' MB')"></div>
+                        <!--CV error message-->
+                        <div *ngIf="(invalidCv$ | async)" class="alert alert-danger alert-dismissible martop5"
+                            role="alert">{{fixedTextHash['invalid_file_format'][currLan]}}</div>
+                        <div *ngIf="(tooLargeCv$ | async)" class="alert alert-danger alert-dismissible martop5"
+                            role="alert">{{fixedTextHash['file_size_large'][currLan]}}</div>
+                        <div *ngIf="(tooSmallCv$ | async)" class="alert alert-danger alert-dismissible martop5"
+                            role="alert">{{fixedTextHash['minimum_sized_req'][currLan]}}</div>
+                        <div *ngIf="(completeFirstForm.controls['cv_document'].touched || !(pristineFlag$ | async)) && completeFirstForm.controls['cv_document'].errors"
+                            class="alert alert-danger alert-dismissible martop5" role="alert">
+                            <span
+                                *ngIf="(isNationalitySaudi$ | async)">{{fixedTextHash['upload_national_id'][currLan]}}</span>
+                            <span
+                                *ngIf="!(isNationalitySaudi$ | async) && (isLocationSaudi$ | async)">{{fixedTextHash['upload_iqama_number'][currLan]}}</span>
+                        </div>
+                    </ng-container>
+                </div>
+                <!-- end upload National ID Number -->
+ 
+                <div class="clearfix"></div>
+
+
+                <!-- start driving license -->
+                <!-- ================================================================================================-->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left margin-btm-15">
+                    <h4>{{fixedTextHash['drive_license'][currLan]}} </h4>
+                    <div class="clicks">
+                        <div class="radio radio-primary radio-inline">
+                            <input id="driving_license_ratio_yes" type="radio" value="true" formControlName="has_driving_license">
+                            <label for="driving_license_ratio_yes">
+                                <span>{{fixedTextHash['yes'][currLan]}}</span>
+                            </label>
+                        </div>
+                        <div class="radio radio-primary radio-inline">
+                            <input id="driving_license_ratio_no" type="radio" value="false" formControlName="has_driving_license">
+                            <label for="driving_license_ratio_no">
+                                <span>{{fixedTextHash['no'][currLan]}}</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="completeFirstForm.controls['has_driving_license'].value == 'true'" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 arabic-right-left margin-btm-5">
+                    <h4>{{fixedTextHash['country_of_issue'][currLan]}}</h4>
+                    <bootstrap-selectbox *ngIf="countryList"
+                                         (selectedId)="completeFirstForm.controls['driving_license_country_id'].setValue($event.id)"
+                                         [selectedValue]="completeFirstForm.controls['driving_license_country_id'].value"
+                                         [placeholder]="fixedTextHash['empty_country'][currLan]"
+                                         [selectOneEnter]="true"
+                                         (onEmptyText)="makeControlInvalid(completeFirstForm.controls['driving_license_country_id'])"
+                                         [error]="(!(pristineFlag$ | async) || completeFirstForm.controls['driving_license_country_id'].touched) && !completeFirstForm.controls['driving_license_country_id'].value && completeFirstForm.controls['has_driving_license'].value"
+                                         [selectList]="countryList">
+                    </bootstrap-selectbox>
+
+                    <!-- just hide this section we no need this -->
+                    <input hidden="text" name="driving_license_country_id"   formControlName="driving_license_country_id"  >
+                </div>
+                <!-- end driving license -->
+
+                <!-- start button group -->
+                <div class="fal-register-btn-group">
+                    <button *ngIf="!postInProcess"  class="fal-btn-primary" type="button" (click)="getSubmit()">{{fixedTextHash['next'][currLan]}}</button>
+                    <button *ngIf="postInProcess" class="fal-btn-primary disabled_button" type="button">{{fixedTextHash['next'][currLan]}}</button>
+                </div>
+                <!-- end button group -->
+
+            </form>
+        </ng-container>
+
+    </div>
+    <!-- End Step One -->
+    <!--========================================================================-->
+
+</div>

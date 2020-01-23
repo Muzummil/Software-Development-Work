@@ -1,0 +1,31 @@
+<div class="loder-top">
+  <router-outlet name="transpage"></router-outlet>
+</div>
+
+<span [class.arabic]="accountService.isArabic()">
+
+  <div [class.hide]="!accountService.getSwitchPage()" [class.show]="accountService.getSwitchPage()" >
+    <router-outlet name="switchpage"></router-outlet>
+  </div>
+
+  <div [class.hide]="accountService.getSwitchPage()" [class.show]="!accountService.getSwitchPage()">
+    
+
+      <!-- the home page and public page *side-body class not required
+      the inner pages of employer and jobseeker the *side-body class required -->
+
+      <div [class.side-body]="(isAuthorized$ | async)">
+        <router-outlet name="header"></router-outlet>
+        <router-outlet name="leftbar"></router-outlet>
+        <router-outlet></router-outlet>
+        <!-- Menus -->
+        
+      </div>
+
+
+
+      <router-outlet name="footer"></router-outlet>
+
+  </div>
+  
+</span>

@@ -1,0 +1,362 @@
+<div class="main-tab load-data-js mobile-tab-top"></div>
+<div class="tab-content job-bloovo">
+    <!--------------------------- All Jobs ---------------------------------->
+    <div *ngIf="!loadedData" class="empty-min2">
+        <i class="small_loading"><spinner></spinner></i>
+    </div>
+    <div *ngIf="loadedData" class="container margin-top-space"  [class.arabic] = "accountService.isArabic()">
+        <!--candidates serches-->
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 candidates">
+            <div class="block bottom-gap empty-min14">
+                <div class="common-block block-title border-none ">
+                    <h1>{{fixedTextHash['search_candidates'][currLan]}}</h1>
+                </div>
+
+                <form [formGroup]="candidateNameForm">
+                    <div class="common-block clicks padding-10-10 candi-search-option">
+                        <div class="col-lg-5 col-xs-12 col-sm-6 hide">
+                        </div>
+                        <div class="col-lg-12 col-sm-12 col-xs-12 candi-searzch-part-bt">
+                            <div class="full-box candiSearchCompo">
+
+                                <input  *ngIf="accountService.getSearchJobSeekers()" type="text"
+                                        formControlName="search_string"
+                                        [placeholder]="fixedTextHash['search_keywords'][currLan]"
+                                        class="candi-search-part"
+                                        (keydown.enter)="searchCandidate()"
+                                        name="search_string">
+                                <input *ngIf="!accountService.getSearchJobSeekers()" type="text"
+                                       [placeholder]="fixedTextHash['search_candidate_name'][currLan]"
+                                       class="candi-search-part" name="search_string">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <form [formGroup]="candidateForm">
+                    <div class="block-container edit padd-15">
+
+                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12  arabic-right-left arabic-mob-float-none">
+                            <div class="search-candidates-spinner"  *ngIf="!(sectors$ | async)">
+                                <i><spinner [visible]="true"></spinner></i>
+                            </div>
+                            <div class="search-candidates padding-left" *ngIf="(sectors$ | async)" >
+                                <div class="candidate-txt">{{fixedTextHash['job_attr'][currLan]}}</div>
+                                <div class="full-box">
+                                    <div class="half-box-post">
+                                        <bootstrap-selectbox *ngIf="countryList"
+                                                             [resetOnEmpty]="true"
+                                                             (selectedId)="candidateForm.controls['locations'].setValue($event.id);cityObj.id = null;cityObj.text = null; cityObj.name = null;cityObj.country_id =null;"
+                                                             [selectedValue]="candidateForm.controls['locations'].value"
+                                                             [placeholder]="fixedTextHash['country'][currLan]"
+                                                             [selectList]="countryList">
+                                        </bootstrap-selectbox>
+
+                                        <!-- just hide the section its no needed in design  -->
+                                        <input  type="hidden" name="locations"   formControlName="locations" class="text" >
+                                    </div>
+
+                                </div>
+                                <div class="full-box">
+                                    <div *ngFor="let sel_country of countryList">
+                                        <auto-comp1 *ngIf="sel_country.id == candidateForm.controls['locations'].value && sel_country.id != ''"
+                                                    [countryId]="sel_country.id"
+                                                    [current_city]="cityObj"
+                                                    [resetOnEmpty]="true"
+                                                    [initData]="sel_country.id == cityObj.country_id ?[cityObj]:[]"
+                                                    (changeCityId)="cityObj.id = $event.id;">
+                                        </auto-comp1>
+                                    </div>
+                                    <input  type="hidden" name="cities"  [ngModel]="cityObj.id"
+                                            formControlName="cities" >
+
+                                    <input *ngIf="!candidateForm.controls['locations'].value"
+                                           type="text" name="cities"
+                                           readonly [placeholder]="fixedTextHash['city'][currLan]" >
+
+                                </div>
+                                <div class="full-box">
+                                    <input  type="hidden" [placeholder]="fixedTextHash['job_title'][currLan]" name="job_title"
+                                            formControlName="job_title" class="text" >
+                                    <bootstrap-selectbox *ngIf="(title$ | async)"
+                                                         [selectOnType]="true"
+                                                         [showCaret]="false"
+                                                         [resetOnLoad]="false"
+                                                         [selectOnEmpty]="true"
+                                                         [resetNow]="resetNowTitle"
+                                                         [onTypeOpen]="false"
+                                                         (selectedId)="setSelTitle($event)"
+                                                         [selectedValue]="candidateForm.controls['job_title'].value"
+                                                         [placeholder]="fixedTextHash['job_title'][currLan]"
+                                                         [selectList]="(title$ | async)">
+                                    </bootstrap-selectbox>
+                                </div>
+
+
+                                <div class="full-box">
+                                    <bootstrap-selectbox *ngIf="(sectors$ | async)"
+                                                         [resetOnEmpty]="true"
+                                                         (selectedId)="candidateForm.controls['sectors'].setValue($event.id);"
+                                                         [selectedValue]="candidateForm.controls['sectors'].value"
+                                                         [placeholder]="fixedTextHash['sector'][currLan]"
+                                                         [selectList]="(sectors$ | async)">
+                                    </bootstrap-selectbox>
+                                    <input  type="hidden" name="sectors"  formControlName="sectors" class="text" >
+
+                                </div>
+
+
+                                <div class="full-box">
+                                    <bootstrap-selectbox *ngIf="(functionalAreaList$ | async)"
+                                                         [resetOnEmpty]="true"
+                                                         (selectedId)="candidateForm.controls['fareas'].setValue($event.id);"
+                                                         [selectedValue]="candidateForm.controls['fareas'].value"
+                                                         [placeholder]="fixedTextHash['functional_area'][currLan]"
+                                                         [selectList]="(functionalAreaList$ | async)">
+                                    </bootstrap-selectbox>
+                                    <input  type="hidden" name="fareas"  formControlName="fareas" class="text" >
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12  arabic-right-left arabic-mob-float-none">
+                            <div class="search-candidates-spinner"   *ngIf="!(salary_range_expected$ | async)?.salary_range">
+                                <i><spinner [visible]="true"></spinner></i>
+                            </div>
+                            <div class="search-candidates"  *ngIf="(salary_range_expected$ | async)?.salary_range">
+                                <div class="candidate-txt">{{fixedTextHash['personal_attr'][currLan]}}</div>
+
+                                <div class="full-box">
+                                    <bootstrap-selectbox *ngIf="(expRange$ | async)"
+                                                         (selectedId)="candidateForm.controls['exprange'].setValue($event.id);"
+                                                         [selectedValue]="candidateForm.controls['exprange'].value"
+                                                         [resetOnEmpty]="true"
+                                                         [placeholder]="fixedTextHash['years_experience'][currLan]"
+                                                         [selectList]="(expRange$ | async)">
+
+                                    </bootstrap-selectbox>
+                                    <input  type="hidden" name="exprange"  formControlName="exprange" class="text" >
+
+                                </div>
+
+                                <div class="full-box">
+
+                                    <bootstrap-selectbox *ngIf="(education$ | async)"
+                                                         [selectOnType]="true"
+                                                         [resetOnEmpty]="true"
+                                                         [resetOnLoad]="false"
+                                                         [createNewList]="false"
+                                                         [selectOnEmpty]="true"
+                                                         [resetNow]="resetNowEdu"
+                                                         [onTypeOpen]="false"
+                                                         [showCaret]="false"
+                                                         (selectedId)="setSelEducation($event)"
+                                                         [selectedValue]="candidateForm.controls['graduation_university'].value"
+                                                         [placeholder]="fixedTextHash['school'][currLan]"
+                                                         [selectList]="(education$ | async)">
+                                    </bootstrap-selectbox>
+                                    <input  type="hidden" name="graduation_university"
+                                            formControlName="graduation_university"
+                                            class="text"
+                                            [placeholder]="fixedTextHash['school'][currLan]" >
+
+                                </div>
+
+                                <div class="full-box">
+                                    <bootstrap-selectbox *ngIf="(educationList$ | async)?.education"
+                                                         [resetOnEmpty]="true"
+                                                         (selectedId)="candidateForm.controls['edulevels'].setValue($event.id);"
+                                                         [selectedValue]="candidateForm.controls['edulevels'].value"
+                                                         [placeholder]="fixedTextHash['high_edu'][currLan]"
+                                                         [selectList]="(educationList$ | async)?.education">
+                                    </bootstrap-selectbox>
+                                    <input  type="hidden" name="edulevels"  formControlName="edulevels" class="text" >
+
+                                </div>
+
+
+                                <div class="full-box">
+                                    <bootstrap-selectbox *ngIf="(salary_range$ | async)?.salary_range"
+                                                         [resetOnEmpty]="true"
+                                                         (selectedId)="candidateForm.controls['current_sal'].setValue($event.id);"
+                                                         [selectedValue]="candidateForm.controls['current_sal'].value"
+                                                         [placeholder]="fixedTextHash['cur_month_salary'][currLan].replace('CURRCODE',fixedTextHash[accountService.getCurrency()][currLan])"
+                                                         [selectList]="(salary_range$ | async)?.salary_range">
+                                    </bootstrap-selectbox>
+                                    <input  type="hidden" name="current_sal"  formControlName="current_sal" class="text" >
+
+                                </div>
+
+                                <div class="full-box">
+                                    <bootstrap-selectbox *ngIf="(salary_range_expected$ | async)?.salary_range"
+                                                         [resetOnEmpty]="true"
+                                                         (selectedId)="candidateForm.controls['expect_sal'].setValue($event.id);"
+                                                         [selectedValue]="candidateForm.controls['expect_sal'].value"
+                                                         [placeholder]="fixedTextHash['exp_month_salary'][currLan].replace('CURRCODE',fixedTextHash[accountService.getCurrency()][currLan])"
+                                                         [selectList]="(salary_range_expected$ | async)?.salary_range">
+                                    </bootstrap-selectbox>
+                                    <input  type="hidden" name="expect_sal"  formControlName="expect_sal" class="text" >
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12  arabic-right-left arabic-mob-float-none">
+                            <div class="search-candidates-spinner"  *ngIf="!(languagesList$ | async)?.languages">
+                                <i><spinner [visible]="true"></spinner></i>
+                            </div>
+                            <div class="search-candidates " *ngIf="(languagesList$ | async)?.languages">
+                                <div class="candidate-txt">{{fixedTextHash['demographic_attr'][currLan]}}</div>
+                                <div class="full-box">
+                                    <bootstrap-selectbox *ngIf="nationalityList"
+                                                         [resetOnEmpty]="true"
+                                                         (selectedId)="candidateForm.controls['nationality'].setValue($event.id);"
+                                                         [selectedValue]="candidateForm.controls['nationality'].value"
+                                                         [placeholder]="fixedTextHash['nationality'][currLan]" [selectList]="nationalityList">
+                                    </bootstrap-selectbox>
+                                    <input  type="hidden" name="nationality"  formControlName="nationality" class="text" >
+
+                                </div>
+                                <div class="full-box">
+                                    <bootstrap-selectbox *ngIf="(ageGroup$ | async)"
+                                                         [resetOnEmpty]="true"
+                                                         (selectedId)="candidateForm.controls['age_group'].setValue($event.id);"
+                                                         [selectedValue]="candidateForm.controls['age_group'].value"
+                                                         [placeholder]="fixedTextHash['age_group'][currLan]"
+                                                         [selectList]="(ageGroup$ | async)">
+                                    </bootstrap-selectbox>
+                                    <input  type="hidden" name="age_group"  formControlName="age_group" class="text" >
+
+
+                                </div>
+                                <div class="full-box">
+                                    <bootstrap-selectbox *ngIf="(languagesList$ | async)?.languages"
+                                                         [resetOnEmpty]="true"
+                                                         (selectedId)="candidateForm.controls['language'].setValue($event.id);"
+                                                         [selectedValue]="candidateForm.controls['language'].value"
+                                                         [placeholder]="fixedTextHash['language'][currLan]"
+                                                         [selectList]="(languagesList$ | async)?.languages">
+                                    </bootstrap-selectbox>
+                                    <input  type="hidden" name="language"  formControlName="language" class="text" >
+
+
+                                </div>
+
+                                <div class="full-box">
+                                    <bootstrap-selectbox *ngIf="(genderList$ | async)"
+                                                         [resetOnEmpty]="true"
+                                                         (selectedId)="candidateForm.controls['gender'].setValue($event.id);"
+                                                         [selectedValue]="candidateForm.controls['gender'].value"
+                                                         [placeholder]="fixedTextHash['gender'][currLan]"
+                                                         [selectList]="(genderList$ | async)">
+                                    </bootstrap-selectbox>
+                                    <input  type="hidden" name="gender"  formControlName="gender" class="text" >
+
+                                </div>
+                                <div class="full-box">
+                                    <bootstrap-selectbox *ngIf="(maritalStatusList$ | async)"
+                                                         [resetOnEmpty]="true"
+                                                         (selectedId)="candidateForm.controls['marital_status'].setValue($event.id);"
+                                                         [selectedValue]="candidateForm.controls['marital_status'].value"
+                                                         [placeholder]="fixedTextHash['marital_status'][currLan]"
+                                                         [selectList]="(maritalStatusList$ | async)">
+                                    </bootstrap-selectbox>
+                                    <input  type="hidden" name="marital_status"  formControlName="marital_status" class="text" >
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 border-none arabic-right-left arabic-mob-float-none">
+                            <div class="search-candidates-spinner padding-right"  *ngIf="!(jobTypeList$ | async)?.job_types">
+                                <i><spinner [visible]="true"></spinner></i>
+                            </div>
+                            <div class="search-candidates padding-right"  *ngIf="(jobTypeList$ | async)?.job_types">
+                                <div class="candidate-txt">{{fixedTextHash['other_attr'][currLan]}}</div>
+                                <div class="full-box">
+                                    <bootstrap-selectbox *ngIf="(noticePeriodList$ | async)"
+                                                         [resetOnEmpty]="true"
+                                                         (selectedId)="candidateForm.controls['notice_period'].setValue($event.id);"
+                                                         [selectedValue]="candidateForm.controls['notice_period'].value"
+                                                         [placeholder]="fixedTextHash['notice_period'][currLan]"
+                                                         [selectList]="(noticePeriodList$ | async)">
+                                    </bootstrap-selectbox>
+                                    <input  type="hidden" name="notice_period"  formControlName="notice_period" class="text" >
+                                </div>
+                                <div class="full-box">
+                                    <bootstrap-selectbox *ngIf="(lastActiveList$ | async)"
+                                                         [resetOnEmpty]="true"
+                                                         (selectedId)="candidateForm.controls['last_active'].setValue($event.id);"
+                                                         [selectedValue]="candidateForm.controls['last_active'].value"
+                                                         [placeholder]="fixedTextHash['last_active'][currLan]"
+                                                         [selectList]="(lastActiveList$ | async)">
+                                    </bootstrap-selectbox>
+                                    <input  type="hidden" name="last_active"  formControlName="last_active" class="text" >
+                                </div>
+                                <div class="full-box">
+                                    <bootstrap-selectbox *ngIf="(visaStatusList$ | async)"
+                                                         [resetOnEmpty]="true"
+                                                         (selectedId)="candidateForm.controls['visa_status'].setValue($event.id);"
+                                                         [selectedValue]="candidateForm.controls['visa_status'].value"
+                                                         [placeholder]="fixedTextHash['visa_status'][currLan]"
+                                                         [selectList]="(visaStatusList$ | async)">
+                                    </bootstrap-selectbox>
+                                    <input  type="hidden" name="visa_status"  formControlName="visa_status" class="text" >
+
+                                </div>
+
+                                <div class="full-box">
+                                    <bootstrap-selectbox *ngIf="(jobTypeList$ | async)?.job_types"
+                                                         [resetOnEmpty]="true"
+                                                         (selectedId)="candidateForm.controls['jobtypes'].setValue($event.id);"
+                                                         [selectedValue]="candidateForm.controls['jobtypes'].value"
+                                                         [placeholder]="fixedTextHash['job_type'][currLan]"
+                                                         [selectList]="(jobTypeList$ | async)?.job_types">
+                                    </bootstrap-selectbox>
+                                    <input  type="hidden" name="jobtypes"  formControlName="jobtypes" class="text" >
+
+                                </div>
+
+                                <div class="full-box">
+                                    <input  type="hidden" name="company_name"  formControlName="company_name"  placeholder="Company Name" class="text" >
+                                    <bootstrap-selectbox *ngIf="(company_name$ | async)"
+                                                         [selectOnType]="true"
+                                                         [resetNow]="resetNowComp"
+                                                         [resetOnEmpty]="true"
+                                                         [createNewList]="false"
+                                                         [resetOnLoad]="false"
+                                                         [showCaret]="false"
+                                                         [selectOnEmpty]="true"
+                                                         [onTypeOpen]="false"
+                                                         (selectedId)="setSelCompany($event)"
+                                                         [selectedValue]="candidateForm.controls['company_name'].value"
+                                                         [placeholder]="fixedTextHash['company'][currLan]"
+                                                         [selectList]="(company_name$ | async)">
+                                    </bootstrap-selectbox>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </form>
+
+                <!--candidates  buttton-->
+                <div class="common-block block-footer">
+                    <a  class="cursor_pointer1"  *ngIf="accountService.getSearchJobSeekers() && someThingSelected"
+                        (click)="searchCandidate()">
+                        <button class="big-160">{{fixedTextHash['search'][currLan]}}</button>
+                    </a>
+                    <a   *ngIf="!accountService.getSearchJobSeekers() || !someThingSelected" >
+                        <button class="big-160 disabled_button" >{{fixedTextHash['search'][currLan]}}</button>
+                    </a>
+                    <span class="cancel" (click)="onReset()" >
+                        <button class="big-160">  {{fixedTextHash['reset'][currLan]}} </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

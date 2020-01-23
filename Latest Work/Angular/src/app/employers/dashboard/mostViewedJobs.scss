@@ -1,0 +1,111 @@
+@import '../../../styles/sass/base/_variables.scss';
+
+
+input:-webkit-autofill {
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
+}
+
+h1, h2, h3, h4, h5, span, label, a, button, p{
+    font-family: $primary-Fonts;
+}
+
+.arabic{
+    h1, h2, h3, h4, h5, span, label, a, button, p, input, .cmpny-txt{
+       font-family: $arabic-primary-Fonts!important;
+    }
+}
+
+.block{
+    border:1px solid $light-border;
+    border-radius: $border-radius;
+    padding: 10px;
+}
+
+.headding-box-dash{
+    float: left;
+    min-height: $button-height;
+    line-height: $button-height;
+    width: calc(100% - 700px);
+    color: $primarycolor;
+    font-size: $normal-font;
+}
+
+.headding-box-dash-action{
+    float: left;
+    min-height: $button-height;;
+    line-height: $button-height;;
+    width: 700px;
+    .equal-box-actions{
+        width: 25%;
+        float: left;
+        color: $primarycolor;
+        font-size: $small-font;
+        text-align: center;
+        border-left:1px solid $boredr-color;
+    }
+}
+
+.feturd-compny-dtls{
+
+    color: $primarycolor;
+    .cmpny-txt{
+        color: $secondarycolor;
+    }
+
+}
+
+.job-bloovo{
+    min-height: 700px;
+}
+
+.box-dash-profile-left{
+    width: calc(100% - 700px)
+}
+.box-dash-profile-right{
+    width: 700px;
+}
+.applicants-numbers{
+    background:$white!important;
+    font-size: $normal-font;
+    text-align: center;
+}
+.probability{
+    padding-top: 0px!important;
+    a{
+        color: $primarycolor!important;
+    }
+}
+.equal-box-action{
+    text-align: center;
+    padding-top: 20px;
+    font-size: $normal-font;
+}
+
+.stnderd{
+    margin-top:0px!important;
+}
+.featured{
+    margin-top:0px!important;
+}
+.applicants-txt{
+    color: $secondarycolor!important;
+    text-align: center;
+}
+.applicants-numbers{
+    color: $primarycolor!important;
+}
+
+.filter-jobs .featured-box{
+    margin-bottom: 10px;
+}
+.featured-box{
+    border:1px solid $light-border;
+}
+
+
+
+
+
+
+

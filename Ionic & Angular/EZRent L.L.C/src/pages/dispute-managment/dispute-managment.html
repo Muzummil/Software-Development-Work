@@ -1,0 +1,20 @@
+<ion-header class="animated fadeIn no-shadow">
+
+  <ion-navbar class="no-border" color="primary" hideBackButton="true">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+     Dispute Managment
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+<ion-tabs>
+  <ion-tab [root]="tab1Root" tabTitle="Sent" tabIcon="ios-send"></ion-tab>
+  <ion-tab [root]="tab2Root" tabTitle="Received" tabIcon="md-archive"></ion-tab>
+  <ion-tab [root]="tab3Root" tabTitle="Create Dispute" tabIcon="ios-add-circle"></ion-tab>
+</ion-tabs>
+</ion-content>

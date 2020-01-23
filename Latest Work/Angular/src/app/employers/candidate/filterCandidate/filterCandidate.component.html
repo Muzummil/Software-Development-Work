@@ -1,0 +1,681 @@
+<!--FILTER-->
+<div class="row filter clicks">
+    <div id="main ">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" [class.arabic] = "accountService.isArabic()">
+            <!-- country -->
+            <!-- =================================================== -->
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 arabic-right-left">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingJobTitle">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button">
+                                {{fixedTextHash['refine_search'][currLan]}}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseJobTitle" aria-labelledby="headingJobTitle">
+                        <div class="panel-body scrollbar">
+                            <form [formGroup]="candidateNameForm">
+                            <div class="fltr-check">
+                                <input type="hidden" formControlName="job_title"  placeholder="{{fixedTextHash['job_title_txt'][currLan]}}" name="job_title" >
+                                <bootstrap-selectbox *ngIf="(title$ | async)"
+                                                    [selectOnType]="true"
+                                                    [showCaret]="false"
+                                                    [resetOnLoad]="false"
+                                                    [stringFeedback]="false"
+                                                    [arrowSelectionCompulsion]="true"
+                                                    [selectOnEmpty]="true"
+                                                    [resetNow]="resetNowTitle"
+                                                    [onTypeOpen]="false"
+                                                    (selectedId)="setSelTitle($event)"
+                                                    (returnEvent)="makeSearchonEnterOrClick($event)"
+                                                    [selectedValue]="candidateNameForm.controls['job_title'].value"
+                                                    [placeholder]="fixedTextHash['job_title'][currLan]"
+                                                    [selectList]="(title$ | async)">
+                                </bootstrap-selectbox>
+                            </div>
+                            <div class="fltr-check">
+                                <input type="hidden" formControlName="graduation_university"  placeholder="{{fixedTextHash['search_graduate_university'][currLan]}}" name="graduation_university" >
+                                <bootstrap-selectbox *ngIf="(education$ | async)"
+                                                    [selectOnType]="true"
+                                                    [showCaret]="false"
+                                                    [resetOnLoad]="false"
+                                                    [stringFeedback]="false"
+                                                    [selectOnEmpty]="true"
+                                                    [arrowSelectionCompulsion]="true"
+                                                    [resetNow]="resetNowEdu"
+                                                    [onTypeOpen]="false"
+                                                    (selectedId)="setSelEducation($event)"
+                                                    (returnEvent)="makeSearchonEnterOrClick($event)"
+                                                    [selectedValue]="candidateNameForm.controls['graduation_university'].value"
+                                                    [placeholder]="fixedTextHash['school'][currLan]"
+                                                    [selectList]="(education$ | async)">
+                                </bootstrap-selectbox>
+                            </div>
+                            <div class="fltr-check">
+                                <input type="hidden" formControlName="company_name"  placeholder="{{fixedTextHash['company_name'][currLan]}}" name="company_name" >
+                                <bootstrap-selectbox *ngIf="(company_name$ | async)"
+                                                    [selectOnType]="true"
+                                                    [resetOnLoad]="false"
+                                                    [showCaret]="false"
+                                                    [stringFeedback]="false"
+                                                    [arrowSelectionCompulsion]="true"
+                                                    [resetNow]="resetNowComp"
+                                                    [selectOnEmpty]="true"
+                                                    [onTypeOpen]="false"
+                                                    (selectedId)="setSelCompany($event)"
+                                                    (returnEvent)="makeSearchonEnterOrClick($event)"
+                                                    [selectedValue]="candidateNameForm.controls['company_name'].value"
+                                                    [placeholder]="fixedTextHash['company'][currLan]"
+                                                    [selectList]="(company_name$ | async)">
+                                </bootstrap-selectbox>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- country -->
+            <!-- =================================================== -->
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 arabic-right-left">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                            aria-expanded="true" aria-controls="collapseOne">
+                                {{fixedTextHash['country'][currLan]}}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">
+                            <div class="empty-min4 " *ngIf="((locations$ | async)?.elements?.length >0)? false:true">
+                                <div class="empty-prf">
+                                    <spinner  [visible]="true"></spinner>
+                                </div>
+                            </div>
+                            <div *ngIf="(locations$ | async)?.showAddmoreFlag" class="edit">
+                                <div [class.filter-add]="(locations$ | async)?.expendAddmoreFlag" [class.filter-open]="!(locations$ | async)?.expendAddmoreFlag">
+                                    <auto-complete  [placeholder]="fixedTextHash['country'][currLan]" [fullWidth]="true"
+                                                    [resetOnSelect]="true" [recordType]="'Country'"
+                                                    (changeRecords)="onAddElement($event,'locations')"
+                                                    [excludeItems]="(locations$ | async)?.elements">
+                                    </auto-complete>
+                                </div>
+                            </div>
+                            <div class="fltr-check-box scrollbar" id="style-4">
+                            <div class="fltr-check" *ngFor="let country of (locations$ | async)?.elements,let country_index =index">
+                                <input    [id]="'checkboxCountry'+country_index"
+                                        value="{{country.id}}"
+                                        (click)="onSelectElement(country.id,'locations')"
+                                        class="css-checkbox" type="checkbox"
+                                        [attr.name]="'checkboxCountry'+country_index"
+                                        [checked]="country.selectedFlag"
+                                >
+                                <label class="css-label" [attr.for]="'checkboxCountry'+country_index">{{country.name}}</label>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- City -->
+            <!-- =================================================== -->
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 arabic-right-left">
+                <div  class="panel panel-default">
+                    <div class="panel-heading" role="tab" >
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                            href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                {{fixedTextHash['city'][currLan]}}
+                            </a>
+                        </h4>
+                    </div>
+
+                    <div *ngIf="(locations$ | async)?.elementsChecked.length == 0">
+                        <div class="panel-body">
+                            <div class="alert alert-warning page-alert" id="alert-3">
+                                {{fixedTextHash['select_country_first'][currLan]}}
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="(locations$ | async)?.elementsChecked.length >0" id="collapseTwo" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">
+                            <div class="empty-min4 " *ngIf="((cities$ | async)?.elements?.length >0)? false:true">
+                                <div class="empty-prf">
+                                    <spinner  [visible]="true"></spinner>
+                                </div>
+                            </div>
+
+                            <div *ngIf="(cities$ | async)?.showAddmoreFlag" class="edit">
+                                <div [class.filter-add]="(cities$ | async)?.expendAddmoreFlag" [class.filter-open]="!(cities$ | async)?.expendAddmoreFlag" >
+                                    <auto-comp-city [fullWidth]="true" [resetOnSelect]="true" [sortOrder]="''"
+                                        [recordType]="'City'" (changeRecords)="onAddElement($event,'cities')"
+                                        [placeholder]="fixedTextHash['city'][currLan]"
+                                        [countryList]="(locations$ | async)?.elementsChecked"
+                                        [excludeItems]="(cities$ | async)?.elements">
+                                    </auto-comp-city>
+                                </div>
+                            </div>
+                            <div class="fltr-check-box scrollbar" id="style-4">
+                            <div class="fltr-check" *ngFor="let city of (cities$ | async)?.elements,let city_index =index" >
+                                <input [id]="'checkboxCity'+city_index"
+                                    value="{{city.id}}"
+                                    (click)="onSelectElement(city.id,'cities')"
+                                    class="css-checkbox"
+                                    type="checkbox" [attr.name]="'checkboxCity'+city_index"
+                                    [checked]="city.selectedFlag"
+                                >
+                                <label class="css-label" [attr.for]="'checkboxCity'+city_index">{{city.name}}</label>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- sector -->
+            <!-- =================================================== -->
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 arabic-right-left">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                            href="#collapsethree" aria-expanded="false" aria-controls="collapsethree">
+                                {{fixedTextHash['sector'][currLan]}}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapsethree" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body border-bottom">
+                            <div  *ngIf="(sectors$ | async)?.showAddmoreFlag" class="edit">
+                                <div [class.filter-add]="(sectors$ | async)?.expendAddmoreFlag"
+                                    [class.filter-open]="!(sectors$ | async)?.expendAddmoreFlag">
+                                    <auto-complete [placeholder]="fixedTextHash['sector'][currLan]" [fullWidth]="true"
+                                                [resetOnSelect]="true" [recordType]="'Sector'"
+                                                (changeRecords)="onAddElement($event,'sectors')"
+                                                [excludeItems] = "(sectors$ | async)?.elements">
+                                    </auto-complete>
+                                </div>
+                            </div>
+                            <div class="fltr-check-box scrollbar" id="style-4">
+                                <div class="fltr-check" *ngFor="let sector of (sectors$ | async)?.elements,let sector_index = index;trackBy:sector?.id" >
+                                    <input [id]="'checkboxSector'+sector_index" value="{{sector.id}}" class="css-checkbox"
+                                        type="checkbox" [attr.name]="'checkboxSector'+sector_index"
+                                        [checked] = "sector.selectedFlag"
+                                        (click)="onSelectElement(sector.id,'sectors')">
+                                    <label class="css-label" [attr.for]="'checkboxSector'+sector_index">{{sector.name}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- country -->
+            <!-- =================================================== -->
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 arabic-right-left">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingFour">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                            href="#collapsefour" aria-expanded="false" aria-controls="collapsefour">
+                                {{fixedTextHash['functional_area'][currLan]}}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapsefour" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body border-bottom">
+                            <div  *ngIf="(fareas$ | async)?.showAddmoreFlag" class="edit">
+                                <div [class.filter-add]="(fareas$ | async)?.expendAddmoreFlag"  [class.filter-open]="!(fareas$ | async)?.expendAddmoreFlag">
+                                    <auto-complete [placeholder]="fixedTextHash['functional_area'][currLan]" [fullWidth]="true"
+                                                [resetOnSelect]="true" [recordType]="'FunctionalArea'"
+                                                (changeRecords)="onAddElement($event,'fareas')"
+                                                [excludeItems] = "(fareas$ | async)?.elements">
+                                    </auto-complete>
+                                </div>
+                            </div>
+                            <div class="fltr-check-box scrollbar" id="style-4">
+                                <div class="fltr-check" *ngFor="let selval of (fareas$ | async)?.elements,let sel_index =index;trackBy:selval?.id" >
+                                    <input [id]="'checkboxFarea'+sel_index" value="{{selval.id}}" class="css-checkbox"
+                                        type="checkbox" [attr.name]="'checkboxFarea'+sel_index"
+                                        [checked] = "selval.selectedFlag"
+                                        (click)="onSelectElement(selval.id,'fareas')">
+                                    <label class="css-label" [attr.for]="'checkboxFarea'+sel_index">{{selval.name}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- country -->
+            <!-- =================================================== -->
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 arabic-right-left">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingFive">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                            href="#collapsefive" aria-expanded="false" aria-controls="collapsefive">
+                                {{fixedTextHash['year_exp'][currLan]}}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapsefive" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body border-bottom">
+                            <div  *ngIf="(explevels$ | async)?.showAddmoreFlag" class="edit">
+                                <div [class.filter-add]="(explevels$ | async)?.expendAddmoreFlag"  [class.filter-open]="!(explevels$ | async)?.expendAddmoreFlag">
+                                    <auto-complete   [placeholder]="fixedTextHash['years_experience'][currLan]"
+                                                    [fullWidth]="true"
+                                                    [resetOnSelect]="true" [recordType]="'JobExperience'"
+                                                    (changeRecords)="onAddElement($event,'explevels')"
+                                                    [excludeItems] = "(explevels$ | async)?.elements">
+                                    </auto-complete>
+                                </div>
+                            </div>
+                            <div class="fltr-check-box scrollbar" id="style-4">
+                                <div class="fltr-check" *ngFor="let selval of (exprange$ | async)?.elements,let sel_index =index;trackBy:selval?.id" >
+                                    <input [id]="'checkboxExp'+sel_index" value="{{selval.id}}" class="css-checkbox"
+                                        type="checkbox" [attr.name]="'checkboxExp'+sel_index"
+                                        [checked] = "selval.selectedFlag"
+                                        (click)="onSelectElement(selval.id,'exprange')">
+                                    <label class="css-label" [attr.for]="'checkboxExp'+sel_index">{{selval.name}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- country -->
+            <!-- =================================================== -->
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 arabic-right-left">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingSix">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                            href="#collapsesix" aria-expanded="false" aria-controls="collapsesix">
+                                {{fixedTextHash['high_edu'][currLan]}}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapsesix" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body border-bottom">
+                            <div  *ngIf="(edulevels$ | async)?.showAddmoreFlag" class="edit">
+                                <div [class.filter-add]="(edulevels$ | async)?.expendAddmoreFlag"  [class.filter-open]="!(edulevels$ | async)?.expendAddmoreFlag">
+                                    <auto-complete [placeholder]="fixedTextHash['high_edu'][currLan]"
+                                                [fullWidth]="true" [resetOnSelect]="true"
+                                                [recordType]="'JobEducation'"
+                                                (changeRecords)="onAddElement($event,'edulevels')"
+                                                [excludeItems] = "(edulevels$ | async)?.elements">
+                                    </auto-complete>
+                                </div>
+                            </div>
+                            <div class="fltr-check-box scrollbar" id="style-4">
+                                <div class="fltr-check" *ngFor="let selval of (edulevels$ | async)?.elements,let sel_index =index;trackBy:selval?.id" >
+                                    <input [id]="'checkboxEdu'+sel_index" value="{{selval.id}}" class="css-checkbox"
+                                        type="checkbox" [attr.name]="'checkboxEdu'+sel_index"
+                                        [checked] = "selval.selectedFlag"
+                                        (click)="onSelectElement(selval.id,'edulevels')">
+                                    <label class="css-label" [attr.for]="'checkboxEdu'+sel_index">{{selval.name}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- country -->
+            <!-- =================================================== -->
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 arabic-right-left">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingSeven">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                            href="#collapseseven" aria-expanded="false" aria-controls="collapseseven">
+                                {{fixedTextHash['cur_month_salary'][currLan].replace('CURRCODE',fixedTextHash[accountService.getCurrency()][currLan])}}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseseven" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body border-bottom">
+                            <div class="fltr-check-box scrollbar" id="style-4">
+                            <div class="fltr-check" *ngFor="let selval of (current_sal$ | async)?.elements,let sel_index =index;trackBy:selval?.id" >
+                                <input [id]="'checkboxCurSalary'+sel_index" value="{{selval.id}}" class="css-checkbox"
+                                    type="checkbox" [attr.name]="'checkboxCurSalary'+sel_index"
+                                    [checked] = "selval.selectedFlag"
+                                    (click)="onSelectElement(selval.id,'current_sal')">
+                                <label class="css-label" [attr.for]="'checkboxCurSalary'+sel_index">{{selval.name}}</label>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- country -->
+            <!-- =================================================== -->
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 arabic-right-left">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingEight">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                            href="#collapseeight" aria-expanded="false" aria-controls="collapseeight">
+                                {{fixedTextHash['exp_month_salary'][currLan].replace('CURRCODE',fixedTextHash[accountService.getCurrency()][currLan])}}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseeight" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body border-bottom">
+                            <div class="fltr-check-box scrollbar" id="style-4">
+                                <div class="fltr-check" *ngFor="let selval of (expect_sal$ | async)?.elements,let sel_index =index;trackBy:selval?.id" >
+                                    <input [id]="'checkboxExpSalary'+sel_index" value="{{selval.id}}" class="css-checkbox"
+                                        type="checkbox" [attr.name]="'checkboxExpSalary'+sel_index"
+                                        [checked] = "selval.selectedFlag"
+                                        (click)="onSelectElement(selval.id,'expect_sal')">
+                                    <label class="css-label" [attr.for]="'checkboxExpSalary'+sel_index">{{selval.name}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- country -->
+            <!-- =================================================== -->
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 arabic-right-left">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingNine">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                            href="#collapsenine" aria-expanded="false" aria-controls="collapsenine">
+                                {{fixedTextHash['age_group'][currLan]}}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapsenine" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body border-bottom">
+                            <div class="fltr-check-box scrollbar" id="style-4">
+                                <div class="fltr-check" *ngFor="let selval of (age_group$ | async)?.elements,let sel_index =index;trackBy:selval?.id" >
+                                    <input [id]="'checkboxAgeGroup'+sel_index" value="{{selval.id}}" class="css-checkbox"
+                                        type="checkbox" [attr.name]="'checkboxAgeGroup'+sel_index"
+                                        [checked] = "selval.selectedFlag"
+                                        (click)="onSelectElement(selval.id,'age_group')">
+                                    <label class="css-label" [attr.for]="'checkboxAgeGroup'+sel_index">{{selval.name}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- country -->
+            <!-- =================================================== -->
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 arabic-right-left">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTen">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                            href="#collapseten" aria-expanded="false" aria-controls="collapseten">
+                                {{fixedTextHash['language'][currLan]}}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseten" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body border-bottom">
+                            <div *ngIf="(language$ | async)?.showAddmoreFlag" class="edit">
+                                <div [class.filter-add]="(language$ | async)?.expendAddmoreFlag" [class.filter-open]="!(language$ | async)?.expendAddmoreFlag">
+                                    <auto-complete [placeholder]="fixedTextHash['language'][currLan]"
+                                                [fullWidth]="true" [resetOnSelect]="true"
+                                                [recordType]="'Language'"
+                                                (changeRecords)="onAddElement($event,'language')"
+                                                [excludeItems]="(language$ | async)?.elements">
+
+                                    </auto-complete>
+                                </div>
+                            </div>
+                            <div class="fltr-check-box scrollbar" id="style-4">
+                                <div class="fltr-check" *ngFor="let selval of (language$ | async)?.elements,let sel_index =index;trackBy:selval?.id" >
+                                    <input [id]="'checkboxLanguage'+sel_index" value="{{selval.id}}" class="css-checkbox"
+                                        type="checkbox" [attr.name]="'checkboxLanguage'+sel_index"
+                                        [checked] = "selval.selectedFlag"
+                                        (click)="onSelectElement(selval.id,'language')">
+                                    <label class="css-label" [attr.for]="'checkboxLanguage'+sel_index">{{selval.name}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- country -->
+            <!-- =================================================== -->
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 arabic-right-left">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingEleven">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                            href="#collapseeleven" aria-expanded="false" aria-controls="collapseeleven">
+                                {{fixedTextHash['gender'][currLan]}}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseeleven" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body border-bottom">
+                            <div class="fltr-check-box scrollbar" id="style-4">
+                                <div class="fltr-check" *ngFor="let selval of (gender$ | async)?.elements,let sel_index =index;trackBy:selval?.id" >
+                                    <input [id]="'checkboxGender'+sel_index" value="{{selval.id}}" class="css-checkbox"
+                                        type="checkbox" [attr.name]="'checkboxGender'+sel_index"
+                                        [checked] = "selval.selectedFlag"
+                                        (click)="onSelectElement(selval.id,'gender')">
+                                    <label class="css-label" [attr.for]="'checkboxGender'+sel_index">{{selval.name}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- country -->
+            <!-- =================================================== -->
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 arabic-right-left">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingtwelve">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                            href="#collapsetwelve" aria-expanded="false" aria-controls="collapsetwelve">
+                                {{fixedTextHash['notice_period'][currLan]}}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapsetwelve" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body border-bottom">
+                            <div class="fltr-check-box scrollbar" id="style-4">
+                                <div class="fltr-check" *ngFor="let selval of (notice_period$ | async)?.elements,let sel_index =index;trackBy:selval?.id" >
+                                    <input [id]="'checkboxNoticePeriod'+sel_index" value="{{selval.id}}" class="css-checkbox"
+                                        type="checkbox" [attr.name]="'checkboxNoticePeriod'+sel_index"
+                                        [checked] = "selval.selectedFlag"
+                                        (click)="onSelectElement(selval.id,'notice_period')">
+                                    <label class="css-label" [attr.for]="'checkboxNoticePeriod'+sel_index">{{selval.name}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- country -->
+            <!-- =================================================== -->
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 arabic-right-left">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingthirteen">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                            href="#collapsethirteen" aria-expanded="false" aria-controls="collapsethirteen">
+                                {{fixedTextHash['last_active'][currLan]}}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapsethirteen" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body border-bottom">
+                            <div class="fltr-check-box scrollbar" id="style-4">
+                                <div class="fltr-check" *ngFor="let selval of (last_active$ | async)?.elements,let sel_index =index;trackBy:selval?.id" >
+                                    <input [id]="'checkLastActive'+sel_index" value="{{selval.id}}" class="css-checkbox"
+                                        type="checkbox" [attr.name]="'checkLastActive'+sel_index"
+                                        [checked] = "selval.selectedFlag"
+                                        (click)="onSelectElement(selval.id,'last_active')">
+                                    <label class="css-label" [attr.for]="'checkLastActive'+sel_index">{{selval.name}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- country -->
+            <!-- =================================================== -->
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 arabic-right-left">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingfourteen">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                            href="#collapsefourteen" aria-expanded="false" aria-controls="collapsefourteen">
+                                {{fixedTextHash['visa_status'][currLan]}}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapsefourteen" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body border-bottom">
+                            <div class="fltr-check-box scrollbar" id="style-4">
+                                <div class="fltr-check" *ngFor="let selval of (visa_status$ | async)?.elements,let sel_index =index;trackBy:selval?.id" >
+                                    <input [id]="'checkVisaStatus'+sel_index" value="{{selval.id}}" class="css-checkbox"
+                                        type="checkbox" [attr.name]="'checkVisaStatus'+sel_index"
+                                        [checked] = "selval.selectedFlag"
+                                        (click)="onSelectElement(selval.id,'visa_status')">
+                                    <label class="css-label" [attr.for]="'checkVisaStatus'+sel_index">{{selval.name}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- country -->
+            <!-- =================================================== -->
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 arabic-right-left">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingfifteen">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                            href="#collapsefifteen" aria-expanded="false" aria-controls="collapsefifteen">
+                                {{fixedTextHash['job_type'][currLan]}}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapsefifteen" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body border-bottom">
+                            <div class="fltr-check-box scrollbar" id="style-4">
+                                <div class="fltr-check" *ngFor="let selval of (jobTypes$ | async)?.elements,let sel_index =index;trackBy:selval?.id" >
+                                    <input [id]="'checkjobType'+sel_index" value="{{selval.id}}" class="css-checkbox"
+                                        type="checkbox" [attr.name]="'checkjobType'+sel_index"
+                                        [checked] = "selval.selectedFlag"
+                                        (click)="onSelectElement(selval.id,'jobtypes')">
+                                    <label class="css-label" [attr.for]="'checkjobType'+sel_index">{{selval.name}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- country -->
+            <!-- =================================================== -->
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 arabic-right-left">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingsixteen">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSixteen"
+                            aria-expanded="true" aria-controls="collapseSixteen">
+                                {{fixedTextHash['nationality'][currLan]}}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseSixteen" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">
+                            <div class="empty-min4 " *ngIf="((nationality$ | async)?.elements?.length >0)? false:true">
+                                <div class="empty-prf">
+                                    <spinner  [visible]="true"></spinner>
+                                </div>
+                            </div>
+                            <!--{{(cities$ | async) | json}}-->
+                            <div *ngIf="(nationality$ | async)?.showAddmoreFlag" class="edit">
+                                <div [class.filter-add]="(nationality$ | async)?.expendAddmoreFlag" [class.filter-open]="!(nationality$ | async)?.expendAddmoreFlag">
+                                    <auto-complete [placeholder]="fixedTextHash['nationality'][currLan]"
+                                                [fullWidth]="true"
+                                                [resetOnSelect]="true"
+                                                [recordType]="'Country'"
+                                                (changeRecords)="onAddElement($event,'nationality')"
+                                                [excludeItems]="(nationality$ | async)?.elements">
+
+                                    </auto-complete>
+                                </div>
+                            </div>
+                            <div class="fltr-check-box scrollbar" id="style-4">
+                            <div class="fltr-check" *ngFor="let country of (nationality$ | async)?.elements,let country_index =index" >
+                                <input    [id]="'checkboxNationality'+country_index"
+                                        value="{{country.id}}"
+                                        (click)="onSelectElement(country.id,'nationality')"
+                                        class="css-checkbox" type="checkbox"
+                                        [attr.name]="'checkboxNationality'+country_index"
+                                        [checked]="country.selectedFlag"
+                                >
+                                <label class="css-label" [attr.for]="'checkboxNationality'+country_index">{{country.name}}</label>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- country -->
+            <!-- =================================================== -->
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 arabic-right-left">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingSeventeen">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                            href="#collapseventeen" aria-expanded="false" aria-controls="collapseventeen">
+                                {{fixedTextHash['marital_status'][currLan]}}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseventeen" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body border-bottom">
+                            <div class="fltr-check-box scrollbar" id="style-4">
+                            <div class="fltr-check" *ngFor="let selval of (marital_status$ | async)?.elements,let sel_index =index;trackBy:selval?.id" >
+                                <input [id]="'checkboxMarital_status'+sel_index" value="{{selval.id}}" class="css-checkbox"
+                                    type="checkbox" [attr.name]="'checkboxMarital_status'+sel_index"
+                                    [checked] = "selval.selectedFlag"
+                                    (click)="onSelectElement(selval.id,'marital_status')">
+                                <label class="css-label" [attr.for]="'checkboxMarital_status'+sel_index">{{selval.name}}</label>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--BUTTONS SUBMIT REFERESH-->
+<div class="row block-footer padding-top-0 footer-action-filter ">
+    <!--<button   class="apply" (click)="onApply()">Apply</button>-->
+    <div class="bt-group-ats">
+        <button  class="bt-reset-filter arabic-right-left" (click)="onResetUrl()">{{fixedTextHash['reset'][currLan]}}</button>
+        <button class="bt-reset-filter bt-cancel-ats arabic-right-left" data-toggle="collapse" data-target="#demo">{{fixedTextHash['submit'][currLan]}}</button>
+    </div>
+</div>

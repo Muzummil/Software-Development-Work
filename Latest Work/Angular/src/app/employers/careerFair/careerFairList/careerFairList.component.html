@@ -1,0 +1,78 @@
+<div class="container career-fair-emp" [class.arabic]="accountService.isArabic()">
+    <div class="row">
+        <!-- HEADER -->
+        <div class="col-md-12">
+            <div class="header-career-emp">
+                <h2 class="arabic-right-left">{{fixedTextHash['upcoming_events'][currLan]}}</h2>
+                <button class="add-new-career arabic-right-left" [routerLink]="accountService.getCurrLangUrl()+accountService.getPath()+'/career-fairs/add'">{{fixedTextHash['add_new'][currLan]}}</button>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+        <!-- LIST -->
+        <div class="col-md-12">
+            <div class="upcoming-event-container">
+                <div class="career-empty" *ngIf="showSpinner">
+                    <spinner></spinner>
+                </div>
+
+                <div *ngIf="careerFairList.length == 0 && !showSpinner">
+                    <div class="empty-prf career-empty">
+                        <div>
+                            <i class="icon-empty-user"></i>
+                            <h5>{{fixedTextHash['no_upcoming_events'][currLan]}}</h5>
+                        </div>
+                    </div>
+                </div>
+
+
+                <ng-container *ngIf="careerFairList.length > 0 && !showSpinner">
+                    <div *ngFor="let selCareerFair of careerFairList" class="col-md-12">
+                        <!-- LOGO OF CAREER FARE -->
+                        <div class="career-fair-loop">
+                            <div class="box-career-logo" [routerLink]="accountService.getCurrLangUrl()+accountService.getPath()+'/career-fairs/'+ accountService.getSpaceToDashLowerCase(selCareerFair.title)+'-'+selCareerFair.id">
+                                <img *ngIf="selCareerFair?.logo_image" src="{{selCareerFair?.logo_image}}">
+                                <i *ngIf="!selCareerFair?.logo_image" class="zmdi zmdi-image-o"></i>
+                            </div>
+
+                            <!-- CODE OF CAREER FARE MOBILE ONLY-->
+                            <div class="box-career-code hidden-lg hidden-sm hidden-md">
+                                <qr-code [url]="accountService.getCurrLangUrl()+'career-fairs/'+ accountService.getSpaceToDashLowerCase(selCareerFair.title)+'-'+selCareerFair.id">
+                                </qr-code>
+                            </div>
+
+                            <!-- DETAILS OF CAREER FARE -->
+                            <div class="box-career-details" [routerLink]="accountService.getCurrLangUrl()+accountService.getPath()+'/career-fairs/'+ accountService.getSpaceToDashLowerCase(selCareerFair.title)+'-'+selCareerFair.id">
+                                <ul>
+                                    <li><strong>{{selCareerFair?.title}}</strong></li>
+                                    <li>{{selCareerFair?.city?.name}}</li>
+                                    <li>{{selCareerFair?.country?.name}}</li>
+                                    <li>{{selCareerFair?.address}}</li>
+                                    <li *ngIf="selCareerFair?.gender == 'any'">{{fixedTextHash['for_both_males_and_females'][currLan]}}</li>
+                                    <li *ngIf="selCareerFair?.gender == 'male'">{{fixedTextHash['for_males'][currLan]}}</li>
+                                    <li *ngIf="selCareerFair?.gender == 'female'">{{fixedTextHash['for_females'][currLan]}}</li>
+                                    <li>{{fixedTextHash['start_date'][currLan]}}: {{accountService.getFormattedDate(selCareerFair?.from, 'MMM DD, YYYY')}} | {{fixedTextHash['end_date'][currLan]}}: {{accountService.getFormattedDate(selCareerFair?.to, 'MMM
+                                        DD, YYYY')}}</li>
+                                </ul>
+                            </div>
+
+                            <!-- CODE OF CAREER FARE DESKTOP ONLY-->
+                            <div class="box-career-code hidden-xs">
+                                <qr-code [url]="accountService.getCurrLangUrl()+'career-fairs/'+ accountService.getSpaceToDashLowerCase(selCareerFair.title)+'-'+selCareerFair.id">
+                                </qr-code>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </ng-container>
+
+            </div>
+        </div>
+
+        <!-- PAGINATION -->
+        <div class="col-md-12">
+            <pagination-new [url]="accountService.getCurrLangUrl()+accountService.getPath()+'/career-fairs'" [totalRecords]="totalRecords$"></pagination-new>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,33 @@
+<ion-header class="animated fadeIn no-shadow">
+
+  <ion-navbar class="no-border" color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      My Tenants
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="common-bg all-tenants">
+  <div class="no-data" *ngIf="message">
+    <img src="../../assets/icon/no-data.png" alt="image">
+    <h4>{{ message }}</h4>
+  </div>
+  <div *ngIf="tenants" >
+    <ion-grid class="table_grid" *ngFor="let tenant of tenants">
+      <ion-row *ngFor="let info of tenant">
+        <ion-col col-7>
+          <h5>{{info.name}}</h5>
+          <span>{{info.building_name}}</span>
+        </ion-col>
+        <ion-col col-5>
+          <button type="button" [ngClass]="{'btn-success': info.status == 'Paid', 'btn-danger': info.status == 'Unpaid'}">{{info.status}}</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+
+</ion-content>

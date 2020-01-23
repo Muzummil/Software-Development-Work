@@ -1,0 +1,7 @@
+<div class="tab-content job-bloovo">
+    <all-jobs *ngIf="allJobsFlag"  [locations]="locations" (jobDetailsClick)="onClickjobDetail($event)"   ></all-jobs>
+    <my-interviews *ngIf="interviewsFlag"  (jobDetailsClick)="onClickjobDetail($event)"></my-interviews>
+    <my-jobs *ngIf="myJobsFlag"></my-jobs>
+    <job-detail *ngIf="jobDetailsFlag" [jobId]="jobId" [fromPage]="fromPage"   (jobDetailsClick)="onClickjobDetail($event)"  (backClick)="onClickBack($event)"></job-detail>
+    <div class="clearfix"></div>
+</div>

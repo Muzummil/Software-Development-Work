@@ -1,0 +1,60 @@
+@import '../../../../styles/sass/base/_variables.scss';
+
+
+input:-webkit-autofill {
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
+}
+
+h1, h2, h3, h4, h5, span, label, a, button, p{
+    font-family: $primary-Fonts;
+}
+
+.arabic{
+    h1, h2, h3, h4, h5, span, label, a, button, p, input, .cmpny-txt{
+       font-family: $arabic-primary-Fonts!important;
+    }
+}
+
+.company-cover{
+    border-radius: $border-radius;                                             
+}
+.block .cancel button{
+    height:$button-height;
+    border-radius: $border-radius;   
+}
+
+.block{
+    border:1px solid $light-border;
+    border-radius: $border-radius;
+    float: left;
+    width: 100%;
+}
+
+.block-contant{
+    padding: 10px;
+}
+.block-title-2,  .block-title{
+    padding: 10px;
+}
+.display .soc{
+    float: left;
+}
+
+input, select{
+    height: $form-height!important;
+    border-radius: $border-radius!important;
+    color: $secondarycolor!important;
+    margin-bottom: 10px;
+}
+.contry-numbers{
+    margin-bottom: 10px!important;
+}
+
+.requirement{
+    padding: 10px;
+    border-top: 1px solid $light-border;
+}
+
+
+

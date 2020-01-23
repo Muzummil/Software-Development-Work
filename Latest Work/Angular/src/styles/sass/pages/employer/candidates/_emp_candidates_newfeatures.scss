@@ -1,0 +1,92 @@
+.likelyhood_of_changing {
+    width: 160px;
+    height: 170px;
+    float: right;
+    padding: 20px;
+    border: 1px solid #e3f1f7;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    .stats-each{
+    	width: 100%;
+    	height: auto;
+    	h2{
+    		font-size: 22px;
+    		color:$primarycolor;
+    		text-align: center;
+    		display: block;
+    		font-weight: bold;
+    		padding-top:20px;
+
+    	}
+    	.progress-b{
+    		display: block;
+    		width: 120px;
+    		height: 20px;
+    		display: block;
+    		margin: 10px auto;
+    		border-radius:$border-radius;
+    		-webkit-border-radius:$border-radius;
+    		-moz-border-radius:$border-radius;
+    		overflow: hidden;
+    		background-color:#ECF7FC;matching-candidates
+    		i{
+    			display: block;
+    			width: auto;
+    			height: 20px;
+    		}
+    	}
+    	.high{
+    		background-color: #01CD77;
+    	}
+    	.medium{
+    		background-color: #FF9802;
+    	}
+    	.low{
+    		background-color: #FF330B;
+    	}
+
+    	span{
+    		font-size: 12px;
+    		display: block;
+		    width: 100%;
+		    text-align: center;
+		    color: #354A61;
+    	}
+    }
+}
+
+.new-candidate-list-feature{
+  .newlistleft{
+    width: 100%!important;
+  }
+}
+
+// followers new listing
+#followers{
+    .newlistleft{
+        width: 100%;
+    }
+    .exp-box{
+        height: 150px;
+        margin-bottom: 0px!important;
+        h5{
+            padding-top:40px;
+        }
+    }
+}
+
+// most viewed profile new listing
+#most-profile{
+    .newlistleft{
+        width: 100%;
+    }
+    .exp-box{
+        // height: 150px;
+        // margin-bottom: 0px!important;
+        // h5{
+        //     padding-top:40px;
+        // }
+    }
+}
+

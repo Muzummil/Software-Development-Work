@@ -1,0 +1,32 @@
+.category__box {
+    height: 100px;
+    width: 100%;
+    background-color: red;
+}
+
+.category__text {
+    height: 100px;
+    background-color: blue;
+    position: relative;
+    top: 35px;
+    color: #fff;
+    font-size: 20px;
+}
+
+.category__subtext {
+    height: 100px;
+    background-color: blue;
+    position: relative;
+    top: 57px;
+    left: -46px;
+    color: #fff;
+    font-size: 12px;
+}
+
+.category__check {
+    height: 100px;
+    background-color: peru;
+    position: absolute;
+    right: -10px;
+    top: 30px;
+}

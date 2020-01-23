@@ -1,0 +1,157 @@
+<div class="container career-fair" [class.arabic]="accountService.isArabic()">
+
+    <div class="row">
+
+        <!-- Header -->
+        <div class="col-md-12">
+            <div class="header-career-emp">
+                <h2 class="arabic-right-left" *ngIf="!carrerFairId">{{fixedTextHash['add_new_career_fair'][currLan]}}</h2>
+                <h2 class="arabic-right-left" *ngIf="carrerFairId">{{fixedTextHash['edit_career_fair'][currLan]}}</h2>
+                <button class="add-new-career arabic-right-left" (click)="goBack()">{{fixedTextHash['back'][currLan]}}</button>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+        <div class="career-empty" *ngIf="showSpinner">
+            <spinner></spinner>
+        </div>
+
+        <!-- body form -->
+        <div class="col-md-12">
+            <ng-container *ngIf="!showSpinner">
+                <form [formGroup]="careerFairForm">
+
+                    <div class="common-block mg-bottom-20">
+                        <!-- start upload image -->
+                        <div class="col-md-12 col-xs-12 arabic-right-left">
+                            <div class="fal-upload">
+                                <div class="arabic-right-left up-logo">
+                                    <i *ngIf="careerFairForm.controls['logo_image'].value == ''" class="icon-profile"></i>
+                                    <img *ngIf="careerFairForm.controls['logo_image'].value != ''" [src]="careerFairForm.controls['logo_image'].value">
+                                </div>
+                                <div class="arabic-right-left right-details-logo">
+                                    <h5>{{fixedTextHash['profile_pic'][currLan]}}</h5>
+                                    <a data-toggle="modal" data-target=".your-profile-img" href="#">
+                                        <button class="add-new-logo" type="button"> {{fixedTextHash['upload'][currLan]}}</button>
+                                    </a>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+
+                        <!--Event Title-->
+                        <div class="col-md-4 col-xs-12 arabic-right-left">
+                            <label>{{fixedTextHash['title'][currLan]}}</label>
+                            <div class="full-box">
+                                <input name="title" formControlName="title" class="text" placeholder="Title" [class.error-feild]="(careerFairForm.controls['title'].touched || !(pristineFlag$ | async)) && careerFairForm.controls['title'].errors">
+                            </div>
+                        </div>
+
+
+                        <!-- Country -->
+                        <div class="col-md-4 col-xs-12 arabic-right-left">
+                            <label>{{fixedTextHash['country'][currLan]}}</label>
+                            <div class="full-box">
+                                <bootstrap-selectbox *ngIf="countryList?.countries" [placeholder]="fixedTextHash['country'][currLan]" (selectedId)="getSelectCountry($event)" [selectedValue]="careerFairForm.controls['country_id'].value" [placeholder]="fixedTextHash['country'][currLan]"
+                                    [error]="(careerFairForm.controls['country_id'].touched || !(pristineFlag$ | async)) && careerFairForm.controls['country_id'].errors" [selectList]="countryList?.countries">
+                                </bootstrap-selectbox>
+                                <!-- just hide the section its no needed in design  -->
+                                <input type="hidden" name="country_id" formControlName="country_id" class="text">
+                            </div>
+                        </div>
+
+                        <!-- City -->
+                        <div class="col-md-4 col-xs-12 arabic-right-left">
+                            <label>{{fixedTextHash['city'][currLan]}}</label>
+                            <div class="full-box">
+                                <input *ngIf="!careerFairForm.controls['country_id'].value" type="text" name="city_temp" class="m-mg-only" [class.error-feild]="(careerFairForm.controls['country_id'].touched || !(pristineFlag$ | async)) && careerFairForm.controls['country_id'].errors"
+                                    [placeholder]="fixedTextHash['city'][currLan]">
+                                <ng-container *ngFor="let sel_country of countryList?.countries">
+                                    <auto-comp1 *ngIf="sel_country.id == careerFairForm.controls['country_id'].value" [resetOnEmpty]="true" [countryId]="sel_country.id" [current_city]="cityObj" [initData]="sel_country.id == cityObj?.country?.id ?[cityObj]:[]" [error]="(careerFairForm.controls['city_id'].touched || !(pristineFlag$ | async)) && careerFairForm.controls['city_id'].errors"
+                                        (changeCityId)="careerFairForm.controls['city_id'].setValue($event.id)">
+                                    </auto-comp1>
+                                </ng-container>
+                                <!-- just hide the section its no needed in design  -->
+                                <input type="hidden" name="city_id" formControlName="city_id" class="text">
+                            </div>
+                        </div>
+
+                        <!-- Address -->
+                        <div class="col-md-8 col-xs-12 arabic-right-left">
+                            <label>{{fixedTextHash['address'][currLan]}}</label>
+                            <div class="full-box">
+                                <textarea formControlName="address" [class.error-feild]="(careerFairForm.controls['address'].touched || !(pristineFlag$ | async)) && careerFairForm.controls['address'].errors">
+                                </textarea>
+                            </div>
+                        </div>
+
+                        <!-- Gender -->
+                        <div class="col-md-4 col-xs-12 arabic-right-left">
+                            <label>{{fixedTextHash['gender'][currLan]}}</label>
+                            <div class="full-box">
+                                <bootstrap-selectbox *ngIf="genderList" [placeholder]="fixedTextHash['gender'][currLan]" [error]="(careerFairForm.controls['gender'].touched || !(pristineFlag$ | async)) && careerFairForm.controls['gender'].errors" (selectedId)="careerFairForm.controls['gender'].setValue($event.id);"
+                                    [selectedValue]="careerFairForm.controls['gender'].value" [placeholder]="fixedTextHash['gender'][currLan]" [selectList]="genderList">
+                                </bootstrap-selectbox>
+                                <input type="hidden" name="gender" formControlName="gender" class="text">
+                            </div>
+                        </div>
+
+                        <!-- start date -->
+                        <div class="col-md-4 col-xs-12 arabic-right-left">
+                            <label>{{fixedTextHash['start_date'][currLan]}}</label>
+                            <div class="full-box relative">
+                                <input type="hidden" formControlName="from" #careerStartDate [ngModel]="startDate" (change)="selectStartDate(careerStartDate)" placeholder="{{fixedTextHash['start_date'][currLan]}}">
+
+                                <datePicker-block (emitSelDate)="careerFairForm.controls['from'].setValue($event['selDate']);careerFairForm.controls['to'].setValue(null);setEndDate($event)" [dp_placeholder]="fixedTextHash['start_date'][currLan]" [sel_id]="'from'" [error]="(careerFairForm.controls['from'].touched || !(pristineFlag$ | async)) && careerFairForm.controls['from'].errors"
+                                    [toYear]="toYear" [minDate]="maxDate" [dp_value]="careerFairForm.controls['from'].value | date: 'MMM yyyy dd'">
+                                </datePicker-block>
+                            </div>
+                        </div>
+
+                        <!-- End date -->
+                        <div class="col-md-4 col-xs-12 arabic-right-left">
+                            <label>{{fixedTextHash['end_date'][currLan]}}</label>
+                            <div class="full-box relative" >
+                                <input type="hidden" formControlName="to"
+                                       placeholder="{{fixedTextHash['end_date'][currLan]}}">
+                                  <datePicker-block (emitSelDate)="careerFairForm.controls['to'].setValue($event['selDate'])" [dp_placeholder]="fixedTextHash['end_date'][currLan]" [sel_id]="'to'" [error]="(careerFairForm.controls['to'].touched || !(pristineFlag$ | async)) && careerFairForm.controls['to'].errors"
+                                    [toYear]="toYear" [minDate]="selectedFromDate" [dp_startDate]="selectedFromDate" [dp_value]="careerFairForm.controls['to'].value | date: 'MMM yyyy dd'">
+                                </datePicker-block>
+                            </div>
+                        </div>
+
+
+
+                        <!-- active inactive -->
+                        <div class="col-md-12 col-xs-12 arabic-right-left">
+                            <div class="skill-radio clicks arabic-right-left">
+                                <div class="sk-radio">
+                                    <div class="radio radio-primary online">
+                                        <input id="radio225" formControlName="active" type="radio" value="true">
+                                        <label for="radio225">&nbsp;{{fixedTextHash['active'][currLan]}}</label>
+                                    </div>
+                                </div>
+                                <div class="sk-radio ">
+                                    <div class="radio radio-primary offline">
+                                        <input id="radio234" formControlName="active" type="radio" value="false">
+                                        <label for="radio234">&nbsp;{{fixedTextHash['in_active'][currLan]}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- upload logo modal-->
+                    <build-file [popupClass]="'your-profile-img'" [custromfileInfo]="custromfileInfo" (selectedFile)="loadFiles($event)"></build-file>
+
+                    <!-- Publish Button -->
+                    <button *ngIf="carrerFairId" (click)="addEditCareer()" class="publish-career">{{fixedTextHash['update'][currLan]}}</button>
+                    <button *ngIf="!carrerFairId" (click)="addEditCareer()" class="publish-career">{{fixedTextHash['create'][currLan]}}</button>
+
+                </form>
+            </ng-container>
+        </div>
+
+    </div>
+</div>
